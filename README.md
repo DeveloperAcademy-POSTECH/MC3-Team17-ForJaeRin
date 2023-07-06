@@ -13,11 +13,11 @@
 
 `git init`
 
-1. 원본(메인) 레포를 upstream으로 remote해줍니다.
+3. 원본(메인) 레포를 upstream으로 remote해줍니다.
 
 `git remote add upstream <원본(메인)레포 주소>`
 
-1. 로컬(나의) 레포를 origin으로 remote해줍니다.
+4. 로컬(나의) 레포를 origin으로 remote해줍니다.
 
 `git remote add origin <로컬(포크한 나의)레포 주소>`
 
@@ -32,29 +32,29 @@
 
 `git branch feature/#7    //이슈번호7의 브랜치 생성`
 
-1. 해당 브랜치로 이동하여 작업을 합니다.
+3. 해당 브랜치로 이동하여 작업을 합니다.
 
 `git switch feature/#7    //해당 브랜치로 변경`
 
-1. 작업이 끝난 뒤, add와 commit을 진행합니다.
+4. 작업이 끝난 뒤, add와 commit을 진행합니다.
 
 `git add .    //작업 요소를 더해줌
 git commit -m "[Prefix] <앱 이름>#이슈번호 - Weather View 디자인 구현"    //무엇을 구현했는지 메세지로 작성`
 
-1. 내가 작업을 하는 도중에 다른 사람이 작업을 진행하여 원본(메인)레포가 변경되어 있을 수도 있으니, (확인을 위해) pull을 한 번 진행해준다.
+5. 내가 작업을 하는 도중에 다른 사람이 작업을 진행하여 원본(메인)레포가 변경되어 있을 수도 있으니, (확인을 위해) pull을 한 번 진행해준다.
 
 `git pull upstream develop    //원본(메인)레포의 파일을 불러온다.`
 
-1. 에러가 나지 않았다면, origin에서 작업한 내용을 push해준다.
+6. 에러가 나지 않았다면, origin에서 작업한 내용을 push해준다.
 
 `git push -u origin <브랜치명>    //해당 브랜치를 올리고자 한다.`
 
-1. PR을 통해 코드 리뷰를 진행한 뒤, approve를 해준다면 merge를 한다.
-2. 기본 브랜치로 돌아옵니다.
+7. PR을 통해 코드 리뷰를 진행한 뒤, approve를 해준다면 merge를 한다.
+8. 기본 브랜치로 돌아옵니다.
 
 `git switch develop(main)`
 
-1. 1번부터 다시 진행을 하며 작업을 반복하면 됩니다.
+9. 1번부터 다시 진행을 하며 작업을 반복하면 됩니다.
 
 ## Git Branch Convention
 
