@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FB2A573BFC001256CB /* FontModifier.swift */; };
+		A94147FE2A573D01001256CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FD2A573D01001256CB /* View+Extension.swift */; };
 		A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */; };
 		A945F0392A56788500DC62D7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0382A56788500DC62D7 /* ContentView.swift */; };
 		A945F03B2A56788700DC62D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A945F03A2A56788700DC62D7 /* Assets.xcassets */; };
@@ -15,6 +17,10 @@
 		A945F0532A56788700DC62D7 /* ForJaeRinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0522A56788700DC62D7 /* ForJaeRinUITests.swift */; };
 		A945F0552A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */; };
 		A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A945F0632A56ABC800DC62D7 /* .swiftlint.yml */; };
+		A945F0752A57113C00DC62D7 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A945F0742A57113C00DC62D7 /* sample.json */; };
+		A945F0792A5711F000DC62D7 /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0782A5711F000DC62D7 /* SampleModel.swift */; };
+		A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F07D2A57139100DC62D7 /* SampleView.swift */; };
+		A945F0802A5713A800DC62D7 /* SampleVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F07F2A5713A800DC62D7 /* SampleVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A94147FB2A573BFC001256CB /* FontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontModifier.swift; sourceTree = "<group>"; };
+		A94147FD2A573D01001256CB /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A945F0332A56788500DC62D7 /* ForJaeRin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForJaeRin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinApp.swift; sourceTree = "<group>"; };
 		A945F0382A56788500DC62D7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +55,10 @@
 		A945F0522A56788700DC62D7 /* ForJaeRinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinUITests.swift; sourceTree = "<group>"; };
 		A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A945F0632A56ABC800DC62D7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A945F0742A57113C00DC62D7 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
+		A945F0782A5711F000DC62D7 /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
+		A945F07D2A57139100DC62D7 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		A945F07F2A5713A800DC62D7 /* SampleVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,9 +110,12 @@
 		A945F0352A56788500DC62D7 /* ForJaeRin */ = {
 			isa = PBXGroup;
 			children = (
+				A945F0682A570A2500DC62D7 /* Global */,
+				A945F0672A570A1A00DC62D7 /* Models */,
+				A945F0732A57106F00DC62D7 /* Data */,
+				A945F0712A570E8900DC62D7 /* Presentation */,
 				A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */,
 				A945F0382A56788500DC62D7 /* ContentView.swift */,
-				A945F03A2A56788700DC62D7 /* Assets.xcassets */,
 				A945F03F2A56788700DC62D7 /* ForJaeRin.entitlements */,
 				A945F03C2A56788700DC62D7 /* Preview Content */,
 			);
@@ -130,6 +145,105 @@
 				A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */,
 			);
 			path = ForJaeRinUITests;
+			sourceTree = "<group>";
+		};
+		A945F0652A5709E900DC62D7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A945F07C2A57138000DC62D7 /* SampleView */,
+				A945F0702A570E5300DC62D7 /* Component */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A945F0672A570A1A00DC62D7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A945F0782A5711F000DC62D7 /* SampleModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A945F0682A570A2500DC62D7 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				A945F06F2A570D9B00DC62D7 /* Resources */,
+				A945F06D2A570AA000DC62D7 /* Modifier */,
+				A945F06B2A570A5C00DC62D7 /* Extension */,
+				A945F0692A570A3C00DC62D7 /* Utils */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		A945F0692A570A3C00DC62D7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A945F06B2A570A5C00DC62D7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A94147FD2A573D01001256CB /* View+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		A945F06D2A570AA000DC62D7 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				A94147FB2A573BFC001256CB /* FontModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
+		A945F06F2A570D9B00DC62D7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A945F03A2A56788700DC62D7 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A945F0702A570E5300DC62D7 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		A945F0712A570E8900DC62D7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A945F0722A570EE100DC62D7 /* ViewModels */,
+				A945F0652A5709E900DC62D7 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		A945F0722A570EE100DC62D7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A945F07F2A5713A800DC62D7 /* SampleVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A945F0732A57106F00DC62D7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A945F0742A57113C00DC62D7 /* sample.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A945F07C2A57138000DC62D7 /* SampleView */ = {
+			isa = PBXGroup;
+			children = (
+				A945F07D2A57139100DC62D7 /* SampleView.swift */,
+			);
+			path = SampleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A945F0752A57113C00DC62D7 /* sample.json in Resources */,
 				A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */,
 				A945F03E2A56788700DC62D7 /* Preview Assets.xcassets in Resources */,
 				A945F03B2A56788700DC62D7 /* Assets.xcassets in Resources */,
@@ -304,7 +419,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
+				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
+				A945F0802A5713A800DC62D7 /* SampleVM.swift in Sources */,
+				A945F0792A5711F000DC62D7 /* SampleModel.swift in Sources */,
+				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
