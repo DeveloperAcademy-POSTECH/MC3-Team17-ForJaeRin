@@ -4,6 +4,7 @@
 //
 //  Created by Yun Dongbeom on 2023/07/06.
 //
+//rinsu 와따감
 
 import SwiftUI
 
