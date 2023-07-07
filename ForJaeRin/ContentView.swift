@@ -13,7 +13,7 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("앤린예나용팔커피로키")
+            Text("나는 천잰가 ?")
             Image("test_landscape")
                 .resizable()
             SampleView()
