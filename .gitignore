@@ -1,38 +1,13 @@
-# Created by https://www.toptal.com/developers/gitignore/api/macos,swift,xcode
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,swift,xcode
+# Created by https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode
+# Edit at https://www.toptal.com/developers/gitignore?templates=swift,cocoapods,xcode
 
-### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
+### CocoaPods ###
+## CocoaPods GitIgnore Template
 
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-### macOS Patch ###
-# iCloud generated files
-*.icloud
+# CocoaPods - Only use to conserve bandwidth / Save time on Pushing
+#           - Also handy if you have a large number of dependant pods
+#           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
+Pods/
 
 ### Swift ###
 # Xcode
@@ -126,8 +101,12 @@ iOSInjectionProject/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,swift,xcode
+# End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,xcode
+
+.DS_Store
+*.xcuserstate
