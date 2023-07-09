@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */; };
+		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
+		A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */; };
 		A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FB2A573BFC001256CB /* FontModifier.swift */; };
 		A94147FE2A573D01001256CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FD2A573D01001256CB /* View+Extension.swift */; };
 		A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */; };
@@ -41,6 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
+		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
 		A94147FB2A573BFC001256CB /* FontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontModifier.swift; sourceTree = "<group>"; };
 		A94147FD2A573D01001256CB /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A945F0332A56788500DC62D7 /* ForJaeRin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForJaeRin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +92,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A91E90192A5B072D00EBB3F2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		A91E901E2A5B19FE00EBB3F2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A91E901F2A5B1A0B00EBB3F2 /* ButtonView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A91E901F2A5B1A0B00EBB3F2 /* ButtonView */ = {
+			isa = PBXGroup;
+			children = (
+				A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */,
+			);
+			path = ButtonView;
+			sourceTree = "<group>";
+		};
+		A91E90222A5B1A3300EBB3F2 /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				A91E90232A5B1A4300EBB3F2 /* FileSystemView */,
+			);
+			path = TestView;
+			sourceTree = "<group>";
+		};
+		A91E90232A5B1A4300EBB3F2 /* FileSystemView */ = {
+			isa = PBXGroup;
+			children = (
+				A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */,
+			);
+			path = FileSystemView;
+			sourceTree = "<group>";
+		};
 		A945F02A2A56788500DC62D7 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +156,7 @@
 		A945F0352A56788500DC62D7 /* ForJaeRin */ = {
 			isa = PBXGroup;
 			children = (
+				A91E90192A5B072D00EBB3F2 /* Utils */,
 				A945F0682A570A2500DC62D7 /* Global */,
 				A945F0672A570A1A00DC62D7 /* Models */,
 				A945F0732A57106F00DC62D7 /* Data */,
@@ -150,8 +197,9 @@
 		A945F0652A5709E900DC62D7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A91E90222A5B1A3300EBB3F2 /* TestView */,
+				A91E901E2A5B19FE00EBB3F2 /* Components */,
 				A945F07C2A57138000DC62D7 /* SampleView */,
-				A945F0702A570E5300DC62D7 /* Component */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,16 +218,8 @@
 				A945F06F2A570D9B00DC62D7 /* Resources */,
 				A945F06D2A570AA000DC62D7 /* Modifier */,
 				A945F06B2A570A5C00DC62D7 /* Extension */,
-				A945F0692A570A3C00DC62D7 /* Utils */,
 			);
 			path = Global;
-			sourceTree = "<group>";
-		};
-		A945F0692A570A3C00DC62D7 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		A945F06B2A570A5C00DC62D7 /* Extension */ = {
@@ -204,13 +244,6 @@
 				A945F03A2A56788700DC62D7 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		A945F0702A570E5300DC62D7 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Component;
 			sourceTree = "<group>";
 		};
 		A945F0712A570E8900DC62D7 /* Presentation */ = {
@@ -420,12 +453,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
+				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
 				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
 				A945F0802A5713A800DC62D7 /* SampleVM.swift in Sources */,
+				A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */,
 				A945F0792A5711F000DC62D7 /* SampleModel.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
+				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
