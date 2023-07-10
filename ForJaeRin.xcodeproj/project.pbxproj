@@ -11,6 +11,8 @@
 		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
 		A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */; };
 		A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */; };
+		A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */; };
+		A91E902E2A5BDF1C00EBB3F2 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */; };
 		A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FB2A573BFC001256CB /* FontModifier.swift */; };
 		A94147FE2A573D01001256CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FD2A573D01001256CB /* View+Extension.swift */; };
 		A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */; };
@@ -49,6 +51,8 @@
 		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
 		A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
+		A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		A94147FB2A573BFC001256CB /* FontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontModifier.swift; sourceTree = "<group>"; };
 		A94147FD2A573D01001256CB /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A945F0332A56788500DC62D7 /* ForJaeRin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForJaeRin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +103,7 @@
 			children = (
 				A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */,
 				A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */,
+				A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 		A91E901E2A5B19FE00EBB3F2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A91E90302A5BE33300EBB3F2 /* LayoutView */,
 				A91E901F2A5B1A0B00EBB3F2 /* ButtonView */,
 			);
 			path = Components;
@@ -122,6 +128,7 @@
 		A91E90222A5B1A3300EBB3F2 /* TestView */ = {
 			isa = PBXGroup;
 			children = (
+				A91E902C2A5BDF1100EBB3F2 /* RecordView */,
 				A91E90232A5B1A4300EBB3F2 /* FileSystemView */,
 			);
 			path = TestView;
@@ -133,6 +140,21 @@
 				A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */,
 			);
 			path = FileSystemView;
+			sourceTree = "<group>";
+		};
+		A91E902C2A5BDF1100EBB3F2 /* RecordView */ = {
+			isa = PBXGroup;
+			children = (
+				A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */,
+			);
+			path = RecordView;
+			sourceTree = "<group>";
+		};
+		A91E90302A5BE33300EBB3F2 /* LayoutView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LayoutView;
 			sourceTree = "<group>";
 		};
 		A945F02A2A56788500DC62D7 = {
@@ -460,7 +482,9 @@
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
 				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
 				A945F0802A5713A800DC62D7 /* SampleVM.swift in Sources */,
+				A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */,
 				A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */,
+				A91E902E2A5BDF1C00EBB3F2 /* RecordView.swift in Sources */,
 				A945F0792A5711F000DC62D7 /* SampleModel.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
@@ -638,8 +662,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kkojangro.ForJaeRin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -666,8 +694,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kkojangro.ForJaeRin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
