@@ -4,7 +4,6 @@
 //
 //  Created by Yun Dongbeom on 2023/07/06.
 //
-//rinsu 와따감
 
 import SwiftUI
 
@@ -18,6 +17,8 @@ struct ContentView: View {
             Image("test_landscape")
                 .resizable()
             SampleView()
+            // MARK: 파일시스템을 테스트하기 위한 버튼
+            FileSystemView()
         }
         .padding()
     }
