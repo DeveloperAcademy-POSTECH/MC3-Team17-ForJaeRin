@@ -21,6 +21,9 @@ struct ContentView: View {
             FileSystemView()
         }
         .padding()
+        .onAppear {
+            VoiceManager.requestMicrophonePermission()
+        }
     }
 }
 

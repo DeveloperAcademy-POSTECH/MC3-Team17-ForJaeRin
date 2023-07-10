@@ -96,7 +96,7 @@ class AppFileManager {
             print("remove file error. do something \(error)")
         }
     }
-    
+
     /// 생성한 폴더 삭제
     func removeDirectory() {
         do {
