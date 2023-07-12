@@ -43,6 +43,7 @@ identifier_name:
   excluded: # 제외할 문자열 목록 사용
     - id
     - URL
+    - url
     - GlobalAPIKey
   allowed_symbols: ["_"]
 reporter: "xcode" # 보고 유형 (xcode, json, csv, codeclimate, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)
