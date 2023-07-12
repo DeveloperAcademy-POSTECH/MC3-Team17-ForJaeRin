@@ -9,6 +9,13 @@ import SwiftUI
 
 struct ImportPdfView: View {
     @Binding var isSheetActive: Bool
+    @Binding var step: Int {
+        didSet {
+            if step > 3 {
+                isSheetActive = false
+            }
+        }
+    }
     
     var body: some View {
         VStack {
@@ -16,7 +23,7 @@ struct ImportPdfView: View {
             HStack {
                 HStack {
                     Text("PDF 가져오기")
-                    Text("페이지 카운트 1/4")
+                    Text("페이지 카운트 \(step)/4")
                 }
                 Spacer()
                 Button {
@@ -36,9 +43,19 @@ struct ImportPdfView: View {
                 Spacer()
             }
             HStack {
+                Button {
+                    print("prev")
+                    if step > 0 {
+                        step -= 1
+                    }
+                } label: {
+                    Text("이전")
+                }
+                .buttonStyle(AppButtonStyle(width: 80))
                 Spacer()
                 Button {
                     print("next")
+                    step += 1
                 } label: {
                     Text("다음")
                 }
@@ -56,6 +73,7 @@ struct ImportPdfView: View {
 struct ImportPdfView_Previews: PreviewProvider {
     static var previews: some View {
         @State var isSheetActive = false
-        ImportPdfView(isSheetActive: $isSheetActive)
+        @State var step = 0
+        ImportPdfView(isSheetActive: $isSheetActive, step: $step)
     }
 }

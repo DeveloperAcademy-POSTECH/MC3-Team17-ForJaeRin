@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var isSheetActive = false
+    @State private var isSheetActive = false {
+        didSet {
+            step = 0
+        }
+    }
+    @State private var step = 0
+    
     var body: some View {
         VStack(spacing: 0) {
             // Project Title
@@ -25,7 +31,7 @@ struct HomeView: View {
             maxHeight: .infinity,
             alignment: .topLeading)
         .sheet(isPresented: $isSheetActive) {
-            ImportPdfView(isSheetActive: $isSheetActive)
+            ImportPdfView(isSheetActive: $isSheetActive, step: $step)
             .frame(minWidth: 650, minHeight: 320)
         }
     }
