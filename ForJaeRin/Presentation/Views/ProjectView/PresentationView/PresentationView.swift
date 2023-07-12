@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+/**
+ 앱의 메인이 되는 페이지입니다.
+ - 키워드 편집
+ - PDF와 스크롤 연동되는 키워드
+ - PPT 진행상황 확인을 위한 프로그레스바
+ - 음성 인식 피드백
+ - 연습 끝내기 시 키워드 발화 여부 / 소요시간 / 다시 듣기 등 피드백(후순위)
+ - 다시 연습하기
+ */
+// MARK: 연습모드 페이지 뷰
 struct PresentationView: View {
     @Binding var isContentsActive: Bool
     @State var isSidebarActive = true
@@ -33,6 +43,7 @@ struct PresentationView: View {
 }
 
 extension PresentationView {
+    // MARK: PDF 및 연습 오디오 컨트롤러
     func splitLeftView() -> some View {
         return ZStack {
             PresentationTimerView()
@@ -46,6 +57,7 @@ extension PresentationView {
         .border(.red, width: 2)
     }
     
+    // MARK: 우측 사이드 바
     func splitRightView() -> some View {
         let ACTIVE_SIDEBAR_WIDTH: CGFloat = 272
         
@@ -59,6 +71,7 @@ extension PresentationView {
         maxHeight: .infinity, alignment: .topLeading)
     }
     
+    // MARK: Presentation 내 레이아웃 조정 및 기능을 위한 뷰
     func toolbarView() -> some View {
         HStack(spacing: 0) {
             Button {

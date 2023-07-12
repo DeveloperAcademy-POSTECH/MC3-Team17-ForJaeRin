@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ VoiceManager / SpeechRecognizer와 함께 연동해서 음성 저장
+ */
+// MARK: 연습모드 기록을 위한 오디오 컨트롤러
 struct AudioControllerView: View {
     var body: some View {
         HStack {

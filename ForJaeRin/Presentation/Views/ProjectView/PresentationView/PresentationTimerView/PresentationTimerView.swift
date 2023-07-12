@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ 연습모드 실행 시 설정한 시간과 실행 시간 측정
+ */
+// MARK: 연습모드 타이머
 struct PresentationTimerView: View {
     @State private var pogPosition = CGPoint()
     @State private var size = CGSize.zero

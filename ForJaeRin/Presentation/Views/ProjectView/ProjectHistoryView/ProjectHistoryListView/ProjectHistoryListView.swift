@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: 프로젝트 연습 이력 리스트 뷰
 struct ProjectHistoryListView: View {
     let currencyStyle = Decimal.FormatStyle.Currency(code: "USD")
     

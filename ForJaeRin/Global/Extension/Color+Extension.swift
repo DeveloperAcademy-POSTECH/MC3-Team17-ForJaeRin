@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
     
+    // MARK: 컬러를 Hex값을 사용하기 위해 확장한 생성자
     init(hex: String) {
         let scanner = Scanner(string: hex)
         _ = scanner.scanString("#")

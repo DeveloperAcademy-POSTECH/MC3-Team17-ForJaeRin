@@ -8,6 +8,7 @@
 import SwiftUI
 import PDFKit
 
+// MARK: PDF를 띄우기 위한 View
 struct PDFKitView: NSViewRepresentable {
     typealias NSViewType = PDFView
     let url: URL // new variable to get the URL of the document

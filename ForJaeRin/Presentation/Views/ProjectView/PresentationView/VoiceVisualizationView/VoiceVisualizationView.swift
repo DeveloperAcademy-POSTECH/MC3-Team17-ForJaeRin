@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ VoiceManager / SpeechRecognizer와 함께 연동해서 음성 시각화
+ */
+// MARK: 현재 말하는 상태 시각화
 struct VoiceVisualizationView: View {
     var body: some View {
         VStack {

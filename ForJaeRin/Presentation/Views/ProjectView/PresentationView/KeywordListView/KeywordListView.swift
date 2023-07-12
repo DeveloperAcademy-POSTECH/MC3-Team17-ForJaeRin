@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ 사전 설정 키워드 보여주기
+ */
+// MARK: 사전 설정한 PDF 페이지 별 키워드를 출력하는 뷰
 struct KeywordListView: View {
     @State var isSheetActive = false
     

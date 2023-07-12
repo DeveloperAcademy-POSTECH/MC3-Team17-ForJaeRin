@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+/**
+ 어떤 결과를 요약해서 보여줄 것인지, 정보 확인이 필요합니다.
+ */
+// MARK: 프로젝트 연습 결과 요약 뷰
 struct ProjectSummaryView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
