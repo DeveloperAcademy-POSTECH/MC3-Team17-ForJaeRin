@@ -19,8 +19,8 @@ struct ToolbarView: CustomizableToolbarContent {
                 }
             }
             .frame(width: 40, height: 40)
-                                   .background(Color.gray)
-                                   .cornerRadius(20)
+               .background(Color.gray)
+               .cornerRadius(20)
            ControlGroup {
                Button {
                    // decrease font
