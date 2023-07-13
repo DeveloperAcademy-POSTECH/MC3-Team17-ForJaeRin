@@ -24,6 +24,28 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
     
+    static var primary: Self = .primary500
     
 }
+
+// MARK: Design Token - Primary Color
+extension Color {
+    /// 프라이머리 컬러
+    static var primary500: Self {
+        .init(hex: "#8B6DFF")
+    }
+    static var primary400: Self {
+        .init(hex: "#C9C1FF")
+    }
+    static var primary300: Self {
+        .init(hex: "#DED9FF")
+    }
+    static var primary200: Self {
+        .init(hex: "#EAE7FF")
+    }
+    static var primary100: Self {
+        .init(hex: "#F7F5FF")
+    }
+}
+
 // swiftlint:enable identifier_name
