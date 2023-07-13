@@ -24,7 +24,7 @@ extension Color {
         self.init(red: r, green: g, blue: b)
     }
     
-    static var primary: Self = .primary500
+    static var systemPrimary: Self = .primary500
     
 }
 
@@ -45,6 +45,56 @@ extension Color {
     }
     static var primary100: Self {
         .init(hex: "#F7F5FF")
+    }
+}
+
+// MARK: Design Token - System Gray Color
+extension Color {
+    static var systemBlack: Self {
+        .init(hex: "#000000")
+    }
+    static var systemGray500: Self {
+        .init(hex: "#353535")
+    }
+    static var systemGray400: Self {
+        .init(hex: "#565656")
+    }
+    static var systemGray300: Self {
+        .init(hex: "#6D6D6D")
+    }
+    static var systemGray200: Self {
+        .init(hex: "#9A9A9A")
+    }
+    static var systemGray100: Self {
+        .init(hex: "#DDDDDD")
+    }
+    static var systemWhite: Self {
+        .init(hex: "#FFFFFF")
+    }
+}
+
+// MARK: Design Token - PDF Group Color
+extension Color {
+    static var groupPurple: Self {
+        .init(hex: "#E3D8FB")
+    }
+    static var groupYellow: Self {
+        .init(hex: "#FCEABF")
+    }
+    static var groupGreen: Self {
+        .init(hex: "#BDE1DD")
+    }
+    static var groupPink: Self {
+        .init(hex: "#FFDFF0")
+    }
+    static var groupOrange: Self {
+        .init(hex: "#FFDCBC")
+    }
+    static var groupBlue: Self {
+        .init(hex: "#D4E3F8")
+    }
+    static var groupGray: Self {
+        .init(hex: "#D9D9D9")
     }
 }
 
