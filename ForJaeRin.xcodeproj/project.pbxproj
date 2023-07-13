@@ -48,6 +48,12 @@
 		A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */; };
 		A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE582A5E962500B9F94B /* ProjectHistoryListView.swift */; };
 		A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE5A2A5E962E00B9F94B /* ProjectSummaryView.swift */; };
+		A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */; };
+		A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28922A605D570043C8C1 /* PDFPageModel.swift */; };
+		A98A28952A605ED40043C8C1 /* ProjectFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28942A605ED40043C8C1 /* ProjectFileManager.swift */; };
+		A98A28972A60604F0043C8C1 /* PDFGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */; };
+		A98A28992A6062C50043C8C1 /* PracticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28982A6062C50043C8C1 /* PracticeModel.swift */; };
+		A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A289A2A6068320043C8C1 /* ProjectMetadataModel.swift */; };
 		A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CC2A5DBC43008510CF /* Color+Extension.swift */; };
 		A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */; };
 		A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526D12A5E3356008510CF /* FileImporterButtonView.swift */; };
@@ -116,6 +122,12 @@
 		A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationTimerView.swift; sourceTree = "<group>"; };
 		A97FBE582A5E962500B9F94B /* ProjectHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHistoryListView.swift; sourceTree = "<group>"; };
 		A97FBE5A2A5E962E00B9F94B /* ProjectSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSummaryView.swift; sourceTree = "<group>"; };
+		A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentManager.swift; sourceTree = "<group>"; };
+		A98A28922A605D570043C8C1 /* PDFPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPageModel.swift; sourceTree = "<group>"; };
+		A98A28942A605ED40043C8C1 /* ProjectFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileManager.swift; sourceTree = "<group>"; };
+		A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFGroupModel.swift; sourceTree = "<group>"; };
+		A98A28982A6062C50043C8C1 /* PracticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeModel.swift; sourceTree = "<group>"; };
+		A98A289A2A6068320043C8C1 /* ProjectMetadataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectMetadataModel.swift; sourceTree = "<group>"; };
 		A99526CC2A5DBC43008510CF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExporterButtonView.swift; sourceTree = "<group>"; };
 		A99526D12A5E3356008510CF /* FileImporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImporterButtonView.swift; sourceTree = "<group>"; };
@@ -362,6 +374,8 @@
 		A945F0672A570A1A00DC62D7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A98A288F2A605C710043C8C1 /* PDFModels */,
+				A98A288E2A605C4D0043C8C1 /* ProjectModels */,
 				A945F0782A5711F000DC62D7 /* SampleModel.swift */,
 			);
 			path = Models;
@@ -509,6 +523,26 @@
 				A97FBE582A5E962500B9F94B /* ProjectHistoryListView.swift */,
 			);
 			path = ProjectHistoryListView;
+			sourceTree = "<group>";
+		};
+		A98A288E2A605C4D0043C8C1 /* ProjectModels */ = {
+			isa = PBXGroup;
+			children = (
+				A98A28942A605ED40043C8C1 /* ProjectFileManager.swift */,
+				A98A289A2A6068320043C8C1 /* ProjectMetadataModel.swift */,
+				A98A28982A6062C50043C8C1 /* PracticeModel.swift */,
+			);
+			path = ProjectModels;
+			sourceTree = "<group>";
+		};
+		A98A288F2A605C710043C8C1 /* PDFModels */ = {
+			isa = PBXGroup;
+			children = (
+				A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */,
+				A98A28922A605D570043C8C1 /* PDFPageModel.swift */,
+				A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */,
+			);
+			path = PDFModels;
 			sourceTree = "<group>";
 		};
 		A99526CE2A5E32C7008510CF /* FileSystemView */ = {
@@ -694,19 +728,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */,
 				A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */,
 				A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */,
 				A93BCB102A6026790081FAB8 /* ToolbarView.swift in Sources */,
 				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
+				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
 				A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */,
+				A98A28992A6062C50043C8C1 /* PracticeModel.swift in Sources */,
 				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
 				A97FBE492A5E84E400B9F94B /* PresentationPDFView.swift in Sources */,
 				A938398D2A5CF3020075A97F /* HomeView.swift in Sources */,
 				A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */,
+				A98A28972A60604F0043C8C1 /* PDFGroupModel.swift in Sources */,
 				A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */,
 				A938399C2A5D3F540075A97F /* ProjectHistoryView.swift in Sources */,
 				A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */,
@@ -715,11 +753,13 @@
 				A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */,
 				A91E90342A5C611500EBB3F2 /* SelectProjectView.swift in Sources */,
 				A938399A2A5D3F430075A97F /* PresentationView.swift in Sources */,
+				A98A28952A605ED40043C8C1 /* ProjectFileManager.swift in Sources */,
 				A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */,
 				A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */,
 				A91E902E2A5BDF1C00EBB3F2 /* RecordView.swift in Sources */,
 				A945F0792A5711F000DC62D7 /* SampleModel.swift in Sources */,
 				A938399E2A5DA13F0075A97F /* CustomLabel.swift in Sources */,
+				A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */,
 				A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
