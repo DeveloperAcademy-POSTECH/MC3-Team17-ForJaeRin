@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A912BA992A613C4100A3321E /* sampleFile.json in Resources */ = {isa = PBXBuildFile; fileRef = A912BA982A613C4100A3321E /* sampleFile.json */; };
 		A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */; };
 		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
 		A91E90252A5B1A5200EBB3F2 /* FileSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A912BA982A613C4100A3321E /* sampleFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleFile.json; sourceTree = "<group>"; };
 		A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
 		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		A91E90242A5B1A5200EBB3F2 /* FileSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemView.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				A98A28A42A6130150043C8C1 /* SampleProject */,
 				A97FBE4E2A5E887900B9F94B /* sample.pdf */,
 				A945F03A2A56788700DC62D7 /* Assets.xcassets */,
+				A912BA982A613C4100A3321E /* sampleFile.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -578,18 +581,10 @@
 		A98A28A42A6130150043C8C1 /* SampleProject */ = {
 			isa = PBXGroup;
 			children = (
-				A98A28A82A6130950043C8C1 /* Practice */,
 				A98A28A62A6130890043C8C1 /* sampleProject.pdf */,
 				A98A28A92A6130D00043C8C1 /* sampleProject.json */,
 			);
 			path = SampleProject;
-			sourceTree = "<group>";
-		};
-		A98A28A82A6130950043C8C1 /* Practice */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Practice;
 			sourceTree = "<group>";
 		};
 		A99526CE2A5E32C7008510CF /* FileSystemView */ = {
@@ -708,6 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A945F0752A57113C00DC62D7 /* sample.json in Resources */,
+				A912BA992A613C4100A3321E /* sampleFile.json in Resources */,
 				A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */,
 				A98A28AA2A6130D00043C8C1 /* sampleProject.json in Resources */,
 				A98A28A72A6130890043C8C1 /* sampleProject.pdf in Resources */,
