@@ -115,7 +115,7 @@ extension SplitLayoutView {
             } else if currentContent == .history {
                 ProjectHistoryView()
             } else if currentContent == .plan {
-                
+                ProjectPlanView()
             }
         }
     }
