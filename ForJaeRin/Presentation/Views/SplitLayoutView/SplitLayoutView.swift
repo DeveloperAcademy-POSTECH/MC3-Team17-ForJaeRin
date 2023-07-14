@@ -114,6 +114,8 @@ extension SplitLayoutView {
                 PresentationView(isContentsActive: $isContentsActive)
             } else if currentContent == .history {
                 ProjectHistoryView()
+            } else if currentContent == .plan {
+                
             }
         }
     }
