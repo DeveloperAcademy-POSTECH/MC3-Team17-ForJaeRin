@@ -16,4 +16,3 @@ struct PDFGroup: Identifiable {
     /// 초단위로 저장 - 시간 계산 필요
     var setTime: Int
 }
-
