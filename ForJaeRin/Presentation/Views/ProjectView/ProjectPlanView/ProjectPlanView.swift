@@ -7,35 +7,46 @@
 
 import SwiftUI
 
+enum GroupColor: CaseIterable {
+    case groupPurple
+    case groupYellow
+    case groupGreen
+    case groupPink
+    case groupOrange
+    case groupBlue
+    case groupGray
+    
+    var color: Color {
+        switch self {
+        case .groupPurple:
+            return Color.groupPurple
+        case .groupYellow:
+            return Color.groupYellow
+        case .groupGreen:
+            return Color.groupGreen
+        case .groupPink:
+            return Color.groupPink
+        case .groupOrange:
+            return Color.groupOrange
+        case .groupBlue:
+            return Color.groupBlue
+        case .groupGray:
+            return Color.groupGray
+        }
+    }
+}
+
 struct ProjectPlanView: View {
     @State var values = [
         "a", "b", "c", "d",
-        "e", "f", "g", "h"
+        "e", "f", "g"
     ]
-    
     @State var isHovering: Bool = false
+    
     var body: some View {
         VStack {
+//            PresentationPageList(pdfDocument: PDFDocu)
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            List {
-                        ForEach(0..<values.count, id: \.self) { index in
-                            HStack {
-                                Image(systemName: "line.horizontal.3")
-                                    .onHover { hovering in
-                                        isHovering = hovering
-                                    }
-                                
-                                TextField("Value", text: $values[index])
-                            }
-//                            .moveDisabled(!isHovering)
-                        }
-                        .onMove { indices, newOffset in
-                            values.move(
-                                fromOffsets: indices,
-                                toOffset: newOffset
-                            )
-                        }
-                    }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
