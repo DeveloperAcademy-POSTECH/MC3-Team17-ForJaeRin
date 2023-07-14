@@ -118,7 +118,8 @@ extension HomeView {
     
     private func projectCardContainerView() -> some View {
         let columns = [
-            GridItem(.adaptive(minimum: 212, maximum: 320), spacing: 32)
+            GridItem(.adaptive(minimum: 212, maximum: 320), spacing: 32),
+            GridItem(.flexible(minimum: 100, maximum: 400))
         ]
 
         return LazyVGrid(

@@ -14,10 +14,6 @@ struct ForJaeRinApp: App {
 //            FileSystemView()
 //            RecordView()
             ContentView()
-                .toolbar(id: "main") {
-                    ToolbarView()
-                }
-                .edgesIgnoringSafeArea(.top)
         }
         .commands {
             ToolbarCommands()

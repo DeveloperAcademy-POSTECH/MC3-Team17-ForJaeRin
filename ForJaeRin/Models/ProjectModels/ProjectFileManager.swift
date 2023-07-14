@@ -20,7 +20,11 @@ final class ProjectFileManager: ObservableObject {
     /// 연습 이력
     var practices: [Practice]
     
-    init(projectURL: URL, pdfDocument: PDFDocumentManager, practices: [Practice], projectMetadata: ProjectMetadata) {
+    init(
+        projectURL: URL,
+        pdfDocument: PDFDocumentManager,
+        practices: [Practice],
+        projectMetadata: ProjectMetadata) {
         self.projectURL = projectURL
         self.pdfDocument = pdfDocument
         self.practices = practices

@@ -98,4 +98,10 @@ extension Color {
     }
 }
 
+extension Color {
+    static var detailLayoutBackground: Self {
+        .init(hex: "#F6F5FA")
+    }
+}
+
 // swiftlint:enable identifier_name

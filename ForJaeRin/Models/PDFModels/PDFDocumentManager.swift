@@ -19,4 +19,10 @@ final class PDFDocumentManager: ObservableObject {
         self.PDFPages = PDFPages
         self.PDFGroups = PDFGroups
     }
+    
+    // MARK: 페이지 인덱스로 PDF Group을 조회해서 현재 페이지가 속한 그룹 인덱스 반환
+    func findGroupIndex(pageIndex: Int) -> Int{
+        var result: Int = 0
+        return result
+    }
 }

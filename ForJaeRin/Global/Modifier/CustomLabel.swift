@@ -23,3 +23,16 @@ struct LeftSidebarLabelStyle: LabelStyle {
         .frame(maxWidth: .infinity)
     }
 }
+
+struct LayoutContentLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 8) {
+            configuration.icon
+                .font(.title3)
+            configuration.title
+                .font(.body)
+                .foregroundColor(.systemBlack)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}

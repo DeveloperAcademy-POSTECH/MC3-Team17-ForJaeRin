@@ -30,10 +30,6 @@ struct PresentationView: View {
                     splitLeftView()
                     splitRightView()
                 }
-                .toolbar {
-                    ToolbarView()
-                        .defaultCustomization(.visible, options: .alwaysAvailable)
-                }
             }
         .presentedWindowToolbarStyle(.unifiedCompact(showsTitle: true))
     }
