@@ -69,6 +69,46 @@
                         "end": 2
                     },
                     "setTime": 30
+                },
+                {
+                    "name": "그룹 - 2",
+                    "range": {
+                        "start": 3,
+                        "end": 5
+                    },
+                    "setTime": 120
+                },
+                {
+                    "name": "그룹 - 3",
+                    "range": {
+                        "start": 6,
+                        "end": 6
+                    },
+                    "setTime": 60
+                },
+                {
+                    "name": "그룹 - 4",
+                    "range": {
+                        "start": 7,
+                        "end": 8
+                    },
+                    "setTime": 120
+                },
+                {
+                    "name": "그룹 - 5",
+                    "range": {
+                        "start": 9,
+                        "end": 9
+                    },
+                    "setTime": 60
+                },
+                {
+                    "name": "그룹 - 6",
+                    "range": {
+                        "start": 10,
+                        "end": 12
+                    },
+                    "setTime": 30
                 }
             ]
         },
