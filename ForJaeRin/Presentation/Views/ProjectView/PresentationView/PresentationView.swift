@@ -31,11 +31,8 @@ struct PresentationView: View {
                     splitRightView()
                 }
                 .toolbar {
-                    Button {
-                        isSidebarActive.toggle()
-                    } label: {
-                        Image(systemName: "sidebar.trailing")
-                    }
+                    ToolbarView()
+                        .defaultCustomization(.visible, options: .alwaysAvailable)
                 }
             }
         .presentedWindowToolbarStyle(.unifiedCompact(showsTitle: true))
