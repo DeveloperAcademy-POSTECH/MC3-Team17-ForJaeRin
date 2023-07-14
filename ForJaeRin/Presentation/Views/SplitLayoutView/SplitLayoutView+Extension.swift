@@ -19,6 +19,7 @@ extension SplitLayoutView {
         case present
         case history
         case settings
+        case plan
         
         var contentsName: String {
             switch self {
@@ -30,6 +31,8 @@ extension SplitLayoutView {
                 return "History"
             case .settings:
                 return "Settings"
+            case .plan:
+                return "Plan"
             }
         }
         
@@ -42,6 +45,8 @@ extension SplitLayoutView {
             case .history:
                 return .single
             case .settings:
+                return .single
+            case .plan:
                 return .single
             }
         }
@@ -68,7 +73,7 @@ extension SplitLayoutView {
             case .home:
                 return [.home]
             case .project:
-                return [.present, .history]
+                return [.present, .history, .plan]
             case .settings:
                 return [.settings]
             }
