@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ToolbarView: CustomizableToolbarContent {
     var body: some CustomizableToolbarContent {
-        
+
         ToolbarItem(id: "font", placement: .secondaryAction) {
             VStack {
                 Button {

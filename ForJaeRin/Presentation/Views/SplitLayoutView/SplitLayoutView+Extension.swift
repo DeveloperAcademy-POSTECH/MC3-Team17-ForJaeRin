@@ -36,6 +36,21 @@ extension SplitLayoutView {
             }
         }
         
+        var iconName: String {
+            switch self {
+            case .home:
+                return "Home"
+            case .present:
+                return "folder.fill"
+            case .history:
+                return "doc.richtext.fill"
+            case .settings:
+                return "gearshape.fill"
+            case .plan:
+                return "Plan"
+            }
+        }
+        
         var column: TabColumns {
             switch self {
             case .home:

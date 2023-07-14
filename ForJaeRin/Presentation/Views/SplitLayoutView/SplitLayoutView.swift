@@ -58,13 +58,13 @@ extension SplitLayoutView {
                     .padding(8)
                     .foregroundColor(
                         mainTab == currentTab
-                        ? .accentColor
-                        : Color(nsColor: .tertiaryLabelColor))
+                        ? Color.systemPrimary
+                        : Color.systemGray100)
             }
-            .listRowBackground(mainTab == currentTab ? .white : Color(hex: "#F2F2F7"))
+            .listRowBackground(Color.systemWhite)
         }
         .listStyle(.plain)
-        .background(Color(hex: "#F2F2F7"))
+        .background(Color.systemWhite)
         .scrollContentBackground(.hidden)
     }
     
@@ -78,20 +78,35 @@ extension SplitLayoutView {
                             currentTab.tabContents,
                             id: \.self,selection: $currentContent) { tabContents in
                             NavigationLink(value: tabContents) {
-                                Label(tabContents.contentsName, systemImage: "heart.fill")
+                                Label(tabContents.contentsName, systemImage: tabContents.iconName)
+                                    .padding(.vertical, 4)
+                                    .labelStyle(LayoutContentLabelStyle())
+
                             }
+                            .listRowSeparator(.visible)
+                            .listRowBackground(Color.systemWhite)
+                            .foregroundColor(currentContent == tabContents
+                                             ? Color.systemPrimary
+                                             : Color.systemGray100)
                         }
-                        .navigationSplitViewColumnWidth(120)
+                        .listRowSeparator(.visible)
+                        .navigationSplitViewColumnWidth(172)
+                        .frame(maxWidth: 172, alignment: .leading)
+                        .listStyle(.plain)
                     } else {
                         List(
                             currentTab.tabContents,
                             id: \.self,selection: $currentContent) { tabContents in
                             NavigationLink(value: tabContents) {
-                                Label(tabContents.contentsName, systemImage: "heart.fill")
+                                Label(tabContents.contentsName, systemImage: tabContents.iconName)
                             }
                         }
                         .navigationSplitViewColumnWidth(0)
                     }
+                }
+                .padding(16)
+                .toolbar(id: "project-tooblar") {
+                    ToolbarView()
                 }
             } else {
                 List(currentTab.tabContents, id: \.self,selection: $currentContent) { tabContents in
@@ -102,6 +117,7 @@ extension SplitLayoutView {
                 .navigationSplitViewColumnWidth(0)
             }
         }
+        .background(Color.systemWhite)
         .navigationTitle(currentContent.contentsName)
     }
     
@@ -118,6 +134,7 @@ extension SplitLayoutView {
                 ProjectPlanView()
             }
         }
+        .background(Color.detailLayoutBackground)
     }
 }
 
