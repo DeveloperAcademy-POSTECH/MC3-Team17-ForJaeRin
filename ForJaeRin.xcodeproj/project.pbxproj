@@ -57,6 +57,8 @@
 		A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A289D2A60D1720043C8C1 /* ProjectPlanView.swift */; };
 		A98A28A12A6125A30043C8C1 /* PresentationPageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28A02A6125A30043C8C1 /* PresentationPageList.swift */; };
 		A98A28A32A6125B50043C8C1 /* PresentationPageListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28A22A6125B50043C8C1 /* PresentationPageListItem.swift */; };
+		A98A28A72A6130890043C8C1 /* sampleProject.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A98A28A62A6130890043C8C1 /* sampleProject.pdf */; };
+		A98A28AA2A6130D00043C8C1 /* sampleProject.json in Resources */ = {isa = PBXBuildFile; fileRef = A98A28A92A6130D00043C8C1 /* sampleProject.json */; };
 		A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CC2A5DBC43008510CF /* Color+Extension.swift */; };
 		A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */; };
 		A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526D12A5E3356008510CF /* FileImporterButtonView.swift */; };
@@ -134,6 +136,8 @@
 		A98A289D2A60D1720043C8C1 /* ProjectPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPlanView.swift; sourceTree = "<group>"; };
 		A98A28A02A6125A30043C8C1 /* PresentationPageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPageList.swift; sourceTree = "<group>"; };
 		A98A28A22A6125B50043C8C1 /* PresentationPageListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPageListItem.swift; sourceTree = "<group>"; };
+		A98A28A62A6130890043C8C1 /* sampleProject.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sampleProject.pdf; sourceTree = "<group>"; };
+		A98A28A92A6130D00043C8C1 /* sampleProject.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleProject.json; sourceTree = "<group>"; };
 		A99526CC2A5DBC43008510CF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExporterButtonView.swift; sourceTree = "<group>"; };
 		A99526D12A5E3356008510CF /* FileImporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImporterButtonView.swift; sourceTree = "<group>"; };
@@ -420,6 +424,7 @@
 		A945F06F2A570D9B00DC62D7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A98A28A42A6130150043C8C1 /* SampleProject */,
 				A97FBE4E2A5E887900B9F94B /* sample.pdf */,
 				A945F03A2A56788700DC62D7 /* Assets.xcassets */,
 			);
@@ -570,6 +575,23 @@
 			path = PresentationPageList;
 			sourceTree = "<group>";
 		};
+		A98A28A42A6130150043C8C1 /* SampleProject */ = {
+			isa = PBXGroup;
+			children = (
+				A98A28A82A6130950043C8C1 /* Practice */,
+				A98A28A62A6130890043C8C1 /* sampleProject.pdf */,
+				A98A28A92A6130D00043C8C1 /* sampleProject.json */,
+			);
+			path = SampleProject;
+			sourceTree = "<group>";
+		};
+		A98A28A82A6130950043C8C1 /* Practice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Practice;
+			sourceTree = "<group>";
+		};
 		A99526CE2A5E32C7008510CF /* FileSystemView */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,6 +709,8 @@
 			files = (
 				A945F0752A57113C00DC62D7 /* sample.json in Resources */,
 				A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */,
+				A98A28AA2A6130D00043C8C1 /* sampleProject.json in Resources */,
+				A98A28A72A6130890043C8C1 /* sampleProject.pdf in Resources */,
 				A945F03E2A56788700DC62D7 /* Preview Assets.xcassets in Resources */,
 				A945F03B2A56788700DC62D7 /* Assets.xcassets in Resources */,
 				A97FBE4F2A5E887900B9F94B /* sample.pdf in Resources */,
