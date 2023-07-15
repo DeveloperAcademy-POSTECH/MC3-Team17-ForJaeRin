@@ -18,7 +18,7 @@ struct PresentationPDFView: View {
     
     var body: some View {
         VStack {
-            PDFKitView(url: pdfUrl)
+            PDFKitView(url: pdfUrl, pageNumber: 0)
         }
     }
 }

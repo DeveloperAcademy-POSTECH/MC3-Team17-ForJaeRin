@@ -22,6 +22,7 @@ struct PresentationPageList: View {
                 pdfDocument.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
             }
         }
+        .scrollContentBackground(.hidden)
     }
 }
 

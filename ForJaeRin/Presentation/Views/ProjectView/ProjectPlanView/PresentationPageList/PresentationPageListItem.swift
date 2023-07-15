@@ -13,58 +13,104 @@ struct PresentationPageListItem: View {
     var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
     var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
+    @State var pageScript = ""
+    @State var keywords: Keywords = []
     
     var body: some View {
         HStack(spacing: 0) {
             // 그룹 인디케이터
-            groupIndicator(groupColor: GroupColor.allCases[groupIndex])
+            groupIndicator()
             // 프레젠테이션(PDF) 컨테이너
+            pdfContainer(pageIndex: pageIndex)
+            dottedDivider()
             // 스크립트 컨테이너
+            scriptContainer()
+            dottedDivider()
             // 키워드 컨테이너
+            keywordContainer()
         }
+        .background(Color.systemWhite)
+        .cornerRadius(10)
+        .frame(maxWidth: .infinity, minHeight: 182)
         .onAppear {
-            print(groupIndex)
-            print(pdfPage)
-            
+            pageScript = pdfPage.script
+            keywords = pdfPage.keywords
         }
     }
 }
 
 extension PresentationPageListItem {
     // MARK: 그룹 인디케이터
-    private func groupIndicator(groupColor: GroupColor) -> some View {
+    private func groupIndicator() -> some View {
         Rectangle()
             .frame(width: 20)
-            .foregroundColor(groupColor.color)
-            .border(.red)
+            .foregroundColor(GroupColor.allCases[groupIndex].color)
     }
     
-    // MARK: 프레젠테이션(PDF) 컨테이너
-    private func pdfContainer() -> some View {
-        VStack {
-            Rectangle()
+    // MARK: 프레젠테이션(PDF) 컨테이너 - 로키가 잘 해줄꺼야
+    private func pdfContainer(pageIndex: Int) -> some View {
+        let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
+        
+        return ZStack(alignment: .topLeading) {
+            Text("\(pageIndex + 1)")
+                .offset(x: 6, y: -24)
+                .zIndex(1)
+            VStack {
+                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
+                    .background(Color.blue)
+                    .frame(maxWidth: 212, maxHeight: 118)
+                    .cornerRadius(10)
+            }
+            .padding(.leading, 50)
+            .padding(.trailing, 35)
         }
-        .background(Color.blue)
     }
     
     // MARK: 스크립트 컨테이너
-    private func scriptContainer(script: String) -> some View {
+    private func scriptContainer() -> some View {
         ScrollView {
-            Text(script)
+            VStack {
+                TextEditor(text: $pageScript)
+                    .frame(minHeight: 182-48, maxHeight: 182-48)
+                    
+            }
+            .frame(minWidth: 206, maxWidth: .infinity, minHeight: 182, maxHeight: .infinity)
         }
+        .frame(maxWidth: 206, maxHeight: 182)
+        .padding(.leading, 35)
+        .padding(.trailing, 4)
     }
     
     // MARK: 키워드 컨테이너
-    private func keywordContainer(keywords: Keywords) -> some View {
+    private func keywordContainer() -> some View {
         VStack {
             List {
-                ForEach(0..<keywords.count, id: \.self) { index in
-                    Text(keywords[index])
+                ChipView(mode: .scrollable, binding: .constant(7), items: keywords) {
+                    Text($0)
+                        .foregroundColor(Color.systemPrimary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.systemGray100,lineWidth:1)
+                                .foregroundColor(Color.clear)
+                                .cornerRadius(5)
+                          )
                 }
             }
         }
+        .padding(.leading, 35)
+        .padding(.trailing, 102)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
+    private func dottedDivider() -> some View {
+        Rectangle()
+            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [3]))
+            .foregroundColor(Color.systemGray100)
+            .frame(minWidth:1, maxWidth: 1)
+            .padding(.vertical, 24)
+    }
 }
 
 struct PresentationPageListItem_Previews: PreviewProvider {

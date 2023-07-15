@@ -16,13 +16,6 @@ struct ContentView: View {
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
                 .foregroundColor(Color.systemGray100)
-            Button {
-//                AppFileManager.shared.loadJSONData()
-                print(projectFileManager.projectMetadata?.projectName)
-            } label: {
-                Text("조회하기")
-            }
-
             NavigationStack {
                     SplitLayoutView()
             }
@@ -33,6 +26,7 @@ struct ContentView: View {
         }
     }
     
+    // MARK: 테스트용 데이터 가져와서 넣기
     private func initProject() {
         do {
             let data = try Data(contentsOf: AppFileManager.shared.url!)

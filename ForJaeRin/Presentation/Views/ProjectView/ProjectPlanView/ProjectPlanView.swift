@@ -41,10 +41,13 @@ struct ProjectPlanView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
 
     var body: some View {
-        VStack {
-            //
+        VStack(spacing: 0) {
             PresentationPageList(pdfDocument: projectFileManager.pdfDocument!)
+                .background(Color.detailLayoutBackground)
+                .scrollContentBackground(.hidden)
         }
+        .padding(.horizontal, 92)
+        .padding(.vertical, 50)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
