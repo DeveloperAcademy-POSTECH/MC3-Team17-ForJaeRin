@@ -15,7 +15,6 @@
 		A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */; };
 		A91E902E2A5BDF1C00EBB3F2 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */; };
 		A91E90342A5C611500EBB3F2 /* SelectProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90332A5C611500EBB3F2 /* SelectProjectView.swift */; };
-		A91E90362A5C613100EBB3F2 /* ProjectTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90352A5C613100EBB3F2 /* ProjectTestView.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
@@ -91,7 +90,6 @@
 		A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		A91E90332A5C611500EBB3F2 /* SelectProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProjectView.swift; sourceTree = "<group>"; };
-		A91E90352A5C613100EBB3F2 /* ProjectTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTestView.swift; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A938398F2A5CF9120075A97F /* SplitLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLayoutView.swift; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 			children = (
 				A945F07C2A57138000DC62D7 /* SampleView */,
 				A91E90322A5C60DA00EBB3F2 /* SelectProjectView */,
-				A91E90312A5C60B000EBB3F2 /* ProjectView */,
 				A91E902C2A5BDF1100EBB3F2 /* RecordView */,
 				A91E90232A5B1A4300EBB3F2 /* FileSystemView */,
 			);
@@ -225,14 +222,6 @@
 				A91E902D2A5BDF1B00EBB3F2 /* RecordView.swift */,
 			);
 			path = RecordView;
-			sourceTree = "<group>";
-		};
-		A91E90312A5C60B000EBB3F2 /* ProjectView */ = {
-			isa = PBXGroup;
-			children = (
-				A91E90352A5C613100EBB3F2 /* ProjectTestView.swift */,
-			);
-			path = ProjectView;
 			sourceTree = "<group>";
 		};
 		A91E90322A5C60DA00EBB3F2 /* SelectProjectView */ = {
@@ -563,8 +552,8 @@
 		A98A289C2A60D1620043C8C1 /* ProjectPlanView */ = {
 			isa = PBXGroup;
 			children = (
-				A98A289F2A6125820043C8C1 /* PresentationPageList */,
 				A98A289D2A60D1720043C8C1 /* ProjectPlanView.swift */,
+				A98A289F2A6125820043C8C1 /* PresentationPageList */,
 			);
 			path = ProjectPlanView;
 			sourceTree = "<group>";
@@ -814,7 +803,6 @@
 				A93839962A5D3CE10075A97F /* SplitLayoutView+Extension.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
-				A91E90362A5C613100EBB3F2 /* ProjectTestView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
 				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
 				A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */,

@@ -37,16 +37,12 @@ enum GroupColor: CaseIterable {
 }
 
 struct ProjectPlanView: View {
-    @State var values = [
-        "a", "b", "c", "d",
-        "e", "f", "g"
-    ]
-    @State var isHovering: Bool = false
+    @State private var leftPaneWidth: CGFloat = 200
     
     var body: some View {
         VStack {
+            //
 //            PresentationPageList(pdfDocument: PDFDocu)
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

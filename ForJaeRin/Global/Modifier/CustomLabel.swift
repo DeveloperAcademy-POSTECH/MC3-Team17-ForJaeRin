@@ -25,6 +25,8 @@ struct LeftSidebarLabelStyle: LabelStyle {
 }
 
 struct LayoutContentLabelStyle: LabelStyle {
+//    var isSelected: Bool
+    
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 8) {
             configuration.icon

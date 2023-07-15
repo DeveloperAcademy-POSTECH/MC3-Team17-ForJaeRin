@@ -14,6 +14,8 @@ struct ForJaeRinApp: App {
 //            FileSystemView()
 //            RecordView()
             ContentView()
+                .toolbarBackground(Color.systemWhite)
+                .environmentObject(ProjectFileManager())
         }
         .commands {
             ToolbarCommands()

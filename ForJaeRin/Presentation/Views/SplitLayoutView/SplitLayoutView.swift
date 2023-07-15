@@ -41,6 +41,7 @@ struct SplitLayoutView: View {
         } content: {
             /// 2depth - currentTab에 따라 다른 view로 분기됩니다.
             tabContentsView()
+                .listRowBackground(Color.systemWhite)
         } detail: {
             /// 3depth - currentContent에 따라 다른 view로 분기됩니다.
             detailView()
@@ -79,20 +80,22 @@ extension SplitLayoutView {
                             id: \.self,selection: $currentContent) { tabContents in
                             NavigationLink(value: tabContents) {
                                 Label(tabContents.contentsName, systemImage: tabContents.iconName)
-                                    .padding(.vertical, 4)
+                                    .padding(.vertical, 8)
                                     .labelStyle(LayoutContentLabelStyle())
-
+                                    .foregroundColor(currentContent == tabContents
+                                         ? Color.systemPrimary
+                                         : Color.systemGray100)
                             }
+                            .listRowBackground(currentContent == tabContents
+                                               ? Color.systemGray100
+                                               : Color.systemWhite)
                             .listRowSeparator(.visible)
-                            .listRowBackground(Color.systemWhite)
-                            .foregroundColor(currentContent == tabContents
-                                             ? Color.systemPrimary
-                                             : Color.systemGray100)
+                            .alignmentGuide(.listRowSeparatorLeading, computeValue: { _ in
+                                return 0
+                            })
                         }
-                        .listRowSeparator(.visible)
+                            .listStyle(DefaultListStyle())
                         .navigationSplitViewColumnWidth(172)
-                        .frame(maxWidth: 172, alignment: .leading)
-                        .listStyle(.plain)
                     } else {
                         List(
                             currentTab.tabContents,
@@ -104,7 +107,6 @@ extension SplitLayoutView {
                         .navigationSplitViewColumnWidth(0)
                     }
                 }
-                .padding(16)
                 .toolbar(id: "project-tooblar") {
                     ToolbarView()
                 }
