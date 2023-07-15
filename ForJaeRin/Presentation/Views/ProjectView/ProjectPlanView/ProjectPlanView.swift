@@ -38,11 +38,12 @@ enum GroupColor: CaseIterable {
 
 struct ProjectPlanView: View {
     @State private var leftPaneWidth: CGFloat = 200
-    
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+
     var body: some View {
         VStack {
             //
-//            PresentationPageList(pdfDocument: PDFDocu)
+            PresentationPageList(pdfDocument: projectFileManager.pdfDocument!)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

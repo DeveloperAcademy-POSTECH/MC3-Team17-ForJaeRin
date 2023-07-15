@@ -22,6 +22,11 @@ struct PresentationPageListItem: View {
             // 스크립트 컨테이너
             // 키워드 컨테이너
         }
+        .onAppear {
+            print(groupIndex)
+            print(pdfPage)
+            
+        }
     }
 }
 

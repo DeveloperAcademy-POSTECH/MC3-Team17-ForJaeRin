@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PresentationPageList: View {
-    @Binding var pdfDocument: PDFDocumentManager
+    var pdfDocument: PDFDocumentManager
     
     var body: some View {
         List {

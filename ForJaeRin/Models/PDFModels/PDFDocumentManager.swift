@@ -22,7 +22,15 @@ final class PDFDocumentManager: ObservableObject {
     
     // MARK: 페이지 인덱스로 PDF Group을 조회해서 현재 페이지가 속한 그룹 인덱스 반환
     func findGroupIndex(pageIndex: Int) -> Int {
-        let result: Int = 0
+        var result: Int = 0
+        
+        for (index, element) in PDFGroups.enumerated() {
+            if pageIndex >= element.range.start &&
+                pageIndex >= element.range.end {
+                result = index
+            }
+        }
+        
         return result
     }
 }
