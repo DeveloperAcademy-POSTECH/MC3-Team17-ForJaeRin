@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: PDF 페이지 별 정보를 들고 있는 구조체
-struct PDFPage: Identifiable {
+struct PDFPage: Identifiable, Equatable {
     var id = UUID()
     var keywords: Keywords
     var script: String

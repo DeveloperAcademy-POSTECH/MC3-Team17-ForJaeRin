@@ -35,16 +35,16 @@ extension Color {
         .init(hex: "#8B6DFF")
     }
     static var primary400: Self {
-        .init(hex: "#C9C1FF")
+        .init(hex: "#AC9FFF").opacity(0.65)
     }
     static var primary300: Self {
-        .init(hex: "#DED9FF")
+        .init(hex: "#AC9FFF").opacity(0.4)
     }
     static var primary200: Self {
-        .init(hex: "#EAE7FF")
+        .init(hex: "#AC9FFF").opacity(0.25)
     }
     static var primary100: Self {
-        .init(hex: "#F7F5FF")
+        .init(hex: "#AC9FFF").opacity(0.1)
     }
 }
 

@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct PresentationPageListItem: View {
-    var groupIndex: Int
-    var pageIndex: Int
-    var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
-    var pdfPage: PDFPage
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+    @State var groupIndex: Int
+    @State var pageIndex: Int
+    @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
+    @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
     @State var pageScript = ""
     @State var keywords: Keywords = []
@@ -31,6 +32,8 @@ struct PresentationPageListItem: View {
         }
         .background(Color.systemWhite)
         .cornerRadius(10)
+        .padding(.trailing, 92)
+//        .padding(.top, pageIndex == 0 ? 50 : 0)
         .frame(maxWidth: .infinity, minHeight: 182)
         .onAppear {
             pageScript = pdfPage.script
@@ -57,9 +60,13 @@ extension PresentationPageListItem {
                 .zIndex(1)
             VStack {
                 PDFKitView(url: pdfUrl, pageNumber: pageIndex)
-                    .background(Color.blue)
                     .frame(maxWidth: 212, maxHeight: 118)
-                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.systemGray100,lineWidth:1)
+                            .foregroundColor(Color.clear)
+                            .cornerRadius(10)
+                      )
             }
             .padding(.leading, 50)
             .padding(.trailing, 35)
@@ -68,11 +75,10 @@ extension PresentationPageListItem {
     
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
-        ScrollView {
-            VStack {
+        ScrollView(showsIndicators: false) {
+            HStack {
                 TextEditor(text: $pageScript)
                     .frame(minHeight: 182-48, maxHeight: 182-48)
-                    
             }
             .frame(minWidth: 206, maxWidth: .infinity, minHeight: 182, maxHeight: .infinity)
         }

@@ -42,12 +42,14 @@ struct ProjectPlanView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            PresentationPageList(pdfDocument: projectFileManager.pdfDocument!)
+            PresentationPageList(
+                pdfDocument: projectFileManager.pdfDocument!,
+                pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
+            )
                 .background(Color.detailLayoutBackground)
                 .scrollContentBackground(.hidden)
         }
-        .padding(.horizontal, 92)
-        .padding(.vertical, 50)
+        .padding(.leading, 92)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

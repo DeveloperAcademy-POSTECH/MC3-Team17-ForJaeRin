@@ -10,7 +10,9 @@ import Foundation
 // MARK: PDF 정보를 들고 있을 클래스
 final class PDFDocumentManager: ObservableObject {
     let url: URL
+    @Published
     var PDFPages: [PDFPage]
+    @Published
     /// PDF Group은 최대 7개
     var PDFGroups: [PDFGroup]
     
