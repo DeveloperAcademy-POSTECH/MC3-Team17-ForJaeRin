@@ -20,6 +20,6 @@ struct ForJaeRinApp: App {
         .commands {
             ToolbarCommands()
         }
-        .windowToolbarStyle(.expanded)
+        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
     }
 }

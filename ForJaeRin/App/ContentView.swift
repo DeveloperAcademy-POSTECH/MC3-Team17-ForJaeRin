@@ -10,9 +10,43 @@ import SwiftUI
 struct ContentView: View {
     @State private var path = NavigationPath()
     @EnvironmentObject var projectFileManager: ProjectFileManager
-    
+    @State private var isHovering = false
+
     var body: some View {
         VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                HStack(spacing: 12) {
+                    Button {
+                        print("그룹 수정하기")
+                    } label: {
+                        Label("그룹 수정하기", systemImage: "crop")
+                            .labelStyle(CustomToolbarLabelStyle())
+                            .foregroundColor(Color.systemGray300)
+                    }
+                    .buttonStyle(.plain)
+                    Button {
+                        print("흐름보기")
+                    } label: {
+                        Label("흐름보기", systemImage: "chart.bar.doc.horizontal")
+                            .labelStyle(CustomToolbarLabelStyle())
+                            .foregroundColor(Color.systemGray300)
+                    }
+                    .buttonStyle(.plain)
+                    Button {
+                        print("연습모드")
+                    } label: {
+                        Label("연습모드", systemImage: "play.fill")
+                            .labelStyle(CustomToolbarLabelStyle())
+                            .foregroundColor(Color.systemGray300)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.bottom, 8)
+                .padding(.horizontal, 60)
+            }
+            .frame(maxWidth: .infinity, minHeight: 1)
+            .foregroundColor(Color.systemWhite)
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
                 .foregroundColor(Color.systemGray100)
@@ -32,7 +66,7 @@ struct ContentView: View {
             let data = try Data(contentsOf: AppFileManager.shared.url!)
             let file = try AppFileManager.shared.decodeJson(from: data)
             
-            let PDFPages = Array(file.projectDocument.PDFPages).enumerated().map { index, pdfpage in
+            let PDFPages = file.projectDocument.PDFPages.map { pdfpage in
                 PDFPage(keywords: pdfpage.keywords, script: pdfpage.script)
             }
             let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in

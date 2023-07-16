@@ -54,7 +54,7 @@ extension SplitLayoutView {
     private func sidebarView() -> some View {
         List(mainTabs, id: \.self,selection: $currentTab) { mainTab in
             NavigationLink(value: mainTab) {
-                Label(mainTab.tabName, systemImage: "heart.fill")
+                Label(mainTab.tabName, systemImage: mainTab.iconName)
                     .labelStyle(LeftSidebarLabelStyle())
                     .padding(8)
                     .foregroundColor(
@@ -86,15 +86,13 @@ extension SplitLayoutView {
                                          ? Color.systemPrimary
                                          : Color.systemGray100)
                             }
-                            .listRowBackground(currentContent == tabContents
-                                               ? Color.systemGray100
-                                               : Color.systemWhite)
+                            .listRowBackground(Color.systemWhite)
                             .listRowSeparator(.visible)
                             .alignmentGuide(.listRowSeparatorLeading, computeValue: { _ in
                                 return 0
                             })
                         }
-                            .listStyle(DefaultListStyle())
+                            .listStyle(PlainListStyle())
                         .navigationSplitViewColumnWidth(172)
                     } else {
                         List(
@@ -106,9 +104,6 @@ extension SplitLayoutView {
                         }
                         .navigationSplitViewColumnWidth(0)
                     }
-                }
-                .toolbar(id: "project-tooblar") {
-                    ToolbarView()
                 }
             } else {
                 List(currentTab.tabContents, id: \.self,selection: $currentContent) { tabContents in

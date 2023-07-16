@@ -29,9 +29,8 @@ struct PresentationView: View {
                 HSplitView {
                     splitLeftView()
                     splitRightView()
-                }
             }
-        .presentedWindowToolbarStyle(.unifiedCompact(showsTitle: true))
+        }
     }
 }
 

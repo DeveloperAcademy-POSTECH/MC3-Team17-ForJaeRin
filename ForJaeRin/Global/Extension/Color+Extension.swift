@@ -54,19 +54,19 @@ extension Color {
         .init(hex: "#000000")
     }
     static var systemGray500: Self {
-        .init(hex: "#353535")
+        .init(hex: "#2F2F2F")
     }
     static var systemGray400: Self {
-        .init(hex: "#565656")
+        .init(hex: "#2F2F2F").opacity(0.65)
     }
     static var systemGray300: Self {
-        .init(hex: "#6D6D6D")
+        .init(hex: "#2F2F2F").opacity(0.45)
     }
     static var systemGray200: Self {
-        .init(hex: "#9A9A9A")
+        .init(hex: "#2F2F2F").opacity(0.25)
     }
     static var systemGray100: Self {
-        .init(hex: "#DDDDDD")
+        .init(hex: "#2F2F2F").opacity(0.1)
     }
     static var systemWhite: Self {
         .init(hex: "#FFFFFF")
