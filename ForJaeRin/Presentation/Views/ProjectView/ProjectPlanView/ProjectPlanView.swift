@@ -45,8 +45,8 @@ struct ProjectPlanView: View {
             PresentationPageList(
                 pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
             )
-                .background(Color.detailLayoutBackground)
-                .scrollContentBackground(.hidden)
+            .background(Color.detailLayoutBackground)
+            .scrollContentBackground(.hidden)
         }
         .padding(.leading, 92)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

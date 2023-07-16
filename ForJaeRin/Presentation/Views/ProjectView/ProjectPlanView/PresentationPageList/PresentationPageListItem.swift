@@ -70,6 +70,7 @@ extension PresentationPageListItem {
             }
             .padding(.leading, 50)
             .padding(.trailing, 35)
+            .frame(maxWidth: 318)
         }
     }
     

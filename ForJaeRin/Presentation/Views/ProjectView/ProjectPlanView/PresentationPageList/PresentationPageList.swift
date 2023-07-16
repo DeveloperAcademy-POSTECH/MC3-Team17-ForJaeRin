@@ -14,7 +14,7 @@ struct PresentationPageList: View {
     var body: some View {
         GeometryReader { geometry in
             let document = projectFileManager.pdfDocument!
-            ScrollView(showsIndicators: false) {
+            ScrollView {
                 List {
                     PresentationPageListOnboardingView()
                     ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
@@ -29,10 +29,8 @@ struct PresentationPageList: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
-                    print(newValue)
                     pdfDocumentPages = newValue
                 })
-                .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
     }

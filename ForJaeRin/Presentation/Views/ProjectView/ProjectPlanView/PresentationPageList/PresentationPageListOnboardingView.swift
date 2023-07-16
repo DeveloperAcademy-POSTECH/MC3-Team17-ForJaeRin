@@ -12,16 +12,19 @@ struct PresentationPageListOnboardingView: View {
         ZStack(alignment: .topTrailing) {
             backgackgroundView()
             HStack {
-                Spacer(minLength: 70)
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color.primary200)
-                        .cornerRadius(10)
-                        .frame(width: 111, height: 62)
-                    Text("썸네일")
-                        .foregroundColor(Color.systemPrimary)
+                HStack(spacing: 0) {
+                    Spacer(minLength: 70)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color.primary200)
+                            .cornerRadius(10)
+                            .frame(width: 111, height: 62)
+                        Text("썸네일")
+                            .foregroundColor(Color.systemPrimary)
+                    }
+                    Spacer(minLength: 35)
                 }
-                Spacer(minLength: 35)
+                .frame(maxWidth: 318)
                 Divider()
                     .padding(.trailing, 35)
                 scriptInfoView()
