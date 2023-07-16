@@ -9,32 +9,22 @@ import SwiftUI
 
 struct PresentationPageList: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
-    
-    var pdfDocument: PDFDocumentManager {
-        didSet {
-            print(pdfDocument.PDFPages)
-        }
-    }
-    
-    @State var pdfDocumentPages: [PDFPage] {
-        didSet {
-            print(pdfDocumentPages)
-        }
-    }
+    @State var pdfDocumentPages: [PDFPage]
     
     var body: some View {
         GeometryReader { geometry in
+            let document = projectFileManager.pdfDocument!
             ScrollView(showsIndicators: false) {
                 List {
                     PresentationPageListOnboardingView()
                     ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
                         PresentationPageListItem(
-                            groupIndex: pdfDocument.findGroupIndex(pageIndex: index),
+                            groupIndex: document.findGroupIndex(pageIndex: index),
                             pageIndex: index,
-                            pdfGroup: pdfDocument.PDFGroups[pdfDocument.findGroupIndex(pageIndex: index)],
-                            pdfPage: pdfDocument.PDFPages[index])
+                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
+                            pdfPage: document.PDFPages[index])
                     }.onMove { fromIndex, toIndex in
-                        pdfDocument.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
+                        document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)

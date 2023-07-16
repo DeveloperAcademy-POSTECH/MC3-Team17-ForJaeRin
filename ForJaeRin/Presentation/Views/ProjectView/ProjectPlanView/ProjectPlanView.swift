@@ -43,7 +43,6 @@ struct ProjectPlanView: View {
     var body: some View {
         VStack(spacing: 0) {
             PresentationPageList(
-                pdfDocument: projectFileManager.pdfDocument!,
                 pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
             )
                 .background(Color.detailLayoutBackground)
