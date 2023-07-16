@@ -96,6 +96,27 @@ extension Color {
     static var groupGray: Self {
         .init(hex: "#D9D9D9")
     }
+    static var groupPurpleText: Self {
+        .init(hex: "#5000FF")
+    }
+    static var groupYellowText: Self {
+        .init(hex: "#FFB300")
+    }
+    static var groupGreenText: Self {
+        .init(hex: "#40C3B4")
+    }
+    static var groupPinkText: Self {
+        .init(hex: "#FFACD9")
+    }
+    static var groupOrangeText: Self {
+        .init(hex: "#FF7A00")
+    }
+    static var groupBlueText: Self {
+        .init(hex: "#74AEFF")
+    }
+    static var groupGrayText: Self {
+        .init(hex: "#848484")
+    }
 }
 
 extension Color {

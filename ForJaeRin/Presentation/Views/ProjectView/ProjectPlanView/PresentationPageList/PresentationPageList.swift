@@ -17,12 +17,14 @@ struct PresentationPageList: View {
             ScrollView {
                 List {
                     PresentationPageListOnboardingView()
-                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
+                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, page in
+                        
                         PresentationPageListItem(
                             groupIndex: document.findGroupIndex(pageIndex: index),
                             pageIndex: index,
                             pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
-                            pdfPage: document.PDFPages[index])
+                            pdfPage: document.PDFPages[index]
+                        )
                     }.onMove { fromIndex, toIndex in
                         document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
                     }

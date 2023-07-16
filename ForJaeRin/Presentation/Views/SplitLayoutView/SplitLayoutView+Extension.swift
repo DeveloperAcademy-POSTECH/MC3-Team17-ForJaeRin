@@ -47,7 +47,7 @@ extension SplitLayoutView {
             case .settings:
                 return "gearshape.fill"
             case .plan:
-                return "Plan"
+                return "folder.fill"
             }
         }
         

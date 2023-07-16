@@ -34,6 +34,25 @@ enum GroupColor: CaseIterable {
             return Color.groupGray
         }
     }
+    
+    var text: Color {
+        switch self {
+        case .groupPurple:
+            return Color.groupPurpleText
+        case .groupYellow:
+            return Color.groupYellowText
+        case .groupGreen:
+            return Color.groupGreenText
+        case .groupPink:
+            return Color.groupPinkText
+        case .groupOrange:
+            return Color.groupOrangeText
+        case .groupBlue:
+            return Color.groupBlueText
+        case .groupGray:
+            return Color.groupGrayText
+        }
+    }
 }
 
 struct ProjectPlanView: View {

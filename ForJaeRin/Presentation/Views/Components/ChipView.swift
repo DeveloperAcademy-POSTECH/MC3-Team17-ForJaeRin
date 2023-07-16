@@ -44,7 +44,7 @@ struct ChipView<B, T: Hashable, V: View>: View {
     return ZStack(alignment: .topLeading) {
       ForEach(self.items, id: \.self) { item in
         self.viewMapping(item)
-          .padding([.vertical], 12)
+          .padding([.vertical], 6)
           .alignmentGuide(.leading, computeValue: { _item in
             if (abs(width - _item.width) > geometry.size.width) {
               width = 0

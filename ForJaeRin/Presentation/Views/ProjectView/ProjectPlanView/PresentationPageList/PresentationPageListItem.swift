@@ -18,26 +18,54 @@ struct PresentationPageListItem: View {
     @State var keywords: Keywords = []
     
     var body: some View {
-        HStack(spacing: 0) {
-            // 그룹 인디케이터
-            groupIndicator()
-            // 프레젠테이션(PDF) 컨테이너
-            pdfContainer(pageIndex: pageIndex)
-            dottedDivider()
-            // 스크립트 컨테이너
-            scriptContainer()
-            dottedDivider()
-            // 키워드 컨테이너
-            keywordContainer()
+        VStack {
+            if checkGroupFirstItem() {
+                ZStack {
+                    Rectangle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [7]))
+                        .foregroundColor(GroupColor.allCases[groupIndex].text)
+                        .frame(maxWidth: .infinity ,minHeight:1, maxHeight: 1)
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(GroupColor.allCases[groupIndex].text,lineWidth:1)
+                        .foregroundColor(Color.systemWhite)
+                        .background(Color.systemWhite)
+                        .cornerRadius(50)
+                        .frame(maxWidth: 255, maxHeight: 26)
+                    TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                        .foregroundColor(GroupColor.allCases[groupIndex].text)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.trailing, 92)
+                .frame(maxWidth: .infinity, minHeight: 26)
+            }
+            HStack(spacing: 0) {
+                // 그룹 인디케이터
+                groupIndicator()
+                // 프레젠테이션(PDF) 컨테이너
+                pdfContainer(pageIndex: pageIndex)
+                dottedDivider()
+                // 스크립트 컨테이너
+                scriptContainer()
+                dottedDivider()
+                // 키워드 컨테이너
+                keywordContainer()
+            }
+            .background(Color.systemWhite)
+            .cornerRadius(10)
+            .padding(.trailing, 92)
+            .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
-        .background(Color.systemWhite)
-        .cornerRadius(10)
-        .padding(.trailing, 92)
-//        .padding(.top, pageIndex == 0 ? 50 : 0)
-        .frame(maxWidth: .infinity, minHeight: 182)
         .onAppear {
             pageScript = pdfPage.script
             keywords = pdfPage.keywords
+        }
+    }
+    
+    private func checkGroupFirstItem() -> Bool {
+        if pageIndex == pdfGroup.range.start {
+            return true
+        } else {
+            return false
         }
     }
 }
@@ -76,12 +104,9 @@ extension PresentationPageListItem {
     
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
-        ScrollView(showsIndicators: false) {
-            HStack {
-                TextEditor(text: $pageScript)
-                    .frame(minHeight: 182-48, maxHeight: 182-48)
-            }
-            .frame(minWidth: 206, maxWidth: .infinity, minHeight: 182, maxHeight: .infinity)
+        HStack {
+            TextEditor(text: $pageScript)
+                .frame(minHeight: 182-48, maxHeight: 182-48)
         }
         .frame(maxWidth: 206, maxHeight: 182)
         .padding(.leading, 35)
@@ -106,6 +131,7 @@ extension PresentationPageListItem {
                 }
             }
         }
+        .padding(.vertical, 24)
         .padding(.leading, 35)
         .padding(.trailing, 102)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -130,6 +156,7 @@ struct PresentationPageListItem_Previews: PreviewProvider {
             groupIndex: groupIndex,
             pageIndex: pageIndex,
             pdfGroup: pdfGroup,
-            pdfPage: pdfPage)
+            pdfPage: pdfPage
+        )
     }
 }

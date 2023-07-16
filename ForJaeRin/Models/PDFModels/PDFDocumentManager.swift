@@ -27,8 +27,9 @@ final class PDFDocumentManager: ObservableObject {
         var result: Int = 0
         
         for (index, element) in PDFGroups.enumerated() {
+            
             if pageIndex >= element.range.start &&
-                pageIndex >= element.range.end {
+                pageIndex <= element.range.end {
                 result = index
             }
         }

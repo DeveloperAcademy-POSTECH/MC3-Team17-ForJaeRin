@@ -32,7 +32,7 @@ struct ContentView: View {
             let data = try Data(contentsOf: AppFileManager.shared.url!)
             let file = try AppFileManager.shared.decodeJson(from: data)
             
-            let PDFPages = file.projectDocument.PDFPages.map { pdfpage in
+            let PDFPages = Array(file.projectDocument.PDFPages).enumerated().map { index, pdfpage in
                 PDFPage(keywords: pdfpage.keywords, script: pdfpage.script)
             }
             let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in
