@@ -15,16 +15,32 @@ struct LeftSidebarLabelStyle: LabelStyle {
             configuration.icon
                 .scaledToFill()
                 .padding(.bottom, 8)
-                .font(.title2)
-            configuration.title
-                .multilineTextAlignment(.center)
-                .font(.caption)
+                .font(.largeTitle)
+//            configuration.title
+//                .multilineTextAlignment(.center)
+//                .font(.caption)
         }
         .frame(maxWidth: .infinity)
     }
 }
 
+struct CustomToolbarLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .center, spacing: 0) {
+            configuration.icon
+                .scaledToFill()
+                .padding(.bottom, 6)
+                .font(.title2)
+            configuration.title
+                .multilineTextAlignment(.center)
+                .font(.caption)
+        }
+    }
+}
+
 struct LayoutContentLabelStyle: LabelStyle {
+//    var isSelected: Bool
+    
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 8) {
             configuration.icon

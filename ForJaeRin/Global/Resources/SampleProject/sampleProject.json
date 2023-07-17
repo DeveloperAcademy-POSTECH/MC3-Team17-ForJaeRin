@@ -1,5 +1,4 @@
 {
-    "project": {
         "projectMetadata": {
             "projectName": "My NC1 Story",
             "projectGoal": "새싹톤에서 시도해 본, ‘디자이너 입장에서 개발자와 소통하는 법’에 대해 사람들에게 공유하기",
@@ -113,5 +112,5 @@
             ]
         },
         "practice": []
-    }
+
 }

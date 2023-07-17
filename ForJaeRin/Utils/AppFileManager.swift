@@ -110,4 +110,47 @@ class AppFileManager {
             print("remove directory error. do something \(error)")
         }
     }
+    
+    func decodeJson(from jsonData: Data) throws -> RootModel {
+        let decoder = JSONDecoder()
+        return try decoder.decode(RootModel.self, from: jsonData)
+    }
+    
+    // MARK: 임시 json 경로
+    let url = Bundle.main.url(forResource: "sampleProject", withExtension: "json")
+}
+// MARK: 임시 JSON 구조체
+struct RootModel: Codable {
+    let projectMetadata: ProjectMetadata
+    let projectDocument: ProjectDocument
+    let practice: [String]
+    
+    struct ProjectMetadata: Codable {
+        let projectName: String
+        let projectGoal: String
+        let presentationTime: Int
+        let createAt: String
+    }
+    
+    struct ProjectDocument: Codable {
+        let PDFPages: [PDFPage]
+        let PDFGroups: [PDFGroup]
+        // swiftlint:disable nesting
+        struct PDFGroup: Codable {
+            let name: String
+            let range: Range
+            let setTime: Int
+            
+            struct Range: Codable {
+                let start: Int
+                let end: Int
+            }
+        }
+        
+        struct PDFPage: Codable {
+            let keywords: Keywords
+            let script: String
+        }
+    }
+    // swiftlint:enable nesting
 }

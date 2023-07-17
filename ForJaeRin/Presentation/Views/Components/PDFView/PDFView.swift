@@ -12,11 +12,19 @@ import PDFKit
 struct PDFKitView: NSViewRepresentable {
     typealias NSViewType = PDFView
     let url: URL // new variable to get the URL of the document
+    let pageNumber: Int
     
     func makeNSView(context: NSViewRepresentableContext<PDFKitView>) -> PDFView {
         // Creating a new PDFVIew and adding a document to it
         let pdfView = PDFView()
-        pdfView.document = PDFDocument(url: self.url)
+        let document = PDFDocument(url: self.url)
+        document?.page(at: pageNumber)
+        pdfView.displayBox = .cropBox
+        pdfView.displayMode = .singlePage
+        pdfView.autoScales = true
+        pdfView.backgroundColor = .white
+        pdfView.document = document
+        
         return pdfView
     }
     
@@ -29,7 +37,6 @@ struct PDFView_Previews: PreviewProvider {
     static var previews: some View {
         let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
         
-        PDFKitView(url: pdfUrl)
-            .scaledToFill()
+        PDFKitView(url: pdfUrl, pageNumber: 1)
     }
 }

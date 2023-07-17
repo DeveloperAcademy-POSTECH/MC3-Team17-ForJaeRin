@@ -7,8 +7,11 @@
 
 import Foundation
 
-// MARK: Tuple -> Struct로 변경이 필요할 것 같지만 우선 남겨둘게요.
-typealias SpeechRange = (start: Int, end: Int, group: Int)
+struct SpeechRange {
+    var start: Int
+    var end: Int
+    var group: Int
+}
 
 // MARK: 프로젝트 연습정보를 담기위한 구조체
 struct Practice: Identifiable {

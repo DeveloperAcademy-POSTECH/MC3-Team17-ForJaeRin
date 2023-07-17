@@ -8,70 +8,155 @@
 import SwiftUI
 
 struct PresentationPageListItem: View {
-    var groupIndex: Int
-    var pageIndex: Int
-    var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
-    var pdfPage: PDFPage
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+    @State var groupIndex: Int
+    @State var pageIndex: Int
+    @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
+    @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
+    @State var pageScript = ""
+    @State var keywords: Keywords = []
     
     var body: some View {
-        HStack(spacing: 0) {
-            // 그룹 인디케이터
-            groupIndicator(groupColor: GroupColor.allCases[groupIndex])
-            // 프레젠테이션(PDF) 컨테이너
-            // 스크립트 컨테이너
-            // 키워드 컨테이너
+        VStack {
+            if checkGroupFirstItem() {
+                ZStack {
+                    Rectangle()
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [7]))
+                        .foregroundColor(GroupColor.allCases[groupIndex].text)
+                        .frame(maxWidth: .infinity ,minHeight:1, maxHeight: 1)
+                    RoundedRectangle(cornerRadius: 50)
+                        .stroke(GroupColor.allCases[groupIndex].text,lineWidth:1)
+                        .foregroundColor(Color.systemWhite)
+                        .background(Color.systemWhite)
+                        .cornerRadius(50)
+                        .frame(maxWidth: 255, maxHeight: 26)
+                    TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                        .foregroundColor(GroupColor.allCases[groupIndex].text)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.trailing, 92)
+                .frame(maxWidth: .infinity, minHeight: 26)
+            }
+            HStack(spacing: 0) {
+                // 그룹 인디케이터
+                groupIndicator()
+                // 프레젠테이션(PDF) 컨테이너
+                pdfContainer(pageIndex: pageIndex)
+                dottedDivider()
+                // 스크립트 컨테이너
+                scriptContainer()
+                dottedDivider()
+                // 키워드 컨테이너
+                keywordContainer()
+            }
+            .background(Color.systemWhite)
+            .cornerRadius(10)
+            .padding(.trailing, 92)
+            .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
+        }
+        .onAppear {
+            pageScript = pdfPage.script
+            keywords = pdfPage.keywords
+        }
+    }
+    
+    private func checkGroupFirstItem() -> Bool {
+        if pageIndex == pdfGroup.range.start {
+            return true
+        } else {
+            return false
         }
     }
 }
 
 extension PresentationPageListItem {
     // MARK: 그룹 인디케이터
-    private func groupIndicator(groupColor: GroupColor) -> some View {
+    private func groupIndicator() -> some View {
         Rectangle()
             .frame(width: 20)
-            .foregroundColor(groupColor.color)
-            .border(.red)
+            .foregroundColor(GroupColor.allCases[groupIndex].color)
     }
     
-    // MARK: 프레젠테이션(PDF) 컨테이너
-    private func pdfContainer() -> some View {
-        VStack {
-            Rectangle()
+    // MARK: 프레젠테이션(PDF) 컨테이너 - 로키가 잘 해줄꺼야
+    private func pdfContainer(pageIndex: Int) -> some View {
+        let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
+        
+        return ZStack(alignment: .topLeading) {
+            Text("\(pageIndex + 1)")
+                .offset(x: 6, y: -24)
+                .zIndex(1)
+            VStack {
+                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
+                    .frame(maxWidth: 212, maxHeight: 118)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.systemGray100,lineWidth:1)
+                            .foregroundColor(Color.clear)
+                            .cornerRadius(10)
+                      )
+            }
+            .padding(.leading, 50)
+            .padding(.trailing, 35)
+            .frame(maxWidth: 318)
         }
-        .background(Color.blue)
     }
     
     // MARK: 스크립트 컨테이너
-    private func scriptContainer(script: String) -> some View {
-        ScrollView {
-            Text(script)
+    private func scriptContainer() -> some View {
+        HStack {
+            TextEditor(text: $pageScript)
+                .frame(minHeight: 182-48, maxHeight: 182-48)
         }
+        .frame(maxWidth: 206, maxHeight: 182)
+        .padding(.leading, 35)
+        .padding(.trailing, 4)
     }
     
     // MARK: 키워드 컨테이너
-    private func keywordContainer(keywords: Keywords) -> some View {
+    private func keywordContainer() -> some View {
         VStack {
             List {
-                ForEach(0..<keywords.count, id: \.self) { index in
-                    Text(keywords[index])
+                ChipView(mode: .scrollable, binding: .constant(7), items: keywords) {
+                    Text($0)
+                        .foregroundColor(Color.systemPrimary)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.systemGray100,lineWidth:1)
+                                .foregroundColor(Color.clear)
+                                .cornerRadius(5)
+                          )
                 }
             }
         }
+        .padding(.vertical, 24)
+        .padding(.leading, 35)
+        .padding(.trailing, 102)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
+    private func dottedDivider() -> some View {
+        Rectangle()
+            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [3]))
+            .foregroundColor(Color.systemGray100)
+            .frame(minWidth:1, maxWidth: 1)
+            .padding(.vertical, 24)
+    }
 }
 
 struct PresentationPageListItem_Previews: PreviewProvider {
     static var previews: some View {
-        var groupIndex = 0
-        var pageIndex = 0
-        var pdfGroup = PDFGroup(name: "그룹명", range: (start: 0, end: 3), setTime: 300)
-        var pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
+        let groupIndex = 0
+        let pageIndex = 0
+        let pdfGroup = PDFGroup(name: "그룹명", range: (start: 0, end: 3), setTime: 300)
+        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
         PresentationPageListItem(
             groupIndex: groupIndex,
             pageIndex: pageIndex,
             pdfGroup: pdfGroup,
-            pdfPage: pdfPage)
+            pdfPage: pdfPage
+        )
     }
 }

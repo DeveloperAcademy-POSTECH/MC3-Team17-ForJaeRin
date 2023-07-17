@@ -8,25 +8,32 @@
 import SwiftUI
 
 struct PresentationPageList: View {
-    @Binding var pdfDocument: PDFDocumentManager
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+    @State var pdfDocumentPages: [PDFPage]
     
     var body: some View {
-        List {
-            ForEach(0..<pdfDocument.PDFPages.count, id: \.self) { index in
-                PresentationPageListItem(
-                    groupIndex: pdfDocument.findGroupIndex(pageIndex: index),
-                    pageIndex: index,
-                    pdfGroup: pdfDocument.PDFGroups[pdfDocument.findGroupIndex(pageIndex: index)],
-                    pdfPage: pdfDocument.PDFPages[index])
-            }.onMove { fromIndex, toIndex in
-                pdfDocument.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
+        GeometryReader { geometry in
+            let document = projectFileManager.pdfDocument!
+            ScrollView {
+                List {
+                    PresentationPageListOnboardingView()
+                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, page in
+                        
+                        PresentationPageListItem(
+                            groupIndex: document.findGroupIndex(pageIndex: index),
+                            pageIndex: index,
+                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
+                            pdfPage: document.PDFPages[index]
+                        )
+                    }.onMove { fromIndex, toIndex in
+                        document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
+                    pdfDocumentPages = newValue
+                })
             }
         }
     }
 }
-
-// struct PresentationPageList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PresentationPageList()
-//    }
-// }

@@ -35,16 +35,16 @@ extension Color {
         .init(hex: "#8B6DFF")
     }
     static var primary400: Self {
-        .init(hex: "#C9C1FF")
+        .init(hex: "#AC9FFF").opacity(0.65)
     }
     static var primary300: Self {
-        .init(hex: "#DED9FF")
+        .init(hex: "#AC9FFF").opacity(0.4)
     }
     static var primary200: Self {
-        .init(hex: "#EAE7FF")
+        .init(hex: "#AC9FFF").opacity(0.25)
     }
     static var primary100: Self {
-        .init(hex: "#F7F5FF")
+        .init(hex: "#AC9FFF").opacity(0.1)
     }
 }
 
@@ -54,19 +54,19 @@ extension Color {
         .init(hex: "#000000")
     }
     static var systemGray500: Self {
-        .init(hex: "#353535")
+        .init(hex: "#2F2F2F")
     }
     static var systemGray400: Self {
-        .init(hex: "#565656")
+        .init(hex: "#2F2F2F").opacity(0.65)
     }
     static var systemGray300: Self {
-        .init(hex: "#6D6D6D")
+        .init(hex: "#2F2F2F").opacity(0.45)
     }
     static var systemGray200: Self {
-        .init(hex: "#9A9A9A")
+        .init(hex: "#2F2F2F").opacity(0.25)
     }
     static var systemGray100: Self {
-        .init(hex: "#DDDDDD")
+        .init(hex: "#2F2F2F").opacity(0.1)
     }
     static var systemWhite: Self {
         .init(hex: "#FFFFFF")
@@ -95,6 +95,27 @@ extension Color {
     }
     static var groupGray: Self {
         .init(hex: "#D9D9D9")
+    }
+    static var groupPurpleText: Self {
+        .init(hex: "#5000FF")
+    }
+    static var groupYellowText: Self {
+        .init(hex: "#FFB300")
+    }
+    static var groupGreenText: Self {
+        .init(hex: "#40C3B4")
+    }
+    static var groupPinkText: Self {
+        .init(hex: "#FFACD9")
+    }
+    static var groupOrangeText: Self {
+        .init(hex: "#FF7A00")
+    }
+    static var groupBlueText: Self {
+        .init(hex: "#74AEFF")
+    }
+    static var groupGrayText: Self {
+        .init(hex: "#848484")
     }
 }
 

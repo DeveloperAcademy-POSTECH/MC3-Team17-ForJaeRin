@@ -28,18 +28,18 @@ extension SplitLayoutView {
             case .present:
                 return "Present"
             case .history:
-                return "History"
+                return "연습 기록보기"
             case .settings:
                 return "Settings"
             case .plan:
-                return "Plan"
+                return "연습하기"
             }
         }
         
         var iconName: String {
             switch self {
             case .home:
-                return "Home"
+                return "house.fill"
             case .present:
                 return "folder.fill"
             case .history:
@@ -47,7 +47,7 @@ extension SplitLayoutView {
             case .settings:
                 return "gearshape.fill"
             case .plan:
-                return "Plan"
+                return "folder.fill"
             }
         }
         
@@ -83,12 +83,23 @@ extension SplitLayoutView {
             }
         }
         
+        var iconName: String {
+            switch self {
+            case .home:
+                return "house.fill"
+            case .project:
+                return "folder.fill"
+            case .settings:
+                return "gearshape.fill"
+            }
+        }
+        
         var tabContents: [TabContents] {
             switch self {
             case .home:
                 return [.home]
             case .project:
-                return [.present, .history, .plan]
+                return [.plan, .history, .present]
             case .settings:
                 return [.settings]
             }

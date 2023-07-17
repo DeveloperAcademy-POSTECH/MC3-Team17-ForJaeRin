@@ -34,20 +34,40 @@ enum GroupColor: CaseIterable {
             return Color.groupGray
         }
     }
+    
+    var text: Color {
+        switch self {
+        case .groupPurple:
+            return Color.groupPurpleText
+        case .groupYellow:
+            return Color.groupYellowText
+        case .groupGreen:
+            return Color.groupGreenText
+        case .groupPink:
+            return Color.groupPinkText
+        case .groupOrange:
+            return Color.groupOrangeText
+        case .groupBlue:
+            return Color.groupBlueText
+        case .groupGray:
+            return Color.groupGrayText
+        }
+    }
 }
 
 struct ProjectPlanView: View {
-    @State var values = [
-        "a", "b", "c", "d",
-        "e", "f", "g"
-    ]
-    @State var isHovering: Bool = false
-    
+    @State private var leftPaneWidth: CGFloat = 200
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+
     var body: some View {
-        VStack {
-//            PresentationPageList(pdfDocument: PDFDocu)
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 0) {
+            PresentationPageList(
+                pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
+            )
+            .background(Color.detailLayoutBackground)
+            .scrollContentBackground(.hidden)
         }
+        .padding(.leading, 92)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
