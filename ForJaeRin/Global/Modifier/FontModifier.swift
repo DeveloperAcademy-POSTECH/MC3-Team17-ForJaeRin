@@ -8,6 +8,15 @@
 import Foundation
 import SwiftUI
 
+func customFont(size: CGFloat) -> Font {
+    if let font = NSFont(name: "Pretendard-Regular", size: size) {
+        return Font(font)
+    } else {
+        // Return a fallback font or handle the error
+        return Font.system(size: size)
+    }
+}
+
 // MARK: 샘플코드입니다.
 
 struct CustomFontModifier: ViewModifier {

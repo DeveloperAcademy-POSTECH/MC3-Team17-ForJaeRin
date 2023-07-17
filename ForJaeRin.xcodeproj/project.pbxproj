@@ -23,7 +23,8 @@
 		A92ABAC52A650F9F004B4972 /* SelectProjectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */; };
 		A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC72A654132004B4972 /* ProjectCardView.swift */; };
 		A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC92A655E05004B4972 /* DateManager.swift */; };
-		A92ABACD2A656F66004B4972 /* Pretendard in Frameworks */ = {isa = PBXBuildFile; productRef = A92ABACC2A656F66004B4972 /* Pretendard */; };
+		A92ABAD02A657208004B4972 /* Pretendard in Frameworks */ = {isa = PBXBuildFile; productRef = A92ABACF2A657208004B4972 /* Pretendard */; };
+		A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAD12A657369004B4972 /* Font+Extension.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
@@ -108,6 +109,7 @@
 		A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProjectScene.swift; sourceTree = "<group>"; };
 		A92ABAC72A654132004B4972 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		A92ABAC92A655E05004B4972 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		A92ABAD12A657369004B4972 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A938398F2A5CF9120075A97F /* SplitLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLayoutView.swift; sourceTree = "<group>"; };
@@ -166,7 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A92ABACD2A656F66004B4972 /* Pretendard in Frameworks */,
+				A92ABAD02A657208004B4972 /* Pretendard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +457,7 @@
 			children = (
 				A94147FD2A573D01001256CB /* View+Extension.swift */,
 				A99526CC2A5DBC43008510CF /* Color+Extension.swift */,
+				A92ABAD12A657369004B4972 /* Font+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -664,7 +667,7 @@
 			);
 			name = ForJaeRin;
 			packageProductDependencies = (
-				A92ABACC2A656F66004B4972 /* Pretendard */,
+				A92ABACF2A657208004B4972 /* Pretendard */,
 			);
 			productName = ForJaeRin;
 			productReference = A945F0332A56788500DC62D7 /* ForJaeRin.app */;
@@ -739,7 +742,7 @@
 			);
 			mainGroup = A945F02A2A56788500DC62D7;
 			packageReferences = (
-				A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */,
+				A92ABACE2A657208004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */,
 			);
 			productRefGroup = A945F0342A56788500DC62D7 /* Products */;
 			projectDirPath = "";
@@ -837,6 +840,7 @@
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
 				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
 				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
+				A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
@@ -1209,7 +1213,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */ = {
+		A92ABACE2A657208004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jaemyeong/Pretendard";
 			requirement = {
@@ -1220,9 +1224,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A92ABACC2A656F66004B4972 /* Pretendard */ = {
+		A92ABACF2A657208004B4972 /* Pretendard */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */;
+			package = A92ABACE2A657208004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */;
 			productName = Pretendard;
 		};
 /* End XCSwiftPackageProductDependency section */

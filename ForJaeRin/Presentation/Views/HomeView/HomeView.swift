@@ -80,7 +80,7 @@ extension HomeView {
     private func sectionTextView(sectionHeaderInfo: SectionHeaderInfo) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(sectionHeaderInfo.title)
-                .font(.largeTitle)
+                .font(.systemHeadline)
                 .bold()
             if let subTitle = sectionHeaderInfo.subTitle {
                 Text(subTitle)
