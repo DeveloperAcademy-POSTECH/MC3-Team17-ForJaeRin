@@ -12,6 +12,7 @@ import SwiftUI
  */
 // MARK: 앱 실행 시 처음으로 진입하게 되는 뷰
 struct HomeView: View {
+    @Environment(\.newDocument) private var newDocument
     
     @StateObject var vm = HomeVM()
     @State private var isSheetActive = false {
@@ -27,7 +28,11 @@ struct HomeView: View {
             bottomContainerView()
         }
         .frame(
-            minWidth: 960, maxWidth: .infinity, minHeight: 640, maxHeight: .infinity, alignment: .topLeading)
+            minWidth: 960,
+            maxWidth: .infinity,
+            minHeight: 640,
+            maxHeight: .infinity,
+            alignment: .topLeading)
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
             ImportPDFView(isSheetActive: $isSheetActive, step: $step)
@@ -98,7 +103,8 @@ extension HomeView {
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Button {
-                isSheetActive.toggle()
+//                isSheetActive.toggle()
+                newDocument({KkoDocument()})
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))
