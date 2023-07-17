@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProjectDocumentView: View {
-    
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var document: KkoDocument
     @Environment(\.undoManager) var undoManager
     
@@ -16,11 +16,16 @@ struct ProjectDocumentView: View {
         VStack {
             Text(document.kkoProject.title)
             OpenWindowButton()
+            Button {
+                document.kkoProject.title = "myTest!"
+            } label: {
+                Text("change name")
+            }
+
         }
         .onAppear {
             print(document.kkoProject.path)
         }
-        
     }
 }
 

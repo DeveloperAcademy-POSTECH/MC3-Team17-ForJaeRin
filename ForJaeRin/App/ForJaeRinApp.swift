@@ -13,8 +13,10 @@ struct ForJaeRinApp: App {
     
     var body: some Scene {
         SclectProjectScene(projectFileManager: projectFileManager)
-        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()})
-            .commandsRemoved()
+        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()
+                .environmentObject(projectFileManager)
+        })
+//            .commandsRemoved()
         
 //        WindowGroup(id: "Book Details") {
 ////            FileSystemView()
@@ -27,22 +29,5 @@ struct ForJaeRinApp: App {
 //            ToolbarCommands()
 //        }
 //        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
-    }
-}
-
-struct TestWindowButtonView2: View {
-    var documentURL: URL
-    @Environment(\.openDocument) private var openDocument
-
-    var body: some View {
-        Button("Open Document") {
-           Task {
-               do {
-                   try await openDocument(at: documentURL)
-               } catch {
-                   // Handle error
-               }
-           }
-       }
     }
 }

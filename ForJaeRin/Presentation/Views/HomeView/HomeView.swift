@@ -13,6 +13,7 @@ import SwiftUI
 // MARK: 앱 실행 시 처음으로 진입하게 되는 뷰
 struct HomeView: View {
     @Environment(\.newDocument) private var newDocument
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     
     @StateObject var vm = HomeVM()
     @State private var isSheetActive = false {
