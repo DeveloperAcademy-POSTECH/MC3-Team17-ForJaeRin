@@ -10,7 +10,12 @@ import SwiftUI
 @main
 struct ForJaeRinApp: App {
     var body: some Scene {
-        WindowGroup {
+        Window("Activity", id: "activity") {
+            
+            Text("hello")
+            TestWindowButtonView()
+        }
+        WindowGroup(id: "Book Details") {
 //            FileSystemView()
 //            RecordView()
             ContentView()
@@ -21,5 +26,15 @@ struct ForJaeRinApp: App {
             ToolbarCommands()
         }
         .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+    }
+}
+
+struct TestWindowButtonView: View {
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        Button("Open Activity Window") {
+            openWindow(id: "Book Details")
+        }
     }
 }

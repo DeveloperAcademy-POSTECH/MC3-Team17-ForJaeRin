@@ -16,9 +16,6 @@ struct LeftSidebarLabelStyle: LabelStyle {
                 .scaledToFill()
                 .padding(.bottom, 8)
                 .font(.largeTitle)
-//            configuration.title
-//                .multilineTextAlignment(.center)
-//                .font(.caption)
         }
         .frame(maxWidth: .infinity)
     }

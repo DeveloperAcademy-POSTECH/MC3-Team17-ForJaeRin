@@ -237,6 +237,13 @@
 			path = SelectProjectView;
 			sourceTree = "<group>";
 		};
+		A92ABAB92A64C38B004B4972 /* practice */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = practice;
+			sourceTree = "<group>";
+		};
 		A93839862A5CEFB20075A97F /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -576,6 +583,7 @@
 		A98A28A42A6130150043C8C1 /* SampleProject */ = {
 			isa = PBXGroup;
 			children = (
+				A92ABAB92A64C38B004B4972 /* practice */,
 				A98A28A62A6130890043C8C1 /* sampleProject.pdf */,
 				A98A28A92A6130D00043C8C1 /* sampleProject.json */,
 			);
