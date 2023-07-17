@@ -10,31 +10,55 @@ import SwiftUI
 @main
 struct ForJaeRinApp: App {
     var body: some Scene {
-        Window("Activity", id: "activity") {
-            
-            Text("hello")
-            TestWindowButtonView()
+
+        @StateObject var projectFileManager = ProjectFileManager()
+        
+        Window("Home", id: "Home") {
+            VStack {
+                TestWindowButtonView()
+                TestWindowButtonView2(documentURL: AppFileManager.shared.documentUrl)
+            }
         }
-        WindowGroup(id: "Book Details") {
-//            FileSystemView()
-//            RecordView()
-            ContentView()
-                .toolbarBackground(Color.systemWhite)
-                .environmentObject(ProjectFileManager())
-        }
-        .commands {
-            ToolbarCommands()
-        }
-        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+
+        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()})
+        
+//        WindowGroup(id: "Book Details") {
+////            FileSystemView()
+////            RecordView()
+//            ContentView()
+//                .toolbarBackground(Color.systemWhite)
+//                .environmentObject(ProjectFileManager())
+//        }
+//        .commands {
+//            ToolbarCommands()
+//        }
+//        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
     }
 }
 
 struct TestWindowButtonView: View {
-    @Environment(\.openWindow) private var openWindow
+    @Environment(\.newDocument) private var newDocument
 
     var body: some View {
         Button("Open Activity Window") {
-            openWindow(id: "Book Details")
+            newDocument({KkoDocument()})
         }
+    }
+}
+
+struct TestWindowButtonView2: View {
+    var documentURL: URL
+    @Environment(\.openDocument) private var openDocument
+
+    var body: some View {
+        Button("Open Document") {
+           Task {
+               do {
+                   try await openDocument(at: documentURL)
+               } catch {
+                   // Handle error
+               }
+           }
+       }
     }
 }

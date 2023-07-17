@@ -17,6 +17,9 @@
 		A91E90342A5C611500EBB3F2 /* SelectProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90332A5C611500EBB3F2 /* SelectProjectView.swift */; };
 		A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAB52A630A94004B4972 /* ChipView.swift */; };
 		A92ABAB82A63BE48004B4972 /* PresentationPageListOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAB72A63BE48004B4972 /* PresentationPageListOnboardingView.swift */; };
+		A92ABABB2A64E0D0004B4972 /* AppFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABABA2A64E0D0004B4972 /* AppFileDocument.swift */; };
+		A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABABD2A64E363004B4972 /* KkoFileModel.swift */; };
+		A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC02A64E5D1004B4972 /* ProjectDocumentView.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
@@ -94,6 +97,10 @@
 		A91E90332A5C611500EBB3F2 /* SelectProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProjectView.swift; sourceTree = "<group>"; };
 		A92ABAB52A630A94004B4972 /* ChipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipView.swift; sourceTree = "<group>"; };
 		A92ABAB72A63BE48004B4972 /* PresentationPageListOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPageListOnboardingView.swift; sourceTree = "<group>"; };
+		A92ABABA2A64E0D0004B4972 /* AppFileDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileDocument.swift; sourceTree = "<group>"; };
+		A92ABABC2A64E17D004B4972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A92ABABD2A64E363004B4972 /* KkoFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KkoFileModel.swift; sourceTree = "<group>"; };
+		A92ABAC02A64E5D1004B4972 /* ProjectDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentView.swift; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A938398F2A5CF9120075A97F /* SplitLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLayoutView.swift; sourceTree = "<group>"; };
@@ -178,6 +185,7 @@
 				A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */,
 				A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */,
 				A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */,
+				A92ABABA2A64E0D0004B4972 /* AppFileDocument.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -244,6 +252,22 @@
 			path = practice;
 			sourceTree = "<group>";
 		};
+		A92ABABF2A64E36A004B4972 /* KkoFileModels */ = {
+			isa = PBXGroup;
+			children = (
+				A92ABABD2A64E363004B4972 /* KkoFileModel.swift */,
+			);
+			path = KkoFileModels;
+			sourceTree = "<group>";
+		};
+		A92ABAC22A64E5DA004B4972 /* ProjectDocumentView */ = {
+			isa = PBXGroup;
+			children = (
+				A92ABAC02A64E5D1004B4972 /* ProjectDocumentView.swift */,
+			);
+			path = ProjectDocumentView;
+			sourceTree = "<group>";
+		};
 		A93839862A5CEFB20075A97F /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +308,7 @@
 		A93839912A5D3C860075A97F /* ProjectView */ = {
 			isa = PBXGroup;
 			children = (
+				A92ABAC22A64E5DA004B4972 /* ProjectDocumentView */,
 				A98A289C2A60D1620043C8C1 /* ProjectPlanView */,
 				A93839982A5D3EF10075A97F /* ProjectHistoryView */,
 				A93839972A5D3ECF0075A97F /* PresentationView */,
@@ -338,6 +363,7 @@
 		A945F0352A56788500DC62D7 /* ForJaeRin */ = {
 			isa = PBXGroup;
 			children = (
+				A92ABABC2A64E17D004B4972 /* Info.plist */,
 				A93839862A5CEFB20075A97F /* App */,
 				A91E90192A5B072D00EBB3F2 /* Utils */,
 				A945F0682A570A2500DC62D7 /* Global */,
@@ -388,6 +414,7 @@
 		A945F0672A570A1A00DC62D7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A92ABABF2A64E36A004B4972 /* KkoFileModels */,
 				A98A288F2A605C710043C8C1 /* PDFModels */,
 				A98A288E2A605C4D0043C8C1 /* ProjectModels */,
 				A945F0782A5711F000DC62D7 /* SampleModel.swift */,
@@ -783,6 +810,7 @@
 				A93BCB102A6026790081FAB8 /* ToolbarView.swift in Sources */,
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
 				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
+				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
@@ -794,6 +822,7 @@
 				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
 				A97FBE492A5E84E400B9F94B /* PresentationPDFView.swift in Sources */,
 				A938398D2A5CF3020075A97F /* HomeView.swift in Sources */,
+				A92ABABB2A64E0D0004B4972 /* AppFileDocument.swift in Sources */,
 				A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */,
 				A98A28972A60604F0043C8C1 /* PDFGroupModel.swift in Sources */,
 				A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */,
@@ -817,6 +846,7 @@
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
 				A93839962A5D3CE10075A97F /* SplitLayoutView+Extension.swift in Sources */,
+				A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
@@ -985,6 +1015,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForJaeRin/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1017,6 +1048,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ForJaeRin/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				LD_RUNPATH_SEARCH_PATHS = (
