@@ -23,6 +23,7 @@
 		A92ABAC52A650F9F004B4972 /* SelectProjectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */; };
 		A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC72A654132004B4972 /* ProjectCardView.swift */; };
 		A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC92A655E05004B4972 /* DateManager.swift */; };
+		A92ABACD2A656F66004B4972 /* Pretendard in Frameworks */ = {isa = PBXBuildFile; productRef = A92ABACC2A656F66004B4972 /* Pretendard */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
@@ -165,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A92ABACD2A656F66004B4972 /* Pretendard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,6 +663,9 @@
 			dependencies = (
 			);
 			name = ForJaeRin;
+			packageProductDependencies = (
+				A92ABACC2A656F66004B4972 /* Pretendard */,
+			);
 			productName = ForJaeRin;
 			productReference = A945F0332A56788500DC62D7 /* ForJaeRin.app */;
 			productType = "com.apple.product-type.application";
@@ -733,6 +738,9 @@
 				Base,
 			);
 			mainGroup = A945F02A2A56788500DC62D7;
+			packageReferences = (
+				A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */,
+			);
 			productRefGroup = A945F0342A56788500DC62D7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1199,6 +1207,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jaemyeong/Pretendard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A92ABACC2A656F66004B4972 /* Pretendard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A92ABACB2A656F66004B4972 /* XCRemoteSwiftPackageReference "Pretendard" */;
+			productName = Pretendard;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A945F02B2A56788500DC62D7 /* Project object */;
 }
