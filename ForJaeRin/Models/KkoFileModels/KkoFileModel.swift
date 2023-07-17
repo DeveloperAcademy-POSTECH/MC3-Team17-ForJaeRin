@@ -20,6 +20,14 @@ extension KkoProject {
     static let samplePDFPath = Bundle.main.url(forResource: "sampleProject", withExtension: "pdf")
     static let rootStorage = AppFileManager.shared.documentUrl
     static let sample = KkoProject(path: KkoProject.rootStorage, title: "unnamed")
+    static let sampels = [
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed"),
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed"),
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed"),
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed"),
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed"),
+        KkoProject(path: KkoProject.rootStorage, title: "unnamed")
+    ]
 }
 
 // MARK: 테스트를 위한 파일 업데이트 메서드

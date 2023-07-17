@@ -9,18 +9,12 @@ import SwiftUI
 
 @main
 struct ForJaeRinApp: App {
+    @StateObject var projectFileManager = ProjectFileManager()
+    
     var body: some Scene {
-
-        @StateObject var projectFileManager = ProjectFileManager()
-        
-        Window("Home", id: "Home") {
-            VStack {
-                TestWindowButtonView()
-                TestWindowButtonView2(documentURL: AppFileManager.shared.documentUrl)
-            }
-        }
-
+        SclectProjectScene(projectFileManager: projectFileManager)
         DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()})
+            .commandsRemoved()
         
 //        WindowGroup(id: "Book Details") {
 ////            FileSystemView()
@@ -33,16 +27,6 @@ struct ForJaeRinApp: App {
 //            ToolbarCommands()
 //        }
 //        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
-    }
-}
-
-struct TestWindowButtonView: View {
-    @Environment(\.newDocument) private var newDocument
-
-    var body: some View {
-        Button("Open Activity Window") {
-            newDocument({KkoDocument()})
-        }
     }
 }
 

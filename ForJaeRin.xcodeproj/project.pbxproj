@@ -20,6 +20,9 @@
 		A92ABABB2A64E0D0004B4972 /* AppFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABABA2A64E0D0004B4972 /* AppFileDocument.swift */; };
 		A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABABD2A64E363004B4972 /* KkoFileModel.swift */; };
 		A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC02A64E5D1004B4972 /* ProjectDocumentView.swift */; };
+		A92ABAC52A650F9F004B4972 /* SelectProjectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */; };
+		A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC72A654132004B4972 /* ProjectCardView.swift */; };
+		A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC92A655E05004B4972 /* DateManager.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
@@ -101,6 +104,9 @@
 		A92ABABC2A64E17D004B4972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A92ABABD2A64E363004B4972 /* KkoFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KkoFileModel.swift; sourceTree = "<group>"; };
 		A92ABAC02A64E5D1004B4972 /* ProjectDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentView.swift; sourceTree = "<group>"; };
+		A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProjectScene.swift; sourceTree = "<group>"; };
+		A92ABAC72A654132004B4972 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
+		A92ABAC92A655E05004B4972 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A938398F2A5CF9120075A97F /* SplitLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLayoutView.swift; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */,
 				A91E902A2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift */,
 				A92ABABA2A64E0D0004B4972 /* AppFileDocument.swift */,
+				A92ABAC92A655E05004B4972 /* DateManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -268,6 +275,14 @@
 			path = ProjectDocumentView;
 			sourceTree = "<group>";
 		};
+		A92ABAC32A650E96004B4972 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A92ABAC42A650F9F004B4972 /* SelectProjectScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		A93839862A5CEFB20075A97F /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +299,7 @@
 			children = (
 				A97FBE3D2A5E4BB500B9F94B /* ImportPDFView */,
 				A938398C2A5CF3020075A97F /* HomeView.swift */,
+				A92ABAC72A654132004B4972 /* ProjectCardView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -465,6 +481,7 @@
 		A945F0712A570E8900DC62D7 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				A92ABAC32A650E96004B4972 /* Scenes */,
 				A945F0722A570EE100DC62D7 /* ViewModels */,
 				A945F0652A5709E900DC62D7 /* Views */,
 			);
@@ -807,6 +824,7 @@
 				A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */,
 				A92ABAB82A63BE48004B4972 /* PresentationPageListOnboardingView.swift in Sources */,
 				A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */,
+				A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */,
 				A93BCB102A6026790081FAB8 /* ToolbarView.swift in Sources */,
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
 				A945F07E2A57139100DC62D7 /* SampleView.swift in Sources */,
@@ -814,6 +832,7 @@
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
+				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
@@ -823,6 +842,7 @@
 				A97FBE492A5E84E400B9F94B /* PresentationPDFView.swift in Sources */,
 				A938398D2A5CF3020075A97F /* HomeView.swift in Sources */,
 				A92ABABB2A64E0D0004B4972 /* AppFileDocument.swift in Sources */,
+				A92ABAC52A650F9F004B4972 /* SelectProjectScene.swift in Sources */,
 				A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */,
 				A98A28972A60604F0043C8C1 /* PDFGroupModel.swift in Sources */,
 				A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */,
