@@ -36,7 +36,15 @@ struct HomeView: View {
             alignment: .topLeading)
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
-            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+//            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+            // MARK: 페이저 전환 테스트를 위한 임시버튼
+            VStack {
+                Button {
+                    newDocument({KkoDocument()})
+                } label: {
+                    Text("파일 열기")
+                }
+            }
             .frame(minWidth: 650, minHeight: 320)
         }
         .onAppear {
@@ -104,8 +112,7 @@ extension HomeView {
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Button {
-//                isSheetActive.toggle()
-                newDocument({KkoDocument()})
+                isSheetActive.toggle()
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

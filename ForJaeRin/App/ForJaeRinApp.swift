@@ -16,7 +16,7 @@ struct ForJaeRinApp: App {
         DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()
                 .environmentObject(projectFileManager)
         })
-//            .commandsRemoved()
+            .commandsRemoved()
         
 //        WindowGroup(id: "Book Details") {
 ////            FileSystemView()
