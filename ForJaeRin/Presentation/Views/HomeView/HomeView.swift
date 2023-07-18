@@ -50,6 +50,41 @@ struct HomeView: View {
         .onAppear {
             // MARK: 테스트를 위한 샘플 가져오기
             vm.files = KkoProject.sampels
+            initProject()
+        }
+    }
+    
+    // MARK: 테스트용 데이터 가져와서 넣기
+    private func initProject() {
+        do {
+            let data = try Data(contentsOf: AppFileManager.shared.url!)
+            let file = try AppFileManager.shared.decodeJson(from: data)
+            
+            let PDFPages = file.projectDocument.PDFPages.map { pdfpage in
+                PDFPage(keywords: pdfpage.keywords, script: pdfpage.script)
+            }
+            let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in
+                PDFGroup(
+                    name: pdfGroup.name,
+                    range: (pdfGroup.range.start, pdfGroup.range.end),
+                    setTime: pdfGroup.setTime)
+            }
+            
+            projectFileManager.pdfDocument = PDFDocumentManager(
+                url: AppFileManager.shared.url!,
+                PDFPages: PDFPages,
+                PDFGroups: PDFGroups)
+            
+            projectFileManager.projectMetadata = ProjectMetadata(
+                projectName: file.projectMetadata.projectName,
+                projectGoal: file.projectMetadata.projectGoal,
+                presentationTime: file.projectMetadata.presentationTime,
+                creatAt: Date())
+            
+            projectFileManager.practices = []
+        } catch {
+            print("hhh")
+            print("Error decoding JSON: \(error)")
         }
     }
 }
