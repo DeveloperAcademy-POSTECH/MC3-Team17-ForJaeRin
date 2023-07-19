@@ -91,8 +91,9 @@ struct ImportPDFView: View {
                 } label: {
                     Text("이전")
                 }
-                .buttonStyle(AppButtonStyle(width: 92))
+                .buttonStyle(previousButtonFuction() ? AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92) : AppButtonStyle(width: 92))
                 .padding(EdgeInsets(top: 24, leading: 40, bottom: 29, trailing: 0))
+                .disabled(previousButtonFuction())
                 
                 Spacer()
                 
@@ -102,8 +103,9 @@ struct ImportPDFView: View {
                 } label: {
                     Text("다음")
                 }
-                .buttonStyle(AppButtonStyle(width: 92))
+                .buttonStyle(nextButtonFuction() ? AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92) : AppButtonStyle(width: 92))
                 .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
+                .disabled(nextButtonFuction())
             }
             .frame(width: 868, height: 99)
             .foregroundColor(Color(hex: "F6F5FA"))
@@ -112,6 +114,27 @@ struct ImportPDFView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
+    
+    func previousButtonFuction () -> Bool {
+        if step == 1 {
+            return true
+        }
+        return false
+    }
+    
+    func nextButtonFuction () -> Bool {
+        if step == 1 && myData.url == Bundle.main.url(forResource: "sample", withExtension: "pdf") {
+            return true
+        }
+        
+        if step == 2 {
+            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
 
 struct ImportPDFView_Previews: PreviewProvider {

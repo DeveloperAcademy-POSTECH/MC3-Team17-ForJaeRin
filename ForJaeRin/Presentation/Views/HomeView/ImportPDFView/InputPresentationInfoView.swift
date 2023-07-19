@@ -15,8 +15,8 @@ struct InputPresentationInfoView: View {
     @State var purpose: String = ""
     @State var duration: String = ""
     
-    @State private var selectedItem: String = "Item 1"
-    let items = ["Item 1", "Item 2", "Item 3"]
+    @State private var selectedItem: String = "선택"
+    let items = ["5분", "10분", "15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
     
     var body: some View {
         VStack {
@@ -29,7 +29,7 @@ struct InputPresentationInfoView: View {
                 Text("발표 제목")
                     .font(.system(size: 16))
                     .padding(EdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 413))
-                TextField("나만의 발표 제목을 입력하세요", text: $title)
+                TextField("나만의 발표 제목을 입력하세요", text: $myData.title)
                     .textFieldStyle(PlainTextFieldStyle())
                     .font(.system(size: 14))
                     .frame(width: 421, height: 17)
@@ -65,12 +65,12 @@ struct InputPresentationInfoView: View {
                         .padding(EdgeInsets(top: 48, leading: 10, bottom: 45, trailing: 389))
                     Text("발표 예상 소요시간")
                         .padding(EdgeInsets(top: 84, leading: 10, bottom: 9, trailing: 337))
-                    TextField("발표 대상을 입력해주세요", text: $target)
+                    TextField("발표 대상을 입력해주세요", text: $myData.target)
                         .textFieldStyle(PlainTextFieldStyle())
                         .font(.system(size: 14))
                         .frame(width: 141, height: 37)
                         .padding(EdgeInsets(top: 2, leading: 300, bottom: 71, trailing: 10))
-                    TextField("발표 목적을 입력해주세요", text: $purpose)
+                    TextField("발표 목적을 입력해주세요", text: $myData.purpose)
                         .textFieldStyle(PlainTextFieldStyle())
                         .font(.system(size: 14))
                         .frame(width: 141, height: 37)
@@ -79,12 +79,13 @@ struct InputPresentationInfoView: View {
                         ForEach(items, id: \.self) { item in
                             Button(action: {
                                 selectedItem = item
+                                myData.time = item
                             }) {
                                 Text(item)
                             }
                         }
                     } label: {
-                        Text("Select an Item")
+                        Text("\(selectedItem)")
                     }
                     .frame(width: 63, height: 20)
                     .padding(EdgeInsets(top: 82.5, leading: 398, bottom: 7.5, trailing: 10))
@@ -131,12 +132,12 @@ struct OnePDFImageView: View {
     }
     
     private func loadImage() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        //DispatchQueue.global(qos: .userInitiated).async {
             let imgimg = pdfToImage(pdfUrl: self.pdfUrl)
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 self.image = imgimg
-            }
-        }
+            //}
+        //}
     }
     
     func pdfToImage(pdfUrl: URL) -> NSImage? {
