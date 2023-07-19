@@ -14,7 +14,7 @@ struct ForJaeRinApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                HomeView()
+                HomeView(myData: MyData())
                     .environmentObject(projectFileManager)
             }
             .presentedWindowToolbarStyle(.expanded)

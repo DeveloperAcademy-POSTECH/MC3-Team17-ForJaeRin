@@ -13,7 +13,7 @@ struct SclectProjectScene: Scene {
 
     var body: some Scene {
         Window("Home", id: "Home") {
-            HomeView()
+            HomeView(myData: MyData())
                 .environmentObject(projectFileManager)
         }
         .windowResizability(.contentMinSize)

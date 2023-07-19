@@ -28,8 +28,6 @@ struct ProjectPlanView: View {
             isViewReady = true
         }
     }
-    
-
 }
 
 struct ProjectPlanView_Previews: PreviewProvider {

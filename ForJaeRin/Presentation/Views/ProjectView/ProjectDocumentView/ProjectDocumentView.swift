@@ -12,9 +12,11 @@ import SwiftUI
  */
 
 struct ProjectDocumentView: View {
+    //MARK: NavigationStack에서 pop하기 위한 function
+    @Environment(\.dismiss) private var dismiss
+    
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var document: KkoDocument
-    @Environment(\.undoManager) var undoManager
     
     let mainTabs: [Tabs] = [.practice, .record]
     @State private var currentTab: Tabs = .practice
@@ -50,30 +52,45 @@ struct ProjectDocumentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .transition(.move(edge: .leading)) // 슬라이드 트랜지션
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 extension ProjectDocumentView {
-    func toolbarView() -> some View {
+    // MARK: toolbarView
+    private func toolbarView() -> some View {
         HStack(spacing: 0) {
-            Button {
-                withAnimation {
-                    isLeftSidebarActive.toggle()
+            // 고정 영역
+            HStack(spacing: 0) {
+                Button {
+                    withAnimation {
+                        isLeftSidebarActive.toggle()
+                    }
+                } label: {
+                    Label("leftSidebar", systemImage: "sidebar.leading")
+                        .labelStyle(.iconOnly)
                 }
-            } label: {
-                Label("leftSidebar", systemImage: "sidebar.leading")
-                    .labelStyle(.iconOnly)
+                Button {
+                    withAnimation {
+                        dismiss()
+                    }
+                } label: {
+                    Label("leftSidebar", systemImage: "sidebar.leading")
+                        .labelStyle(.iconOnly)
+                }
             }
             Spacer()
-            Button {
-                print("임시")
-            } label: {
-                Label("rightSidebar", systemImage: "sidebar.trailing")
-                    .labelStyle(.iconOnly)
+            // 탭에 따라 변경되는 영역
+            if currentTab == .practice {
+                Button {
+                    print("임시")
+                } label: {
+                    Label("rightSidebar", systemImage: "sidebar.trailing")
+                        .labelStyle(.iconOnly)
+                }
             }
+
         }
         .frame(maxWidth: .infinity, maxHeight: 32, alignment: .center)
         .padding(.vertical ,4)
@@ -108,61 +125,8 @@ extension ProjectDocumentView {
     }
 }
 
-extension ProjectDocumentView {
-    private func testSidebar() -> some View {
-        NavigationSplitView {
-            List(mainTabs, id: \.self, selection: $currentTab) { mainTab in
-                NavigationLink(value: mainTab) {
-                    Label(mainTab.tabName, systemImage: mainTab.iconName)
-                }
-            }
-            .navigationSplitViewColumnWidth(172)
-        } detail: {
-            VStack {
-                if currentTab == .practice {
-                    ProjectPlanView()
-                } else {
-                    Text("연습 기록보기")
-                }
-            }
-        }
-    }
-    
-    private struct 임시테스트: View {
-        @EnvironmentObject var projectFileManager: ProjectFileManager
-        @EnvironmentObject var document: KkoDocument
-        
-        var body: some View {
-            VStack {
-                Text(document.kkoProject.title)
-                OpenWindowButton()
-                Button {
-                    document.kkoProject.title = "myTest!"
-                } label: {
-                    Text("change name")
-                }
-
-            }
-            .onAppear {
-                print(document.kkoProject.path)
-            }
-        }
-    }
-}
-
 struct ProjectDocumentView_Previews: PreviewProvider {
     static var previews: some View {
         ProjectDocumentView()
-    }
-}
-
-
-struct OpenWindowButton: View {
-    @Environment(\.openWindow) private var openWindow
-
-    var body: some View {
-        Button("Open Activity Window") {
-            openWindow(id: "Home")
-        }
     }
 }

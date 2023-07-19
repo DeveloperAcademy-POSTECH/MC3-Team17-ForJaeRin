@@ -95,7 +95,7 @@ extension HomeView {
                 showDetails = true
             }
             .navigationDestination(isPresented: $showDetails) {
-                ProjectPlanView()
+                ProjectDocumentView()
                     .environmentObject(projectFileManager)
                     .presentedWindowStyle(.titleBar)
                     .navigationBarBackButtonHidden()
