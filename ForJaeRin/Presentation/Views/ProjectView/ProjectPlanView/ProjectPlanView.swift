@@ -11,15 +11,22 @@ struct ProjectPlanView: View {
     @State private var leftPaneWidth: CGFloat = 200
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State private var isViewReady = false
-
+    @ObservedObject var vm: ProjectDocumentVM
+    
     var body: some View {
         VStack(spacing: 0) {
-            if isViewReady {
-                PresentationPageList(
-                    pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
-                )
-                .background(Color.detailLayoutBackground)
-                .scrollContentBackground(.hidden)
+            if vm.currentSection == .edit {
+                if isViewReady {
+                    PresentationPageList(
+                        pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
+                    )
+                    .background(Color.detailLayoutBackground)
+                    .scrollContentBackground(.hidden)
+                }
+            } else if vm.currentSection == .flow {
+                Text("flow")
+            } else {
+                Text("practice")
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -31,6 +38,6 @@ struct ProjectPlanView: View {
 
 struct ProjectPlanView_Previews: PreviewProvider {
     static var previews: some View {
-        ProjectPlanView()
+        ProjectPlanView(vm: ProjectDocumentVM())
     }
 }

@@ -43,7 +43,7 @@ struct ProjectDocumentView: View {
                 VStack {
                     VStack {
                         if currentTab == .practice {
-                            ProjectPlanView()
+                            ProjectPlanView(vm: vm)
                         } else {
                             Text("연습 기록보기")
                         }
@@ -61,44 +61,95 @@ extension ProjectDocumentView {
     private func toolbarView() -> some View {
         HStack(spacing: 0) {
             // 고정 영역
-            HStack(spacing: 0) {
-                Button {
-                    withAnimation {
-                        vm.isLeftSidebarActive.toggle()
-                    }
-                } label: {
-                    Label("leftSidebar", systemImage: "sidebar.leading")
-                        .labelStyle(.iconOnly)
-                }
-                Button {
-                    withAnimation {
-                        dismiss()
-                    }
-                } label: {
-                    Label("leftSidebar", systemImage: "sidebar.leading")
-                        .labelStyle(.iconOnly)
-                }
-            }
+            toolbarStaticItemView()
             Spacer()
             // 탭에 따라 변경되는 영역
-            if currentTab == .practice {
-                Button {
-                    print("임시")
-                } label: {
-                    Label("rightSidebar", systemImage: "sidebar.trailing")
-                        .labelStyle(.iconOnly)
-                }
-            }
-
+            toolbarDynamicItemView()
         }
-        .frame(maxWidth: .infinity, maxHeight: 72, alignment: .center)
-        .padding(.vertical ,4)
-        .padding(.horizontal, 8)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: vm.TOOLBAR_HEIGHT,
+            alignment: .center
+        )
+        .padding(.vertical, 20)
+        .padding(.horizontal, 28)
+        .padding(.trailing, 60)
         .background(Color.systemWhite)
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)
     }
+    
+    private func toolbarStaticItemView() -> some View {
+        HStack(spacing: 32) {
+            // goToHome
+            Button {
+                    dismiss()
+            
+            } label: {
+                Label("home", systemImage: "house.fill")
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 28, maxHeight: 28)
+                    .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+            Button {
+                withAnimation {
+                    vm.isLeftSidebarActive.toggle()
+                }
+            } label: {
+                Label("leftSidebar", systemImage: "sidebar.leading")
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 28, maxHeight: 28)
+                    .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+    
+    private func toolbarDynamicItemView() -> some View {
+        Group {
+            if currentTab == .practice {
+                HStack {
+                    Button {
+                        vm.currentSection = .edit
+                    } label: {
+                        Label(
+                            Plans.edit.planName,
+                            systemImage: Plans.edit.iconName
+                        )
+                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .edit))
+                        .frame(maxWidth: 64, maxHeight: 64)
+                        .foregroundColor(Color.systemGray400)
+                    }
+                    .buttonStyle(.plain)
+                    Button {
+                        vm.currentSection = .flow
+                    } label: {
+                        Label(
+                            Plans.flow.planName,
+                            systemImage: Plans.flow.iconName
+                        )
+                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .flow))
+                        .frame(maxWidth: 64, maxHeight: 64)
+                        .foregroundColor(Color.systemGray400)
+                    }
+                    .buttonStyle(.plain)
+                    Button {
+                        vm.currentSection = .practice
+                    } label: {
+                        Label(
+                            Plans.practice.planName,
+                            systemImage: Plans.practice.iconName
+                        )
+                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .practice))
+                        .frame(maxWidth: 64, maxHeight: 64)
+                        .foregroundColor(Color.systemGray400)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+    }
 }
-
 
 struct ProjectDocumentView_Previews: PreviewProvider {
     static var previews: some View {

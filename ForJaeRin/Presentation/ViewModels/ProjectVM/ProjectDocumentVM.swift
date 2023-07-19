@@ -30,7 +30,45 @@ enum Tabs {
     }
 }
 
+enum Plans {
+    case edit
+    case flow
+    case practice
+    
+    var planName: String {
+        switch self {
+        case .edit:
+            return "그룹 수정하기"
+        case .flow:
+            return "흐름보기"
+        case .practice:
+            return "연습모드"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .edit:
+            return "selection.pin.in.out"
+        case .flow:
+            return "chart.bar.doc.horizontal"
+        case .practice:
+            return "play.fill"
+        }
+    }
+}
+
+struct ToolbarButtonInfo: Hashable {
+    var text: String
+    var icon: String
+    static func == (left: ToolbarButtonInfo, right: ToolbarButtonInfo) -> Bool {
+        return left.text == right.text && left.icon == right.icon
+    }
+}
+
 class ProjectDocumentVM: ObservableObject {
     let mainTabs: [Tabs] = [.practice, .record]
+    let TOOLBAR_HEIGHT:CGFloat = 32
     @Published var isLeftSidebarActive = true
+    @Published var currentSection: Plans = .edit
 }

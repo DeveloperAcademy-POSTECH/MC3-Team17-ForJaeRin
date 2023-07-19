@@ -21,13 +21,31 @@ struct LeftSidebarLabelStyle: LabelStyle {
     }
 }
 
-struct CustomToolbarLabelStyle: LabelStyle {
+struct ToolbarIconOnlyLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: .center, spacing: 0) {
             configuration.icon
                 .scaledToFill()
-                .padding(.bottom, 6)
-                .font(.title2)
+                .font(Font.system(size: 18))
+        }
+    }
+}
+
+struct ToolbarVerticalLabelStyle: LabelStyle {
+    var isSelected = false
+    
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .center, spacing: 5) {
+            configuration.icon
+                .scaledToFill()
+                .systemFont(.caption2)
+                .padding(.vertical, 2)
+                .frame(maxWidth: 64)
+                .background(isSelected
+                            ? Color.systemGray100
+                            : Color.clear
+                )
+                .cornerRadius(5)
             configuration.title
                 .multilineTextAlignment(.center)
                 .font(.caption)
