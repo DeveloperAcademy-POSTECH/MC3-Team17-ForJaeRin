@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */; };
+		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
+		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
+		43E88F9B2A64E36C001791DC /* MyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E88F9A2A64E36C001791DC /* MyData.swift */; };
 		A912BA992A613C4100A3321E /* sampleFile.json in Resources */ = {isa = PBXBuildFile; fileRef = A912BA982A613C4100A3321E /* sampleFile.json */; };
 		A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */; };
 		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
@@ -92,6 +96,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPresentationInfoView.swift; sourceTree = "<group>"; };
+		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
+		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
+		43E88F9A2A64E36C001791DC /* MyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyData.swift; sourceTree = "<group>"; };
 		A912BA982A613C4100A3321E /* sampleFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleFile.json; sourceTree = "<group>"; };
 		A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
 		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
@@ -522,6 +530,9 @@
 			isa = PBXGroup;
 			children = (
 				A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */,
+				4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */,
+				4373B8AD2A66714200518FF7 /* InputScriptView.swift */,
+				4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */,
 			);
 			path = ImportPDFView;
 			sourceTree = "<group>";
@@ -606,6 +617,7 @@
 				A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */,
 				A98A28922A605D570043C8C1 /* PDFPageModel.swift */,
 				A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */,
+				43E88F9A2A64E36C001791DC /* MyData.swift */,
 			);
 			path = PDFModels;
 			sourceTree = "<group>";
@@ -842,12 +854,14 @@
 				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
 				A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
+				4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
 				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
+				4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */,
 				A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */,
 				A98A28992A6062C50043C8C1 /* PracticeModel.swift in Sources */,
 				A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */,
@@ -874,7 +888,9 @@
 				A98A28A32A6125B50043C8C1 /* PresentationPageListItem.swift in Sources */,
 				A938399E2A5DA13F0075A97F /* CustomLabel.swift in Sources */,
 				A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */,
+				4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */,
 				A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */,
+				43E88F9B2A64E36C001791DC /* MyData.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
 				A93839962A5D3CE10075A97F /* SplitLayoutView+Extension.swift in Sources */,
@@ -1043,7 +1059,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = JMM62MZQM5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1076,7 +1092,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = JMM62MZQM5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

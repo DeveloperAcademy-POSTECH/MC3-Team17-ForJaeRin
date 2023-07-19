@@ -122,7 +122,7 @@ extension SplitLayoutView {
     private func detailView() -> some View {
         Group {
             if currentContent == .home {
-                HomeView()
+                HomeView(myData: MyData())
             } else if currentContent == .present {
                 PresentationView(isContentsActive: $isContentsActive)
             } else if currentContent == .history {

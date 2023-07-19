@@ -17,9 +17,13 @@ struct HomeView: View {
     
     @StateObject var vm = HomeVM()
     @State private var showDetails = false
+    
+    // EnvironmentObject로 전달할 변수 여기서 선언
+    let myData: MyData
+    
     @State private var isSheetActive = false {
         didSet {
-            step = 0
+            step = 1
         }
     }
     @State private var step = 0
@@ -37,10 +41,9 @@ struct HomeView: View {
             alignment: .topLeading)
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
-            ImportPDFView(
-                showDetails: $showDetails, 
-                isSheetActive: $isSheetActive,
-                          step: $step)
+            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+                .environmentObject(myData)
+                .frame(minWidth: 830, minHeight: 803)
         }
         .onAppear {
             initProject()
@@ -156,7 +159,7 @@ extension HomeView {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))
             }
-            .buttonStyle(AppButtonStyle())
+            .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)
@@ -217,6 +220,6 @@ extension HomeView {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(myData: MyData())
     }
 }
