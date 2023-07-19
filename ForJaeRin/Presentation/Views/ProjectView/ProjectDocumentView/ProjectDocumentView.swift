@@ -76,7 +76,8 @@ extension ProjectDocumentView {
             maxHeight: vm.TOOLBAR_HEIGHT,
             alignment: .center
         )
-        .padding(.vertical, 20)
+        .padding(.top, 12)
+        .padding(.bottom, 8)
         .padding(.horizontal, 28)
         .padding(.trailing, 60)
         .background(Color.systemWhite)

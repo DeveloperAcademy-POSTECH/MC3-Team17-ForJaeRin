@@ -42,6 +42,7 @@
 		A968E6A92A67C0B0008C6738 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A968E6A82A67C0B0008C6738 /* sample.json */; };
 		A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */; };
 		A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */; };
+		A968E6B42A6833ED008C6738 /* PresentationProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B32A6833ED008C6738 /* PresentationProgressView.swift */; };
 		A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */; };
 		A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */; };
 		A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */; };
@@ -126,6 +127,7 @@
 		A968E6A82A67C0B0008C6738 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderModifier.swift; sourceTree = "<group>"; };
 		A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentVM.swift; sourceTree = "<group>"; };
+		A968E6B32A6833ED008C6738 /* PresentationProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationProgressView.swift; sourceTree = "<group>"; };
 		A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPDFView.swift; sourceTree = "<group>"; };
 		A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
 		A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceVisualizationView.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				A93839992A5D3F430075A97F /* PresentationView.swift */,
+				A968E6B22A6833C3008C6738 /* PresentationProgressView */,
 				A97FBE532A5E895D00B9F94B /* PresentationTimerView */,
 				A97FBE502A5E891C00B9F94B /* AudioControllerView */,
 				A97FBE4A2A5E84E800B9F94B /* PresentationPDFView */,
@@ -449,6 +452,14 @@
 				A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */,
 			);
 			path = ProjectVM;
+			sourceTree = "<group>";
+		};
+		A968E6B22A6833C3008C6738 /* PresentationProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				A968E6B32A6833ED008C6738 /* PresentationProgressView.swift */,
+			);
+			path = PresentationProgressView;
 			sourceTree = "<group>";
 		};
 		A97FBE3D2A5E4BB500B9F94B /* ImportPDFView */ = {
@@ -798,6 +809,7 @@
 				A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */,
 				A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */,
 				A98A28A12A6125A30043C8C1 /* PresentationPageList.swift in Sources */,
+				A968E6B42A6833ED008C6738 /* PresentationProgressView.swift in Sources */,
 				A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */,
 				A938399A2A5D3F430075A97F /* PresentationView.swift in Sources */,
 				A98A28952A605ED40043C8C1 /* ProjectFileManager.swift in Sources */,

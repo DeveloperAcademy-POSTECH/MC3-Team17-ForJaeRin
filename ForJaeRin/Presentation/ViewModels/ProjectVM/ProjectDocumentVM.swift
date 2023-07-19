@@ -58,17 +58,9 @@ enum Plans {
     }
 }
 
-struct ToolbarButtonInfo: Hashable {
-    var text: String
-    var icon: String
-    static func == (left: ToolbarButtonInfo, right: ToolbarButtonInfo) -> Bool {
-        return left.text == right.text && left.icon == right.icon
-    }
-}
-
 class ProjectDocumentVM: ObservableObject {
     let mainTabs: [Tabs] = [.practice, .record]
-    let TOOLBAR_HEIGHT:CGFloat = 32
+    let TOOLBAR_HEIGHT:CGFloat = 49
     @Published var isLeftSidebarActive = true
     @Published var currentSection: Plans = .edit
 }

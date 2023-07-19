@@ -23,7 +23,6 @@ struct PresentationView: View {
     
     @ObservedObject var projectFileManager: ProjectFileManager
     
-//    @Binding var isContentsActive: Bool
     @State var isSidebarActive = true
     @State var isDragging = false
     @State var position = CGSize.zero
@@ -31,7 +30,7 @@ struct PresentationView: View {
     var body: some View {
             VStack(spacing: 0) {
                 toolbarView()
-                HSplitView {
+                HStack(spacing: 0) {
                     splitLeftView()
                     splitRightView()
             }
@@ -52,11 +51,10 @@ extension PresentationView {
                 .zIndex(10)
             VStack(spacing: 0) {
                 PresentationPDFView()
-                AudioControllerView()
             }
+            .background(Color.detailLayoutBackground)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .border(.red, width: 2)
     }
     
     // MARK: 우측 사이드 바
@@ -64,6 +62,7 @@ extension PresentationView {
         let ACTIVE_SIDEBAR_WIDTH: CGFloat = 272
         
         return VStack(spacing: 0) {
+            PresentationProgressView()
             KeywordListView()
             VoiceVisualizationView()
         }
@@ -71,29 +70,73 @@ extension PresentationView {
         minWidth: isSidebarActive ? ACTIVE_SIDEBAR_WIDTH : 0,
         maxWidth: isSidebarActive ? ACTIVE_SIDEBAR_WIDTH : 0,
         maxHeight: .infinity, alignment: .topLeading)
+        .border(width: 1, edges: [.leading], color: Color.systemGray100)
+        .background(Color.systemWhite)
     }
     
     // MARK: Presentation 내 레이아웃 조정 및 기능을 위한 뷰
-    func toolbarView() -> some View {
+    // MARK: toolbarView
+    private func toolbarView() -> some View {
         HStack(spacing: 0) {
+            // 고정 영역
+            toolbarStaticItemView()
+            Spacer()
+            // 탭에 따라 변경되는 영역
+            toolbarDynamicItemView()
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: 49,
+            alignment: .center
+        )
+        .padding(.top, 12)
+        .padding(.bottom, 8)
+        .padding(.horizontal, 28)
+        .padding(.trailing, 4)
+        .background(Color.systemWhite)
+        .border(width: 1, edges: [.bottom], color: Color.systemGray100)
+    }
+    
+    private func toolbarStaticItemView() -> some View {
+        HStack(spacing: 32) {
+            // goToHome
             Button {
-                dismiss()
+                    dismiss()
+            } label: {
+                Label("뒤로", systemImage: "chevron.left")
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 28, maxHeight: 28)
+                    .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private func toolbarDynamicItemView() -> some View {
+        HStack(spacing: 56) {
+            Button {
+                withAnimation {
+                    isSidebarActive.toggle()
+                }
             } label: {
                 Label("leftSidebar", systemImage: "sidebar.leading")
-                    .labelStyle(.iconOnly)
+                .labelStyle(ToolbarIconOnlyLabelStyle())
+                .frame(maxWidth: 64, maxHeight: 64)
+                .foregroundColor(Color.systemGray400)
             }
-            Spacer()
-            Button {
-                isSidebarActive.toggle()
+            .buttonStyle(.plain)
+            NavigationLink {
+                PresentationView(projectFileManager: projectFileManager)
             } label: {
-                Label("rightSidebar", systemImage: "sidebar.trailing")
-                    .labelStyle(.iconOnly)
+                Text("연습끝내기")
+                    .systemFont(.body)
             }
+            .buttonStyle(AppButtonStyle(
+                backgroundColor: Color.systemPoint,
+                width: 122,
+                height: 46)
+            )
         }
-        .frame(maxWidth: .infinity, maxHeight: 32, alignment: .center)
-        .padding(.vertical ,4)
-        .padding(.horizontal, 8)
-        .border(width: 1, edges: [.bottom], color: .init(nsColor: .alternateSelectedControlTextColor))
     }
 }
 

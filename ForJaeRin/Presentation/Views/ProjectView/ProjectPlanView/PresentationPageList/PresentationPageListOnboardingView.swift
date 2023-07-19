@@ -13,7 +13,7 @@ struct PresentationPageListOnboardingView: View {
             backgackgroundView()
             HStack {
                 HStack(spacing: 0) {
-                    Spacer(minLength: 70)
+                    Spacer(minLength: 70 + 92)
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color.primary200)
