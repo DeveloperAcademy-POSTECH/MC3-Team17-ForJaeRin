@@ -40,6 +40,7 @@
 		A945F0552A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */; };
 		A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A945F0632A56ABC800DC62D7 /* .swiftlint.yml */; };
 		A968E6A92A67C0B0008C6738 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A968E6A82A67C0B0008C6738 /* sample.json */; };
+		A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */; };
 		A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */; };
 		A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */; };
 		A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */; };
@@ -122,6 +123,7 @@
 		A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A945F0632A56ABC800DC62D7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A968E6A82A67C0B0008C6738 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
+		A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderModifier.swift; sourceTree = "<group>"; };
 		A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPDFView.swift; sourceTree = "<group>"; };
 		A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
 		A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceVisualizationView.swift; sourceTree = "<group>"; };
@@ -395,8 +397,9 @@
 			isa = PBXGroup;
 			children = (
 				A94147FB2A573BFC001256CB /* FontModifier.swift */,
-				A938399D2A5DA13F0075A97F /* CustomLabel.swift */,
 				A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */,
+				A938399D2A5DA13F0075A97F /* CustomLabel.swift */,
+				A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
 				4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
+				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
