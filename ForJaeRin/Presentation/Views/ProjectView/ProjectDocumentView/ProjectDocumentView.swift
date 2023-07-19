@@ -31,6 +31,10 @@ struct ProjectDocumentView: View {
                     VStack(spacing: 0) {
                         List(vm.mainTabs, id: \.self, selection: $currentTab) { mainTab in
                             Label(mainTab.tabName, systemImage: mainTab.iconName)
+                                .labelStyle(LeftSidebarLabelStyle(
+                                    isSelected: currentTab.tabName == mainTab.tabName ))
+                                .listRowBackground(Color.systemWhite)
+                                .listStyle(.plain)
                         }
                     }
                 }

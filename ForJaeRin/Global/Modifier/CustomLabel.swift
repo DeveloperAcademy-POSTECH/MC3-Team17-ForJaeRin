@@ -10,14 +10,22 @@ import SwiftUI
 
 // MARK: 최상위 리스트 뷰의 사용될 라벨 스타일
 struct LeftSidebarLabelStyle: LabelStyle {
+    var isSelected = false
+    
     func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .center, spacing: 0) {
+        HStack(alignment: .center, spacing: 8) {
             configuration.icon
                 .scaledToFill()
-                .padding(.bottom, 8)
-                .font(.largeTitle)
+                .systemFont(.subTitle)
+                .foregroundColor(isSelected ? Color.systemPrimary : Color.systemGray300)
+            configuration.title
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray500)
+                .bold(isSelected)
         }
-        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
