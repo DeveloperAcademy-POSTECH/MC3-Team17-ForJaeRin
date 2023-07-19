@@ -12,9 +12,13 @@ import SwiftUI
  */
 // MARK: 앱 실행 시 처음으로 진입하게 되는 뷰
 struct HomeView: View {
+    
+    // EnvironmentObject로 전달할 변수 여기서 선언
+    let myData: MyData
+    
     @State private var isSheetActive = false {
         didSet {
-            step = 0
+            step = 1
         }
     }
     @State private var step = 0
@@ -32,7 +36,8 @@ struct HomeView: View {
             alignment: .topLeading)
         .sheet(isPresented: $isSheetActive) {
             ImportPDFView(isSheetActive: $isSheetActive, step: $step)
-            .frame(minWidth: 650, minHeight: 320)
+                .environmentObject(myData)
+                .frame(minWidth: 830, minHeight: 803)
         }
     }
 }
@@ -78,7 +83,7 @@ extension HomeView {
             } label: {
                 Text("프로젝트 생성하기")
             }
-            .buttonStyle(AppButtonStyle())
+            .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)
@@ -153,6 +158,6 @@ extension HomeView {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(myData: MyData())
     }
 }
