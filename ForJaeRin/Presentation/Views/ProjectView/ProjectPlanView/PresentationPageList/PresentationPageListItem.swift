@@ -32,6 +32,7 @@ struct PresentationPageListItem: View {
                         .cornerRadius(50)
                         .frame(maxWidth: 255, maxHeight: 26)
                     TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                        .systemFont(.caption1)
                         .foregroundColor(GroupColor.allCases[groupIndex].text)
                         .multilineTextAlignment(.center)
                 }
@@ -86,6 +87,8 @@ extension PresentationPageListItem {
             Text("\(pageIndex + 1)")
                 .offset(x: 6, y: -24)
                 .zIndex(1)
+                .systemFont(.caption1)
+                .foregroundColor(Color.systemGray400)
             VStack {
                 PDFKitView(url: pdfUrl, pageNumber: pageIndex)
                     .frame(maxWidth: 212, maxHeight: 118)
@@ -106,6 +109,8 @@ extension PresentationPageListItem {
     private func scriptContainer() -> some View {
         HStack {
             TextEditor(text: $pageScript)
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray400)
                 .frame(minHeight: 182-48, maxHeight: 182-48)
         }
         .frame(maxWidth: 206, maxHeight: 182)
@@ -116,27 +121,11 @@ extension PresentationPageListItem {
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
         VStack {
-//            List {
-//                ChipView(mode: .scrollable, binding: .constant(7), items: keywords) {
-//                    Text($0)
-//                        .foregroundColor(Color.systemPrimary)
-//                        .padding(.horizontal, 16)
-//                        .padding(.vertical, 12)
-//                        .overlay(
-//                            RoundedRectangle(cornerRadius: 5)
-//                                .stroke(Color.systemGray100,lineWidth:1)
-//                                .foregroundColor(Color.clear)
-//                                .cornerRadius(5)
-//                          )
-//                }
-//            }
             KeywordView()
-                .frame(minWidth: 345, maxWidth: 345)
+                .padding(.vertical, 24)
+                .padding(.horizontal, 36)
+                .frame(minWidth: 345, maxWidth: .infinity)
         }
-//        .padding(.vertical, 24)
-//        .padding(.leading, 35)
-//        .padding(.trailing, 102)
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func dottedDivider() -> some View {

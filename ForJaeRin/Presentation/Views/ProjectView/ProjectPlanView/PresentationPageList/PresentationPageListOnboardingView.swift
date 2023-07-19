@@ -20,6 +20,7 @@ struct PresentationPageListOnboardingView: View {
                             .cornerRadius(10)
                             .frame(width: 111, height: 62)
                         Text("썸네일")
+                            .systemFont(.body)
                             .foregroundColor(Color.systemPrimary)
                     }
                     Spacer(minLength: 35)
@@ -68,6 +69,7 @@ extension PresentationPageListOnboardingView {
     private func scriptInfoView() -> some View {
         Text("이 곳에 PPT 페이지별 스크립트를\n입력해주세요.")
             .lineLimit(2)
+            .systemFont(.body)
             .foregroundColor(Color.primary400)
     }
     
@@ -86,6 +88,7 @@ extension PresentationPageListOnboardingView {
                             .foregroundColor(Color.clear)
                             .cornerRadius(5)
                       )
+                    .systemFont(.caption1)
                 Text("스크립트")
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
@@ -98,6 +101,7 @@ extension PresentationPageListOnboardingView {
                             .foregroundColor(Color.clear)
                             .cornerRadius(5)
                       )
+                    .systemFont(.caption1)
                 Text("입력")
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
@@ -110,9 +114,11 @@ extension PresentationPageListOnboardingView {
                             .foregroundColor(Color.clear)
                             .cornerRadius(5)
                       )
+                    .systemFont(.caption1)
             }
             Text("키워드는 스크립트에 포함된 단어들로\n최대 7개까지 입력해주세요.")
                 .lineLimit(2)
+                .systemFont(.caption2)
                 .foregroundColor(Color.primary400)
         }
 //        .frame(maxWidth: .infinity, alignment: .leading)

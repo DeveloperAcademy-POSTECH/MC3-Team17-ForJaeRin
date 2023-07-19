@@ -14,4 +14,11 @@ extension String {
        let size = self.size(withAttributes: fontAttributes)
        return size.width
     }
+    
+    func getTextWidth(_ text: String, font: Font) -> CGFloat {
+        let attributedText = NSAttributedString(string: text, attributes: [.font: font])
+        let textSize = attributedText.size()
+        return textSize.width
+    }
+
 }

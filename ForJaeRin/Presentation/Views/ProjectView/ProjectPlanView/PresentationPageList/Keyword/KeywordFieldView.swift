@@ -12,6 +12,7 @@ struct KeywordFieldView: View {
     @State var colorDeep = false
     @State var availableEdit = false
     @FocusState private var focusedField: Bool
+    let FONT_STYLE = NSFont.systemFont(ofSize: 18, weight: .semibold)
     
     var body: some View {
         if availableEdit || newKeyword.isEmpty {
@@ -29,38 +30,34 @@ struct KeywordFieldView: View {
             })
                 .focused($focusedField)
                 .textFieldStyle(PlainTextFieldStyle())
-                .font(.system(size: 18, weight: .semibold))
+                .systemFont(.subTitle)
                 .frame(
                     width: newKeyword == "" ?
-                    "키워드 입력".widthOfString(fontStyle: NSFont.systemFont(ofSize: 18, weight: .semibold)) :
-                        newKeyword.widthOfString(fontStyle: NSFont.systemFont(ofSize: 18, weight: .semibold)))
+                    "키워드 입력".widthOfString(fontStyle: FONT_STYLE) + 16 :
+                        newKeyword.widthOfString(fontStyle: FONT_STYLE) + 16)
                 .foregroundColor(Color(red: 0.54, green: 0.43, blue: 1))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
-                        .stroke(!colorDeep ?
-                            Color(red: 0.18, green: 0.18, blue: 0.18).opacity(0.1) :
-                                    Color(red: 0.54, green: 0.43, blue: 1), lineWidth: 1)
-                        .background(!colorDeep ? .clear : Color(red: 0.67, green: 0.62, blue: 1).opacity(0.1))
+                        .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
+                        .background(!colorDeep ? .clear : Color.primary100)
                 )
                 .onTapGesture(count: 1) {
                     print("텍스트필드")
                 }
         } else {
             Text("\(newKeyword)")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundColor(Color(red: 0.54, green: 0.43, blue: 1))
-                .padding(.horizontal, 16)
+                .systemFont(.subTitle)
+                .foregroundColor(Color.systemPrimary)
+                .padding(.horizontal, 24)
                 .padding(.vertical, 12)
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
-                        .stroke(!colorDeep ?
-                            Color(red: 0.18, green: 0.18, blue: 0.18).opacity(0.1) :
-                                    Color(red: 0.54, green: 0.43, blue: 1), lineWidth: 1)
-                        .background(!colorDeep ? .clear : Color(red: 0.67, green: 0.62, blue: 1).opacity(0.1))
+                        .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
+                        .background(!colorDeep ? .clear : Color.primary100)
                 )
                 .onTapGesture(count: 2) {
                     focusedField = true
@@ -73,4 +70,3 @@ struct KeywordFieldView: View {
         }
     }
 }
-
