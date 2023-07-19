@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DateManager {
+enum DateManager {
     static func formatDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
