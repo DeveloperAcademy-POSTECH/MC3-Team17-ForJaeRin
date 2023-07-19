@@ -144,9 +144,11 @@ extension HomeView {
                 .frame(width: vm.SYMBOL_INNER_SIZE, height: vm.SYMBOL_INNER_SIZE)
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
-            Button {
-//                isSheetActive.toggle()
-                showDetails = true
+            NavigationLink {
+                ProjectDocumentView()
+                    .environmentObject(projectFileManager)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ForJaeRinApp: App {
     @StateObject var projectFileManager = ProjectFileManager()
+    @State var stack = NavigationPath()
     
     var body: some Scene {
         WindowGroup {

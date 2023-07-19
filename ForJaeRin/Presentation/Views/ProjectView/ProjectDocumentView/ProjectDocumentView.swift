@@ -20,6 +20,7 @@ struct ProjectDocumentView: View {
     @StateObject var vm = ProjectDocumentVM()
     
     @State var currentTab: Tabs = .practice
+    @State var isPracticeModeActive = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -57,6 +58,12 @@ struct ProjectDocumentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+struct MyTestView: View {
+    var body: some View {
+        Text("Hleo")
     }
 }
 
@@ -137,8 +144,8 @@ extension ProjectDocumentView {
                         .foregroundColor(Color.systemGray400)
                     }
                     .buttonStyle(.plain)
-                    Button {
-                        vm.currentSection = .practice
+                    NavigationLink {
+                        PresentationView(projectFileManager: projectFileManager)
                     } label: {
                         Label(
                             Plans.practice.planName,
@@ -149,6 +156,19 @@ extension ProjectDocumentView {
                         .foregroundColor(Color.systemGray400)
                     }
                     .buttonStyle(.plain)
+//                    Button {
+////                        vm.currentSection = .practice
+//                        isPracticeModeActive = true
+//                    } label: {
+//                        Label(
+//                            Plans.practice.planName,
+//                            systemImage: Plans.practice.iconName
+//                        )
+//                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .practice))
+//                        .frame(maxWidth: 64, maxHeight: 64)
+//                        .foregroundColor(Color.systemGray400)
+//                    }
+//                    .buttonStyle(.plain)
                 }
             }
         }
