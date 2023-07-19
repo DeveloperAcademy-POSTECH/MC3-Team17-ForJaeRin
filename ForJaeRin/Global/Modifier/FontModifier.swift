@@ -8,14 +8,34 @@
 import Foundation
 import SwiftUI
 
-// MARK: 샘플코드입니다.
-
-struct CustomFontModifier: ViewModifier {
+struct SystemFontModifier: ViewModifier {
     @Environment(\.sizeCategory) var sizeCategory
-    var name: String = "Font_Name"
-    var size: Double
+    var font: SystemFont = .body
 
     func body(content: Content) -> some View {
-        return content.font(.custom(name, size: size))
+        content.font(font.value)
+    }
+}
+
+enum SystemFont {
+    case headline
+    case subTitle
+    case body
+    case caption1
+    case caption2
+    
+    var value: Font {
+        switch self {
+        case .headline:
+            return Font.systemHeadline
+        case .subTitle:
+            return Font.systemSubtitle
+        case .body:
+            return Font.systemBody
+        case .caption1:
+            return Font.systemCaption1
+        case .caption2:
+            return Font.systemCaption1
+        }
     }
 }

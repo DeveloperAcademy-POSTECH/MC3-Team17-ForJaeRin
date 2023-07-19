@@ -47,5 +47,6 @@ identifier_name:
     - url
     - GlobalAPIKey
     - end
+    - vm
   allowed_symbols: ["_"]
 reporter: "xcode" # 보고 유형 (xcode, json, csv, codeclimate, checkstyle, junit, html, emoji, sonarqube, markdown, github-actions-logging)

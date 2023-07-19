@@ -17,7 +17,7 @@ struct PresentationPageList: View {
             ScrollView {
                 List {
                     PresentationPageListOnboardingView()
-                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, page in
+                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
                         
                         PresentationPageListItem(
                             groupIndex: document.findGroupIndex(pageIndex: index),
