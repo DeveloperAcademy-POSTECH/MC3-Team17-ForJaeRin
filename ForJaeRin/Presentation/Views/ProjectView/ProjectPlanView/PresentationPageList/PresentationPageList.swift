@@ -21,7 +21,6 @@ struct PresentationPageList: View {
                         PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
                     }
                     ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
-                        
                         PresentationPageListItem(
                             groupIndex: document.findGroupIndex(pageIndex: index),
                             pageIndex: index,

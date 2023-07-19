@@ -26,7 +26,7 @@ struct ProjectDocumentView: View {
         VStack(spacing: 0) {
             // custom toolbar
             toolbarView()
-            HSplitView {
+            HStack(spacing: 0) {
                 // left sidebar
                 VStack {
                     VStack(spacing: 0) {
@@ -99,9 +99,8 @@ extension ProjectDocumentView {
             }
             .buttonStyle(.plain)
             Button {
-                withAnimation {
-                    vm.isLeftSidebarActive.toggle()
-                }
+                vm.isLeftSidebarActive.toggle()
+
             } label: {
                 Label("leftSidebar", systemImage: "sidebar.leading")
                     .labelStyle(ToolbarIconOnlyLabelStyle())

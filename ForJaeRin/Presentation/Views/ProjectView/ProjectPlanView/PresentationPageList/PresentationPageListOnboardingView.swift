@@ -45,7 +45,7 @@ struct PresentationPageListOnboardingView: View {
                     .foregroundColor(Color.primary400)
             }
             .buttonStyle(.plain)
-            .padding(.trailing, 54)
+            .padding(.trailing, 92)
             .offset(x: -18, y: 9)
         }
         .padding(.top, 50)
@@ -66,7 +66,7 @@ extension PresentationPageListOnboardingView {
                 .stroke(Color.primary400)
         )
         .padding(.leading, 92)
-        .padding(.trailing, 54)
+        .padding(.trailing, 92)
     }
     
     private func scriptInfoView() -> some View {
@@ -124,7 +124,6 @@ extension PresentationPageListOnboardingView {
                 .systemFont(.caption2)
                 .foregroundColor(Color.primary400)
         }
-//        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

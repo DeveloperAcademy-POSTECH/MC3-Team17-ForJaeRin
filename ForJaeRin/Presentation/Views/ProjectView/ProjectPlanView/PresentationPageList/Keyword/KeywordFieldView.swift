@@ -53,6 +53,7 @@ struct KeywordFieldView: View {
                 .foregroundColor(Color.systemPrimary)
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
+                .fixedSize()
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
                         .inset(by: 0.5)
