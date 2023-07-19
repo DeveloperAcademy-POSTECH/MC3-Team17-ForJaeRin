@@ -62,7 +62,7 @@ extension PresentationPageListOnboardingView {
                 .inset(by: 0.5)
                 .stroke(Color.primary400)
         )
-        .padding(.trailing, 92)
+        .padding(.horizontal, 92)
     }
     
     private func scriptInfoView() -> some View {

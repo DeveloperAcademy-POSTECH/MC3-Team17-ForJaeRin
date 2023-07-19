@@ -61,12 +61,6 @@ struct ProjectDocumentView: View {
     }
 }
 
-struct MyTestView: View {
-    var body: some View {
-        Text("Hleo")
-    }
-}
-
 extension ProjectDocumentView {
     // MARK: toolbarView
     private func toolbarView() -> some View {
@@ -156,19 +150,6 @@ extension ProjectDocumentView {
                         .foregroundColor(Color.systemGray400)
                     }
                     .buttonStyle(.plain)
-//                    Button {
-////                        vm.currentSection = .practice
-//                        isPracticeModeActive = true
-//                    } label: {
-//                        Label(
-//                            Plans.practice.planName,
-//                            systemImage: Plans.practice.iconName
-//                        )
-//                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .practice))
-//                        .frame(maxWidth: 64, maxHeight: 64)
-//                        .foregroundColor(Color.systemGray400)
-//                    }
-//                    .buttonStyle(.plain)
                 }
             }
         }

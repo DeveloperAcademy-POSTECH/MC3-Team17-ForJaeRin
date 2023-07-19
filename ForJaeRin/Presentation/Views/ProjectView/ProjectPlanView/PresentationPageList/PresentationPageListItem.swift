@@ -35,7 +35,7 @@ struct PresentationPageListItem: View {
                         .foregroundColor(GroupColor.allCases[groupIndex].text)
                         .multilineTextAlignment(.center)
                 }
-                .padding(.trailing, 92)
+                .padding(.horizontal, 92)
                 .frame(maxWidth: .infinity, minHeight: 26)
             }
             HStack(spacing: 0) {
@@ -52,7 +52,7 @@ struct PresentationPageListItem: View {
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
-            .padding(.trailing, 92)
+            .padding(.horizontal, 92)
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
         .onAppear {
