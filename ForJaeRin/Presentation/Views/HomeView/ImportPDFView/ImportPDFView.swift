@@ -103,9 +103,11 @@ struct ImportPDFView: View {
                 } label: {
                     Text("다음")
                 }
+
                 .buttonStyle(nextButtonFuction() ? AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92) : AppButtonStyle(width: 92))
                 .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
                 .disabled(nextButtonFuction())
+
             }
             .frame(width: 868, height: 99)
             .foregroundColor(Color(hex: "F6F5FA"))
