@@ -19,6 +19,7 @@ import SwiftUI
  */
 // MARK: 새 프로젝트를 생성하기 위한 시트뷰
 struct ImportPDFView: View {
+    @Binding var showDetails: Bool
     @Binding var isSheetActive: Bool
     @Binding var step: Int {
         didSet {
@@ -48,6 +49,18 @@ struct ImportPDFView: View {
             .padding(8)
             // body
             VStack {
+
+                Button {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+                        showDetails = true
+                        isSheetActive = true
+                    }
+                    
+                    
+                } label: {
+                    Text("닫어")
+                }
+
                 Spacer()
                 FileImporterButtonView()
                     .buttonStyle(AppButtonStyle())
@@ -78,13 +91,16 @@ struct ImportPDFView: View {
             // footer
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .onDisappear {
+            isSheetActive = false
+        }
     }
 }
 
-struct ImportPDFView_Previews: PreviewProvider {
-    static var previews: some View {
-        @State var isSheetActive = false
-        @State var step = 0
-        ImportPDFView(isSheetActive: $isSheetActive, step: $step)
-    }
-}
+//struct ImportPDFView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        @State var isSheetActive = false
+//        @State var step = 0
+//        ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+//    }
+//}
