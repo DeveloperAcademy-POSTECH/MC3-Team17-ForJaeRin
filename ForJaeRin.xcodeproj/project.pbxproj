@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112F60A42A6831BF00D19446 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A32A6831BF00D19446 /* String+Extension.swift */; };
+		112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A62A68322B00D19446 /* KeywordFieldView.swift */; };
+		112F60A92A68326100D19446 /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A82A68326100D19446 /* KeywordView.swift */; };
 		4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */; };
 		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
@@ -88,6 +91,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		112F60A32A6831BF00D19446 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		112F60A62A68322B00D19446 /* KeywordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFieldView.swift; sourceTree = "<group>"; };
+		112F60A82A68326100D19446 /* KeywordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordView.swift; sourceTree = "<group>"; };
 		4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPresentationInfoView.swift; sourceTree = "<group>"; };
 		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
@@ -181,6 +187,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		112F60A52A68320600D19446 /* Keyword */ = {
+			isa = PBXGroup;
+			children = (
+				112F60A62A68322B00D19446 /* KeywordFieldView.swift */,
+				112F60A82A68326100D19446 /* KeywordView.swift */,
+			);
+			path = Keyword;
+			sourceTree = "<group>";
+		};
 		A91E90192A5B072D00EBB3F2 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +409,7 @@
 				A94147FD2A573D01001256CB /* View+Extension.swift */,
 				A99526CC2A5DBC43008510CF /* Color+Extension.swift */,
 				A92ABAD12A657369004B4972 /* Font+Extension.swift */,
+				112F60A32A6831BF00D19446 /* String+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -570,6 +586,7 @@
 		A98A289F2A6125820043C8C1 /* PresentationPageList */ = {
 			isa = PBXGroup;
 			children = (
+				112F60A52A68320600D19446 /* Keyword */,
 				A98A28A02A6125A30043C8C1 /* PresentationPageList.swift */,
 				A98A28A22A6125B50043C8C1 /* PresentationPageListItem.swift */,
 				A92ABAB72A63BE48004B4972 /* PresentationPageListOnboardingView.swift */,
@@ -795,6 +812,7 @@
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
+				112F60A42A6831BF00D19446 /* String+Extension.swift in Sources */,
 				4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */,
 				A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */,
 				A98A28992A6062C50043C8C1 /* PracticeModel.swift in Sources */,
@@ -816,6 +834,7 @@
 				A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */,
 				A98A28A32A6125B50043C8C1 /* PresentationPageListItem.swift in Sources */,
 				A938399E2A5DA13F0075A97F /* CustomLabel.swift in Sources */,
+				112F60A92A68326100D19446 /* KeywordView.swift in Sources */,
 				A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */,
 				4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */,
 				A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */,
@@ -826,6 +845,7 @@
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
+				112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */,
 				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
 				A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */,
 			);
@@ -987,7 +1007,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1020,7 +1040,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
