@@ -10,6 +10,8 @@ import SwiftUI
 class MyData: ObservableObject {
     @Published var url: URL = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
     
+    @Published var images: [NSImage] = [NSImage]()
+    
     @Published var title: String = ""
     @Published var target: String = ""
     @Published var time: String = ""
@@ -19,4 +21,18 @@ class MyData: ObservableObject {
     
     @Published var keywords: [[String]] = []
     @Published var script: [String] = []
+    
+    func clear() {
+        self.images = [NSImage]()
+        self.title = ""
+        self.target = ""
+        self.time = ""
+        self.purpose = ""
+        
+        self.pageIndex = 0
+        
+        self.keywords = []
+        self.script = []
+    }
+    
 }
