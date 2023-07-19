@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PresentationPageListOnboardingView: View {
+    @Binding var isOnboardingActive: Bool
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
             backgackgroundView()
@@ -37,13 +39,13 @@ struct PresentationPageListOnboardingView: View {
             }
             .padding(.vertical, 18)
             Button {
-                print("Close")
+                isOnboardingActive = false
             } label: {
                 Image(systemName: "xmark")
                     .foregroundColor(Color.primary400)
             }
             .buttonStyle(.plain)
-            .padding(.trailing, 92)
+            .padding(.trailing, 54)
             .offset(x: -18, y: 9)
         }
         .padding(.top, 50)
@@ -63,7 +65,8 @@ extension PresentationPageListOnboardingView {
                 .inset(by: 0.5)
                 .stroke(Color.primary400)
         )
-        .padding(.horizontal, 92)
+        .padding(.leading, 92)
+        .padding(.trailing, 54)
     }
     
     private func scriptInfoView() -> some View {
@@ -126,7 +129,9 @@ extension PresentationPageListOnboardingView {
 }
 
 struct PresentationPageListOnboardingView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        PresentationPageListOnboardingView()
+        @State var isOnboardingActive = false
+        PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
     }
 }

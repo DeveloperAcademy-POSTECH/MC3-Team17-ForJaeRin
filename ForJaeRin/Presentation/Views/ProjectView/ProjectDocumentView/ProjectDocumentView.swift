@@ -36,6 +36,7 @@ struct ProjectDocumentView: View {
                                     isSelected: currentTab.tabName == mainTab.tabName ))
                                 .listRowBackground(Color.systemWhite)
                                 .listStyle(.plain)
+                                .frame(minHeight: 40)
                         }
                     }
                 }
