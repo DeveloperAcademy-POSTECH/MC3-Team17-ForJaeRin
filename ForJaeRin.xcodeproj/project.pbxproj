@@ -31,8 +31,6 @@
 		A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAD12A657369004B4972 /* Font+Extension.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
-		A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398F2A5CF9120075A97F /* SplitLayoutView.swift */; };
-		A93839962A5D3CE10075A97F /* SplitLayoutView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93839952A5D3CE10075A97F /* SplitLayoutView+Extension.swift */; };
 		A938399A2A5D3F430075A97F /* PresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93839992A5D3F430075A97F /* PresentationView.swift */; };
 		A938399C2A5D3F540075A97F /* ProjectHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938399B2A5D3F540075A97F /* ProjectHistoryView.swift */; };
 		A938399E2A5DA13F0075A97F /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938399D2A5DA13F0075A97F /* CustomLabel.swift */; };
@@ -40,7 +38,6 @@
 		A94147FC2A573BFC001256CB /* FontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FB2A573BFC001256CB /* FontModifier.swift */; };
 		A94147FE2A573D01001256CB /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94147FD2A573D01001256CB /* View+Extension.swift */; };
 		A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */; };
-		A945F0392A56788500DC62D7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0382A56788500DC62D7 /* ContentView.swift */; };
 		A945F03B2A56788700DC62D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A945F03A2A56788700DC62D7 /* Assets.xcassets */; };
 		A945F03E2A56788700DC62D7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A945F03D2A56788700DC62D7 /* Preview Assets.xcassets */; };
 		A945F0492A56788700DC62D7 /* ForJaeRinTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0482A56788700DC62D7 /* ForJaeRinTests.swift */; };
@@ -120,8 +117,6 @@
 		A92ABAD12A657369004B4972 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A938398F2A5CF9120075A97F /* SplitLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitLayoutView.swift; sourceTree = "<group>"; };
-		A93839952A5D3CE10075A97F /* SplitLayoutView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SplitLayoutView+Extension.swift"; sourceTree = "<group>"; };
 		A93839992A5D3F430075A97F /* PresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationView.swift; sourceTree = "<group>"; };
 		A938399B2A5D3F540075A97F /* ProjectHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHistoryView.swift; sourceTree = "<group>"; };
 		A938399D2A5DA13F0075A97F /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -130,7 +125,6 @@
 		A94147FD2A573D01001256CB /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A945F0332A56788500DC62D7 /* ForJaeRin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForJaeRin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinApp.swift; sourceTree = "<group>"; };
-		A945F0382A56788500DC62D7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A945F03A2A56788700DC62D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A945F03D2A56788700DC62D7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A945F03F2A56788700DC62D7 /* ForJaeRin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ForJaeRin.entitlements; sourceTree = "<group>"; };
@@ -299,7 +293,6 @@
 			isa = PBXGroup;
 			children = (
 				A945F0362A56788500DC62D7 /* ForJaeRinApp.swift */,
-				A945F0382A56788500DC62D7 /* ContentView.swift */,
 				A945F03F2A56788700DC62D7 /* ForJaeRin.entitlements */,
 				A945F03C2A56788700DC62D7 /* Preview Content */,
 			);
@@ -322,15 +315,6 @@
 				A938398A2A5CF2410075A97F /* HomeVM.swift */,
 			);
 			path = HomeVM;
-			sourceTree = "<group>";
-		};
-		A938398E2A5CF9090075A97F /* SplitLayoutView */ = {
-			isa = PBXGroup;
-			children = (
-				A938398F2A5CF9120075A97F /* SplitLayoutView.swift */,
-				A93839952A5D3CE10075A97F /* SplitLayoutView+Extension.swift */,
-			);
-			path = SplitLayoutView;
 			sourceTree = "<group>";
 		};
 		A93839912A5D3C860075A97F /* ProjectView */ = {
@@ -431,7 +415,6 @@
 			isa = PBXGroup;
 			children = (
 				A91E901E2A5B19FE00EBB3F2 /* Components */,
-				A938398E2A5CF9090075A97F /* SplitLayoutView */,
 				A93839912A5D3C860075A97F /* ProjectView */,
 				A93839872A5CF2090075A97F /* HomeView */,
 				A91E90222A5B1A3300EBB3F2 /* TestView */,
@@ -860,7 +843,6 @@
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */,
-				A945F0392A56788500DC62D7 /* ContentView.swift in Sources */,
 				4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */,
 				A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */,
 				A98A28992A6062C50043C8C1 /* PracticeModel.swift in Sources */,
@@ -874,7 +856,6 @@
 				A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */,
 				A938399C2A5D3F540075A97F /* ProjectHistoryView.swift in Sources */,
 				A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */,
-				A93839902A5CF9120075A97F /* SplitLayoutView.swift in Sources */,
 				A98A28A12A6125A30043C8C1 /* PresentationPageList.swift in Sources */,
 				A945F0802A5713A800DC62D7 /* SampleVM.swift in Sources */,
 				A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */,
@@ -893,7 +874,6 @@
 				43E88F9B2A64E36C001791DC /* MyData.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
-				A93839962A5D3CE10075A97F /* SplitLayoutView+Extension.swift in Sources */,
 				A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
