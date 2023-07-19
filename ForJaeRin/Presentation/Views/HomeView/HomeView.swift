@@ -16,6 +16,7 @@ struct HomeView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     @StateObject var vm = HomeVM()
+    @State private var showDetails = false
     @State private var isSheetActive = false {
         didSet {
             step = 0
@@ -36,15 +37,15 @@ struct HomeView: View {
             alignment: .topLeading)
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
-            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+            ImportPDFView(
+                showDetails: $showDetails, 
+                isSheetActive: $isSheetActive,
+                          step: $step)
         }
         .onAppear {
-            // MARK: 테스트를 위한 샘플 가져오기
-            vm.files = KkoProject.sampels
             initProject()
         }
     }
-    
     // MARK: 테스트용 데이터 가져와서 넣기
     private func initProject() {
         do {
@@ -85,6 +86,18 @@ extension HomeView {
     private func topContainerView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             // 로고
+            Circle()
+                .fill(Color.gray)
+            Button("Show details") {
+                showDetails = true
+            }
+            .navigationDestination(isPresented: $showDetails) {
+                ProjectPlanView()
+                    .environmentObject(projectFileManager)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
+            }
+            .navigationTitle("My Favorite Color")
             Image(vm.LOGO_NAME)
                 .frame(
                     width: vm.LOGO_SIZE.width,

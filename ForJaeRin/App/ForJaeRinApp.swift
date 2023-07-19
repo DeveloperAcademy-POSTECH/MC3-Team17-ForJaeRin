@@ -17,23 +17,7 @@ struct ForJaeRinApp: App {
                 HomeView()
                     .environmentObject(projectFileManager)
             }
+            .presentedWindowToolbarStyle(.expanded)
         }
-//        SclectProjectScene(projectFileManager: projectFileManager)
-//        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()
-//                .environmentObject(projectFileManager)
-//        })
-//            .commandsRemoved()
-        
-//        WindowGroup(id: "Book Details") {
-////            FileSystemView()
-////            RecordView()
-//            ContentView()
-//                .toolbarBackground(Color.systemWhite)
-//                .environmentObject(ProjectFileManager())
-//        }
-//        .commands {
-//            ToolbarCommands()
-//        }
-//        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
     }
 }
