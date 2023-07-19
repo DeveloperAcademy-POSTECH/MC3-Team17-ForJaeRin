@@ -12,7 +12,6 @@ import SwiftUI
  */
 // MARK: 앱 실행 시 처음으로 진입하게 되는 뷰
 struct HomeView: View {
-    @Environment(\.newDocument) private var newDocument
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     @StateObject var vm = HomeVM()
@@ -38,12 +37,19 @@ struct HomeView: View {
             maxWidth: .infinity,
             minHeight: 640,
             maxHeight: .infinity,
-            alignment: .topLeading)
+            alignment: .topLeading
+        )
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
             ImportPDFView(isSheetActive: $isSheetActive, step: $step)
                 .environmentObject(myData)
                 .frame(minWidth: 830, minHeight: 803)
+        }
+        .navigationDestination(isPresented: $showDetails) {
+            ProjectDocumentView()
+                .environmentObject(projectFileManager)
+                .presentedWindowStyle(.titleBar)
+                .navigationBarBackButtonHidden()
         }
         .onAppear {
             initProject()
@@ -88,19 +94,6 @@ extension HomeView {
     // MARK: 페이지 타이틀
     private func topContainerView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            // 로고
-            Circle()
-                .fill(Color.gray)
-            Button("Show details") {
-                showDetails = true
-            }
-            .navigationDestination(isPresented: $showDetails) {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-            }
-            .navigationTitle("My Favorite Color")
             Image(vm.LOGO_NAME)
                 .frame(
                     width: vm.LOGO_SIZE.width,
@@ -110,7 +103,6 @@ extension HomeView {
                 .padding(.bottom, 10)
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
             newProjectButtonView()
-//                .padding(.bottom, 92)
         }
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)
         .padding(.horizontal, vm.HORIZONTAL_PADDING)
@@ -136,7 +128,6 @@ extension HomeView {
                 Text(subTitle)
                     .foregroundColor(Color.systemGray300)
                     .font(.body)
-//                    .padding(.bottom, 40)
             }
         }
         .multilineTextAlignment(.leading)
@@ -154,12 +145,14 @@ extension HomeView {
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Button {
-                isSheetActive.toggle()
+//                isSheetActive.toggle()
+                showDetails = true
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))
             }
-            .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
+            .buttonStyle(AppButtonStyle())
+            
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)
