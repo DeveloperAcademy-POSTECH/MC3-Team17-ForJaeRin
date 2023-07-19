@@ -27,9 +27,12 @@ struct FileImporterButtonView: View {
                 .frame(width: 532, height: 431)
             
             VStack {
-                Image("pdfLoadIcon")
+                Image(systemName: "folder.badge.plus")
                     .resizable()
                     .frame(width: 84, height: 58)
+                    .foregroundColor(Color(hex: "2F2F2F").opacity(0.25))
+                    .padding(EdgeInsets(top: 17, leading: 10.5, bottom: 22, trailing: 2.5))
+                    .frame(width: 97, height: 97)
                 Text("PDF 파일을 여기에 끌어서 추가할 수 있어요")
                     .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
                     .foregroundColor(Color(hex: "000000"))
