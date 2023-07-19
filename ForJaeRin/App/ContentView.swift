@@ -15,6 +15,18 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
+                HStack {
+                    Button {
+                        print("사이드바 숨기기")
+                    } label: {
+                        Label("사이드바", systemImage: "sidebar.left")
+                            .labelStyle(CustomToolbarLabelStyle())
+                            .foregroundColor(Color.systemGray300)
+                    }
+                    .buttonStyle(.plain)
+                }
+                .padding(.bottom, 8)
+                .padding(.horizontal, 80)
                 Spacer()
                 HStack(spacing: 12) {
                     Button {

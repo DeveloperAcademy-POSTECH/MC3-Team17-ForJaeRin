@@ -9,17 +9,15 @@ import SwiftUI
 
 @main
 struct ForJaeRinApp: App {
+    @StateObject var projectFileManager = ProjectFileManager()
+    
     var body: some Scene {
         WindowGroup {
-//            FileSystemView()
-//            RecordView()
-            ContentView()
-                .toolbarBackground(Color.systemWhite)
-                .environmentObject(ProjectFileManager())
+            NavigationStack {
+                HomeView(myData: MyData())
+                    .environmentObject(projectFileManager)
+            }
+            .presentedWindowToolbarStyle(.expanded)
         }
-        .commands {
-            ToolbarCommands()
-        }
-        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
     }
 }

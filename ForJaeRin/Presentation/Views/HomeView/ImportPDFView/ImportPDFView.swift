@@ -19,62 +19,95 @@ import SwiftUI
  */
 // MARK: 새 프로젝트를 생성하기 위한 시트뷰
 struct ImportPDFView: View {
+    @EnvironmentObject var myData: MyData
     @Binding var isSheetActive: Bool
     @Binding var step: Int {
         didSet {
-            if step > 3 {
+            if step > 4 {
                 isSheetActive = false
             }
         }
     }
+    
+    let mentions: [String] = ["PDF 가져오기", "PDF 가져오기", "발표 정보 입력하기", "스크립트 입력하기", "그룹 설정하기", ""]
+    
     
     var body: some View {
         VStack {
             // header
             HStack {
                 HStack {
-                    Text("PDF 가져오기")
-                    Text("페이지 카운트 \(step)/4")
+                    Text(mentions[step])
+                        .font(.system(size: 24))
+                    Text("\(step)/4")
+                        .font(.system(size: 15))
+                        .opacity(0.3)
+                        .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 0))
                 }
+                .padding(EdgeInsets(top: 48, leading: 40, bottom: 0, trailing: 0))
+                
                 Spacer()
+                
                 Button {
                     print("닫기")
                     isSheetActive = false
                 } label: {
                     Image(systemName: "xmark")
-//                        .frame(width: 40, height: 40)
+                        //.frame(width: 20, height: 20)
                 }
+                .padding(EdgeInsets(top: 46, leading: 0, bottom: 0, trailing: 40))
             }
-            .padding(8)
+            .frame(width: 868, height: 77)
             // body
             VStack {
-                Spacer()
-                FileImporterButtonView()
-                    .buttonStyle(AppButtonStyle())
-                Spacer()
+                //
+                if step == 1 {
+                    Spacer()
+                    
+                    FileImporterButtonView(step: $step)
+                        .environmentObject(myData)
+                        .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
+                    
+                    Spacer()
+                } else if step == 2 {
+                    Spacer()
+                    InputPresentationInfoView().environmentObject(myData)
+                    Spacer()
+                } else if step == 3 {
+                    InputScriptView().environmentObject(myData)
+                } else if step == 4 {
+                    SettingGroupView().environmentObject(myData)
+                } else {
+                    
+                }
+                
             }
             HStack {
                 Button {
                     print("prev")
-                    if step > 0 {
+                    if step > 1 {
                         step -= 1
                     }
                 } label: {
                     Text("이전")
                 }
-                .buttonStyle(AppButtonStyle(width: 80))
+                .buttonStyle(AppButtonStyle(width: 92))
+                .padding(EdgeInsets(top: 24, leading: 40, bottom: 29, trailing: 0))
+                
                 Spacer()
+                
                 Button {
                     print("next")
                     step += 1
                 } label: {
                     Text("다음")
                 }
-                .buttonStyle(AppButtonStyle(width: 80))
+                .buttonStyle(AppButtonStyle(width: 92))
+                .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+            .frame(width: 868, height: 99)
+            .foregroundColor(Color(hex: "F6F5FA"))
+            .background(Color(hex: "F6F5FA"))
             // footer
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
