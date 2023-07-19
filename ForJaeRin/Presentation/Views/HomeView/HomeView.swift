@@ -36,16 +36,7 @@ struct HomeView: View {
             alignment: .topLeading)
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
-//            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
-            // MARK: 페이저 전환 테스트를 위한 임시버튼
-            VStack {
-                Button {
-                    newDocument({KkoDocument()})
-                } label: {
-                    Text("파일 열기")
-                }
-            }
-            .frame(minWidth: 650, minHeight: 320)
+            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
         }
         .onAppear {
             // MARK: 테스트를 위한 샘플 가져오기

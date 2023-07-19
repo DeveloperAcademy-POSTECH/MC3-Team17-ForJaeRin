@@ -12,11 +12,17 @@ struct ForJaeRinApp: App {
     @StateObject var projectFileManager = ProjectFileManager()
     
     var body: some Scene {
-        SclectProjectScene(projectFileManager: projectFileManager)
-        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()
-                .environmentObject(projectFileManager)
-        })
-            .commandsRemoved()
+        WindowGroup {
+            NavigationStack {
+                HomeView()
+                    .environmentObject(projectFileManager)
+            }
+        }
+//        SclectProjectScene(projectFileManager: projectFileManager)
+//        DocumentGroup(newDocument: {KkoDocument()}, editor: { _ in ProjectDocumentView()
+//                .environmentObject(projectFileManager)
+//        })
+//            .commandsRemoved()
         
 //        WindowGroup(id: "Book Details") {
 ////            FileSystemView()
