@@ -145,8 +145,8 @@ extension HomeView {
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Button {
-                isSheetActive.toggle()
-//                showDetails = true
+//                isSheetActive.toggle()
+                showDetails = true
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

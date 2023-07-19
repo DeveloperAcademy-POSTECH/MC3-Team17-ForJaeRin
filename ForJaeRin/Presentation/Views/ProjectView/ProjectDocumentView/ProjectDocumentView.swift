@@ -12,15 +12,14 @@ import SwiftUI
  */
 
 struct ProjectDocumentView: View {
-    //MARK: NavigationStack에서 pop하기 위한 function
+    // MARK: NavigationStack에서 pop하기 위한 function
     @Environment(\.dismiss) private var dismiss
     
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var document: KkoDocument
+    @StateObject var vm = ProjectDocumentVM()
     
-    let mainTabs: [Tabs] = [.practice, .record]
-    @State private var currentTab: Tabs = .practice
-    @State private var isLeftSidebarActive = true
+    @State var currentTab: Tabs = .practice
     
     var body: some View {
         VStack(spacing: 0) {
@@ -30,13 +29,13 @@ struct ProjectDocumentView: View {
                 // left sidebar
                 VStack {
                     VStack(spacing: 0) {
-                        List(mainTabs, id: \.self, selection: $currentTab) { mainTab in
+                        List(vm.mainTabs, id: \.self, selection: $currentTab) { mainTab in
                             Label(mainTab.tabName, systemImage: mainTab.iconName)
                         }
                     }
                 }
                 .frame(
-                    maxWidth: isLeftSidebarActive ? 172 : 0,
+                    maxWidth: vm.isLeftSidebarActive ? 172 : 0,
                     maxHeight: .infinity,
                     alignment: .topLeading)
                 .background(Color.systemWhite)
@@ -65,7 +64,7 @@ extension ProjectDocumentView {
             HStack(spacing: 0) {
                 Button {
                     withAnimation {
-                        isLeftSidebarActive.toggle()
+                        vm.isLeftSidebarActive.toggle()
                     }
                 } label: {
                     Label("leftSidebar", systemImage: "sidebar.leading")
@@ -92,7 +91,7 @@ extension ProjectDocumentView {
             }
 
         }
-        .frame(maxWidth: .infinity, maxHeight: 32, alignment: .center)
+        .frame(maxWidth: .infinity, maxHeight: 72, alignment: .center)
         .padding(.vertical ,4)
         .padding(.horizontal, 8)
         .background(Color.systemWhite)
@@ -100,30 +99,6 @@ extension ProjectDocumentView {
     }
 }
 
-extension ProjectDocumentView {
-    enum Tabs {
-        case practice
-        case record
-        
-        var tabName: String {
-            switch self {
-            case .practice:
-                return "연습하기"
-            case .record:
-                return "연습 기록보기"
-            }
-        }
-        
-        var iconName: String {
-            switch self {
-            case .practice:
-                return "folder.fill"
-            case .record:
-                return "doc.richtext.fill"
-            }
-        }
-    }
-}
 
 struct ProjectDocumentView_Previews: PreviewProvider {
     static var previews: some View {

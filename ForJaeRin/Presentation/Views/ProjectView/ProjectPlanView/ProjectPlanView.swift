@@ -22,7 +22,6 @@ struct ProjectPlanView: View {
                 .scrollContentBackground(.hidden)
             }
         }
-        .padding(.leading, 92)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             isViewReady = true
