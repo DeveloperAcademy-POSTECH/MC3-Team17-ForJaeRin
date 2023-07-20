@@ -132,10 +132,11 @@ extension PresentationPageListItem {
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
         VStack {
-            KeywordView()
+            KeywordView(pageNumber: pageIndex)
                 .padding(.vertical, 24)
                 .padding(.horizontal, 36)
                 .frame(minWidth: 345, maxWidth: .infinity)
+                .environmentObject(myData)
         }
     }
     

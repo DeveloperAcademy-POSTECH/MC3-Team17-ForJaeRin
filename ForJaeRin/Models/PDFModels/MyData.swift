@@ -19,7 +19,7 @@ class MyData: ObservableObject {
     
     @Published var pageIndex: Int = 0
     
-    @Published var keywords: [[String]] = []
+    @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
     func clear() {

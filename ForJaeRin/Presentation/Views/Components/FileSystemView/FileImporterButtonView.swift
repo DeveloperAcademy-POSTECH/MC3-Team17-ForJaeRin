@@ -60,7 +60,7 @@ struct FileImporterButtonView: View {
                             self.pdfImages = images
                             myData.images = images
                             myData.script = [String](repeating: "", count: myData.images.count)
-                            myData.keywords = [[String]](repeating: [""], count: myData.images.count)
+                            myData.keywords = [[String]](repeating: ["", "", "", "", "", "", ""], count: myData.images.count)
                         }
                         step += 2
                         //

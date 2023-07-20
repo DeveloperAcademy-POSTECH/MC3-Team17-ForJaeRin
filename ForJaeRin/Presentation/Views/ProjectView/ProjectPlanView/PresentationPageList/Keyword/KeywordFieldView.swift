@@ -23,7 +23,7 @@ struct KeywordFieldView: View {
                               availableEdit = true
                               colorDeep = true
                           } else {
-                              print("지금 !")
+                              // print("지금 !")
                               colorDeep = false
                               availableEdit = false
                           }
