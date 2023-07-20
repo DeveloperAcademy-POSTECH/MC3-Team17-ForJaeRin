@@ -53,6 +53,12 @@ extension Color {
     static var point500: Self {
         .init(hex: "#2F2F2F")
     }
+    static var sub100: Self {
+        .init(hex: "#F6F5FA")
+    }
+    static var sub50: Self {
+        .init(hex: "#FBFAFD")
+    }
 }
 
 // MARK: Design Token - System Gray Color
@@ -127,9 +133,7 @@ extension Color {
 }
 
 extension Color {
-    static var detailLayoutBackground: Self {
-        .init(hex: "#F6F5FA")
-    }
+    static var detailLayoutBackground = sub100
 }
 
 // swiftlint:enable identifier_name

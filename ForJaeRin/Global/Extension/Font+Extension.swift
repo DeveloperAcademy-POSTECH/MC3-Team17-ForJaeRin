@@ -15,4 +15,6 @@ extension Font {
     static var systemBody = Font.custom(Pretendard.medium.fontName, size: 16)
     static var systemCaption1 = Font.custom(Pretendard.regular.fontName, size: 14)
     static var systemCaption2 = Font.custom(Pretendard.regular.fontName, size: 12)
+    
+    static var systemHeroTtile = Font.custom(Pretendard.medium.fontName, size: 32)
 }

@@ -59,11 +59,12 @@ extension PresentationView {
     
     // MARK: 우측 사이드 바
     func splitRightView() -> some View {
-        let ACTIVE_SIDEBAR_WIDTH: CGFloat = 272
+        let ACTIVE_SIDEBAR_WIDTH: CGFloat = 302
         
         return VStack(spacing: 0) {
-            PresentationProgressView()
-            KeywordListView()
+            PresentationProgressView(sidebarWidth: ACTIVE_SIDEBAR_WIDTH)
+                .padding(.vertical, 35)
+            KeywordListView(sidebarWidth: ACTIVE_SIDEBAR_WIDTH)
             VoiceVisualizationView()
         }
         .frame(
