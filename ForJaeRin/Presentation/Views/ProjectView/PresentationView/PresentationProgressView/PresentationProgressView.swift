@@ -17,6 +17,7 @@ struct PresentationProgressView: View {
         VStack {
             Text("PPT 진행상황")
                 .systemFont(.body)
+                .bold()
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity, alignment: .leading)
             VStack {

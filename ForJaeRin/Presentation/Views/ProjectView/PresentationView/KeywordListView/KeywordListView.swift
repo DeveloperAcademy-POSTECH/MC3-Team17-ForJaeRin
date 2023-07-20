@@ -13,19 +13,76 @@ import SwiftUI
 // MARK: 사전 설정한 PDF 페이지 별 키워드를 출력하는 뷰
 struct KeywordListView: View {
     @State var isSheetActive = false
+    @State var pdfPages: [PDFPage] = [
+        PDFPage(keywords: ["HIG", "타이포그래피", "가독성", "자동", "사이즈", "일관된", "개발자"], script: "안중요하죠?"),
+        PDFPage(keywords: ["차이", "디테일", "디자이너", "개발자", "소통"], script: "안중요하죠?"),
+        PDFPage(keywords: [ "사이즈", "일관된", "개발자"], script: "안중요하죠?")
+    ]
+    @State var currentPageIndex = 0
+    var sidebarWidth: CGFloat
+    
     
     var body: some View {
         VStack {
-            Text("KeywordListView View")
-            Button {
-                isSheetActive = true
-            } label: {
-                Text("Show Sheet")
+            Text("키워드")
+                .systemFont(.body)
+                .bold()
+                .foregroundColor(Color.systemGray500)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 32)
+            ZStack(alignment: .top) {
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(maxWidth: .infinity, maxHeight: 24)
+                    .background(LinearGradient(
+                        stops: [
+                        Gradient.Stop(color: .white, location: 0.00),
+                        Gradient.Stop(color: .white.opacity(0), location: 1.00)
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                        ))
+                    .zIndex(10)
+                VStack(spacing: 24) {
+                    GeometryReader { geometry in
+                        ZStack(alignment: .bottom) {
+                            ScrollView(showsIndicators: false) {
+                                ForEach(pdfPages.indices, id: \.self) { index in
+                                    KeywordListItem(
+                                        pdfPage: pdfPages[index],
+                                        sidebarWidth: sidebarWidth - 32,
+                                        isSelected: index == currentPageIndex
+                                    )
+                                    .frame(maxWidth: geometry.size.width)
+                                }
+                                .padding(.vertical, geometry.size.height / 2 - 100)
+                            }
+                            .padding(.bottom, 24)
+                            .frame(alignment: .center)
+                            Rectangle()
+                                .fill(Color.clear)
+                                .frame(maxWidth: .infinity, maxHeight: 24)
+                                .background(LinearGradient(
+                                    stops: [
+                                        Gradient.Stop(color: .white.opacity(0), location: 0.00),
+                                        Gradient.Stop(color: .white, location: 1.00)
+                                    ],
+                                    startPoint: UnitPoint(x: 0.5, y: 0),
+                                    endPoint: UnitPoint(x: 0.5, y: 1)))
+                                .offset(y: -24)
+                        }
+                    }
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .center
+                    )
+                }
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .border(.red, width: 2)
         .sheet(isPresented: $isSheetActive) {
             editKeywordListView()
                 .frame(minWidth: 650, minHeight: 320)
@@ -43,6 +100,6 @@ extension KeywordListView {
 
 struct KeywordListView_Previews: PreviewProvider {
     static var previews: some View {
-        KeywordListView()
+        KeywordListView(sidebarWidth: 302)
     }
 }

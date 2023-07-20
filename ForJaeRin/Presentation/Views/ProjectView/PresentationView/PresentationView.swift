@@ -64,7 +64,7 @@ extension PresentationView {
         return VStack(spacing: 0) {
             PresentationProgressView(sidebarWidth: ACTIVE_SIDEBAR_WIDTH)
                 .padding(.vertical, 35)
-            KeywordListView()
+            KeywordListView(sidebarWidth: ACTIVE_SIDEBAR_WIDTH)
             VoiceVisualizationView()
         }
         .frame(
