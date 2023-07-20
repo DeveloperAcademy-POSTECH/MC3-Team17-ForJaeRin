@@ -152,6 +152,16 @@ extension HomeView {
                     .font(Font.system(size: 16))
             }
             .buttonStyle(AppButtonStyle())
+            NavigationLink {
+                ProjectDocumentView()
+                    .environmentObject(projectFileManager)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
+            } label: {
+                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+                    .font(Font.system(size: 16))
+            }
+            .buttonStyle(AppButtonStyle())
             
         }
         .frame(maxWidth: .infinity)

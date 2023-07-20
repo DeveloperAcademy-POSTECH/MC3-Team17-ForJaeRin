@@ -40,7 +40,7 @@ struct KeywordView: View {
                                 .onDrop(of: ["public.text"],
                                         delegate: DelegateForCursor(keywordview: self, startIndex: $startIndex, endIndex: String(index)))
                         } else {
-                            Button(action:{
+                            Button(action: {
                                 lastIndex += 1
                                 resetKeywordIndexList()
                             }, label: {
@@ -61,7 +61,6 @@ struct KeywordView: View {
             }
         }
     }
-    
     
     func resetKeywordIndexList() {
         var rowNumber = 0
