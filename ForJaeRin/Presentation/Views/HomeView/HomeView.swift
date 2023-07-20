@@ -159,6 +159,7 @@ extension HomeView {
                     .environmentObject(myData)
                     .presentedWindowStyle(.titleBar)
                     .navigationBarBackButtonHidden()
+                    .frame(maxWidth: .infinity)
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

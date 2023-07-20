@@ -19,6 +19,14 @@ struct ForJaeRinApp: App {
                     .environmentObject(projectFileManager)
             }
             .presentedWindowToolbarStyle(.expanded)
+            .frame(
+                minWidth: 960,
+                maxWidth: .infinity,
+                minHeight: 640,
+                maxHeight: .infinity,
+                alignment: .topLeading
+            )
         }
+        .windowResizability(.contentMinSize)
     }
 }

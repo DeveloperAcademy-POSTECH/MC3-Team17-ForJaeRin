@@ -30,7 +30,7 @@ struct KeywordListItem: View {
                 maxWidth: sidebarWidth - 24,
                 alignment: .center
             )
-            .padding(.vertical, 12)
+            .padding(.vertical, 24)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(isSelected
@@ -67,18 +67,23 @@ struct KeywordListItem: View {
 
 extension KeywordListItem {
     private func keywordView(keyword: String) -> some View {
-        Text(keyword)
+        let fontStyle = isSelected
+        ? FONT_STYLE
+        : NSFont.systemFont(ofSize: 14, weight: .regular)
+        
+        return Text(keyword)
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(Color.systemGray100, lineWidth: 1)
                     .background(.clear)
-                    .frame(width: keyword.widthOfString(fontStyle: FONT_STYLE) + 32)
+                    .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
             )
-            .foregroundColor(Color.systemPrimary)
-            .systemFont(.subTitle)
-            .frame(width: keyword.widthOfString(fontStyle: FONT_STYLE) + 32)
+            .foregroundColor(isSelected ? Color.systemPrimary : Color.systemGray300
+            )
+            .systemFont(isSelected ? .subTitle : .caption1)
+            .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
     }
 }
 

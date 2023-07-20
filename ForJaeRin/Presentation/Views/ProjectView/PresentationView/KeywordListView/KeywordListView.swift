@@ -21,7 +21,6 @@ struct KeywordListView: View {
     @State var currentPageIndex = 0
     var sidebarWidth: CGFloat
     
-    
     var body: some View {
         VStack {
             Text("키워드")
