@@ -21,7 +21,8 @@ struct InputPresentationInfoView: View {
     var body: some View {
         VStack {
             
-            OnePDFImageView(pdfUrl: myData.url)
+            Image(nsImage: myData.images[0])
+                .resizable()
                 .frame(width: 456, height: 264)
                 .cornerRadius(10)
             
@@ -93,76 +94,5 @@ struct InputPresentationInfoView: View {
             }
             .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
         }
-    }
-}
-
-struct PDFViewer: NSViewRepresentable {
-    var pdfDocument: PDFDocument
-    
-    func makeNSView(context: Context) -> PDFView {
-        let pdfView = PDFView()
-        pdfView.document = pdfDocument
-        pdfView.autoScales = true
-        pdfView.displayMode = .singlePage
-        pdfView.goToFirstPage(nil)
-        return pdfView
-    }
-    
-    func updateNSView(_ pdfView: PDFView, context: Context) {
-        pdfView.document = pdfDocument
-        pdfView.goToFirstPage(nil)
-    }
-}
-
-struct OnePDFImageView: View {
-    let pdfUrl: URL
-    @State private var image: NSImage?
-    
-    var body: some View {
-        Group {
-            if let imgimg = self.image {
-                Image(nsImage: imgimg)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else {
-                Text("Loading...")
-            }
-        }
-        .onAppear(perform: loadImage)
-    }
-    
-    private func loadImage() {
-        //DispatchQueue.global(qos: .userInitiated).async {
-            let imgimg = pdfToImage(pdfUrl: self.pdfUrl)
-            //DispatchQueue.main.async {
-                self.image = imgimg
-            //}
-        //}
-    }
-    
-    func pdfToImage(pdfUrl: URL) -> NSImage? {
-        let pdfDocument = PDFDocument(url: pdfUrl)
-        guard let page = pdfDocument?.page(at: 0) else {
-            return nil
-        }
-        
-        let pageRect = page.bounds(for: .mediaBox)
-        let imgimg = NSImage(size: pageRect.size, flipped: false, drawingHandler: { (rect: NSRect) -> Bool in
-            guard let context = NSGraphicsContext.current?.cgContext else { return false }
-            context.setFillColor(NSColor.white.cgColor)
-            context.fill(rect)
-            //            context.translateBy(x: 0.0, y: rect.size.height)
-            //            context.scaleBy(x: 1.0, y: -1.0)
-            page.draw(with: .mediaBox, to: context)
-            return true
-        })
-        
-        return imgimg
-    }
-}
-
-struct InputPresentationInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        InputPresentationInfoView()
     }
 }

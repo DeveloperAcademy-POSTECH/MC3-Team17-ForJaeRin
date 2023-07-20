@@ -31,7 +31,6 @@ struct ImportPDFView: View {
     
     let mentions: [String] = ["PDF 가져오기", "PDF 가져오기", "발표 정보 입력하기", "스크립트 입력하기", "그룹 설정하기", ""]
     
-    
     var body: some View {
         VStack {
             // header
@@ -53,28 +52,28 @@ struct ImportPDFView: View {
                     isSheetActive = false
                 } label: {
                     Image(systemName: "xmark")
-                        //.frame(width: 20, height: 20)
+                        // .frame(width: 20, height: 20)
                 }
                 .padding(EdgeInsets(top: 46, leading: 0, bottom: 0, trailing: 40))
             }
             .frame(width: 868, height: 77)
             // body
             VStack {
-                //
+                
                 if step == 1 {
                     Spacer()
-                    
                     FileImporterButtonView(step: $step)
                         .environmentObject(myData)
                         .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
-                    
                     Spacer()
                 } else if step == 2 {
                     Spacer()
                     InputPresentationInfoView().environmentObject(myData)
                     Spacer()
                 } else if step == 3 {
+                    Spacer()
                     InputScriptView().environmentObject(myData)
+                    Spacer()
                 } else if step == 4 {
                     SettingGroupView().environmentObject(myData)
                 } else {
