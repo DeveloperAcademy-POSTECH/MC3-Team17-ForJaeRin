@@ -119,7 +119,7 @@ extension PresentationPageListItem {
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
         HStack {
-            TextEditor(text: $pageScript)
+            TextEditor(text: $myData.script[pageIndex])
                 .systemFont(.body)
                 .foregroundColor(Color.systemGray400)
                 .frame(minHeight: 182-48, maxHeight: 182-48)
