@@ -14,7 +14,18 @@ import SwiftUI
 struct VoiceVisualizationView: View {
     var body: some View {
         VStack {
-            Text("Voice Visualization View")
+            ZStack {
+                Circle()
+                    .fill(Color.systemPrimary)
+                    .frame(maxWidth: 48, maxHeight: 48)
+                Image(systemName: "mic.fill")
+                    .font(Font.system(size: 24))
+                    .scaledToFit()
+                    .foregroundColor(Color.systemWhite)
+                    .frame(maxWidth: 48, maxHeight: 48)
+//                Circle()
+                
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: 200)
         .border(.red, width: 2)
