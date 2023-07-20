@@ -16,15 +16,11 @@ struct InputScriptView: View {
     @State var focusIndex: Int = 0
     
     @State var pageNumber: Int = 0
-    @State var scriptText: String = ""
-    @State var keyword: String = ""
-    
-    @State private var pdfImages = [NSImage]()
     
     var body: some View {
         HStack {
             VStack {
-                DispatchScrollView1(url: myData.url, pageNumber: $pageNumber)
+                PDFScrollView(url: myData.url, pageNumber: $pageNumber)
                     .environmentObject(myData)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
@@ -63,7 +59,7 @@ struct InputScriptView: View {
 }
 
 //
-struct DispatchScrollView1: View {
+struct PDFScrollView: View {
     @State private var pdfImages = [NSImage]()
     @EnvironmentObject var myData: MyData
     let url: URL
@@ -142,87 +138,3 @@ struct DispatchScrollView1: View {
         return images
     }
 }
-
-/*
- struct InputScriptView_Previews: PreviewProvider {
-     static var previews: some View {
-         InputScriptView()
-     }
- }
-
- struct MyPDFKitView: NSViewRepresentable {
-     let url: URL
-     @Binding var pageNumber: Int
-     
-     func makeNSView(context: Context) -> PDFView {
-         let pdfView = PDFView()
-         pdfView.document = PDFDocument(url: url)
-         pdfView.autoScales = true
-         pdfView.delegate = context.coordinator
-         let tapGesture = NSClickGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
-         pdfView.addGestureRecognizer(tapGesture)
-         return pdfView
-     }
-     
-     func updateNSView(_ pdfView: PDFView, context: Context) {
-     }
-     
-     func makeCoordinator() -> Coordinator {
-         Coordinator(self)
-     }
-     
-     class Coordinator: NSObject, PDFViewDelegate {
-         var parent: MyPDFKitView
-         
-         init(_ pdfView: MyPDFKitView) {
-             self.parent = pdfView
-         }
-         
-         @objc func handleTap(_ sender: NSClickGestureRecognizer) {
-             if let pdfView = sender.view as? PDFView,
-                let page = pdfView.page(for: sender.location(in: pdfView), nearest: true),
-                let pageIndex = pdfView.document?.index(for: page) {
-                 parent.pageNumber = pageIndex
-             }
-         }
-     }
- }
-
- struct SinglePDFPageView: NSViewRepresentable {
-     let url: URL
-     let pageNumber: Int
-     
-     func makeNSView(context: Context) -> NSView {
-         let pdfView = PDFView()
-         pdfView.autoScales = true
-         pdfView.displayMode = .singlePage
-         
-         if let document = PDFDocument(url: url), let page = document.page(at: pageNumber) {
-             let singlePageDocument = PDFDocument()
-             singlePageDocument.insert(page, at: 0)
-             pdfView.document = singlePageDocument
-         }
-         
-         return pdfView
-     }
-     
-     func updateNSView(_ nsView: NSView, context: Context) {
-     }
- }
-
- struct PDFPageThumbnailView: View {
-     let url: URL
-     let pageIndex: Int
-     
-     var body: some View {
-         if let pdfDocument = PDFDocument(url: url),
-            let page = pdfDocument.page(at: pageIndex) {
-             let pdfPageImage = page.thumbnail(of: CGSize(width: 200, height: 200), for: .artBox)
-             
-             Image(nsImage: pdfPageImage)
-         } else {
-             Text("Failed to load page")
-         }
-     }
- }
- */

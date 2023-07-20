@@ -48,6 +48,7 @@ struct HomeView: View {
         .navigationDestination(isPresented: $showDetails) {
             ProjectDocumentView()
                 .environmentObject(projectFileManager)
+                .environmentObject(myData)
                 .presentedWindowStyle(.titleBar)
                 .navigationBarBackButtonHidden()
         }
@@ -155,6 +156,7 @@ extension HomeView {
             NavigationLink {
                 ProjectDocumentView()
                     .environmentObject(projectFileManager)
+                    .environmentObject(myData)
                     .presentedWindowStyle(.titleBar)
                     .navigationBarBackButtonHidden()
             } label: {

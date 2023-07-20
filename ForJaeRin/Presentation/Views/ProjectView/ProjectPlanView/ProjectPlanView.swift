@@ -13,6 +13,8 @@ struct ProjectPlanView: View {
     @State private var isViewReady = false
     @ObservedObject var vm: ProjectDocumentVM
     
+    @EnvironmentObject var myData: MyData
+    
     var body: some View {
         VStack(spacing: 0) {
             if vm.currentSection == .edit {
@@ -22,6 +24,7 @@ struct ProjectPlanView: View {
                     )
                     .background(Color.detailLayoutBackground)
                     .scrollContentBackground(.hidden)
+                    .environmentObject(myData)
                 }
             } else if vm.currentSection == .flow {
                 Text("flow")
