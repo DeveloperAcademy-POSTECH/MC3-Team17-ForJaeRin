@@ -21,7 +21,8 @@ struct InputPresentationInfoView: View {
     var body: some View {
         VStack {
             
-            OnePDFImageView(pdfUrl: myData.url)
+            Image(nsImage: myData.images[0])
+                .resizable()
                 .frame(width: 456, height: 264)
                 .cornerRadius(10)
             

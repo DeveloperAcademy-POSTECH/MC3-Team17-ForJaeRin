@@ -70,6 +70,7 @@ struct FileImporterButtonView: View {
             }
         }
     }
+    
     func loadPDF() -> PDFDocument? {
         if let pdfURL = Bundle.main.url(forResource: "KHackathon_PDF", withExtension: "pdf") {
             return PDFDocument(url: pdfURL)
@@ -93,10 +94,7 @@ struct FileImporterButtonView: View {
                 if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) {
                     context.setFillColor(NSColor.white.cgColor)
                     context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-                    
-                    //                    context.translateBy(x: 0, y: CGFloat(height))
-                    //                    context.scaleBy(x: 1, y: -1)
-                    
+
                     page.draw(with: .cropBox, to: context)
                     
                     if let cgImage = context.makeImage() {
@@ -109,10 +107,3 @@ struct FileImporterButtonView: View {
         return images
     }
 }
-
-// struct FileImporterButtonView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        FileImporterButtonView(step: $a)
-//    }
-// }
