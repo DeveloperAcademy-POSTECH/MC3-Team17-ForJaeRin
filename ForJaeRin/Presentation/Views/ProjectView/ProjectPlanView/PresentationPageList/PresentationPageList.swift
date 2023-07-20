@@ -29,7 +29,6 @@ struct PresentationPageList: View {
                             pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
                             // pdfPage: document.PDFPages[index]
                         )
-                        .environmentObject(myData)
                     }.onMove { fromIndex, toIndex in
                         document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
                     }
