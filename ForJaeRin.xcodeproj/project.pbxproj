@@ -10,6 +10,9 @@
 		112F60A42A6831BF00D19446 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A32A6831BF00D19446 /* String+Extension.swift */; };
 		112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A62A68322B00D19446 /* KeywordFieldView.swift */; };
 		112F60A92A68326100D19446 /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A82A68326100D19446 /* KeywordView.swift */; };
+		112F60AE2A690EBF00D19446 /* GroupingAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */; };
+		112F60B02A690F4100D19446 /* TempPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AF2A690F4100D19446 /* TempPDFView.swift */; };
+		112F60B22A690F8600D19446 /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60B12A690F8600D19446 /* GroupListView.swift */; };
 		4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */; };
 		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
@@ -94,6 +97,9 @@
 		112F60A32A6831BF00D19446 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		112F60A62A68322B00D19446 /* KeywordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFieldView.swift; sourceTree = "<group>"; };
 		112F60A82A68326100D19446 /* KeywordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordView.swift; sourceTree = "<group>"; };
+		112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingAddButtonView.swift; sourceTree = "<group>"; };
+		112F60AF2A690F4100D19446 /* TempPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPDFView.swift; sourceTree = "<group>"; };
+		112F60B12A690F8600D19446 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPresentationInfoView.swift; sourceTree = "<group>"; };
 		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
@@ -194,6 +200,16 @@
 				112F60A82A68326100D19446 /* KeywordView.swift */,
 			);
 			path = Keyword;
+			sourceTree = "<group>";
+		};
+		112F60AC2A690E3200D19446 /* GroupComponentView */ = {
+			isa = PBXGroup;
+			children = (
+				112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */,
+				112F60AF2A690F4100D19446 /* TempPDFView.swift */,
+				112F60B12A690F8600D19446 /* GroupListView.swift */,
+			);
+			path = GroupComponentView;
 			sourceTree = "<group>";
 		};
 		A91E90192A5B072D00EBB3F2 /* Utils */ = {
@@ -481,6 +497,7 @@
 		A97FBE3D2A5E4BB500B9F94B /* ImportPDFView */ = {
 			isa = PBXGroup;
 			children = (
+				112F60AC2A690E3200D19446 /* GroupComponentView */,
 				A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */,
 				4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */,
 				4373B8AD2A66714200518FF7 /* InputScriptView.swift */,
@@ -799,6 +816,7 @@
 				A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */,
 				A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */,
 				A92ABAB82A63BE48004B4972 /* PresentationPageListOnboardingView.swift in Sources */,
+				112F60B02A690F4100D19446 /* TempPDFView.swift in Sources */,
 				A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */,
 				A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */,
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
@@ -807,6 +825,7 @@
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
 				4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
+				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
 				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
@@ -838,6 +857,7 @@
 				A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */,
 				4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */,
 				A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */,
+				112F60AE2A690EBF00D19446 /* GroupingAddButtonView.swift in Sources */,
 				43E88F9B2A64E36C001791DC /* MyData.swift in Sources */,
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
@@ -1007,7 +1027,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1040,7 +1060,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
