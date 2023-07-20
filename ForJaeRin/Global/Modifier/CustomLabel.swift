@@ -10,24 +10,50 @@ import SwiftUI
 
 // MARK: 최상위 리스트 뷰의 사용될 라벨 스타일
 struct LeftSidebarLabelStyle: LabelStyle {
+    var isSelected = false
+    
     func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .center, spacing: 0) {
+        HStack(alignment: .center, spacing: 8) {
             configuration.icon
                 .scaledToFill()
-                .padding(.bottom, 8)
-                .font(.largeTitle)
+                .systemFont(.subTitle)
+                .foregroundColor(isSelected ? Color.systemPrimary : Color.systemGray300)
+            configuration.title
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray500)
+                .bold(isSelected)
         }
-        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-struct CustomToolbarLabelStyle: LabelStyle {
+struct ToolbarIconOnlyLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: .center, spacing: 0) {
             configuration.icon
                 .scaledToFill()
-                .padding(.bottom, 6)
-                .font(.title2)
+                .font(Font.system(size: 18))
+        }
+    }
+}
+
+struct ToolbarVerticalLabelStyle: LabelStyle {
+    var isSelected = false
+    
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .center, spacing: 5) {
+            configuration.icon
+                .scaledToFill()
+                .systemFont(.caption2)
+                .padding(.vertical, 2)
+                .frame(maxWidth: 64)
+                .background(isSelected
+                            ? Color.systemGray100
+                            : Color.clear
+                )
+                .cornerRadius(5)
             configuration.title
                 .multilineTextAlignment(.center)
                 .font(.caption)
