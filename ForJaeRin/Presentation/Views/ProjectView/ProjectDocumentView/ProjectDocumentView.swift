@@ -22,6 +22,8 @@ struct ProjectDocumentView: View {
     @State var currentTab: Tabs = .practice
     @State var isPracticeModeActive = false
     
+    @EnvironmentObject var myData: MyData
+    
     var body: some View {
         VStack(spacing: 0) {
             // custom toolbar
@@ -50,6 +52,7 @@ struct ProjectDocumentView: View {
                     VStack {
                         if currentTab == .practice {
                             ProjectPlanView(vm: vm)
+                                .environmentObject(myData)
                         } else {
                             Text("연습 기록보기")
                         }

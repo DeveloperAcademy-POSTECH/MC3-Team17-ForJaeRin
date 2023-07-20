@@ -12,10 +12,12 @@ struct PresentationPageListItem: View {
     @State var groupIndex: Int
     @State var pageIndex: Int
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
-    @State var pdfPage: PDFPage
+    //@State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
     @State var pageScript = ""
     @State var keywords: Keywords = []
+    
+    @EnvironmentObject var myData: MyData
     
     var body: some View {
         VStack {
@@ -57,8 +59,8 @@ struct PresentationPageListItem: View {
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
         .onAppear {
-            pageScript = pdfPage.script
-            keywords = pdfPage.keywords
+            //pageScript = pdfPage.script
+            //keywords = pdfPage.keywords
         }
     }
     
@@ -81,7 +83,7 @@ extension PresentationPageListItem {
     
     // MARK: 프레젠테이션(PDF) 컨테이너 - 로키가 잘 해줄꺼야
     private func pdfContainer(pageIndex: Int) -> some View {
-        let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
+        //let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
         
         return ZStack(alignment: .topLeading) {
             Text("\(pageIndex + 1)")
@@ -90,14 +92,23 @@ extension PresentationPageListItem {
                 .systemFont(.caption1)
                 .foregroundColor(Color.systemGray400)
             VStack {
-                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
-                    .frame(maxWidth: 212, maxHeight: 118)
+                //                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
+                //                    .frame(maxWidth: 212, maxHeight: 118)
+                //                    .overlay(
+                //                        RoundedRectangle(cornerRadius: 10)
+                //                            .stroke(Color.systemGray100,lineWidth:1)
+                //                            .foregroundColor(Color.clear)
+                //                            .cornerRadius(10)
+                //                      )
+                Image(nsImage: myData.images[pageIndex])
+                    .resizable()
+                    .frame(width: 212, height: 118)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.systemGray100,lineWidth:1)
                             .foregroundColor(Color.clear)
                             .cornerRadius(10)
-                      )
+                    )
             }
             .padding(.leading, 50)
             .padding(.trailing, 35)
@@ -146,8 +157,8 @@ struct PresentationPageListItem_Previews: PreviewProvider {
         PresentationPageListItem(
             groupIndex: groupIndex,
             pageIndex: pageIndex,
-            pdfGroup: pdfGroup,
-            pdfPage: pdfPage
+            pdfGroup: pdfGroup
+            //pdfPage: pdfPage
         )
     }
 }

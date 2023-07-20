@@ -12,6 +12,8 @@ struct PresentationPageList: View {
     @State var pdfDocumentPages: [PDFPage]
     @State var isOnboardingActive = true
     
+    @EnvironmentObject var myData: MyData
+    
     var body: some View {
         GeometryReader { geometry in
             let document = projectFileManager.pdfDocument!
@@ -20,13 +22,14 @@ struct PresentationPageList: View {
                     if isOnboardingActive {
                         PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
                     }
-                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
+                    ForEach(myData.images.indices, id: \.self) { index in
                         PresentationPageListItem(
                             groupIndex: document.findGroupIndex(pageIndex: index),
                             pageIndex: index,
-                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
-                            pdfPage: document.PDFPages[index]
+                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
+                            // pdfPage: document.PDFPages[index]
                         )
+                        .environmentObject(myData)
                     }.onMove { fromIndex, toIndex in
                         document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
                     }
