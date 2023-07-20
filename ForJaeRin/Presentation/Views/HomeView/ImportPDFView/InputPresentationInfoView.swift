@@ -132,12 +132,12 @@ struct OnePDFImageView: View {
     }
     
     private func loadImage() {
-        //DispatchQueue.global(qos: .userInitiated).async {
+        // DispatchQueue.global(qos: .userInitiated).async {
             let imgimg = pdfToImage(pdfUrl: self.pdfUrl)
-            //DispatchQueue.main.async {
+            // DispatchQueue.main.async {
                 self.image = imgimg
-            //}
-        //}
+            // }
+        // }
     }
     
     func pdfToImage(pdfUrl: URL) -> NSImage? {
