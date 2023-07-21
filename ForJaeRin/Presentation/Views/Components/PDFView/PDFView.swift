@@ -22,7 +22,7 @@ struct PDFKitView: NSViewRepresentable {
         pdfView.displayBox = .cropBox
         pdfView.displayMode = .singlePage
         pdfView.autoScales = true
-        pdfView.backgroundColor = .white
+        pdfView.backgroundColor = NSColor(cgColor: Color.detailLayoutBackground.cgColor!)!
         pdfView.document = document
         
         return pdfView
