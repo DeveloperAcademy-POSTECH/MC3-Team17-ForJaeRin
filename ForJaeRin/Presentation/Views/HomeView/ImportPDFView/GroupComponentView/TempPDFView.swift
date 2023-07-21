@@ -10,6 +10,7 @@ import SwiftUI
 struct TempPDFView: View {
     var index: Int
     var hilight: Bool
+    @EnvironmentObject var myData: MyData
     
     var body: some View {
         ZStack {
@@ -22,8 +23,11 @@ struct TempPDFView: View {
                 .foregroundColor(Color.clear)
                 .frame(width: 184, height: 172)
             VStack(spacing: 8) {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.gray)
+//                RoundedRectangle(cornerRadius: 10)
+//                    .fill(Color.gray)
+//                    .frame(width: 169, height: 127)
+                Image(nsImage: myData.images[index])
+                    .resizable()
                     .frame(width: 169, height: 127)
                 Text("\(index + 1)")
                     .font(.system(size: 12))

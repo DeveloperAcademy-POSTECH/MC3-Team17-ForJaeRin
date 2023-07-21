@@ -12,7 +12,7 @@ struct SettingGroupView: View {
     /// [그룹 이름, 그룹 할당 분, 그룹 할당 초, 그룹 최소 인덱스, 그룹 최대 인덱스]
     @State var groupData: [[String]] = []
     /// 각 PDF별 그룹 번호
-    @State var groupIndex = Array(repeating: -1, count: 11)
+    @State var groupIndex: [Int]
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     /// 현재 보고 있는 그룹 번호(-1은 안 보고 있음)
     @State var focusGroup = -1
@@ -21,6 +21,7 @@ struct SettingGroupView: View {
     /// 클릭한 PDF 인덱스
     /// somethingIsEdit이 false로 변하면 tapHistory를 초기화해야한다.
     @State var tapHistory: [Int] = []
+    @EnvironmentObject var myData: MyData
     
     var body: some View {
         HStack {
@@ -29,7 +30,7 @@ struct SettingGroupView: View {
                 Spacer()
                 /// PDF뷰
                 LazyVGrid(columns: columns, spacing: 9) {
-                    ForEach(0..<11) { index in
+                    ForEach(0..<myData.images.count, id:\.self) { index in
                         TempPDFView(
                             /// groupData에 그룹 최소 인덱스와 최대 인덱스 사이에 속해야 한다.
                             index: index,
@@ -39,6 +40,7 @@ struct SettingGroupView: View {
                                 Int(groupData[focusGroup][3])! <= index &&
                                 index <= Int(groupData[focusGroup][4])!
                         )
+                        .environmentObject(myData)
                         .opacity(tapAvailable().contains(index) ? 1.0 : 0.3)
                         .onTapGesture {
                             /// 탭은 somegthingIsEdit이고, 해당 index가 tapable해야 가능하다.

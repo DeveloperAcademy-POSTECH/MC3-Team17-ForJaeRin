@@ -62,7 +62,6 @@ struct FileImporterButtonView: View {
                             myData.script = [String](repeating: "", count: myData.images.count)
                             myData.keywords = [[String]](repeating: ["", "", "", "", "", "", ""], count: myData.images.count)
                         }
-                        step += 2
                         //
                     case .failure(let failure):
                         print(failure)
