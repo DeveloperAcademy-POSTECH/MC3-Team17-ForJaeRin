@@ -75,7 +75,7 @@ struct ImportPDFView: View {
                     InputScriptView().environmentObject(myData)
                     Spacer()
                 } else if step == 4 {
-                    SettingGroupView().environmentObject(myData)
+                    SettingGroupView(groupIndex: Array(repeating: -1, count: myData.images.count)).environmentObject(myData)
                 } else {
                     
                 }
