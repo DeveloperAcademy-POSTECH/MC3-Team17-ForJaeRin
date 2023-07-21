@@ -568,8 +568,8 @@
 			children = (
 				A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */,
 				A98A28922A605D570043C8C1 /* PDFPageModel.swift */,
-				A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */,
 				43E88F9A2A64E36C001791DC /* MyData.swift */,
+				A98A28962A60604F0043C8C1 /* PDFGroupModel.swift */,
 			);
 			path = PDFModels;
 			sourceTree = "<group>";
