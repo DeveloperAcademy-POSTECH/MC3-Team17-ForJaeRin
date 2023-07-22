@@ -68,14 +68,18 @@ struct ImportPDFView: View {
                     Spacer()
                 } else if step == 2 {
                     Spacer()
-                    InputPresentationInfoView().environmentObject(myData)
+                    InputPresentationInfoView()
+                        .environmentObject(myData)
                     Spacer()
                 } else if step == 3 {
                     Spacer()
-                    InputScriptView().environmentObject(myData)
+                    InputScriptView()
+                        .environmentObject(myData)
                     Spacer()
                 } else if step == 4 {
-                    SettingGroupView(groupIndex: Array(repeating: -1, count: myData.images.count)).environmentObject(myData)
+                    SettingGroupView(
+                        groupIndex: Array(repeating: -1, count: myData.images.count)
+                    ).environmentObject(myData)
                 } else {
                     
                 }
@@ -90,7 +94,9 @@ struct ImportPDFView: View {
                 } label: {
                     Text("이전")
                 }
-                .buttonStyle(previousButtonFuction() ? AppButtonStyle(backgroundColor : Color(hex: "2F2F2F").opacity(0.25), width: 92) : AppButtonStyle(width: 92))
+                .buttonStyle(previousButtonFuction() ?
+                             AppButtonStyle(backgroundColor : Color(hex: "2F2F2F").opacity(0.25), width: 92)
+                                : AppButtonStyle(width: 92))
                 .padding(EdgeInsets(top: 24, leading: 40, bottom: 29, trailing: 0))
                 .disabled(previousButtonFuction())
                 
@@ -103,7 +109,9 @@ struct ImportPDFView: View {
                     Text("다음")
                 }
 
-                .buttonStyle(nextButtonFuction() ? AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92) : AppButtonStyle(width: 92))
+                .buttonStyle(nextButtonFuction() ?
+                             AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92)
+                                : AppButtonStyle(width: 92))
                 .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
                 .disabled(nextButtonFuction())
 

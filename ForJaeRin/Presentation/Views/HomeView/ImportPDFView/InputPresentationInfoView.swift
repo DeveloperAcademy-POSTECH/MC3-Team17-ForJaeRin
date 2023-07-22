@@ -68,11 +68,13 @@ struct InputPresentationInfoView: View {
                         .padding(EdgeInsets(top: 84, leading: 10, bottom: 9, trailing: 337))
                     TextField("발표 대상을 입력해주세요", text: $myData.target)
                         .textFieldStyle(PlainTextFieldStyle())
+                        .multilineTextAlignment(.trailing)
                         .font(.system(size: 14))
                         .frame(width: 141, height: 37)
                         .padding(EdgeInsets(top: 2, leading: 300, bottom: 71, trailing: 10))
                     TextField("발표 목적을 입력해주세요", text: $myData.purpose)
                         .textFieldStyle(PlainTextFieldStyle())
+                        .multilineTextAlignment(.trailing)
                         .font(.system(size: 14))
                         .frame(width: 141, height: 37)
                         .padding(EdgeInsets(top: 38, leading: 300, bottom: 35, trailing: 10))
@@ -89,7 +91,7 @@ struct InputPresentationInfoView: View {
                         Text("\(selectedItem)")
                     }
                     .frame(width: 63, height: 20)
-                    .padding(EdgeInsets(top: 82.5, leading: 398, bottom: 7.5, trailing: 10))
+                    .padding(EdgeInsets(top: 82.5, leading: 398, bottom: 7.5, trailing: 30))
                 }
             }
             .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
@@ -133,12 +135,8 @@ struct OnePDFImageView: View {
     }
     
     private func loadImage() {
-        // DispatchQueue.global(qos: .userInitiated).async {
             let imgimg = pdfToImage(pdfUrl: self.pdfUrl)
-            // DispatchQueue.main.async {
                 self.image = imgimg
-            // }
-        // }
     }
     
     func pdfToImage(pdfUrl: URL) -> NSImage? {
@@ -152,8 +150,6 @@ struct OnePDFImageView: View {
             guard let context = NSGraphicsContext.current?.cgContext else { return false }
             context.setFillColor(NSColor.white.cgColor)
             context.fill(rect)
-            //            context.translateBy(x: 0.0, y: rect.size.height)
-            //            context.scaleBy(x: 1.0, y: -1.0)
             page.draw(with: .mediaBox, to: context)
             return true
         })
