@@ -10,10 +10,6 @@ import PDFKit
 
 struct InputScriptView: View {
     @EnvironmentObject var myData: MyData
-    @State var pageIndex = 0
-    @State var isOn = true
-    
-    @State var focusIndex: Int = 0
     
     @State var pageNumber: Int = 0
     
