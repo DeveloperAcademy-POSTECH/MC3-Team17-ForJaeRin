@@ -27,7 +27,7 @@ struct ProjectPlanView: View {
                     .environmentObject(myData)
                 }
             } else if vm.currentSection == .flow {
-                Text("flow")
+            ProjectFlowView()
             } else {
                 Text("practice")
             }
