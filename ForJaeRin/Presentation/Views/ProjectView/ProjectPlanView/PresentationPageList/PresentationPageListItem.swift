@@ -132,13 +132,28 @@ extension PresentationPageListItem {
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
         VStack {
-            KeywordView(pageNumber: pageIndex)
+            KeywordView(
+                pageNumber: pageIndex,
+                lastIndex: enteredKeywordCount(pageNumber: pageIndex))
                 .padding(.vertical, 24)
                 .padding(.horizontal, 36)
                 .frame(minWidth: 345, maxWidth: .infinity)
                 .environmentObject(myData)
         }
     }
+    
+    private func enteredKeywordCount(pageNumber: Int) -> Int {
+        var answer = 0
+        for allKeyword in myData.keywords[pageNumber] {
+            if allKeyword != "" {
+                answer += 1
+            } else {
+                break
+            }
+        }
+        return answer
+    }
+    
     
     private func dottedDivider() -> some View {
         Rectangle()
