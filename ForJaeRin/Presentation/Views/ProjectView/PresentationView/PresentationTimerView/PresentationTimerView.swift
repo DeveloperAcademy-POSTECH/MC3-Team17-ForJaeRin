@@ -13,44 +13,77 @@ import SwiftUI
 // MARK: 연습모드 타이머
 struct PresentationTimerView: View {
     @State private var pogPosition = CGPoint()
-    @State private var size = CGSize.zero
+    @State private var isAnimationReady = false
+    @State private var size = CGSize.zero {
+        didSet {
+            print("size", size)
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    HStack {
+                    HStack(spacing: 32) {
                         Button {
-                            print("Play")
+                            print("Play.fill")
                         } label: {
-                            Text("Play")
+                            Image(systemName: "play.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.systemGray200)
                         }
+                        .buttonStyle(.plain)
+                        .frame(width: 28, height: 28)
                         Button {
                             print("Pause")
                         } label: {
-                            Text("Pause")
+                            Image(systemName: "pause.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.systemGray500)
                         }
-                        Button {
-                            print("stop")
-                        } label: {
-                            Text("stop")
-                        }
+                        .buttonStyle(.plain)
+                        .frame(width: 28, height: 28)
                     }
-                    .border(.blue)
+                    .padding(.vertical, 18)
+                    .padding(.horizontal, 28)
                     Spacer()
                     // timer
                     HStack {
                         // 진행시간
                         Text("01 : 00")
+                            .font(Font.systemHeroTtile)
+                            .fixedSize()
                         // 제한시간
-                        Text("02 : 00")
+                        Text("(2 : 00)")
+                            .systemFont(.body)
+                            .foregroundColor(Color.systemGray300)
+                            .padding(.trailing, 8)
+                            .fixedSize()
                     }
                 }
-                .padding(8)
-                .frame(maxWidth: 400, maxHeight: 80, alignment: .center)
-                .background(Color.gray)
-                .border(.blue)
-
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .frame(maxWidth: 357, maxHeight: 80, alignment: .center)
+                .background(Color.systemWhite.opacity(0.6))
+                .background(.ultraThinMaterial)
+                .cornerRadius(10)
+                .shadow(color: Color.systemBlack.opacity(0.25), radius: 20, x: 0, y: 8)
+                .onAppear {
+                    pogPosition = CGPoint(x: geometry.size.width / 2, y: geometry.size.height - 60)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.isAnimationReady = true
+                    }
+                }
+                .onChange(of: geometry.size) { newValue in
+                    print(geometry.size)
+                    print(pogPosition)
+                    print(newValue)
+                    pogPosition = CGPoint(x: newValue.width / 2, y: newValue.height - 60)
+                }
             }
             .background(GeometryReader {
                 Color.clear
@@ -60,7 +93,7 @@ struct PresentationTimerView: View {
                 self.size = $0
             }
             .position(pogPosition)
-            .animation(.linear, value: pogPosition)
+            .animation(.linear, value: isAnimationReady ? pogPosition : nil)
             .gesture(
                 DragGesture()
                     .onChanged { value in
