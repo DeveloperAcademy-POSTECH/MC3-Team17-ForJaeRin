@@ -75,6 +75,7 @@
 		A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CC2A5DBC43008510CF /* Color+Extension.swift */; };
 		A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */; };
 		A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526D12A5E3356008510CF /* FileImporterButtonView.swift */; };
+		BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		A99526CC2A5DBC43008510CF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExporterButtonView.swift; sourceTree = "<group>"; };
 		A99526D12A5E3356008510CF /* FileImporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImporterButtonView.swift; sourceTree = "<group>"; };
+		BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFlowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +301,7 @@
 		A93839912A5D3C860075A97F /* ProjectView */ = {
 			isa = PBXGroup;
 			children = (
+				BBB2F3AD2A697FD70099B6D9 /* ProjectFlowView */,
 				A92ABAC22A64E5DA004B4972 /* ProjectDocumentView */,
 				A98A289C2A60D1620043C8C1 /* ProjectPlanView */,
 				A93839982A5D3EF10075A97F /* ProjectHistoryView */,
@@ -633,6 +636,14 @@
 			path = FileSystemView;
 			sourceTree = "<group>";
 		};
+		BBB2F3AD2A697FD70099B6D9 /* ProjectFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */,
+			);
+			path = ProjectFlowView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -830,6 +841,7 @@
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
 				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
+				BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
@@ -1031,7 +1043,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = 889F9UMD8H;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1064,7 +1076,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = 889F9UMD8H;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
