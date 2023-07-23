@@ -13,6 +13,7 @@ struct PDFKitView: NSViewRepresentable {
     typealias NSViewType = PDFView
     let url: URL // new variable to get the URL of the document
     let pageNumber: Int
+    @Binding var myIdx: Int
     
     func makeNSView(context: NSViewRepresentableContext<PDFKitView>) -> PDFView {
         // Creating a new PDFVIew and adding a document to it
@@ -28,8 +29,11 @@ struct PDFKitView: NSViewRepresentable {
         return pdfView
     }
     
-    func updateNSView(_ uiView: PDFView, context: NSViewRepresentableContext<PDFKitView>) {
+    func updateNSView(_ nsView: PDFView, context: NSViewRepresentableContext<PDFKitView>) {
         // we will leave this empty as we don't need to update the PDF
+        if let currentPage = nsView.document?.page(at : myIdx) {
+            nsView.go(to: currentPage)
+        }
     }
 }
 
@@ -37,6 +41,6 @@ struct PDFView_Previews: PreviewProvider {
     static var previews: some View {
         let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
         
-        PDFKitView(url: pdfUrl, pageNumber: 1)
+//        PDFKitView(url: pdfUrl, pageNumber: 1)
     }
 }

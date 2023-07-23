@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class VoiceManager {
+class VoiceManager: ObservableObject {
     
     static var shared = VoiceManager()
 
@@ -26,6 +26,9 @@ class VoiceManager {
             print(timer)
         }
     }
+    
+    @Published var visualTimer: Timer?
+    @Published var average: Float = 0
     
     static func requestMicrophonePermission() {
         switch AVCaptureDevice.authorizationStatus(for: .audio) {
@@ -63,7 +66,7 @@ class VoiceManager {
         // recoder 세팅 (내부 녹음 품질을 정함)
         let recorderSettings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
+            AVSampleRateKey: 44100.0,
             AVNumberOfChannelsKey: 1,
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
@@ -73,15 +76,15 @@ class VoiceManager {
             audioRecorder = try AVAudioRecorder(url: fileName, settings: recorderSettings)
             // 오디오 파일 생성 및 준비
             audioRecorder?.prepareToRecord()
+            startMonitoring()
             // 해당 오디오파일에 녹음시작
             audioRecorder?.record()
             isRecording = true
-            
-//            // 타이머 on
-//            timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-//                self.countSec += 1
-//                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
-//            })
+            // 타이머 on
+            timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+                self.countSec += 1
+                self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
+            })
             
         } catch {
             print("Failed to Setup the Recording")
@@ -94,14 +97,16 @@ class VoiceManager {
         isRecording = false
         
         // timer init
-//        self.countSec = 0
-//        timerCount!.invalidate()
+        self.countSec = 0
+        timerCount!.invalidate()
+        visualTimer!.invalidate()
     }
     
     func playRecording() {
         let filePath = currentPath!
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: filePath)
+            audioPlayer?.volume = 5.0
             audioPlayer?.play()
         } catch {
             print("faild to play file")
@@ -115,4 +120,14 @@ class VoiceManager {
         return "\(minute):\(_second)"
         
     }
+    
+    private func startMonitoring() {
+         audioRecorder?.isMeteringEnabled = true
+         audioRecorder?.record()
+         visualTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
+             // 7
+             self.audioRecorder?.updateMeters()
+             self.average = self.audioRecorder!.averagePower(forChannel: 0)
+         })
+     }
 }

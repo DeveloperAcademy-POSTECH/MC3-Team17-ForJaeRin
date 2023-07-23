@@ -75,6 +75,8 @@
 		A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CC2A5DBC43008510CF /* Color+Extension.swift */; };
 		A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */; };
 		A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99526D12A5E3356008510CF /* FileImporterButtonView.swift */; };
+		A9D04BDE2A6CEAEE0025223A /* PresentationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */; };
+		BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		A99526CC2A5DBC43008510CF /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		A99526CF2A5E334D008510CF /* FileExporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExporterButtonView.swift; sourceTree = "<group>"; };
 		A99526D12A5E3356008510CF /* FileImporterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImporterButtonView.swift; sourceTree = "<group>"; };
+		A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationVM.swift; sourceTree = "<group>"; };
+		BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFlowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +303,7 @@
 		A93839912A5D3C860075A97F /* ProjectView */ = {
 			isa = PBXGroup;
 			children = (
+				BBB2F3AD2A697FD70099B6D9 /* ProjectFlowView */,
 				A92ABAC22A64E5DA004B4972 /* ProjectDocumentView */,
 				A98A289C2A60D1620043C8C1 /* ProjectPlanView */,
 				A93839982A5D3EF10075A97F /* ProjectHistoryView */,
@@ -484,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */,
+				A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */,
 			);
 			path = ProjectVM;
 			sourceTree = "<group>";
@@ -631,6 +637,14 @@
 				A99526D12A5E3356008510CF /* FileImporterButtonView.swift */,
 			);
 			path = FileSystemView;
+			sourceTree = "<group>";
+		};
+		BBB2F3AD2A697FD70099B6D9 /* ProjectFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				BBB2F3AE2A69800A0099B6D9 /* ProjectFlowView.swift */,
+			);
+			path = ProjectFlowView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -830,6 +844,7 @@
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
 				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
+				BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
@@ -853,6 +868,7 @@
 				A968E6B42A6833ED008C6738 /* PresentationProgressView.swift in Sources */,
 				A91E902B2A5BAEDA00EBB3F2 /* SpeechRecognizer.swift in Sources */,
 				A938399A2A5D3F430075A97F /* PresentationView.swift in Sources */,
+				A9D04BDE2A6CEAEE0025223A /* PresentationVM.swift in Sources */,
 				A98A28952A605ED40043C8C1 /* ProjectFileManager.swift in Sources */,
 				A99526D22A5E3356008510CF /* FileImporterButtonView.swift in Sources */,
 				A98A28A32A6125B50043C8C1 /* PresentationPageListItem.swift in Sources */,
@@ -1031,7 +1047,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1064,7 +1080,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
