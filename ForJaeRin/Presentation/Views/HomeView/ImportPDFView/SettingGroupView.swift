@@ -37,8 +37,8 @@ struct SettingGroupView: View {
                             hilight:
 //                                index % 2 == 0
                                 focusGroup != -1 &&
-                                Int(groupData[focusGroup][3])! <= index &&
-                                index <= Int(groupData[focusGroup][4])!
+                            Int(myData.groupData[focusGroup][3])! <= index &&
+                                index <= Int(myData.groupData[focusGroup][4])!
                         )
                         .environmentObject(myData)
                         .opacity(tapAvailable().contains(index) ? 1.0 : 0.3)
@@ -52,8 +52,8 @@ struct SettingGroupView: View {
                                 tapHistory.append(index)
                                 print(tapHistory)
                                 /// focusGroup의 groupData는 tapHistory로 관리된다
-                                groupData[focusGroup][3] = String(tapHistory.min()!)
-                                groupData[focusGroup][4] = String(tapHistory.max()!)
+                                myData.groupData[focusGroup][3] = String(tapHistory.min()!)
+                                myData.groupData[focusGroup][4] = String(tapHistory.max()!)
                             }
                         }
                     }
@@ -69,19 +69,17 @@ struct SettingGroupView: View {
                     .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                     .frame(width: 205)
                 VStack(spacing: 8) {
-                    ForEach(groupData.indices, id: \.self) {index in
+                    ForEach(myData.groupData.indices, id: \.self) {index in
                         /// 그룹 리스트
                         GroupListView(
                             focusGroup: $focusGroup,
                             index: index,
-                            groupData: $groupData,
                             somethingIsEdit: $somethingIsEdit,
                             groupIndex: $groupIndex
                         )
                     }
                     /// 그룹 추가 버튼
                     GroupingAddButtonView(
-                        groupData: $groupData,
                         somethingIsEdit: $somethingIsEdit,
                         focusGroup: $focusGroup
                     )
@@ -89,7 +87,7 @@ struct SettingGroupView: View {
                     .buttonStyle(.plain)
                     /// 수정 혹은 추가 중이면 클릭 불가
                     .disabled(somethingIsEdit || !groupIndex.contains(-1))
-                    if groupData.isEmpty {
+                    if myData.groupData.isEmpty {
                         Text("아이콘을 클릭해\n그룹을 추가해주세요")
                             .multilineTextAlignment(.center)
                             .font(.system(size: 15))

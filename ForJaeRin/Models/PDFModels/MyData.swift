@@ -22,6 +22,8 @@ class MyData: ObservableObject {
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
+    @Published var groupData: [[String]] = []
+    
     func clear() {
         self.images = [NSImage]()
         self.title = ""
@@ -33,6 +35,8 @@ class MyData: ObservableObject {
         
         self.keywords = []
         self.script = []
+        
+        self.groupData = []
     }
     
 }

@@ -42,6 +42,7 @@ struct HomeView: View {
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
             ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+                .environmentObject(projectFileManager)
                 .environmentObject(myData)
                 .frame(minWidth: 830, minHeight: 803)
         }
