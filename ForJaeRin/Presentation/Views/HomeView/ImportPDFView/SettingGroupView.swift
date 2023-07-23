@@ -68,7 +68,7 @@ struct SettingGroupView: View {
                     .foregroundColor(.clear)
                     .background(Color(red: 0.98, green: 0.98, blue: 0.99))
                     .frame(width: 205)
-                VStack {
+                VStack(spacing: 8) {
                     ForEach(groupData.indices, id: \.self) {index in
                         /// 그룹 리스트
                         GroupListView(
@@ -79,14 +79,13 @@ struct SettingGroupView: View {
                             groupIndex: $groupIndex
                         )
                     }
-                    .padding(.top, 20)
                     /// 그룹 추가 버튼
                     GroupingAddButtonView(
                         groupData: $groupData,
                         somethingIsEdit: $somethingIsEdit,
                         focusGroup: $focusGroup
                     )
-                    .padding(.top, 34)
+                    .padding(.top, 4)
                     .buttonStyle(.plain)
                     /// 수정 혹은 추가 중이면 클릭 불가
                     .disabled(somethingIsEdit || !groupIndex.contains(-1))
@@ -99,6 +98,7 @@ struct SettingGroupView: View {
                     }
                     Spacer()
                 }.frame(width: 205)
+                    .padding(.top, 34)
             }.padding(.bottom, 0)
         }
         .padding(.top, 30)
