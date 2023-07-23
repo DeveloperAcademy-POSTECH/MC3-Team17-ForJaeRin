@@ -15,6 +15,8 @@ class ProjectFlowVM: ObservableObject {
         subTitle: "원하는 그룹을 클릭하면 키워드를 확인할 수 있어요"
     )
     
+    let ICON_NAME = "checkmark.circle.fill"
+    
     func calcGroupBlockSize(percent: CGFloat, whole: CGFloat) -> CGFloat {
         percent * (whole / 100)
     }

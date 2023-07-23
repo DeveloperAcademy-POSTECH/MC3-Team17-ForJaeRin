@@ -77,7 +77,7 @@ extension ProjectFlowView {
                         Rectangle()
                             .fill(GroupColor.allCases[index].color)
                         if vm.selectedGroup == index {
-                            Image(systemName: "checkmark.circle.fill")
+                            Image(systemName: vm.ICON_NAME)
                                 .scaledToFit()
                                 .foregroundColor(GroupColor.allCases[index].text)
                                 .frame(maxWidth: 20, maxHeight: 20)
