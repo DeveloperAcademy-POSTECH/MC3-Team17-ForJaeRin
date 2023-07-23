@@ -9,12 +9,13 @@ import SwiftUI
 
 struct PresentationProgressView: View {
     var sidebarWidth: CGFloat
-    
-    @State var currentPageCount: CGFloat = 12
-    @State var wholePageCount: CGFloat = 36
+    @EnvironmentObject var vm: PresentationVM
+//    @State var currentPageCount: CGFloat = 12
+    @State var wholePageCount: CGFloat = 32
     
     var body: some View {
         VStack {
+            var currentPageCount = vm.currentPageIndex
             Text("PPT 진행상황")
                 .systemFont(.body)
                 .bold()
@@ -30,7 +31,7 @@ struct PresentationProgressView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(Color.systemGray100)
                     Rectangle()
-                        .frame(maxWidth: ((currentPageCount / wholePageCount) * (sidebarWidth - 64)), maxHeight: .infinity)
+                        .frame(maxWidth: ((CGFloat(currentPageCount) / wholePageCount) * (sidebarWidth - 64)), maxHeight: .infinity)
                         .foregroundColor(Color.systemPrimary)
                         .cornerRadius(30)
                 }

@@ -20,9 +20,9 @@ import SwiftUI
 struct PresentationView: View {
     // MARK: NavigationStack에서 pop하기 위한 function
     @Environment(\.dismiss) private var dismiss
-    
+    @EnvironmentObject var voiceManager: VoiceManager
     @ObservedObject var projectFileManager: ProjectFileManager
-    
+    @StateObject var vm = PresentationVM()
     @State var isSidebarActive = true
     @State var isDragging = false
     @State var position = CGSize.zero
@@ -35,11 +35,12 @@ struct PresentationView: View {
                     splitRightView()
             }
         }
-            .onAppear {
-                if let practice = projectFileManager.practices {
-                    print(practice.count)
-                } else {return}
-            }
+        .onAppear {
+            if let practice = projectFileManager.practices {
+                print(practice.count)
+            } else {return}
+        }
+        .environmentObject(vm)
     }
 }
 

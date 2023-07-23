@@ -12,6 +12,7 @@ import SwiftUI
  */
 // MARK: 연습모드 타이머
 struct PresentationTimerView: View {
+    @EnvironmentObject var voiceManager: VoiceManager
     @State private var pogPosition = CGPoint()
     @State private var isAnimationReady = false
     @State private var size = CGSize.zero {
@@ -27,6 +28,7 @@ struct PresentationTimerView: View {
                     HStack(spacing: 32) {
                         Button {
                             print("Play.fill")
+                            voiceManager.startRecording()
                         } label: {
                             Image(systemName: "play.fill")
                                 .resizable()
@@ -38,6 +40,19 @@ struct PresentationTimerView: View {
                         .frame(width: 28, height: 28)
                         Button {
                             print("Pause")
+                            voiceManager.stopRecording(index: 0)
+                        } label: {
+                            Image(systemName: "pause.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(Color.systemGray500)
+                        }
+                        .buttonStyle(.plain)
+                        .frame(width: 28, height: 28)
+                        Button {
+                            print("Play")
+                            voiceManager.playRecording()
                         } label: {
                             Image(systemName: "pause.fill")
                                 .resizable()
@@ -54,7 +69,7 @@ struct PresentationTimerView: View {
                     // timer
                     HStack {
                         // 진행시간
-                        Text("01 : 00")
+                        Text("\(voiceManager.timer)")
                             .font(Font.systemHeroTtile)
                             .fixedSize()
                         // 제한시간
