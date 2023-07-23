@@ -31,13 +31,33 @@ struct CustomRoundedRectangle: Shape {
 
         path.move(to: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: minY))
         path.addLine(to: CGPoint(x: maxX - (isLastRectangle ? cornerRadius : 0), y: minY))
-        path.addArc(center: CGPoint(x: maxX - (isLastRectangle ? cornerRadius : 0), y: minY + (isLastRectangle ? cornerRadius : 0)), radius: isLastRectangle ? cornerRadius : 0, startAngle: Angle.degrees(270), endAngle: Angle.degrees(0), clockwise: false)
+        path.addArc(
+            center: CGPoint(x: maxX - (isLastRectangle ? cornerRadius : 0), y: minY + (isLastRectangle ? cornerRadius : 0)),
+            radius: isLastRectangle ? cornerRadius : 0,
+            startAngle: Angle.degrees(270),
+            endAngle: Angle.degrees(0), clockwise: false
+        )
         path.addLine(to: CGPoint(x: maxX, y: maxY - (isLastRectangle ? cornerRadius : 0)))
-        path.addArc(center: CGPoint(x: maxX - (isLastRectangle ? cornerRadius : 0), y: maxY - (isLastRectangle ? cornerRadius : 0)), radius: isLastRectangle ? cornerRadius : 0, startAngle: Angle.degrees(0), endAngle: Angle.degrees(90), clockwise: false)
+        path.addArc(
+            center: CGPoint(x: maxX - (isLastRectangle ? cornerRadius : 0), y: maxY - (isLastRectangle ? cornerRadius : 0)),
+            radius: isLastRectangle ? cornerRadius : 0,
+            startAngle: Angle.degrees(0), endAngle: Angle.degrees(90),
+            clockwise: false
+        )
         path.addLine(to: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: maxY))
-        path.addArc(center: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: maxY - (isFirstRectangle ? cornerRadius : 0)), radius: isFirstRectangle ? cornerRadius : 0, startAngle: Angle.degrees(90), endAngle: Angle.degrees(180), clockwise: false)
+        path.addArc(center: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: maxY - (isFirstRectangle ? cornerRadius : 0)),
+                    radius: isFirstRectangle ? cornerRadius : 0,
+                    startAngle: Angle.degrees(90),
+                    endAngle: Angle.degrees(180),
+                    clockwise: false
+        )
         path.addLine(to: CGPoint(x: minX, y: minY + (isFirstRectangle ? cornerRadius : 0)))
-        path.addArc(center: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: minY + (isFirstRectangle ? cornerRadius : 0)), radius: isFirstRectangle ? cornerRadius : 0, startAngle: Angle.degrees(180), endAngle: Angle.degrees(270), clockwise: false)
+        path.addArc(center: CGPoint(x: minX + (isFirstRectangle ? cornerRadius : 0), y: minY + (isFirstRectangle ? cornerRadius : 0)),
+                    radius: isFirstRectangle ? cornerRadius : 0,
+                    startAngle: Angle.degrees(180),
+                    endAngle: Angle.degrees(270),
+                    clockwise: false
+        )
         path.closeSubpath()
 
         return path
