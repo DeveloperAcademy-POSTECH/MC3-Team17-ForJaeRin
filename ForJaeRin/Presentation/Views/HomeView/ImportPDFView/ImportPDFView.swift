@@ -19,6 +19,7 @@ import SwiftUI
  */
 // MARK: 새 프로젝트를 생성하기 위한 시트뷰
 struct ImportPDFView: View {
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var myData: MyData
     @Binding var isSheetActive: Bool
     @Binding var step: Int {
@@ -81,7 +82,9 @@ struct ImportPDFView: View {
                         groupIndex: Array(repeating: -1, count: myData.images.count)
                     ).environmentObject(myData)
                 } else {
+                    // JSON 파일 생성 후 저장 및 PDF 파일 복사본 같이 저장
                     
+                    //
                 }
                 
             }
@@ -144,6 +147,16 @@ struct ImportPDFView: View {
         return false
     }
     
+    func sendMyData() {
+        var tempStr = myData.time
+        tempStr.removeLast()
+        var tempInt = Int(tempStr)
+        var projectMetaData = ProjectMetadata(projectName: myData.title, projectGoal: myData.purpose, presentationTime: tempInt!, creatAt: Date())
+        
+        var pdfDocumentManager = PDFDocumentManager(url: myData.url, PDFPages: [], PDFGroups: [])
+        
+        var projectFileManager = ProjectFileManager()
+    }
 }
 
 struct ImportPDFView_Previews: PreviewProvider {
