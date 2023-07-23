@@ -18,7 +18,10 @@ struct KeywordListView: View {
         PDFPage(keywords: ["차이", "디테일", "디자이너", "개발자", "소통"], script: "안중요하죠?"),
         PDFPage(keywords: [ "사이즈", "일관된", "개발자"], script: "안중요하죠?")
     ]
-    @State var currentPageIndex = 0
+    @EnvironmentObject var vm: PresentationVM
+//    @State var currentPageCount: CGFloat = 12
+    @State var wholePageCount: CGFloat = 32
+    
     var sidebarWidth: CGFloat
     
     var body: some View {
@@ -46,15 +49,24 @@ struct KeywordListView: View {
                     GeometryReader { geometry in
                         ZStack(alignment: .bottom) {
                             ScrollView(showsIndicators: false) {
-                                ForEach(pdfPages.indices, id: \.self) { index in
-                                    KeywordListItem(
-                                        pdfPage: pdfPages[index],
-                                        sidebarWidth: sidebarWidth - 32,
-                                        isSelected: index == currentPageIndex
-                                    )
-                                    .frame(maxWidth: geometry.size.width)
+                                ScrollViewReader { scrollViewProxy in
+                                    ForEach(pdfPages.indices, id: \.self) { index in
+                                        KeywordListItem(
+                                            pdfPage: pdfPages[index],
+                                            sidebarWidth: sidebarWidth - 32,
+                                            isSelected: index == vm.currentPageIndex
+                                        )
+                                        .frame(maxWidth: geometry.size.width)
+                                        .id(index)
+                                    }
+                                    .padding(.vertical, geometry.size.height / 2 - 100)
+                                    .onChange(of: vm.currentPageIndex) { newID in
+                                        // scrollToID 값이 변경되면 해당 ID를 가진 뷰로 스크롤합니다.
+                                        withAnimation {
+                                            scrollViewProxy.scrollTo(newID, anchor: .center)
+                                        }
+                                    }
                                 }
-                                .padding(.vertical, geometry.size.height / 2 - 100)
                             }
                             .padding(.bottom, 24)
                             .frame(alignment: .center)

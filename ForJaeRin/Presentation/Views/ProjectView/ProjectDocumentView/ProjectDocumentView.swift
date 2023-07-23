@@ -144,6 +144,7 @@ extension ProjectDocumentView {
                     .buttonStyle(.plain)
                     NavigationLink {
                         PresentationView(projectFileManager: projectFileManager)
+                            .environmentObject(VoiceManager.shared)
                     } label: {
                         Label(
                             Plans.practice.planName,
