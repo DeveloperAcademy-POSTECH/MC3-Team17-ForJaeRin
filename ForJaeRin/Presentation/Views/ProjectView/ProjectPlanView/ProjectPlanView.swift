@@ -12,7 +12,6 @@ struct ProjectPlanView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State private var isViewReady = false
     @ObservedObject var vm: ProjectDocumentVM
-    
     @EnvironmentObject var myData: MyData
     
     var body: some View {
@@ -27,9 +26,7 @@ struct ProjectPlanView: View {
                     .environmentObject(myData)
                 }
             } else if vm.currentSection == .flow {
-            ProjectFlowView()
-            } else {
-                Text("practice")
+                ProjectFlowView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

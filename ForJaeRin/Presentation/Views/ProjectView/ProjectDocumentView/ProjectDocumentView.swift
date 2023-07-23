@@ -14,15 +14,11 @@ import SwiftUI
 struct ProjectDocumentView: View {
     // MARK: NavigationStack에서 pop하기 위한 function
     @Environment(\.dismiss) private var dismiss
-    
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var document: KkoDocument
+    @EnvironmentObject var myData: MyData
     @StateObject var vm = ProjectDocumentVM()
     
-    @State var currentTab: Tabs = .practice
-    @State var isPracticeModeActive = false
-    
-    @EnvironmentObject var myData: MyData
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,10 +28,10 @@ struct ProjectDocumentView: View {
                 // left sidebar
                 VStack {
                     VStack(spacing: 0) {
-                        List(vm.mainTabs, id: \.self, selection: $currentTab) { mainTab in
+                        List(vm.mainTabs, id: \.self, selection: $vm.currentTab) { mainTab in
                             Label(mainTab.tabName, systemImage: mainTab.iconName)
                                 .labelStyle(LeftSidebarLabelStyle(
-                                    isSelected: currentTab.tabName == mainTab.tabName ))
+                                    isSelected: vm.currentTab.tabName == mainTab.tabName ))
                                 .listRowBackground(Color.systemWhite)
                                 .listStyle(.plain)
                                 .frame(minHeight: 40)
@@ -50,11 +46,11 @@ struct ProjectDocumentView: View {
                 // rightsidebar
                 VStack {
                     VStack {
-                        if currentTab == .practice {
+                        if vm.currentTab == .practice {
                             ProjectPlanView(vm: vm)
                                 .environmentObject(myData)
                         } else {
-                            Text("연습 기록보기")
+                            ProjectHistoryView()
                         }
                     }
                 }
@@ -116,7 +112,7 @@ extension ProjectDocumentView {
     
     private func toolbarDynamicItemView() -> some View {
         Group {
-            if currentTab == .practice {
+            if vm.currentTab == .practice {
                 HStack {
                     Button {
                         vm.currentSection = .edit
@@ -145,6 +141,7 @@ extension ProjectDocumentView {
                     NavigationLink {
                         PresentationView(projectFileManager: projectFileManager)
                             .environmentObject(VoiceManager.shared)
+                            .environmentObject(vm)
                     } label: {
                         Label(
                             Plans.practice.planName,

@@ -25,13 +25,8 @@ struct PresentationPDFView: View {
                 currentPageIndex: $vm.currentPageIndex,
                 pdfView: pdfView,
                 pdfDocument: document)
-            Text("Current Page: \(vm.currentPageIndex)")
-            Button {
-                vm.currentPageIndex += 1
-            } label: {
-                Text("이동하기")
-            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
