@@ -24,7 +24,7 @@ struct Practice: Identifiable {
 }
 
 let practice1 = Practice(
-    saidKeywords: [["말한 키워드1", "말한 키워드2", "말한 키워드3"], ["말한 키워드1", "말한 키워드2"]],
+    saidKeywords: [["말한 키워드1", "말한 키워드2", "말한 키워드3"], ["말한 키워드1", "말한 키워드2"], [], [], [], [], []],
     speechRanges: [SpeechRange(start: 0, end: 60, group: 0), SpeechRange(start: 61, end: 120, group: 1)],
     progressTime: 300,
     audioPath: URL(string: "ff")!)
