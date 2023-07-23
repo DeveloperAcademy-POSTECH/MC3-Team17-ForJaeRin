@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct GroupListView: View {
-    
+    /// ellipsis를 누르면 tempData에 저장한다.
+    /// groupIndex는 -1로 초기화해둔다.
+    /// 취소 버튼 -> tempData로 접근
+    /// 완료 버튼 -> 새로 입력된 데이터로 접근
+    /// 휴지통 버튼 -> 삭제
+    /// 새로 추가할 때
+    /// 취소 버튼 -> 삭제
+    /// 완료 버튼 -> 저장
+    /// 휴지통 버튼 -> 생성 안됨
     @Binding var focusGroup: Int
-    @State var index: Int
+    var index: Int
     @Binding var groupData: [[String]]
     /// 해당 그룹 리스트뷰가 수정중인지(최초 제작 혹은 ellipsis를 통해 활성화됨
     @State var editMode = true
@@ -18,6 +26,9 @@ struct GroupListView: View {
     /// editMode가 켜지면 true, trash.fill 혹은 입력을 모두 하지 않고 취소를 누르면 false
     @Binding var somethingIsEdit: Bool
     @Binding var groupIndex: [Int]
+    @State var tempData = ["", "", "", "-1", "-1"]
+    @FocusState var focusField: Bool
+    @State var onDelete = false
     
     var body: some View {
         if index < groupData.count {
@@ -28,20 +39,25 @@ struct GroupListView: View {
                             RoundedRectangle(cornerRadius: 6)
                                 .fill(.black.opacity(0.01))
                                 .frame(width: groupData[index][0] != ""
-                                        && groupData[index][1] != ""
-                                        && groupData[index][2] != ""
-                                        && groupData[index][3] != "-1"
-                                        && groupData[index][4] != "-1" ? 141 : 173,
+                                       && groupData[index][1] != ""
+                                       && groupData[index][2] != ""
+                                       && groupData[index][3] != "-1"
+                                       && groupData[index][4] != "-1"
+                                       && tempData != ["", "", "", "-1", "-1"]
+                                       ? 141 : 173,
                                         height: 36)
                             RoundedRectangle(cornerRadius: 6)
                                 .stroke(.black.opacity(0.04), lineWidth: 1)
                                 .frame(width: groupData[index][0] != ""
-                                        && groupData[index][1] != ""
-                                        && groupData[index][2] != ""
-                                        && groupData[index][3] != "-1"
-                                        && groupData[index][4] != "-1" ? 141 : 173,
+                                       && groupData[index][1] != ""
+                                       && groupData[index][2] != ""
+                                       && groupData[index][3] != "-1"
+                                       && groupData[index][4] != "-1"
+                                       && tempData != ["", "", "", "-1", "-1"]
+                                       ? 141 : 173,
                                         height: 36)
                             TextField("그룹이름을 입력해주세요", text: $groupData[index][0])
+                                .focused($focusField)
                                 .font(.system(size: 14))
                                 .textFieldStyle(.plain)
                                 .padding(.leading, 10)
@@ -49,29 +65,29 @@ struct GroupListView: View {
                                 && groupData[index][1] != ""
                                 && groupData[index][2] != ""
                                 && groupData[index][3] != "-1"
-                                && groupData[index][4] != "-1" ? 141 : 173,
+                                && groupData[index][4] != "-1"
+                                && tempData != ["", "", "", "-1", "-1"]
+                                ? 141 : 173,
                                 height: 36)
-                        /// 입력받은 데이터가 모두 있어야 trash.fill을 표시
+                        /// 입력받은 데이터가 모두 있고, tempData가 ["", "", "", "", ""]가 아니어야 trash.fill을 표시
                         if groupData[index][0] != ""
                             && groupData[index][1] != ""
                             && groupData[index][2] != ""
                             && groupData[index][3] != "-1"
-                            && groupData[index][4] != "-1" {
+                            && groupData[index][4] != "-1"
+                            && tempData != ["", "", "", "-1", "-1"] {
                             Button(action: {
-                                for tmpindex in 0..<groupIndex.count {
-                                    if groupIndex[tmpindex] == index {
-                                        groupIndex[tmpindex] = -1
-                                    } else if groupIndex[tmpindex] > index {
-                                        groupIndex[tmpindex] -= 1
+                                focusField = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                    withAnimation {
+                                        groupData.remove(at: index)
+                                        resetGroupIndex()
+                                        editMode = false
+                                        somethingIsEdit = false
+                                        focusGroup = -1
+                                        tempData = ["", "", "", "-1", "-1"]
                                     }
                                 }
-                                for tmpindex in Int(groupData[index][3])!...Int(groupData[index][4])! {
-                                    groupIndex[tmpindex] = -1
-                                }
-                                groupData.remove(at: index)
-                                editMode = false
-                                somethingIsEdit = false
-                                focusGroup = -1
                             }, label: {
                                 Image(systemName: "trash.fill")
                                     .frame(width: 28, height: 28)
@@ -88,22 +104,28 @@ struct GroupListView: View {
                             .frame(width: 173, height: 76)
                         VStack {
                             HStack(spacing: 0) {
-                                // MARK: 여기부터 !
                                 Text("발표 시간")
                                     .font(.system(size: 14))
                                     .padding(.leading, 9)
                                 Spacer()
                                 TextField("0", text: $groupData[index][1])
+                                    .focused($focusField)
                                     .font(.system(size: 14))
                                     .textFieldStyle(.plain)
                                     .frame(width: 17)
                                 Text("분")
                                     .font(.system(size: 14))
                                 TextField("0", text: $groupData[index][2])
+                                    .focused($focusField)
                                     .font(.system(size: 14))
                                     .textFieldStyle(.plain)
                                     .frame(width: 17)
                                 Text("초")
+                                    .onTapGesture {
+                                        print(groupData)
+                                        print(tempData)
+                                        focusField = false
+                                    }
                                     .font(.system(size: 14))
                                     .padding(.trailing, 9)
                             }
@@ -122,15 +144,31 @@ struct GroupListView: View {
                     HStack {
                         /// 입력받지 않은 데이터가 하나라도 있다면 groupData에서 remove
                         Button(action: {
-                            focusGroup = -1
-                            somethingIsEdit = false
-                            editMode = false
-                            if groupData[index][0] == ""
-                                || groupData[index][1] == ""
-                                || groupData[index][2] == ""
-                                || groupData[index][3] == "-1"
-                                || groupData[index][4] == "-1" {
-                                groupData.remove(at: index)
+                            focusField = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                                withAnimation {
+                                    groupData.remove(at: index)
+                                    editMode = false
+                                    somethingIsEdit = false
+                                    focusGroup = -1
+                                    if tempData[0] != ""
+                                        || tempData[1] != ""
+                                        || tempData[2] != ""
+                                        || tempData[3] != "-1"
+                                        || tempData[4] != "-1" {
+                                        var answerIndex = 0
+                                        for alreadyData in groupData {
+                                            if Int(alreadyData[3])! > Int(tempData[3])! {
+                                                break
+                                            }
+                                            answerIndex += 1
+                                        }
+                                        groupData.insert(tempData, at: answerIndex)
+                                    }
+                                    resetGroupIndex()
+                                    tempData = ["", "", "", "-1", "-1"]
+                                    print(groupData)
+                                }
                             }
                         }, label: {
                             ZStack {
@@ -144,13 +182,23 @@ struct GroupListView: View {
                         }).buttonStyle(.plain)
                         /// 입력받지 않은게 하나라도 있으면 disabled
                         Button(action: {
-                            editMode = false
-                            focusGroup = -1
-                            somethingIsEdit = false
-                            for tmpindex in Int(groupData[index][3])!...Int(groupData[index][4])! {
-                                groupIndex[tmpindex] = index
+                            withAnimation {
+                                var answerIndex = 0
+                                let addedData = groupData[index]
+                                groupData.remove(at: index)
+                                for alreadyData in groupData {
+                                    if Int(alreadyData[3])! > Int(addedData[3])! {
+                                        break
+                                    }
+                                    answerIndex += 1
+                                }
+                                groupData.insert(addedData, at: answerIndex)
+                                editMode = false
+                                focusGroup = -1
+                                somethingIsEdit = false
+                                resetGroupIndex()
+                                tempData = ["", "", "", "-1", "-1"]
                             }
-                            print(groupIndex)
                         }, label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 6)
@@ -204,9 +252,17 @@ struct GroupListView: View {
                             .padding(.leading, 8)
                         Spacer()
                         Button(action: {
-                            editMode = true
-                            somethingIsEdit = true
-                            focusGroup = index
+                            withAnimation {
+                                editMode = true
+                                somethingIsEdit = true
+                                focusGroup = index
+                                tempData = groupData[index]
+                                for dataIndex in 0..<groupIndex.count {
+                                    if groupIndex[dataIndex] == index {
+                                        groupIndex[dataIndex] = -1
+                                    }
+                                }
+                            }
                         }, label: {
                             Image(systemName: "ellipsis")
                                 .frame(width: 23, height: 33)
@@ -218,6 +274,17 @@ struct GroupListView: View {
                 .font(.system(size: 17))
                 .foregroundColor(.black.opacity(0.85))
                 .accentColor(Color.green)
+            }
+        }
+    }
+    
+    private func resetGroupIndex() {
+        for contentIndex in 0..<groupIndex.count {
+            groupIndex[contentIndex] = -1
+        }
+        for eachGroup in 0..<groupData.count {
+            for contentIndex in Int(groupData[eachGroup][3])!...Int(groupData[eachGroup][4])! {
+                groupIndex[contentIndex] = eachGroup
             }
         }
     }
