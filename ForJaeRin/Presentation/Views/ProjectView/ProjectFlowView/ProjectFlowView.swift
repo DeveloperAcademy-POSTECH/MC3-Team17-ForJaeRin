@@ -9,11 +9,6 @@ import SwiftUI
 struct ProjectFlowView: View {
     @StateObject var vm = ProjectFlowVM()
     @EnvironmentObject var projectFileManager: ProjectFileManager
-    
-    @State private var selectedRectangleIndex: Int? = 0
-    @State private var rowCount: Int = 15
-    @State private var groupNames: [String] = ["그룹1", "그룹2", "그룹3", "그룹4", "그룹5", "그룹6", "그룹7"]
-    let texts: [String] = ["차이", "개발자", "안녕하세요", "디자이너", "충전기", "어쩌라고", "반가워요"]
 
     var body: some View {
         VStack(spacing: 46) {
@@ -48,7 +43,7 @@ extension ProjectFlowView {
         .padding(.horizontal, 27)
         .background(Color.systemWhite)
         .cornerRadius(12)
-        .frame(maxWidth: .infinity, maxHeight: 244, alignment: .topLeading)
+        .frame(maxWidth: .infinity,maxHeight: 224, alignment: .topLeading)
     }
     
     // MARK: 텍스트 컨테이너
@@ -121,7 +116,6 @@ extension ProjectFlowView {
             }
         }
         .frame(maxWidth: wholeWidthSize)
-        .cornerRadius(12)
     }
     
     // MARK: 하단 컨테이너
@@ -148,26 +142,42 @@ extension ProjectFlowView {
         .cornerRadius(12)
     }
     
+    // MARK: 그룹별 키워드 목록
     private func groupKeywordListView(pdfPages: [PDFPage], index: Int) -> some View {
-        VStack {
-            HStack {
-                ForEach(pdfPages[index].keywords, id: \.self) { keyword in
-                    ZStack {
-                        Text(keyword)
-                            .systemFont(.subTitle)
-                            .foregroundColor(Color.systemGray400)
-                            .padding(.vertical, 12)
-                            .padding(.horizontal, 16)
-                            .background(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color.systemGray200)
-                                    .background(Color.clear)
-                                    .cornerRadius(5)
-                            )
+        ZStack(alignment: .bottomLeading) {
+            Rectangle()
+                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                .foregroundColor(Color.systemGray200)
+                .frame(maxWidth: .infinity ,minHeight: 1, maxHeight: 1, alignment: .bottom)
+                .background(Color.detailLayoutBackground)
+            VStack {
+                HStack {
+                    Text("\(index + 1)")
+                        .systemFont(.caption1)
+                        .foregroundColor(Color.systemGray400)
+                        .frame(maxWidth: 20, maxHeight: 20)
+                        .padding(.trailing, 10)
+                    ForEach(pdfPages[index].keywords, id: \.self) { keyword in
+                        ZStack {
+                            Text(keyword)
+                                .systemFont(.subTitle)
+                                .foregroundColor(Color.systemGray400)
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 16)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.systemGray200)
+                                        .background(Color.clear)
+                                        .cornerRadius(5)
+                                )
+                        }
                     }
                 }
             }
+            .padding(.vertical, 26)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
-        .padding(.vertical, 26)
+        .padding(.horizontal, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
