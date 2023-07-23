@@ -33,7 +33,6 @@ struct PresentationPDFView: View {
             }
         }
     }
-
 }
 
 struct PDFKitRepresentedView: NSViewRepresentable {
@@ -60,22 +59,29 @@ struct PDFKitRepresentedView: NSViewRepresentable {
     }
 
     func updateNSView(_ nsView: PDFView, context: NSViewRepresentableContext<PDFKitRepresentedView>) {
+        if let currentPage = nsView.document?.page(at: currentPageIndex) {
+            nsView.go(to: currentPage)
+        }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, currentPageIndex: $currentPageIndex)
     }
 
     class Coordinator: NSObject, PDFViewDelegate {
         var parent: PDFKitRepresentedView
-
-        init(_ parent: PDFKitRepresentedView) {
+        @Binding var currentPageIndex: Int
+        
+        init(_ parent: PDFKitRepresentedView, currentPageIndex: Binding<Int>) {
             self.parent = parent
+            _currentPageIndex = currentPageIndex
         }
         
         @objc func pdfViewPageChanged(_ notification: Notification) {
             if let pdfView = notification.object as? PDFView {
-                parent.currentPageIndex = (pdfView.currentPage?.pageRef?.pageNumber ?? 1) - 1
+                DispatchQueue.main.async {
+                    self.parent.currentPageIndex = (pdfView.currentPage?.pageRef?.pageNumber ?? 1) - 1
+                }
             }
         }
     }

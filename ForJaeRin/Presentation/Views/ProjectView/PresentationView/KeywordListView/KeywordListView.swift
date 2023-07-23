@@ -19,7 +19,6 @@ struct KeywordListView: View {
         PDFPage(keywords: [ "사이즈", "일관된", "개발자"], script: "안중요하죠?")
     ]
     @EnvironmentObject var vm: PresentationVM
-//    @State var currentPageCount: CGFloat = 12
     @State var wholePageCount: CGFloat = 32
     
     var sidebarWidth: CGFloat
@@ -56,6 +55,9 @@ struct KeywordListView: View {
                                             sidebarWidth: sidebarWidth - 32,
                                             isSelected: index == vm.currentPageIndex
                                         )
+                                        .onTapGesture(count: 2) {
+                                            vm.currentPageIndex = index
+                                        }
                                         .frame(maxWidth: geometry.size.width)
                                         .id(index)
                                     }
