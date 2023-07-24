@@ -65,4 +65,19 @@ class PresentationVM: ObservableObject {
         // scaled to max at 96 (our height of our bar)
         voiceScaleSize = CGFloat(level * (VOICE_SCALE_SIZE.max / 10))
     }
+    
+    // MARK: PresentationTimerView
+    let AUDIO_CONTROLLER_SIZE = CGSize(width: 357, height: 80)
+    let AUDIO_PLAY_BUTTON_INFO = (
+        icon: "play.fill",
+        label: "연습 시작"
+    )
+    let AUDIO_PAUSE_BUTTON_INFO = (
+        icon: "pause.fill",
+        label: "연습 일시정지"
+    )
+    let AUDIO_STOP_BUTTON_INFO = (
+        icon: "stop.fill",
+        label: "연습 중지"
+    )
 }
