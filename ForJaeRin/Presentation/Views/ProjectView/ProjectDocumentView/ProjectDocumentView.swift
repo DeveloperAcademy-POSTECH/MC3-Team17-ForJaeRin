@@ -46,7 +46,7 @@ struct ProjectDocumentView: View {
                         if currentTab == .practice {
                             ProjectPlanView()
                         } else {
-                            Text("연습 기록보기")
+                            ProjectHistoryView()
                         }
                     }
                 }
