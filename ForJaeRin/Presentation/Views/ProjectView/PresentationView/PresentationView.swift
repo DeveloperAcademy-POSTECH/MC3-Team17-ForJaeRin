@@ -21,8 +21,10 @@ struct PresentationView: View {
     // MARK: NavigationStack에서 pop하기 위한 function
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var voiceManager: VoiceManager
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
     @StateObject var vm = PresentationVM()
+    @StateObject var speechRecognizer = SpeechRecognizer()
     
     var body: some View {
             VStack(spacing: 0) {
@@ -32,16 +34,42 @@ struct PresentationView: View {
                     splitRightView()
             }
         }
-<<<<<<< HEAD
+            .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
+                print(speechRecognizer.arr_transcript)
+                print((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)![0])
+                keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
+            })
         .onAppear {
             // saidKeywords에 pdf 페이지 수만큼 [] append
             for _ in 0..<(projectFileManager.pdfDocument?.PDFPages.count ?? 0) {
                 vm.practice.saidKeywords.append([])
             }
         }
-=======
->>>>>>> 3acf65a27ebbb724575ff2cfeb488563af360998
         .environmentObject(vm)
+        .environmentObject(speechRecognizer)
+    }
+    
+    private func keywordCheck(_ keywordList: [String]) {
+        for keyword in keywordList {
+            let arr_keyword = keyword.split(separator: " ")
+            if arr_keyword.isEmpty
+                || speechRecognizer.arr_transcript.count < arr_keyword.count {
+                return
+            }
+            for temp in 1...arr_keyword.count {
+                let arr_keyword_index = arr_keyword.count - temp
+                let arr_transcript_index = speechRecognizer.arr_transcript.count - temp
+                if !speechRecognizer
+                    .arr_transcript[arr_transcript_index]
+                    .contains(String(arr_keyword[arr_keyword_index])) {
+                    return
+                }
+            }
+            if !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
+                vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
+            }
+            
+        }
     }
 }
 
@@ -126,6 +154,8 @@ extension PresentationView {
             // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
             Button {
                 // MARK: 로직 작성 필요
+                speechRecognizer.stopTranscribing()
+                vm.practice.progressTime = voiceManager.countSec
                 projectDocumentVM.currentTab = .record
                 dismiss()
                 
