@@ -20,11 +20,9 @@ struct ProjectHistoryView: View {
     var body: some View {
         VStack(spacing: 0) {
             ProjectSummaryView()
-            ProjectHistoryListView()
+//                ProjectHistoryListView()
         }
-        .padding(32)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .border(.red, width: 2)
     }
 }
 
