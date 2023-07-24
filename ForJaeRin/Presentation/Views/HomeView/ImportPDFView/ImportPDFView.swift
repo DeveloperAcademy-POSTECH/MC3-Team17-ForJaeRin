@@ -26,36 +26,14 @@ struct ImportPDFView: View {
     // MARK: Sheet 창을 닫기 위한 바인딩 값
     @Binding var isSheetActive: Bool
     
-    let mentions: [String] = ["PDF 가져오기", "PDF 가져오기", "발표 정보 입력하기", "스크립트 입력하기", "그룹 설정하기", ""]
-    
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             headerContainerView()
             bodyContainerView()
             footerContainerView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .environmentObject(vm)
-    }
-    
-    func previousButtonFuction () -> Bool {
-        if vm.step == .importPDFFile {
-            return true
-        }
-        return false
-    }
-    
-    func nextButtonFuction () -> Bool {
-        if vm.step == .importPDFFile && myData.url == Bundle.main.url(forResource: "sample", withExtension: "pdf") {
-            return true
-        }
-        
-        if vm.step.rawValue == 2 {
-            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
-                return true
-            }
-        }
-        return false
     }
     
     func sendMyData() {
@@ -74,39 +52,38 @@ extension ImportPDFView {
     // MARK: 헤더 컨테이너 뷰
     func headerContainerView() -> some View {
         HStack {
-            HStack {
-                Text(mentions[vm.step.rawValue])
-                    .font(.system(size: 24))
-                Text("\(vm.step.rawValue)/4")
-                    .font(.system(size: 15))
+            HStack(spacing: 16) {
+                Text(vm.step.title)
+                    .systemFont(.headline)
+                Text("\(vm.step.rawValue + 1)/4")
+                    .systemFont(.caption1)
                     .opacity(0.3)
-                    .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 0))
             }
-            .padding(EdgeInsets(top: 48, leading: 40, bottom: 0, trailing: 0))
-            
             Spacer()
-            
             Button {
-                print("닫기")
                 isSheetActive = false
             } label: {
                 Image(systemName: "xmark")
-                    // .frame(width: 20, height: 20)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 16, maxHeight: 16)
+                    .foregroundColor(Color.systemGray200)
             }
-            .padding(EdgeInsets(top: 46, leading: 0, bottom: 0, trailing: 40))
+            .buttonStyle(.plain)
+            .frame(maxWidth: 24, maxHeight: 24)
         }
-        .frame(width: 868, height: 77)
+        .padding(.top, 48)
+        .padding(.horizontal, 40)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
     // MARK: 바디 컨테이너 뷰 - 스탭별로 바뀌는 뷰
     func bodyContainerView() -> some View {
         VStack {
             if vm.step == .importPDFFile {
-                Spacer()
                 FileImporterButtonView()
                     .environmentObject(myData)
-                    .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
-                Spacer()
+                    .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary))
             } else if vm.step == .setMetaData {
                 Spacer()
                 InputPresentationInfoView()
@@ -126,57 +103,62 @@ extension ImportPDFView {
                 
                 //
             }
-            
         }
+        .padding(.vertical, 40)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: 푸터 컨테이너 뷰
     func footerContainerView() -> some View {
         HStack {
             if vm.step != .importPDFFile {
-
+                footerButtonView(
+                    info: vm.PREV_BUTTON_INFO,
+                    isActive: vm.checkIsStepFirst()) {
+                        vm.handlePrevButton()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            
-            Spacer()
-            
-            Button {
-                print("next")
-                vm.step = ImportPDFStep.allCases[vm.step.rawValue + 1]
-            } label: {
-                Text("다음")
+            footerButtonView(
+                info: vm.NEXT_BUTTON_INFO,
+                isActive: vm.checkIsCanGoToNext(myData: myData)) {
+                    vm.handleNextButton()
             }
-
-            .buttonStyle(nextButtonFuction() ?
-                         AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92)
-                            : AppButtonStyle(width: 92))
-            .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
-            .disabled(nextButtonFuction())
-
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
-        .padding(.top, 24)
-        .padding(.bottom, 32)
+        .padding(.vertical, 28)
+        .padding(.horizontal, 40)
         .background(Color.sub100)
+        .frame(maxWidth: .infinity)
     }
     
-//    if vm.step.rawValue > 1 {
-//        vm.step = ImportPDFStep.allCases[vm.step.rawValue - 1]
-//    }
-    
-    func footerButtonView(isActive: Bool, action: @escaping () -> Void) -> some View {
+    // MARK: label로 변환해주기
+    func footerButtonView(
+        info: (icon: String, label: String),
+        isActive: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
         Button {
             action()
         } label: {
-            Text("이전")
+            Text(info.label)
         }
         .buttonStyle(
-            previousButtonFuction()
-            ? AppButtonStyle(backgroundColor : Color(hex: "2F2F2F").opacity(0.25), width: 92)
-                        : AppButtonStyle(width: 92))
-        .padding(EdgeInsets(top: 24, leading: 40, bottom: 29, trailing: 0))
-        .disabled(previousButtonFuction())
+            isActive
+            ? AppButtonStyle(
+                backgroundColor: Color.systemPoint,
+                width: vm.FOOTER_BUTTON_SIZE,
+                height: 42
+            )
+            : AppButtonStyle(
+                backgroundColor: Color.systemGray200,
+                width: vm.FOOTER_BUTTON_SIZE,
+                height: 42
+            )
+        )
+        .disabled(isActive)
     }
 }
-
 
 struct ImportPDFView_Previews: PreviewProvider {
     static var previews: some View {

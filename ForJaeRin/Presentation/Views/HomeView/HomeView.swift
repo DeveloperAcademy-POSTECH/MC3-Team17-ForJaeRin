@@ -35,16 +35,13 @@ struct HomeView: View {
                 // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
                 ImportPDFView(isSheetActive: $vm.isSheetActive)
                     .frame(
-                        maxWidth: vm.sheetSize.width,
-                        minHeight: vm.sheetSize.height
+                        minWidth: vm.getSheetWidth(height: geometry.size.height),
+                        maxWidth: vm.getSheetWidth(height: geometry.size.height),
+                        minHeight: geometry.size.height - 64
                     )
                     .environmentObject(projectFileManager)
                     .environmentObject(myData)
             }
-            .onChange(of: geometry.size, perform: { newValue in
-                vm.sheetSize.height = newValue.height - 64
-                vm.sheetSize.width = vm.getSheetWidth(height: newValue.height)
-            })
             .onAppear {
                 initProject()
             }

@@ -48,7 +48,7 @@ class HomeVM: ObservableObject {
     @Published var sheetSize = CGSize()
     
     func getSheetWidth(height: CGFloat) -> CGFloat {
-        height * 1.1
+        max(height * 110 / 100, 868)
     }
     
     func calcCardWidth(containerWidth: CGFloat) -> CGFloat {
