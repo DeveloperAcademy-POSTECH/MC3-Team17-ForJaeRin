@@ -53,6 +53,7 @@ struct FileImporterButtonView: View {
                         print(success)
                         myData.clear()
                         myData.url = success
+                        print(success)
                         step += 1
                         //
                         if let pdfDocument = PDFDocument(url: myData.url) {
