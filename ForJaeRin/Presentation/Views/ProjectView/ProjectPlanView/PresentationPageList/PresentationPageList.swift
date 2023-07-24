@@ -10,20 +10,24 @@ import SwiftUI
 struct PresentationPageList: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State var pdfDocumentPages: [PDFPage]
+    @State var isOnboardingActive = true
+    
+    @EnvironmentObject var myData: MyData
     
     var body: some View {
         GeometryReader { geometry in
             let document = projectFileManager.pdfDocument!
             ScrollView {
                 List {
-                    PresentationPageListOnboardingView()
-                    ForEach(Array(pdfDocumentPages.enumerated()), id: \.element.id) { index, _ in
-                        
+                    if isOnboardingActive {
+                        PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
+                    }
+                    ForEach(myData.images.indices, id: \.self) { index in
                         PresentationPageListItem(
                             groupIndex: document.findGroupIndex(pageIndex: index),
                             pageIndex: index,
-                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
-                            pdfPage: document.PDFPages[index]
+                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
+                            // pdfPage: document.PDFPages[index]
                         )
                     }.onMove { fromIndex, toIndex in
                         document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)

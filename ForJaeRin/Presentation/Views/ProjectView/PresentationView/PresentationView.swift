@@ -18,19 +18,21 @@ import SwiftUI
  */
 // MARK: 연습모드 페이지 뷰
 struct PresentationView: View {
-    @Binding var isContentsActive: Bool
-    @State var isSidebarActive = true
-    @State var isDragging = false
-    @State var position = CGSize.zero
+    // MARK: NavigationStack에서 pop하기 위한 function
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var voiceManager: VoiceManager
+    @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
+    @StateObject var vm = PresentationVM()
     
     var body: some View {
             VStack(spacing: 0) {
                 toolbarView()
-                HSplitView {
+                HStack(spacing: 0) {
                     splitLeftView()
                     splitRightView()
             }
         }
+        .environmentObject(vm)
     }
 }
 
@@ -42,54 +44,109 @@ extension PresentationView {
                 .zIndex(10)
             VStack(spacing: 0) {
                 PresentationPDFView()
-                AudioControllerView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .border(.red, width: 2)
     }
     
     // MARK: 우측 사이드 바
     func splitRightView() -> some View {
-        let ACTIVE_SIDEBAR_WIDTH: CGFloat = 272
-        
-        return VStack(spacing: 0) {
+        VStack(spacing: 0) {
+            PresentationProgressView()
+                .padding(.vertical, 35)
             KeywordListView()
             VoiceVisualizationView()
         }
         .frame(
-        minWidth: isSidebarActive ? ACTIVE_SIDEBAR_WIDTH : 0,
-        maxWidth: isSidebarActive ? ACTIVE_SIDEBAR_WIDTH : 0,
+            minWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,
+            maxWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,
         maxHeight: .infinity, alignment: .topLeading)
+        .border(width: 1, edges: [.leading], color: Color.systemGray100)
+        .background(Color.systemWhite)
     }
     
     // MARK: Presentation 내 레이아웃 조정 및 기능을 위한 뷰
-    func toolbarView() -> some View {
+    private func toolbarView() -> some View {
         HStack(spacing: 0) {
-            Button {
-                isContentsActive.toggle()
-            } label: {
-                Label("leftSidebar", systemImage: "sidebar.leading")
-                    .labelStyle(.iconOnly)
-            }
+            toolbarStaticItemView()
             Spacer()
-            Button {
-                isSidebarActive.toggle()
-            } label: {
-                Label("rightSidebar", systemImage: "sidebar.trailing")
-                    .labelStyle(.iconOnly)
-            }
+            toolbarDynamicItemView()
         }
-        .frame(maxWidth: .infinity, maxHeight: 32, alignment: .center)
-        .padding(.vertical ,4)
-        .padding(.horizontal, 8)
-        .border(width: 1, edges: [.bottom], color: .init(nsColor: .alternateSelectedControlTextColor))
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: 49,
+            alignment: .center
+        )
+        .padding(.top, 12)
+        .padding(.bottom, 8)
+        .padding(.leading, 8)
+        .padding(.trailing, 32)
+        .background(Color.systemWhite)
+        .border(width: 1, edges: [.bottom], color: Color.systemGray100)
+    }
+    
+    private func toolbarStaticItemView() -> some View {
+        HStack(spacing: 32) {
+            // goToHome
+            Button {
+                dismiss()
+            } label: {
+                Label(vm.TOOLBAR_LEFT_BUTTON_INFO.label, systemImage: vm.TOOLBAR_LEFT_BUTTON_INFO.icon)
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 64, maxHeight: 64)
+                    .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private func toolbarDynamicItemView() -> some View {
+        HStack(spacing: 56) {
+            // MARK: 사이드 바를 토글시키기 위한 버튼
+            Button {
+                withAnimation {
+                    vm.isSidebarActive.toggle()
+                }
+            } label: {
+                Label(vm.TOOLBAR_RIGHT_BUTTON_INFO.label, systemImage: vm.TOOLBAR_RIGHT_BUTTON_INFO.icon)
+                .labelStyle(ToolbarIconOnlyLabelStyle())
+                .frame(maxWidth: 64, maxHeight: 64)
+                .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+            // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
+            Button {
+                // MARK: 로직 작성 필요
+                projectDocumentVM.currentTab = .record
+                dismiss()
+                
+            } label: {
+                Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
+                    .systemFont(.body)
+            }
+            .buttonStyle(AppButtonStyle(
+                backgroundColor: Color.systemPoint,
+                width: 122,
+                height: 46)
+            )
+//            NavigationLink {
+//                PresentationView(projectFileManager: projectFileManager)
+//
+//            } label: {
+//                Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
+//                    .systemFont(.body)
+//            }
+//            .buttonStyle(AppButtonStyle(
+//                backgroundColor: Color.systemPoint,
+//                width: 122,
+//                height: 46)
+//            )
+        }
     }
 }
 
 struct PresentationView_Previews: PreviewProvider {
     static var previews: some View {
-        @State var isContentsActive = true
-        PresentationView(isContentsActive: $isContentsActive)
+        PresentationView()
     }
 }

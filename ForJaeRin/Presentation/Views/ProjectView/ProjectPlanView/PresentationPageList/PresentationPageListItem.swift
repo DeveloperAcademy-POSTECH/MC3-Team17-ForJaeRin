@@ -12,10 +12,12 @@ struct PresentationPageListItem: View {
     @State var groupIndex: Int
     @State var pageIndex: Int
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
-    @State var pdfPage: PDFPage
+    //@State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
     @State var pageScript = ""
     @State var keywords: Keywords = []
+    
+    @EnvironmentObject var myData: MyData
     
     var body: some View {
         VStack {
@@ -32,10 +34,11 @@ struct PresentationPageListItem: View {
                         .cornerRadius(50)
                         .frame(maxWidth: 255, maxHeight: 26)
                     TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                        .systemFont(.caption1)
                         .foregroundColor(GroupColor.allCases[groupIndex].text)
                         .multilineTextAlignment(.center)
                 }
-                .padding(.trailing, 92)
+                .padding(.horizontal, 92)
                 .frame(maxWidth: .infinity, minHeight: 26)
             }
             HStack(spacing: 0) {
@@ -52,12 +55,12 @@ struct PresentationPageListItem: View {
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
-            .padding(.trailing, 92)
+            .padding(.horizontal, 92)
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
         .onAppear {
-            pageScript = pdfPage.script
-            keywords = pdfPage.keywords
+            //pageScript = pdfPage.script
+            //keywords = pdfPage.keywords
         }
     }
     
@@ -80,21 +83,32 @@ extension PresentationPageListItem {
     
     // MARK: 프레젠테이션(PDF) 컨테이너 - 로키가 잘 해줄꺼야
     private func pdfContainer(pageIndex: Int) -> some View {
-        let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
+        //let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
         
         return ZStack(alignment: .topLeading) {
             Text("\(pageIndex + 1)")
                 .offset(x: 6, y: -24)
                 .zIndex(1)
+                .systemFont(.caption1)
+                .foregroundColor(Color.systemGray400)
             VStack {
-                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
-                    .frame(maxWidth: 212, maxHeight: 118)
+                //                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
+                //                    .frame(maxWidth: 212, maxHeight: 118)
+                //                    .overlay(
+                //                        RoundedRectangle(cornerRadius: 10)
+                //                            .stroke(Color.systemGray100,lineWidth:1)
+                //                            .foregroundColor(Color.clear)
+                //                            .cornerRadius(10)
+                //                      )
+                Image(nsImage: myData.images[pageIndex])
+                    .resizable()
+                    .frame(width: 212, height: 118)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.systemGray100,lineWidth:1)
                             .foregroundColor(Color.clear)
                             .cornerRadius(10)
-                      )
+                    )
             }
             .padding(.leading, 50)
             .padding(.trailing, 35)
@@ -105,7 +119,9 @@ extension PresentationPageListItem {
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
         HStack {
-            TextEditor(text: $pageScript)
+            TextEditor(text: $myData.script[pageIndex])
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray400)
                 .frame(minHeight: 182-48, maxHeight: 182-48)
         }
         .frame(maxWidth: 206, maxHeight: 182)
@@ -116,26 +132,28 @@ extension PresentationPageListItem {
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
         VStack {
-            List {
-                ChipView(mode: .scrollable, binding: .constant(7), items: keywords) {
-                    Text($0)
-                        .foregroundColor(Color.systemPrimary)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.systemGray100,lineWidth:1)
-                                .foregroundColor(Color.clear)
-                                .cornerRadius(5)
-                          )
-                }
+            KeywordView(
+                pageNumber: pageIndex,
+                lastIndex: enteredKeywordCount(pageNumber: pageIndex))
+                .padding(.vertical, 24)
+                .padding(.horizontal, 36)
+                .frame(minWidth: 345, maxWidth: .infinity)
+                .environmentObject(myData)
+        }
+    }
+    
+    private func enteredKeywordCount(pageNumber: Int) -> Int {
+        var answer = 0
+        for allKeyword in myData.keywords[pageNumber] {
+            if allKeyword != "" {
+                answer += 1
+            } else {
+                break
             }
         }
-        .padding(.vertical, 24)
-        .padding(.leading, 35)
-        .padding(.trailing, 102)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        return answer
     }
+    
     
     private func dottedDivider() -> some View {
         Rectangle()
@@ -155,8 +173,8 @@ struct PresentationPageListItem_Previews: PreviewProvider {
         PresentationPageListItem(
             groupIndex: groupIndex,
             pageIndex: pageIndex,
-            pdfGroup: pdfGroup,
-            pdfPage: pdfPage
+            pdfGroup: pdfGroup
+            //pdfPage: pdfPage
         )
     }
 }

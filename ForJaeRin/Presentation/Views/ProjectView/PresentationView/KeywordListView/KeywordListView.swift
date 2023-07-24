@@ -12,24 +12,83 @@ import SwiftUI
  */
 // MARK: 사전 설정한 PDF 페이지 별 키워드를 출력하는 뷰
 struct KeywordListView: View {
-    @State var isSheetActive = false
-    
+    @EnvironmentObject var projectFileManager: ProjectFileManager
+    @EnvironmentObject var vm: PresentationVM
+
     var body: some View {
         VStack {
-            Text("KeywordListView View")
-            Button {
-                isSheetActive = true
-            } label: {
-                Text("Show Sheet")
+            Text(vm.KEYWORD_SECTION_TITLE)
+                .systemFont(.body)
+                .bold()
+                .foregroundColor(Color.systemGray500)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 32)
+            ZStack(alignment: .top) {
+                Rectangle()
+                    .fill(Color.clear)
+                    .frame(maxWidth: .infinity, maxHeight: 24)
+                    .background(LinearGradient(
+                        stops: [
+                        Gradient.Stop(color: .white, location: 0.00),
+                        Gradient.Stop(color: .white.opacity(0), location: 1.00)
+                        ],
+                        startPoint: UnitPoint(x: 0.5, y: 0),
+                        endPoint: UnitPoint(x: 0.5, y: 1)
+                        ))
+                    .zIndex(10)
+                VStack(spacing: 24) {
+                    GeometryReader { geometry in
+                        ZStack(alignment: .bottom) {
+                            ScrollView(showsIndicators: false) {
+                                ScrollViewReader { scrollViewProxy in
+                                    if let document = projectFileManager.pdfDocument {
+                                        ForEach(document.PDFPages.indices, id: \.self) { index in
+                                            KeywordListItem(
+                                                pdfPage: document.PDFPages[index],
+                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 32,
+                                                isSelected: index == vm.currentPageIndex
+                                            )
+                                            .onTapGesture(count: 2) {
+                                                vm.currentPageIndex = index
+                                            }
+                                            .frame(maxWidth: geometry.size.width)
+                                            .id(index)
+                                        }
+                                        .onChange(of: vm.currentPageIndex) { newID in
+                                            // MARK: scrollToID 값이 변경되면 해당 ID를 가진 뷰로 스크롤합니다.
+                                            withAnimation {
+                                                scrollViewProxy.scrollTo(newID, anchor: .center)
+                                            }
+                                        }
+                                    }
+                                }
+                                .padding(.vertical, geometry.size.height / 2 - 100)
+                            }
+                            .padding(.bottom, 24)
+                            .frame(alignment: .center)
+                            Rectangle()
+                                .fill(Color.clear)
+                                .frame(maxWidth: .infinity, maxHeight: 24)
+                                .background(LinearGradient(
+                                    stops: [
+                                        Gradient.Stop(color: .white.opacity(0), location: 0.00),
+                                        Gradient.Stop(color: .white, location: 1.00)
+                                    ],
+                                    startPoint: UnitPoint(x: 0.5, y: 0),
+                                    endPoint: UnitPoint(x: 0.5, y: 1)))
+                                .offset(y: -24)
+                        }
+                    }
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity
+                    )
+                }
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .border(.red, width: 2)
-        .sheet(isPresented: $isSheetActive) {
-            editKeywordListView()
-                .frame(minWidth: 650, minHeight: 320)
-        }
     }
 }
 

@@ -42,12 +42,14 @@ struct HomeView: View {
         .background(Color.detailLayoutBackground)
         .sheet(isPresented: $isSheetActive) {
             ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+                .environmentObject(projectFileManager)
                 .environmentObject(myData)
                 .frame(minWidth: 830, minHeight: 803)
         }
         .navigationDestination(isPresented: $showDetails) {
             ProjectDocumentView()
                 .environmentObject(projectFileManager)
+                .environmentObject(myData)
                 .presentedWindowStyle(.titleBar)
                 .navigationBarBackButtonHidden()
         }
@@ -147,6 +149,18 @@ extension HomeView {
             Button {
 //                isSheetActive.toggle()
                 showDetails = true
+            } label: {
+                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+                    .font(Font.system(size: 16))
+            }
+            .buttonStyle(AppButtonStyle())
+            NavigationLink {
+                ProjectDocumentView()
+                    .environmentObject(projectFileManager)
+                    .environmentObject(myData)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
+                    .frame(maxWidth: .infinity)
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

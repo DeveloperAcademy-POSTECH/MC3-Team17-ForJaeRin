@@ -12,45 +12,45 @@ import SwiftUI
  */
 // MARK: 연습모드 타이머
 struct PresentationTimerView: View {
+    @EnvironmentObject var voiceManager: VoiceManager
+    @EnvironmentObject var projectFileManamger: ProjectFileManager
+    @EnvironmentObject var vm: PresentationVM
+    
+    // MARK: 컨트롤러 위치 조정을 위한 local state
     @State private var pogPosition = CGPoint()
+    @State private var isAnimationReady = false
     @State private var size = CGSize.zero
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    HStack {
-                        Button {
-                            print("Play")
-                        } label: {
-                            Text("Play")
-                        }
-                        Button {
-                            print("Pause")
-                        } label: {
-                            Text("Pause")
-                        }
-                        Button {
-                            print("stop")
-                        } label: {
-                            Text("stop")
-                        }
-                    }
-                    .border(.blue)
+                    audioButonContainer()
                     Spacer()
-                    // timer
-                    HStack {
-                        // 진행시간
-                        Text("01 : 00")
-                        // 제한시간
-                        Text("02 : 00")
+                    timerContainer()
+                }
+                .padding(.vertical, 8)
+                .padding(.horizontal, 16)
+                .frame(
+                    maxWidth: vm.AUDIO_CONTROLLER_SIZE.width,
+                    maxHeight: vm.AUDIO_CONTROLLER_SIZE.height
+                )
+                .background(Color.systemWhite.opacity(0.6))
+                .background(.ultraThinMaterial)
+                .cornerRadius(10)
+                .shadow(color: Color.systemBlack.opacity(0.25), radius: 20, x: 0, y: 8)
+                .onAppear {
+                    pogPosition = CGPoint(x: geometry.size.width / 2, y: geometry.size.height - 60)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.isAnimationReady = true
                     }
                 }
-                .padding(8)
-                .frame(maxWidth: 400, maxHeight: 80, alignment: .center)
-                .background(Color.gray)
-                .border(.blue)
-
+                .onChange(of: geometry.size) { newValue in
+                    print(geometry.size)
+                    print(pogPosition)
+                    print(newValue)
+                    pogPosition = CGPoint(x: newValue.width / 2, y: newValue.height - 60)
+                }
             }
             .background(GeometryReader {
                 Color.clear
@@ -60,13 +60,11 @@ struct PresentationTimerView: View {
                 self.size = $0
             }
             .position(pogPosition)
-            .animation(.linear, value: pogPosition)
+            .animation(.linear, value: isAnimationReady ? pogPosition : nil)
             .gesture(
                 DragGesture()
                     .onChanged { value in
                         let rect = geometry.frame(in: .local)
-                        //                                .inset(by: EdgeInsets(top: size.height / 2.0, leading: size.width / 2.0, bottom: size.height / 2.0, trailing: size.width / 2.0))
-                        //
                         if rect.contains(value.location) {
                             self.pogPosition = value.location
                         }
@@ -75,6 +73,61 @@ struct PresentationTimerView: View {
                         print(value.location)
                     }
             )
+        }
+    }
+}
+
+extension PresentationTimerView {
+    private func audioButonContainer() -> some View {
+        HStack(spacing: 32) {
+            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+                voiceManager.startRecording()
+            }
+            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
+                voiceManager.stopRecording(index: 0)
+            }
+            // MARK: 현재 저장한 음성을 듣기 위한 테스트 버튼
+            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+                voiceManager.playRecording()
+            }
+        }
+        .padding(.vertical, 18)
+        .padding(.horizontal, 28)
+    }
+    
+    private func audioControllButton(
+        info: (icon: String, label: String),
+        action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: info.icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundColor(Color.systemGray200)
+        }
+        .buttonStyle(.plain)
+        .frame(width: 28, height: 28)
+    }
+    
+    private func timerContainer() -> some View {
+        let wholeTime = voiceManager.covertSecToMinAndHour(
+            seconds: projectFileManamger.projectMetadata!.presentationTime
+        )
+        let progressTime = voiceManager.timer
+        
+        return HStack {
+            // 진행시간
+            Text("\(progressTime)")
+                .font(Font.systemHeroTtile)
+                .fixedSize()
+            // 제한시간
+            Text("(\(wholeTime))")
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray300)
+                .padding(.trailing, 8)
+                .fixedSize()
         }
     }
 }

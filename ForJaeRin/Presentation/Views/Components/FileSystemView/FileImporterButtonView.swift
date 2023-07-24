@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PDFKit
 
 /**
  파일 시스템과 관련된 클래스와 연동해서, PDF파일 경로를 들고 있는 것이 좋을 것 같습니다.
@@ -15,6 +16,7 @@ struct FileImporterButtonView: View {
     @EnvironmentObject var myData: MyData
     @State private var isImporting: Bool = false
     @Binding var step: Int
+    @State private var pdfImages = [NSImage]()
     
     var body: some View {
         
@@ -49,8 +51,18 @@ struct FileImporterButtonView: View {
                     switch result {
                     case .success(let success):
                         print(success)
+                        myData.clear()
                         myData.url = success
                         step += 1
+                        //
+                        if let pdfDocument = PDFDocument(url: myData.url) {
+                            let images = self.convertPDFToImages(pdfDocument: pdfDocument)
+                            self.pdfImages = images
+                            myData.images = images
+                            myData.script = [String](repeating: "", count: myData.images.count)
+                            myData.keywords = [[String]](repeating: ["", "", "", "", "", "", ""], count: myData.images.count)
+                        }
+                        //
                     case .failure(let failure):
                         print(failure)
                     }
@@ -58,11 +70,40 @@ struct FileImporterButtonView: View {
             }
         }
     }
-}
+    
+    func loadPDF() -> PDFDocument? {
+        if let pdfURL = Bundle.main.url(forResource: "KHackathon_PDF", withExtension: "pdf") {
+            return PDFDocument(url: pdfURL)
+        }
+        return nil
+    }
+    
+    func convertPDFToImages(pdfDocument: PDFDocument) -> [NSImage] {
+        var images = [NSImage]()
+        let pageCount = pdfDocument.pageCount
+        
+        for pageNumber in 0..<pageCount {
+            if let page = pdfDocument.page(at: pageNumber) {
+                let pageRect = page.bounds(for: .cropBox)
+                let width = Int(pageRect.width)
+                let height = Int(pageRect.height)
+                
+                let colorSpace = CGColorSpaceCreateDeviceRGB()
+                let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue
+                
+                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) {
+                    context.setFillColor(NSColor.white.cgColor)
+                    context.fill(CGRect(x: 0, y: 0, width: width, height: height))
 
-// struct FileImporterButtonView_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        FileImporterButtonView(step: $a)
-//    }
-// }
+                    page.draw(with: .cropBox, to: context)
+                    
+                    if let cgImage = context.makeImage() {
+                        let nsImage = NSImage(cgImage: cgImage, size: NSZeroSize)
+                        images.append(nsImage)
+                    }
+                }
+            }
+        }
+        return images
+    }
+}

@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ForJaeRinApp: App {
     @StateObject var projectFileManager = ProjectFileManager()
+    @State var stack = NavigationPath()
     
     var body: some Scene {
         WindowGroup {
@@ -18,6 +19,14 @@ struct ForJaeRinApp: App {
                     .environmentObject(projectFileManager)
             }
             .presentedWindowToolbarStyle(.expanded)
+            .frame(
+                minWidth: 960,
+                maxWidth: .infinity,
+                minHeight: 640,
+                maxHeight: .infinity,
+                alignment: .topLeading
+            )
         }
+        .windowResizability(.contentMinSize)
     }
 }

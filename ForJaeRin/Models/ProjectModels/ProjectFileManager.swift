@@ -24,5 +24,7 @@ final class ProjectFileManager: ObservableObject {
     var practices: [Practice]?
         
     // MARK: 파일로 변환
-    public func exportFile() {}
+    public func exportFile() {
+//                AppFileManager.shared.encodeJSON()
+    }
 }
