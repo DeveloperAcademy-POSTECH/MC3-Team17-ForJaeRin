@@ -45,6 +45,8 @@
 		A945F0532A56788700DC62D7 /* ForJaeRinUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0522A56788700DC62D7 /* ForJaeRinUITests.swift */; };
 		A945F0552A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */; };
 		A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A945F0632A56ABC800DC62D7 /* .swiftlint.yml */; };
+		A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */; };
+		A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */; };
 		A968E6A92A67C0B0008C6738 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A968E6A82A67C0B0008C6738 /* sample.json */; };
 		A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */; };
 		A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */; };
@@ -139,6 +141,8 @@
 		A945F0522A56788700DC62D7 /* ForJaeRinUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinUITests.swift; sourceTree = "<group>"; };
 		A945F0542A56788700DC62D7 /* ForJaeRinUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForJaeRinUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A945F0632A56ABC800DC62D7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFlowVM.swift; sourceTree = "<group>"; };
+		A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type+Extension.swift"; sourceTree = "<group>"; };
 		A968E6A82A67C0B0008C6738 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderModifier.swift; sourceTree = "<group>"; };
 		A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentVM.swift; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 				A99526CC2A5DBC43008510CF /* Color+Extension.swift */,
 				A92ABAD12A657369004B4972 /* Font+Extension.swift */,
 				112F60A32A6831BF00D19446 /* String+Extension.swift */,
+				A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -490,6 +495,7 @@
 			children = (
 				A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */,
 				A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */,
+				A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */,
 			);
 			path = ProjectVM;
 			sourceTree = "<group>";
@@ -830,6 +836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */,
 				A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */,
 				A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */,
 				A92ABAB82A63BE48004B4972 /* PresentationPageListOnboardingView.swift in Sources */,
@@ -882,6 +889,7 @@
 				A94147FE2A573D01001256CB /* View+Extension.swift in Sources */,
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
 				A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */,
+				A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,

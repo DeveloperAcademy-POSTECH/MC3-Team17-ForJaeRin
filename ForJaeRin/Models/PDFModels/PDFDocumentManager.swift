@@ -36,4 +36,14 @@ final class PDFDocumentManager: ObservableObject {
         
         return result
     }
+    
+    // MARK: 전체 중 현재 그룹이 차지하는 점유율
+    func getGroupVolumn(index: Int) -> CGFloat {
+        let whole = PDFPages.count // 전체 페이지 수
+        let part = (PDFGroups[index].range.end - PDFGroups[index].range.start) + 1
+        
+        return CGFloat((part * 100) / whole)
+    }
 }
+
+

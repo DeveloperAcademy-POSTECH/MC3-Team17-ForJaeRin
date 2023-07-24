@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-typealias SectionHeaderInfo = (title: String, subTitle: String?)
-
 class HomeVM: ObservableObject {
     let LOGO_NAME = ""
     let LOGO_SIZE = CGSize(width: 110, height: 40)
