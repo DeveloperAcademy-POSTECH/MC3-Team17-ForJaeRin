@@ -22,9 +22,11 @@ struct ImportPDFView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var myData: MyData
     @Binding var isSheetActive: Bool
+    @State var nextAvailable = false
     @Binding var step: Int {
         didSet {
             if step > 4 {
+                sendMyData()
                 isSheetActive = false
             }
         }
@@ -79,7 +81,7 @@ struct ImportPDFView: View {
                     Spacer()
                 } else if step == 4 {
                     SettingGroupView(
-                        groupIndex: Array(repeating: -1, count: myData.images.count)
+                        groupIndex: Array(repeating: -1, count: myData.images.count), nextAvailable: $nextAvailable
                     ).environmentObject(myData)
                 } else {
                     // JSON 파일 생성 후 저장 및 PDF 파일 복사본 같이 저장
@@ -135,7 +137,7 @@ struct ImportPDFView: View {
     }
     
     func nextButtonFuction () -> Bool {
-        if step == 1 && myData.url == Bundle.main.url(forResource: "sample", withExtension: "pdf") {
+        if step == 1 {
             return true
         }
         
@@ -148,14 +150,60 @@ struct ImportPDFView: View {
     }
     
     func sendMyData() {
-        var tempStr = myData.time
-        tempStr.removeLast()
-        var tempInt = Int(tempStr)
-        var projectMetaData = ProjectMetadata(projectName: myData.title, projectGoal: myData.purpose, presentationTime: tempInt!, creatAt: Date())
         
-        var pdfDocumentManager = PDFDocumentManager(url: myData.url, PDFPages: [], PDFGroups: [])
+        // MyData -> ProjectFileManager로 데이터 전달 시작!
+        var stringTime = myData.time
+        stringTime.removeLast()
+        var intTime = Int(stringTime)
+        var projectMetaData = ProjectMetadata(
+            projectName: myData.title,
+            projectGoal: myData.purpose,
+            presentationTime: intTime!,
+            creatAt: Date()
+        )
         
-        var projectFileManager = ProjectFileManager()
+        var pdfPages: [PDFPage] = []
+        var pdfGroups: [PDFGroup] = []
+        
+        for index in 0..<myData.keywords.count {
+            pdfPages.append(PDFPage(keywords: myData.keywords[index], script: myData.script[index]))
+        }
+        
+        for index in 0..<myData.groupData.count {
+            pdfGroups.append(
+                PDFGroup(
+                    name: myData.groupData[index][0],
+                    range: PDFGroupRange(start: Int(myData.groupData[index][3])!,
+                                         end: Int(myData.groupData[index][4])!),
+                    setTime: Int(myData.groupData[index][1])! * 60 + Int(myData.groupData[index][2])!
+                )
+            )
+        }
+        
+        var pdfDocumentManager = PDFDocumentManager(
+            url: myData.url,
+            PDFPages: pdfPages,
+            PDFGroups: pdfGroups
+        )
+        
+        projectFileManager.projectURL = myData.url
+        projectFileManager.projectMetadata = projectMetaData
+        projectFileManager.pdfDocument = pdfDocumentManager
+        
+        // MyData -> ProjectFileManager로 데이터 전달 완료!
+        
+        projectFileManager.exportFile()
+        
+        //
+        
+        // MyData -> ProjectFileManager로 데이터 전달
+        // ProjectFileManager를 JSON으로 변환해서 저장
+        // PDF파일도 복사해서 같은 폴더 아래에 넣는다.
+        
+        // 해당 경로에 가서 프로젝트 이름으로 폴더를 만든다. -> 중복 이름이 있으면 실패
+        // // 폴더 만들면 해당 폴더 밑에 JSON 파일을 넣는다 + PDF 복사본도 넣는다
+        // // // 해당 폴더 경로를 최근 프로젝트 이력에 넣는다.
+        
     }
 }
 

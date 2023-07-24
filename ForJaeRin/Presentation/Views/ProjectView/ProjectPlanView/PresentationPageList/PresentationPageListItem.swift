@@ -168,7 +168,7 @@ struct PresentationPageListItem_Previews: PreviewProvider {
     static var previews: some View {
         let groupIndex = 0
         let pageIndex = 0
-        let pdfGroup = PDFGroup(name: "그룹명", range: (start: 0, end: 3), setTime: 300)
+        let pdfGroup = PDFGroup(name: "그룹명", range: PDFGroupRange(start: 0, end: 3), setTime: 300)
         let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
         PresentationPageListItem(
             groupIndex: groupIndex,

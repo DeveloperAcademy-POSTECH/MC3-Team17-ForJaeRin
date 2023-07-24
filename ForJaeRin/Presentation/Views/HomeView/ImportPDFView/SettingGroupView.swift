@@ -22,6 +22,7 @@ struct SettingGroupView: View {
     /// somethingIsEdit이 false로 변하면 tapHistory를 초기화해야한다.
     @State var tapHistory: [Int] = []
     @EnvironmentObject var myData: MyData
+    @Binding var nextAvailable: Bool
     
     var body: some View {
         HStack {
@@ -42,6 +43,11 @@ struct SettingGroupView: View {
                         )
                         .environmentObject(myData)
                         .opacity(tapAvailable().contains(index) ? 1.0 : 0.3)
+                        .onChange(of: groupIndex, perform: { newValue in
+                            if !newValue.contains(-1) {
+                                nextAvailable = true
+                            }
+                        })
                         .onTapGesture {
                             /// 탭은 somegthingIsEdit이고, 해당 index가 tapable해야 가능하다.
                             if somethingIsEdit && tapAvailable().contains(index) {

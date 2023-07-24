@@ -46,4 +46,7 @@ final class PDFDocumentManager: ObservableObject {
     }
 }
 
-
+struct CodablePDFDocumentManager: Codable {
+    var PDFPages: [PDFPage]
+    var PDFGroups: [PDFGroup]
+}
