@@ -118,9 +118,67 @@ class AppFileManager {
     
     // MARK: 임시 json 경로
     let url = Bundle.main.url(forResource: "sampleProject", withExtension: "json")
+    
+    // new
+    func encodeJSON(codableProjectModel: CodableProjectModel, projectURL: URL) {
+        // 디렉토리 Path - 프로젝트 이름
+        var dirPath = documentUrl.appendingPathComponent(
+            codableProjectModel.projectMetadata.projectName,
+            conformingTo: .directory
+        )
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            let data = try encoder.encode(codableProjectModel)
+
+            // 사용자의 문서 디렉토리에 JSON 파일을 저장
+            let documentDirectory = try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create:false
+            )
+            
+            do {
+                /// 생성할 폴더가 이미 만들어져 있는지 확인
+                if !FileManager.default.fileExists(atPath: dirPath.path) {
+                    /// 만들어져있지 않다면 폴더 생성
+                    try FileManager.default.createDirectory(
+                        atPath: dirPath.path,
+                        withIntermediateDirectories: false,
+                        attributes: nil)
+                }
+            } catch {
+                /// 만들어져 있다면 폴더 생성
+                print("create folder error. do something, \(error)")
+            }
+            
+            // json 파일 저장
+            let fileURL = dirPath.appendingPathComponent("appProjectList.json")
+            try data.write(to: fileURL)
+            
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        // PDF 파일 복사본 저장.
+        let sourceURL = projectURL
+        let destinationURL = dirPath.appendingPathComponent("copy.pdf")
+
+        do {
+            try fileManager.copyItem(at: sourceURL, to: destinationURL)
+            print("File copied successfully")
+        } catch let error {
+            print("Failed to copy file: \(error.localizedDescription)")
+        }
+    }
+    
 }
+
 // MARK: 임시 JSON 구조체
-struct RootModel: Codable {
+class RootModel: Codable {
     let projectMetadata: ProjectMetadata
     let projectDocument: ProjectDocument
     let practice: [String]
