@@ -36,9 +36,10 @@ struct PresentationView: View {
             }
         }
         .onAppear {
-            if let practice = projectFileManager.practices {
-                print(practice.count)
-            } else {return}
+            // saidKeywords에 pdf 페이지 수만큼 [] append
+            for _ in 0..<(projectFileManager.pdfDocument?.PDFPages.count ?? 0) {
+                vm.practice.saidKeywords.append([])
+            }
         }
         .environmentObject(vm)
     }
