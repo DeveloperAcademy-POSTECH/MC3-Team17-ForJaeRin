@@ -13,76 +13,28 @@ import SwiftUI
 // MARK: 연습모드 타이머
 struct PresentationTimerView: View {
     @EnvironmentObject var voiceManager: VoiceManager
+    @EnvironmentObject var projectFileManamger: ProjectFileManager
+    @EnvironmentObject var vm: PresentationVM
+    
+    // MARK: 컨트롤러 위치 조정을 위한 local state
     @State private var pogPosition = CGPoint()
     @State private var isAnimationReady = false
-    @State private var size = CGSize.zero {
-        didSet {
-            print("size", size)
-        }
-    }
+    @State private var size = CGSize.zero
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    HStack(spacing: 32) {
-                        Button {
-                            print("Play.fill")
-                            voiceManager.startRecording()
-                        } label: {
-                            Image(systemName: "play.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.systemGray200)
-                        }
-                        .buttonStyle(.plain)
-                        .frame(width: 28, height: 28)
-                        Button {
-                            print("Pause")
-                            voiceManager.stopRecording(index: 0)
-                        } label: {
-                            Image(systemName: "pause.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.systemGray500)
-                        }
-                        .buttonStyle(.plain)
-                        .frame(width: 28, height: 28)
-                        Button {
-                            print("Play")
-                            voiceManager.playRecording()
-                        } label: {
-                            Image(systemName: "pause.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(Color.systemGray500)
-                        }
-                        .buttonStyle(.plain)
-                        .frame(width: 28, height: 28)
-                    }
-                    .padding(.vertical, 18)
-                    .padding(.horizontal, 28)
+                    audioButonContainer()
                     Spacer()
-                    // timer
-                    HStack {
-                        // 진행시간
-                        Text("\(voiceManager.timer)")
-                            .font(Font.systemHeroTtile)
-                            .fixedSize()
-                        // 제한시간
-                        Text("(2 : 00)")
-                            .systemFont(.body)
-                            .foregroundColor(Color.systemGray300)
-                            .padding(.trailing, 8)
-                            .fixedSize()
-                    }
+                    timerContainer()
                 }
                 .padding(.vertical, 8)
                 .padding(.horizontal, 16)
-                .frame(maxWidth: 357, maxHeight: 80, alignment: .center)
+                .frame(
+                    maxWidth: vm.AUDIO_CONTROLLER_SIZE.width,
+                    maxHeight: vm.AUDIO_CONTROLLER_SIZE.height
+                )
                 .background(Color.systemWhite.opacity(0.6))
                 .background(.ultraThinMaterial)
                 .cornerRadius(10)
@@ -113,8 +65,6 @@ struct PresentationTimerView: View {
                 DragGesture()
                     .onChanged { value in
                         let rect = geometry.frame(in: .local)
-                        //                                .inset(by: EdgeInsets(top: size.height / 2.0, leading: size.width / 2.0, bottom: size.height / 2.0, trailing: size.width / 2.0))
-                        //
                         if rect.contains(value.location) {
                             self.pogPosition = value.location
                         }
@@ -123,6 +73,61 @@ struct PresentationTimerView: View {
                         print(value.location)
                     }
             )
+        }
+    }
+}
+
+extension PresentationTimerView {
+    private func audioButonContainer() -> some View {
+        HStack(spacing: 32) {
+            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+                voiceManager.startRecording()
+            }
+            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
+                voiceManager.stopRecording(index: 0)
+            }
+            // MARK: 현재 저장한 음성을 듣기 위한 테스트 버튼
+            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+                voiceManager.playRecording()
+            }
+        }
+        .padding(.vertical, 18)
+        .padding(.horizontal, 28)
+    }
+    
+    private func audioControllButton(
+        info: (icon: String, label: String),
+        action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: info.icon)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundColor(Color.systemGray200)
+        }
+        .buttonStyle(.plain)
+        .frame(width: 28, height: 28)
+    }
+    
+    private func timerContainer() -> some View {
+        let wholeTime = voiceManager.covertSecToMinAndHour(
+            seconds: projectFileManamger.projectMetadata!.presentationTime
+        )
+        let progressTime = voiceManager.timer
+        
+        return HStack {
+            // 진행시간
+            Text("\(progressTime)")
+                .font(Font.systemHeroTtile)
+                .fixedSize()
+            // 제한시간
+            Text("(\(wholeTime))")
+                .systemFont(.body)
+                .foregroundColor(Color.systemGray300)
+                .padding(.trailing, 8)
+                .fixedSize()
         }
     }
 }

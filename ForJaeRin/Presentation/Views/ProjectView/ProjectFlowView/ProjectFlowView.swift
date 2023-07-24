@@ -30,7 +30,7 @@ extension ProjectFlowView {
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
             GeometryReader { geometry in
                 if let pdfDocument = projectFileManager.pdfDocument {
-                    let wholeWidthSize = geometry.size.width
+                    let wholeWidthSize = geometry.size.width // 전체 width
                     VStack(spacing: 15) {
                         partOfGroupBlockView(document: pdfDocument, wholeWidthSize: wholeWidthSize)
                         partOfGroupTextView(document: pdfDocument, wholeWidthSize: wholeWidthSize)
@@ -77,7 +77,7 @@ extension ProjectFlowView {
                         Rectangle()
                             .fill(GroupColor.allCases[index].color)
                         if vm.selectedGroup == index {
-                            Image(systemName: "checkmark.circle.fill")
+                            Image(systemName: vm.ICON_NAME)
                                 .scaledToFit()
                                 .foregroundColor(GroupColor.allCases[index].text)
                                 .frame(maxWidth: 20, maxHeight: 20)

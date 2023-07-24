@@ -8,35 +8,37 @@
 import SwiftUI
 
 struct PresentationProgressView: View {
-    var sidebarWidth: CGFloat
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var vm: PresentationVM
-//    @State var currentPageCount: CGFloat = 12
-    @State var wholePageCount: CGFloat = 32
     
     var body: some View {
         VStack {
-            var currentPageCount = vm.currentPageIndex
-            Text("PPT 진행상황")
+            Text(vm.PROGRESS_SECTION_TITLE)
                 .systemFont(.body)
                 .bold()
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity, alignment: .leading)
             VStack {
-                Text("\(Int(currentPageCount))/\(Int(wholePageCount)) (장)")
-                    .systemFont(.caption2)
-                    .foregroundColor(Color.systemGray200)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                ZStack(alignment: .leading) {
-                    Rectangle()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .foregroundColor(Color.systemGray100)
-                    Rectangle()
-                        .frame(maxWidth: ((CGFloat(currentPageCount) / wholePageCount) * (sidebarWidth - 64)), maxHeight: .infinity)
-                        .foregroundColor(Color.systemPrimary)
-                        .cornerRadius(30)
+                if let document = projectFileManager.pdfDocument {
+                    Text("\(Int(vm.currentPageIndex))/\(Int(document.PDFPages.count)) (장)")
+                        .systemFont(.caption2)
+                        .foregroundColor(Color.systemGray200)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .foregroundColor(Color.systemGray100)
+                        Rectangle()
+                            .frame(
+                                maxWidth: vm.calcProgress(wholeCount: document.PDFPages.count),
+                                maxHeight: .infinity
+                            )
+                            .foregroundColor(Color.systemPrimary)
+                            .cornerRadius(30)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 12)
+                    .cornerRadius(30)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 12)
-                .cornerRadius(30)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -47,6 +49,6 @@ struct PresentationProgressView: View {
 
 struct PresentationProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        PresentationProgressView(sidebarWidth: 302)
+        PresentationProgressView()
     }
 }
