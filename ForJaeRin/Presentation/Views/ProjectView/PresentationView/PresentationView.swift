@@ -22,7 +22,6 @@ struct PresentationView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var voiceManager: VoiceManager
     @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
-    @ObservedObject var projectFileManager: ProjectFileManager
     @StateObject var vm = PresentationVM()
     
     var body: some View {
@@ -53,9 +52,9 @@ extension PresentationView {
     // MARK: 우측 사이드 바
     func splitRightView() -> some View {
         VStack(spacing: 0) {
-            PresentationProgressView(sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH)
+            PresentationProgressView()
                 .padding(.vertical, 35)
-            KeywordListView(sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH)
+            KeywordListView()
             VoiceVisualizationView()
         }
         .frame(
@@ -148,6 +147,6 @@ extension PresentationView {
 
 struct PresentationView_Previews: PreviewProvider {
     static var previews: some View {
-        PresentationView(projectFileManager: ProjectFileManager())
+        PresentationView()
     }
 }

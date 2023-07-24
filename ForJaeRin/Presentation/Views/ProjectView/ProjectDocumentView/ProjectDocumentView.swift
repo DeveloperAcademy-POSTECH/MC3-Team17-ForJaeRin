@@ -139,8 +139,9 @@ extension ProjectDocumentView {
                     }
                     .buttonStyle(.plain)
                     NavigationLink {
-                        PresentationView(projectFileManager: projectFileManager)
+                        PresentationView()
                             .environmentObject(VoiceManager.shared)
+                            .environmentObject(projectFileManager)
                             .environmentObject(vm)
                     } label: {
                         Label(

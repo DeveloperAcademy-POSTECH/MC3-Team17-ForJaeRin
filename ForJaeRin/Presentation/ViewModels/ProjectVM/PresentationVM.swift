@@ -37,6 +37,16 @@ class PresentationVM: ObservableObject {
         label: "연습 끝내기"
     )
     
+    // MARK: PresentationProgressView
+    let PROGRESS_SECTION_TITLE = "PPT 진행상황"
+    
+    func calcProgress(wholeCount: Int) -> CGFloat {
+        CGFloat(currentPageIndex * 100 / wholeCount) * (ACTIVE_SIDEBAR_WIDTH - 64) / 100
+    }
+    
+    // MARK: KeywordListView
+    let KEYWORD_SECTION_TITLE = "키워드"
+    
     // MARK: VoiceVisualization
     @Published var voiceScaleSize: CGFloat = 0
     @Published var isScaled = true

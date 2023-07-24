@@ -30,7 +30,7 @@ extension ProjectFlowView {
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
             GeometryReader { geometry in
                 if let pdfDocument = projectFileManager.pdfDocument {
-                    let wholeWidthSize = geometry.size.width
+                    let wholeWidthSize = geometry.size.width // 전체 width
                     VStack(spacing: 15) {
                         partOfGroupBlockView(document: pdfDocument, wholeWidthSize: wholeWidthSize)
                         partOfGroupTextView(document: pdfDocument, wholeWidthSize: wholeWidthSize)

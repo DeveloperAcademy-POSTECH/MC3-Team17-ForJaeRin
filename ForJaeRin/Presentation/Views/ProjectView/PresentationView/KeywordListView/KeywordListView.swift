@@ -12,20 +12,12 @@ import SwiftUI
  */
 // MARK: 사전 설정한 PDF 페이지 별 키워드를 출력하는 뷰
 struct KeywordListView: View {
-    @State var isSheetActive = false
-    @State var pdfPages: [PDFPage] = [
-        PDFPage(keywords: ["HIG", "타이포그래피", "가독성", "자동", "사이즈", "일관된", "개발자"], script: "안중요하죠?"),
-        PDFPage(keywords: ["차이", "디테일", "디자이너", "개발자", "소통"], script: "안중요하죠?"),
-        PDFPage(keywords: [ "사이즈", "일관된", "개발자"], script: "안중요하죠?")
-    ]
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var vm: PresentationVM
-    @State var wholePageCount: CGFloat = 32
-    
-    var sidebarWidth: CGFloat
-    
+
     var body: some View {
         VStack {
-            Text("키워드")
+            Text(vm.KEYWORD_SECTION_TITLE)
                 .systemFont(.body)
                 .bold()
                 .foregroundColor(Color.systemGray500)
@@ -49,26 +41,28 @@ struct KeywordListView: View {
                         ZStack(alignment: .bottom) {
                             ScrollView(showsIndicators: false) {
                                 ScrollViewReader { scrollViewProxy in
-                                    ForEach(pdfPages.indices, id: \.self) { index in
-                                        KeywordListItem(
-                                            pdfPage: pdfPages[index],
-                                            sidebarWidth: sidebarWidth - 32,
-                                            isSelected: index == vm.currentPageIndex
-                                        )
-                                        .onTapGesture(count: 2) {
-                                            vm.currentPageIndex = index
+                                    if let document = projectFileManager.pdfDocument {
+                                        ForEach(document.PDFPages.indices, id: \.self) { index in
+                                            KeywordListItem(
+                                                pdfPage: document.PDFPages[index],
+                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 32,
+                                                isSelected: index == vm.currentPageIndex
+                                            )
+                                            .onTapGesture(count: 2) {
+                                                vm.currentPageIndex = index
+                                            }
+                                            .frame(maxWidth: geometry.size.width)
+                                            .id(index)
                                         }
-                                        .frame(maxWidth: geometry.size.width)
-                                        .id(index)
-                                    }
-                                    .padding(.vertical, geometry.size.height / 2 - 100)
-                                    .onChange(of: vm.currentPageIndex) { newID in
-                                        // scrollToID 값이 변경되면 해당 ID를 가진 뷰로 스크롤합니다.
-                                        withAnimation {
-                                            scrollViewProxy.scrollTo(newID, anchor: .center)
+                                        .onChange(of: vm.currentPageIndex) { newID in
+                                            // MARK: scrollToID 값이 변경되면 해당 ID를 가진 뷰로 스크롤합니다.
+                                            withAnimation {
+                                                scrollViewProxy.scrollTo(newID, anchor: .center)
+                                            }
                                         }
                                     }
                                 }
+                                .padding(.vertical, geometry.size.height / 2 - 100)
                             }
                             .padding(.bottom, 24)
                             .frame(alignment: .center)
@@ -87,8 +81,7 @@ struct KeywordListView: View {
                     }
                     .frame(
                         maxWidth: .infinity,
-                        maxHeight: .infinity,
-                        alignment: .center
+                        maxHeight: .infinity
                     )
                 }
                 .padding(.horizontal, 16)
@@ -96,10 +89,6 @@ struct KeywordListView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .sheet(isPresented: $isSheetActive) {
-            editKeywordListView()
-                .frame(minWidth: 650, minHeight: 320)
-        }
     }
 }
 
@@ -113,6 +102,6 @@ extension KeywordListView {
 
 struct KeywordListView_Previews: PreviewProvider {
     static var previews: some View {
-        KeywordListView(sidebarWidth: 302)
+        KeywordListView()
     }
 }
