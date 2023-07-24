@@ -13,48 +13,41 @@ import SwiftUI
 // MARK: 앱 실행 시 처음으로 진입하게 되는 뷰
 struct HomeView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
-    
-    @StateObject var vm = HomeVM()
-    @State private var showDetails = false
-    
     // EnvironmentObject로 전달할 변수 여기서 선언
     let myData: MyData
-    
-    @State private var isSheetActive = false {
-        didSet {
-            step = 1
-        }
-    }
-    @State private var step = 0
-    
+    @StateObject var vm = HomeVM()
+
     var body: some View {
-        VStack(spacing: 0) {
-            topContainerView()
-            bottomContainerView()
-        }
-        .frame(
-            minWidth: 960,
-            maxWidth: .infinity,
-            minHeight: 640,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        )
-        .background(Color.detailLayoutBackground)
-        .sheet(isPresented: $isSheetActive) {
-            ImportPDFView(isSheetActive: $isSheetActive, step: $step)
-                .environmentObject(projectFileManager)
-                .environmentObject(myData)
-                .frame(minWidth: 830, minHeight: 803)
-        }
-        .navigationDestination(isPresented: $showDetails) {
-            ProjectDocumentView()
-                .environmentObject(projectFileManager)
-                .environmentObject(myData)
-                .presentedWindowStyle(.titleBar)
-                .navigationBarBackButtonHidden()
-        }
-        .onAppear {
-            initProject()
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                topContainerView()
+                bottomContainerView()
+            }
+            .frame(
+                minWidth: 960,
+                maxWidth: .infinity,
+                minHeight: 640,
+                maxHeight: .infinity,
+                alignment: .topLeading
+            )
+            .background(Color.detailLayoutBackground)
+            .sheet(isPresented: $vm.isSheetActive) {
+                // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
+                ImportPDFView(isSheetActive: $vm.isSheetActive)
+                    .frame(
+                        maxWidth: vm.sheetSize.width,
+                        minHeight: vm.sheetSize.height
+                    )
+                    .environmentObject(projectFileManager)
+                    .environmentObject(myData)
+            }
+            .onChange(of: geometry.size, perform: { newValue in
+                vm.sheetSize.height = newValue.height - 64
+                vm.sheetSize.width = vm.getSheetWidth(height: newValue.height)
+            })
+            .onAppear {
+                initProject()
+            }
         }
     }
     // MARK: 테스트용 데이터 가져와서 넣기
@@ -72,21 +65,17 @@ struct HomeView: View {
                     range: (pdfGroup.range.start, pdfGroup.range.end),
                     setTime: pdfGroup.setTime)
             }
-            
             projectFileManager.pdfDocument = PDFDocumentManager(
                 url: AppFileManager.shared.url!,
                 PDFPages: PDFPages,
                 PDFGroups: PDFGroups)
-            
             projectFileManager.projectMetadata = ProjectMetadata(
                 projectName: file.projectMetadata.projectName,
                 projectGoal: file.projectMetadata.projectGoal,
                 presentationTime: file.projectMetadata.presentationTime,
                 creatAt: Date())
-            
             projectFileManager.practices = []
         } catch {
-            print("hhh")
             print("Error decoding JSON: \(error)")
         }
     }
@@ -147,8 +136,7 @@ extension HomeView {
                 .foregroundColor(Color.systemGray300)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Button {
-                isSheetActive.toggle()
-//                showDetails = true
+                vm.isSheetActive.toggle()
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
                     .font(Font.system(size: 16))

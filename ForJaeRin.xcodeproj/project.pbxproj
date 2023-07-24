@@ -47,6 +47,7 @@
 		A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A945F0632A56ABC800DC62D7 /* .swiftlint.yml */; };
 		A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */; };
 		A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */; };
+		A94D04B32A6E456C00D1DE77 /* ImportPDFVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */; };
 		A968E6A92A67C0B0008C6738 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A968E6A82A67C0B0008C6738 /* sample.json */; };
 		A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */; };
 		A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */; };
@@ -143,6 +144,7 @@
 		A945F0632A56ABC800DC62D7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFlowVM.swift; sourceTree = "<group>"; };
 		A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type+Extension.swift"; sourceTree = "<group>"; };
+		A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPDFVM.swift; sourceTree = "<group>"; };
 		A968E6A82A67C0B0008C6738 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderModifier.swift; sourceTree = "<group>"; };
 		A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentVM.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				A938398A2A5CF2410075A97F /* HomeVM.swift */,
+				A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */,
 			);
 			path = HomeVM;
 			sourceTree = "<group>";
@@ -511,11 +514,11 @@
 		A97FBE3D2A5E4BB500B9F94B /* ImportPDFView */ = {
 			isa = PBXGroup;
 			children = (
-				112F60AC2A690E3200D19446 /* GroupComponentView */,
 				A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */,
 				4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */,
 				4373B8AD2A66714200518FF7 /* InputScriptView.swift */,
 				4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */,
+				112F60AC2A690E3200D19446 /* GroupComponentView */,
 			);
 			path = ImportPDFView;
 			sourceTree = "<group>";
@@ -847,6 +850,7 @@
 				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
 				A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
+				A94D04B32A6E456C00D1DE77 /* ImportPDFVM.swift in Sources */,
 				4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
@@ -1055,7 +1059,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1088,7 +1092,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
