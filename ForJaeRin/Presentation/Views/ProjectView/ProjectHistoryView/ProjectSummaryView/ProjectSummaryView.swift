@@ -401,7 +401,11 @@ struct GroupView: View {
         ZStack (alignment: .topLeading) {
             Rectangle()
                 .cornerRadius(12)
-                .frame(minWidth: 160, maxWidth: .infinity, minHeight: calculateRectangleHeight(keywordCount: groupKeywordCount(for: group)), maxHeight: calculateRectangleHeight(keywordCount: groupKeywordCount(for: group)))
+                .frame(
+                    minWidth: 160,
+                    maxWidth: .infinity,
+                    minHeight: calculateRectangleHeight(keywordCount: groupKeywordCount(for: group)),
+                    maxHeight: calculateRectangleHeight(keywordCount: groupKeywordCount(for: group)))
                 .foregroundColor(Color.systemWhite)
             VStack {
                 ZStack(alignment: .bottom) {
@@ -609,9 +613,9 @@ struct PieChart: View {
     var body: some View {
         Canvas { context, size in
             //도넛 모양
-            let donut = Path { p in
-                p.addEllipse(in: CGRect(origin: .zero, size: size))
-                p.addEllipse(in: CGRect(x: size.width * 0.1, y: size.height * 0.1, width: size.width * 0.8, height: size.height * 0.8))
+            let donut = Path { path in
+                path.addEllipse(in: CGRect(origin: .zero, size: size))
+                path.addEllipse(in: CGRect(x: size.width * 0.1, y: size.height * 0.1, width: size.width * 0.8, height: size.height * 0.8))
             }
             context.clip(to: donut, style: .init(eoFill: true))
             
@@ -625,10 +629,10 @@ struct PieChart: View {
             for (value, color) in slices {
                 let angle = Angle(degrees: 360 * (value / total))
                 let endAngle = startAngle + angle
-                let path = Path { p in
-                    p.move(to: .zero)
-                    p.addArc(center: .zero, radius: radius, startAngle: startAngle + Angle(degrees: 0), endAngle: endAngle, clockwise: false)
-                    p.closeSubpath()
+                let path = Path { path in
+                    path.move(to: .zero)
+                    path.addArc(center: .zero, radius: radius, startAngle: startAngle + Angle(degrees: 0), endAngle: endAngle, clockwise: false)
+                    path.closeSubpath()
                 }
                 pieContext.fill(path, with: .color(color))
                 startAngle = endAngle

@@ -14,6 +14,7 @@ class PresentationVM: ObservableObject {
             print("currentPageIndex Update", currentPageIndex)
         }
     }
+    @Published var currentPageGroup = 0
     // MARK: 연습기록을 저장하기 위한 구조체
     // 2. 초기화
     @Published var practice = Practice(

@@ -23,7 +23,7 @@ class VoiceManager: ObservableObject {
     @Published var timerCount : Timer?
     @Published var timer : String = "0:00" {
         didSet {
-            print(timer)
+            //print(timer)
         }
     }
     

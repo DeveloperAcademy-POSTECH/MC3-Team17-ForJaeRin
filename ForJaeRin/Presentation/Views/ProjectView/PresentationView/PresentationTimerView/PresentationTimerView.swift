@@ -84,6 +84,7 @@ extension PresentationTimerView {
             audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
                 voiceManager.startRecording()
                 speechRecognizer.startTranscribing()
+                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
             }
             audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
                 speechRecognizer.stopTranscribing()

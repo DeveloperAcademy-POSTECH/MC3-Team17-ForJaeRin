@@ -35,9 +35,13 @@ struct PresentationView: View {
             }
         }
             .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
-                print(speechRecognizer.arr_transcript)
-                print((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)![0])
                 keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
+            })
+            .onChange(of: vm.currentPageIndex, perform: { _ in
+                resetGroup()
+            })
+            .onChange(of: vm.currentPageGroup, perform: { newValue in
+                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: newValue))
             })
         .onAppear {
             // saidKeywords에 pdf 페이지 수만큼 [] append
@@ -47,29 +51,6 @@ struct PresentationView: View {
         }
         .environmentObject(vm)
         .environmentObject(speechRecognizer)
-    }
-    
-    private func keywordCheck(_ keywordList: [String]) {
-        for keyword in keywordList {
-            let arr_keyword = keyword.split(separator: " ")
-            if arr_keyword.isEmpty
-                || speechRecognizer.arr_transcript.count < arr_keyword.count {
-                return
-            }
-            for temp in 1...arr_keyword.count {
-                let arr_keyword_index = arr_keyword.count - temp
-                let arr_transcript_index = speechRecognizer.arr_transcript.count - temp
-                if !speechRecognizer
-                    .arr_transcript[arr_transcript_index]
-                    .contains(String(arr_keyword[arr_keyword_index])) {
-                    return
-                }
-            }
-            if !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
-                vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
-            }
-            
-        }
     }
 }
 
@@ -180,6 +161,44 @@ extension PresentationView {
 //                width: 122,
 //                height: 46)
 //            )
+        }
+    }
+    
+    func keywordCheck(_ keywordList: [String]) {
+        var arr_keyword: [String.SubSequence] = []
+        for keyword in keywordList {
+            var checking = true
+            arr_keyword = keyword.split(separator: " ")
+            if arr_keyword.isEmpty
+                || speechRecognizer.arr_transcript.count < arr_keyword.count {
+                checking = false
+                continue
+            }
+            for temp in 1...arr_keyword.count {
+                let arr_keyword_index = arr_keyword.count - temp
+                let arr_transcript_index = speechRecognizer.arr_transcript.count - temp
+                if !speechRecognizer
+                    .arr_transcript[arr_transcript_index]
+                    .contains(String(arr_keyword[arr_keyword_index])) {
+                    checking = false
+                    break
+                }
+            }
+            if checking && !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
+                vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
+            }
+            
+        }
+    }
+    
+    func resetGroup() {
+        for groupIndex in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
+            if vm.currentPageIndex <= (projectFileManager
+                .pdfDocument?.PDFGroups[groupIndex].range.end)!
+                && vm.currentPageIndex >= (projectFileManager
+                    .pdfDocument?.PDFGroups[groupIndex].range.start)! {
+                vm.currentPageGroup = groupIndex
+            }
         }
     }
 }
