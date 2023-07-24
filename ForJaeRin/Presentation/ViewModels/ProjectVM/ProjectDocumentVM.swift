@@ -63,4 +63,5 @@ class ProjectDocumentVM: ObservableObject {
     let TOOLBAR_HEIGHT:CGFloat = 49
     @Published var isLeftSidebarActive = true
     @Published var currentSection: Plans = .edit
+    @Published var currentTab: Tabs = .practice
 }
