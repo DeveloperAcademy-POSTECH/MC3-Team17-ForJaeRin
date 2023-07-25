@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct GroupListView: View {
-    /// ellipsis를 누르면 tempData에 저장한다.
+    /// ellipsis를 누르면 vm.tempData에 저장한다.
     /// groupIndex는 -1로 초기화해둔다.
-    /// 취소 버튼 -> tempData로 접근
+    /// 취소 버튼 -> vm.tempData로 접근
     /// 완료 버튼 -> 새로 입력된 데이터로 접근
     /// 휴지통 버튼 -> 삭제
     /// 새로 추가할 때
@@ -18,21 +18,16 @@ struct GroupListView: View {
     /// 완료 버튼 -> 저장
     /// 휴지통 버튼 -> 생성 안됨
     ///
-    @ObservedObject var vm: SettingGroupVM
-    var index: Int
-    /// 해당 그룹 리스트뷰가 수정중인지(최초 제작 혹은 ellipsis를 통해 활성화됨
-    @State var editMode = true
-    @State var isExpanded = false
-    /// editMode가 켜지면 true, trash.fill 혹은 입력을 모두 하지 않고 취소를 누르면 false
-    @State var tempData = ["", "", "", "-1", "-1"]
-    @FocusState var focusField: Bool
-    @State var onDelete = false
+    @ObservedObject var settingGroupVM: SettingGroupVM
     @EnvironmentObject var myData: MyData
+    @StateObject var vm = GroupListVM()
+    @FocusState var focusField: Bool
+    var index: Int
     var resetAction: () -> Void
     
     var body: some View {
         if index < myData.groupData.count {
-            if editMode {
+            if vm.editMode {
                 VStack(alignment: .center) {
                     HStack(spacing: 4) {
                         ZStack(alignment: .leading) {
@@ -43,7 +38,7 @@ struct GroupListView: View {
                                        && myData.groupData[index][2] != ""
                                        && myData.groupData[index][3] != "-1"
                                        && myData.groupData[index][4] != "-1"
-                                       && tempData != ["", "", "", "-1", "-1"]
+                                       && vm.tempData != ["", "", "", "-1", "-1"]
                                        ? 141 : 173,
                                         height: 36)
                             RoundedRectangle(cornerRadius: 6)
@@ -53,7 +48,7 @@ struct GroupListView: View {
                                        && myData.groupData[index][2] != ""
                                        && myData.groupData[index][3] != "-1"
                                        && myData.groupData[index][4] != "-1"
-                                       && tempData != ["", "", "", "-1", "-1"]
+                                       && vm.tempData != ["", "", "", "-1", "-1"]
                                        ? 141 : 173,
                                         height: 36)
                             TextField("그룹이름을 입력해주세요", text: $myData.groupData[index][0])
@@ -66,26 +61,26 @@ struct GroupListView: View {
                                 && myData.groupData[index][2] != ""
                                 && myData.groupData[index][3] != "-1"
                                 && myData.groupData[index][4] != "-1"
-                                && tempData != ["", "", "", "-1", "-1"]
+                                && vm.tempData != ["", "", "", "-1", "-1"]
                                 ? 141 : 173,
                                 height: 36)
-                        /// 입력받은 데이터가 모두 있고, tempData가 ["", "", "", "", ""]가 아니어야 trash.fill을 표시
+                        /// 입력받은 데이터가 모두 있고, vm.tempData가 ["", "", "", "", ""]가 아니어야 trash.fill을 표시
                         if myData.groupData[index][0] != ""
                             && myData.groupData[index][1] != ""
                             && myData.groupData[index][2] != ""
                             && myData.groupData[index][3] != "-1"
                             && myData.groupData[index][4] != "-1"
-                            && tempData != ["", "", "", "-1", "-1"] {
+                            && vm.tempData != ["", "", "", "-1", "-1"] {
                             Button(action: {
                                 focusField = false
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                     withAnimation {
                                         myData.groupData.remove(at: index)
                                         resetAction()
-                                        editMode = false
-                                        vm.somethingIsEdit = false
-                                        vm.focusGroup = -1
-                                        tempData = ["", "", "", "-1", "-1"]
+                                        vm.editMode = false
+                                        settingGroupVM.somethingIsEdit = false
+                                        settingGroupVM.focusGroup = -1
+                                        vm.tempData = ["", "", "", "-1", "-1"]
                                     }
                                 }
                             }, label: {
@@ -123,7 +118,7 @@ struct GroupListView: View {
                                 Text("초")
                                     .onTapGesture {
                                         print(myData.groupData)
-                                        print(tempData)
+                                        print(vm.tempData)
                                         focusField = false
                                     }
                                     .font(.system(size: 14))
@@ -148,25 +143,25 @@ struct GroupListView: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                 withAnimation {
                                     myData.groupData.remove(at: index)
-                                    editMode = false
-                                    vm.somethingIsEdit = false
-                                    vm.focusGroup = -1
-                                    if tempData[0] != ""
-                                        || tempData[1] != ""
-                                        || tempData[2] != ""
-                                        || tempData[3] != "-1"
-                                        || tempData[4] != "-1" {
+                                    vm.editMode = false
+                                    settingGroupVM.somethingIsEdit = false
+                                    settingGroupVM.focusGroup = -1
+                                    if vm.tempData[0] != ""
+                                        || vm.tempData[1] != ""
+                                        || vm.tempData[2] != ""
+                                        || vm.tempData[3] != "-1"
+                                        || vm.tempData[4] != "-1" {
                                         var answerIndex = 0
                                         for alreadyData in myData.groupData {
-                                            if Int(alreadyData[3])! > Int(tempData[3])! {
+                                            if Int(alreadyData[3])! > Int(vm.tempData[3])! {
                                                 break
                                             }
                                             answerIndex += 1
                                         }
-                                        myData.groupData.insert(tempData, at: answerIndex)
+                                        myData.groupData.insert(vm.tempData, at: answerIndex)
                                     }
                                     resetAction()
-                                    tempData = ["", "", "", "-1", "-1"]
+                                    vm.tempData = ["", "", "", "-1", "-1"]
                                     print(myData.groupData)
                                 }
                             }
@@ -193,11 +188,11 @@ struct GroupListView: View {
                                     answerIndex += 1
                                 }
                                 myData.groupData.insert(addedData, at: answerIndex)
-                                editMode = false
-                                vm.focusGroup = -1
-                                vm.somethingIsEdit = false
+                                vm.editMode = false
+                                settingGroupVM.focusGroup = -1
+                                settingGroupVM.somethingIsEdit = false
                                 resetAction()
-                                tempData = ["", "", "", "-1", "-1"]
+                                vm.tempData = ["", "", "", "-1", "-1"]
                             }
                         }, label: {
                             ZStack {
@@ -219,7 +214,7 @@ struct GroupListView: View {
                     }
                 }
             } else {
-                DisclosureGroup(isExpanded: $isExpanded, content: {
+                DisclosureGroup(isExpanded: $vm.isExpanded, content: {
                     HStack {
                         Text("발표 시간")
                             .foregroundColor(.black.opacity(0.5))
@@ -253,13 +248,13 @@ struct GroupListView: View {
                         Spacer()
                         Button(action: {
                             withAnimation {
-                                editMode = true
-                                vm.somethingIsEdit = true
-                                vm.focusGroup = index
-                                tempData = myData.groupData[index]
-                                for dataIndex in 0..<vm.groupIndex.count {
-                                    if vm.groupIndex[dataIndex] == index {
-                                        vm.groupIndex[dataIndex] = -1
+                                vm.editMode = true
+                                settingGroupVM.somethingIsEdit = true
+                                settingGroupVM.focusGroup = index
+                                vm.tempData = myData.groupData[index]
+                                for dataIndex in 0..<settingGroupVM.groupIndex.count {
+                                    if settingGroupVM.groupIndex[dataIndex] == index {
+                                        settingGroupVM.groupIndex[dataIndex] = -1
                                     }
                                 }
                             }

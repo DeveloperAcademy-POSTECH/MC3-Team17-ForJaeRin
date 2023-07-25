@@ -126,7 +126,7 @@ extension SettingGroupView {
                 VStack(spacing: 0) {
                     ForEach(myData.groupData.indices, id: \.self) {index in
                         /// 그룹 리스트
-                        GroupListView(vm: vm, index: index, resetAction: resetGroupIndex)
+                        GroupListView(settingGroupVM: vm, index: index, resetAction: resetGroupIndex)
                     }
                     /// 그룹 추가 버튼
                     if  myData.groupData.count < 7 {

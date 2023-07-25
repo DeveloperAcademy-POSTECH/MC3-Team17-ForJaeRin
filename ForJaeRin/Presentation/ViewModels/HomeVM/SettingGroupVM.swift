@@ -24,7 +24,6 @@ class SettingGroupVM: ObservableObject {
         }
     }
     
-    
     let SIDEBAR_WIDTH: CGFloat = 205
     
     // MARK: - TempPDFView
