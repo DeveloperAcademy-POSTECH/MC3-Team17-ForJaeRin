@@ -47,6 +47,7 @@ struct KeywordListView: View {
                                             KeywordListItem(
                                                 pdfPage: document.PDFPages[index],
                                                 sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 32,
+                                                index: index,
                                                 isSelected: index == vm.currentPageIndex
                                             )
                                             .onTapGesture(count: 2) {
