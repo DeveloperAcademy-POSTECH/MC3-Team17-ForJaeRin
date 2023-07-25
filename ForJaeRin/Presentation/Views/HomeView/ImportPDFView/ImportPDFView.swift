@@ -81,7 +81,7 @@ extension ImportPDFStep {
 
 extension ImportPDFView {
     // MARK: 헤더 컨테이너 뷰
-    func headerContainerView() -> some View {
+    private func headerContainerView() -> some View {
         HStack {
             HStack(spacing: 16) {
                 Text(vm.step.title)
@@ -109,7 +109,7 @@ extension ImportPDFView {
     }
     
     // MARK: 바디 컨테이너 뷰 - 스탭별로 바뀌는 뷰
-    func bodyContainerView() -> some View {
+    private func bodyContainerView() -> some View {
         VStack {
             AnyView(vm.step.view)
         }
@@ -117,7 +117,7 @@ extension ImportPDFView {
     }
     
     // MARK: 푸터 컨테이너 뷰
-    func footerContainerView() -> some View {
+    private func footerContainerView() -> some View {
         HStack {
             if vm.step != .importPDFFile {
                 footerButtonView(
@@ -132,7 +132,7 @@ extension ImportPDFView {
                 ? vm.DONE_BUTTON_INFO
                 : vm.NEXT_BUTTON_INFO,
                 isActive: vm.checkIsCanGoToNext(myData: myData)) {
-                    vm.handleNextButton(isSheetActive: $isSheetActive, isNewProjectSettingDone: $isNewProjectSettingDone)
+                    vm.handleNextButton(completion: deliveryData)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -143,7 +143,7 @@ extension ImportPDFView {
     }
     
     // MARK: label로 변환해주기
-    func footerButtonView(
+    private func footerButtonView(
         info: (icon: String, label: String),
         isActive: Bool,
         action: @escaping () -> Void
@@ -167,6 +167,22 @@ extension ImportPDFView {
             )
         )
         .disabled(!isActive)
+    }
+    
+    // MARK: - 임시 그룹 설정을 위한,,
+    private func deliveryData() {
+        if let document = projectFileManager.pdfDocument {
+            // 초기화
+            document.PDFGroups = []
+            myData.groupData.enumerated().forEach { _, groupData in
+                document.PDFGroups.append(PDFGroup(
+                    name: groupData[0],
+                    range: (start: Int(groupData[3])!, end: Int(groupData[4])!),
+                    setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
+            }
+        }
+        isSheetActive = false
+        isNewProjectSettingDone = true
     }
 }
 

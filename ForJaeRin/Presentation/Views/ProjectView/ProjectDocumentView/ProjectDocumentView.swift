@@ -19,7 +19,6 @@ struct ProjectDocumentView: View {
     @EnvironmentObject var myData: MyData
     @StateObject var vm = ProjectDocumentVM()
     
-    
     var body: some View {
         VStack(spacing: 0) {
             // custom toolbar

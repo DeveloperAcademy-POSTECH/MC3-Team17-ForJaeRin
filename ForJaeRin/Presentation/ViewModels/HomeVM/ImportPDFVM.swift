@@ -55,11 +55,10 @@ class ImportPDFVM: ObservableObject {
         }
     }
     
-    func handleNextButton(isSheetActive: Binding<Bool>, isNewProjectSettingDone: Binding<Bool>) {
+    func handleNextButton(completion: @escaping () -> Void) {
         if step == .setGroup {
             print("설정 완료 이벤트 시작!")
-            isSheetActive.wrappedValue.toggle()
-            isNewProjectSettingDone.wrappedValue.toggle()
+            completion()
         } else {
             step = ImportPDFStep.allCases[step.rawValue + 1]
         }
