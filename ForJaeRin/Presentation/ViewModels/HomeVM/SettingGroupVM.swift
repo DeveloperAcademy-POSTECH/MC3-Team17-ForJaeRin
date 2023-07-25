@@ -24,5 +24,14 @@ class SettingGroupVM: ObservableObject {
         }
     }
     
+    
     let SIDEBAR_WIDTH: CGFloat = 205
+    
+    // MARK: - TempPDFView
+    let CARD_GAP: CGFloat = 32
+    
+    func calcCardWidth(containerWidth: CGFloat) -> CGSize {
+        let width = (containerWidth - CARD_GAP * 2) / 3
+        return CGSize(width: width, height: width / 3 * 2)
+    }
 }

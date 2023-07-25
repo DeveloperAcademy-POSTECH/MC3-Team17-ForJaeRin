@@ -83,11 +83,12 @@ extension SettingGroupView {
     private func pptGridListView(width:CGFloat, height: CGFloat) -> some View {
         ScrollView(showsIndicators: false) {
             /// PDF뷰
-            LazyVGrid(columns: vm.columns, spacing: 9) {
+            LazyVGrid(columns: vm.columns, spacing: vm.CARD_GAP) {
                 ForEach(0..<myData.images.count, id:\.self) { index in
                     TempPDFView(
                         /// groupData에 그룹 최소 인덱스와 최대 인덱스 사이에 속해야 한다.
                         index: index,
+                        imgSize: vm.calcCardWidth(containerWidth: width),
                         hilight:
                             vm.focusGroup != -1 &&
                         Int(myData.groupData[vm.focusGroup][3])! <= index &&
