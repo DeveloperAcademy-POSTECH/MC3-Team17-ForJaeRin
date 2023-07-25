@@ -21,8 +21,10 @@ struct PresentationView: View {
     // MARK: NavigationStack에서 pop하기 위한 function
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var voiceManager: VoiceManager
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
     @StateObject var vm = PresentationVM()
+    @StateObject var speechRecognizer = SpeechRecognizer()
     
     var body: some View {
             VStack(spacing: 0) {
@@ -32,7 +34,23 @@ struct PresentationView: View {
                     splitRightView()
             }
         }
+            .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
+                keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
+            })
+            .onChange(of: vm.currentPageIndex, perform: { _ in
+                resetGroup()
+            })
+            .onChange(of: vm.currentPageGroup, perform: { newValue in
+                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: newValue))
+            })
+        .onAppear {
+            // saidKeywords에 pdf 페이지 수만큼 [] append
+            for _ in 0..<(projectFileManager.pdfDocument?.PDFPages.count ?? 0) {
+                vm.practice.saidKeywords.append([])
+            }
+        }
         .environmentObject(vm)
+        .environmentObject(speechRecognizer)
     }
 }
 
@@ -117,6 +135,8 @@ extension PresentationView {
             // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
             Button {
                 // MARK: 로직 작성 필요
+                speechRecognizer.stopTranscribing()
+                vm.practice.progressTime = voiceManager.countSec
                 projectDocumentVM.currentTab = .record
                 dismiss()
                 
@@ -141,6 +161,44 @@ extension PresentationView {
 //                width: 122,
 //                height: 46)
 //            )
+        }
+    }
+    
+    func keywordCheck(_ keywordList: [String]) {
+        var arr_keyword: [String.SubSequence] = []
+        for keyword in keywordList {
+            var checking = true
+            arr_keyword = keyword.split(separator: " ")
+            if arr_keyword.isEmpty
+                || speechRecognizer.arr_transcript.count < arr_keyword.count {
+                checking = false
+                continue
+            }
+            for temp in 1...arr_keyword.count {
+                let arr_keyword_index = arr_keyword.count - temp
+                let arr_transcript_index = speechRecognizer.arr_transcript.count - temp
+                if !speechRecognizer
+                    .arr_transcript[arr_transcript_index]
+                    .contains(String(arr_keyword[arr_keyword_index])) {
+                    checking = false
+                    break
+                }
+            }
+            if checking && !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
+                vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
+            }
+            
+        }
+    }
+    
+    func resetGroup() {
+        for groupIndex in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
+            if vm.currentPageIndex <= (projectFileManager
+                .pdfDocument?.PDFGroups[groupIndex].range.end)!
+                && vm.currentPageIndex >= (projectFileManager
+                    .pdfDocument?.PDFGroups[groupIndex].range.start)! {
+                vm.currentPageGroup = groupIndex
+            }
         }
     }
 }

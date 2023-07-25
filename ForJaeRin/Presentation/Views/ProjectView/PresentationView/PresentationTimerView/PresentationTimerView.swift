@@ -15,6 +15,7 @@ struct PresentationTimerView: View {
     @EnvironmentObject var voiceManager: VoiceManager
     @EnvironmentObject var projectFileManamger: ProjectFileManager
     @EnvironmentObject var vm: PresentationVM
+    @EnvironmentObject var speechRecognizer: SpeechRecognizer
     
     // MARK: 컨트롤러 위치 조정을 위한 local state
     @State private var pogPosition = CGPoint()
@@ -82,8 +83,11 @@ extension PresentationTimerView {
         HStack(spacing: 32) {
             audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
                 voiceManager.startRecording()
+                speechRecognizer.startTranscribing()
+                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
             }
             audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
+                speechRecognizer.stopTranscribing()
                 voiceManager.stopRecording(index: 0)
             }
             // MARK: 현재 저장한 음성을 듣기 위한 테스트 버튼

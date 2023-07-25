@@ -14,6 +14,7 @@ import SwiftUI
 struct KeywordListView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var vm: PresentationVM
+    @EnvironmentObject var speechRecognizer: SpeechRecognizer
 
     var body: some View {
         VStack {

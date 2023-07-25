@@ -15,3 +15,10 @@ struct ProjectMetadata {
     var presentationTime: Int
     var creatAt: Date
 }
+
+struct CodableProjectMetadata: Codable {
+    var projectName: String
+    var projectGoal: String
+    var presentationTime: Int
+    var createAt: String
+}

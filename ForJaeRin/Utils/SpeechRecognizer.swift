@@ -29,6 +29,7 @@ actor SpeechRecognizer: ObservableObject {
     }
     
     @MainActor var transcript: String = ""
+    @MainActor @Published var arr_transcript: [String] = []
     
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
@@ -71,6 +72,7 @@ actor SpeechRecognizer: ObservableObject {
     @MainActor func resetTranscript() {
         Task {
             await reset()
+            await transcribe()
         }
     }
     
@@ -162,6 +164,11 @@ actor SpeechRecognizer: ObservableObject {
     nonisolated private func transcribe(_ message: String) {
         Task { @MainActor in
             transcript = message
+            let temp_arr_transcript = transcript.split(separator: " ")
+            arr_transcript = []
+            for each in temp_arr_transcript {
+                arr_transcript.append(String(each))
+            }
         }
     }
     nonisolated private func transcribe(_ error: Error) {

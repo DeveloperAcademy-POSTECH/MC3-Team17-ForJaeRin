@@ -70,7 +70,7 @@ struct HomeView: View {
             let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in
                 PDFGroup(
                     name: pdfGroup.name,
-                    range: (pdfGroup.range.start, pdfGroup.range.end),
+                    range: PDFGroupRange(start: pdfGroup.range.start, end: pdfGroup.range.end),
                     setTime: pdfGroup.setTime)
             }
             projectFileManager.pdfDocument = PDFDocumentManager(
