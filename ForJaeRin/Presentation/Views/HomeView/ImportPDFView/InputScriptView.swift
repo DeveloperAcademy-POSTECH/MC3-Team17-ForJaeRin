@@ -39,6 +39,7 @@ extension InputScriptView {
         GeometryReader { geometry in
             let widthSize = geometry.size.width
             let imgHeight = widthSize / 1.6 * 0.9
+
             VStack {
                 ZStack {
                     Image(nsImage: myData.images[pageNumber])
@@ -51,16 +52,15 @@ extension InputScriptView {
                         .systemFont(.body)
                         .foregroundColor(Color.systemGray200)
                         .padding(10)
-                        .frame(width: widthSize, height: geometry.size.height - imgHeight - 10)
+                        .frame(maxWidth: widthSize, maxHeight: .infinity)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.systemGray100, lineWidth: 1)
-                                .frame(width: widthSize, height: geometry.size.height - imgHeight - 10)
+                                .frame(maxWidth: widthSize, maxHeight: .infinity)
                         )
-                        
                 }
             }
-                .frame(maxWidth: geometry.size.width)
+            .frame(maxWidth: geometry.size.width)
         }
     }
 }

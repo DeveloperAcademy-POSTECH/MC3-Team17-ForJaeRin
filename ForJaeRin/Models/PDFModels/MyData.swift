@@ -22,7 +22,11 @@ class MyData: ObservableObject {
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
-    @Published var groupData: [[String]] = []
+    @Published var groupData: [[String]] = [] {
+        didSet {
+            print(groupData)
+        }
+    }
     
     func clear() {
         self.images = [NSImage]()

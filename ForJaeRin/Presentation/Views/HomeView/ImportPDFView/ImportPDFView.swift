@@ -33,7 +33,11 @@ struct ImportPDFView: View {
             bodyContainerView()
             footerContainerView()
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
         .environmentObject(vm)
         .environmentObject(myData)
     }
@@ -62,13 +66,13 @@ extension ImportPDFStep {
     var view: any View {
         switch self {
         case .importPDFFile:
-            return FileImporterButtonView()
+            return FileImporterButtonView().padding(.vertical, 40)
         case .setMetaData:
-            return InputPresentationInfoView()
+            return InputPresentationInfoView().padding(.vertical, 40)
         case .setScripts:
-            return InputScriptView()
+            return InputScriptView().padding(.vertical, 40)
         case .setGroup:
-            return SettingGroupView()
+            return SettingGroupView().padding(.top, 40)
         }
     }
 }
@@ -107,7 +111,6 @@ extension ImportPDFView {
         VStack {
             AnyView(vm.step.view)
         }
-        .padding(.vertical, 40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     

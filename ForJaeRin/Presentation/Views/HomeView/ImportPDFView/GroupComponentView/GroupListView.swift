@@ -17,14 +17,13 @@ struct GroupListView: View {
     /// 취소 버튼 -> 삭제
     /// 완료 버튼 -> 저장
     /// 휴지통 버튼 -> 생성 안됨
-    @Binding var focusGroup: Int
+    ///
+    @ObservedObject var vm: SettingGroupVM
     var index: Int
     /// 해당 그룹 리스트뷰가 수정중인지(최초 제작 혹은 ellipsis를 통해 활성화됨
     @State var editMode = true
     @State var isExpanded = false
     /// editMode가 켜지면 true, trash.fill 혹은 입력을 모두 하지 않고 취소를 누르면 false
-    @Binding var somethingIsEdit: Bool
-    @Binding var groupIndex: [Int]
     @State var tempData = ["", "", "", "-1", "-1"]
     @FocusState var focusField: Bool
     @State var onDelete = false
@@ -84,8 +83,8 @@ struct GroupListView: View {
                                         myData.groupData.remove(at: index)
                                         resetAction()
                                         editMode = false
-                                        somethingIsEdit = false
-                                        focusGroup = -1
+                                        vm.somethingIsEdit = false
+                                        vm.focusGroup = -1
                                         tempData = ["", "", "", "-1", "-1"]
                                     }
                                 }
@@ -150,8 +149,8 @@ struct GroupListView: View {
                                 withAnimation {
                                     myData.groupData.remove(at: index)
                                     editMode = false
-                                    somethingIsEdit = false
-                                    focusGroup = -1
+                                    vm.somethingIsEdit = false
+                                    vm.focusGroup = -1
                                     if tempData[0] != ""
                                         || tempData[1] != ""
                                         || tempData[2] != ""
@@ -195,8 +194,8 @@ struct GroupListView: View {
                                 }
                                 myData.groupData.insert(addedData, at: answerIndex)
                                 editMode = false
-                                focusGroup = -1
-                                somethingIsEdit = false
+                                vm.focusGroup = -1
+                                vm.somethingIsEdit = false
                                 resetAction()
                                 tempData = ["", "", "", "-1", "-1"]
                             }
@@ -255,12 +254,12 @@ struct GroupListView: View {
                         Button(action: {
                             withAnimation {
                                 editMode = true
-                                somethingIsEdit = true
-                                focusGroup = index
+                                vm.somethingIsEdit = true
+                                vm.focusGroup = index
                                 tempData = myData.groupData[index]
-                                for dataIndex in 0..<groupIndex.count {
-                                    if groupIndex[dataIndex] == index {
-                                        groupIndex[dataIndex] = -1
+                                for dataIndex in 0..<vm.groupIndex.count {
+                                    if vm.groupIndex[dataIndex] == index {
+                                        vm.groupIndex[dataIndex] = -1
                                     }
                                 }
                             }

@@ -18,6 +18,7 @@
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
 		43E88F9B2A64E36C001791DC /* MyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E88F9A2A64E36C001791DC /* MyData.swift */; };
 		A912BA992A613C4100A3321E /* sampleFile.json in Resources */ = {isa = PBXBuildFile; fileRef = A912BA982A613C4100A3321E /* sampleFile.json */; };
+		A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */; };
 		A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */; };
 		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
 		A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */; };
@@ -111,6 +112,7 @@
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
 		43E88F9A2A64E36C001791DC /* MyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyData.swift; sourceTree = "<group>"; };
 		A912BA982A613C4100A3321E /* sampleFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleFile.json; sourceTree = "<group>"; };
+		A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupVM.swift; sourceTree = "<group>"; };
 		A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
 		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 			children = (
 				A938398A2A5CF2410075A97F /* HomeVM.swift */,
 				A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */,
+				A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */,
 			);
 			path = HomeVM;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
 				A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */,
 				A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */,
+				A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,

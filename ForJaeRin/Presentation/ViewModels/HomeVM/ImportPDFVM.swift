@@ -67,11 +67,14 @@ class ImportPDFVM: ObservableObject {
             return false
         }
         
-        if step == .setMetaData {
-            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
-                return false
-            }
-        }
+        // MARK: 테스트를 위한 주석
+//        if step == .setMetaData {
+//            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
+//                return false
+//            }
+//        }
         return true
     }
+    
+    // MARK: SettingGroupView
 }
