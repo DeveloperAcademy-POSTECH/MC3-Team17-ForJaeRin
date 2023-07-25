@@ -47,6 +47,8 @@ class HomeVM: ObservableObject {
     // MARK: Sheet Height 조정을 상태
     @Published var sheetSize = CGSize()
     
+    @Published var isNewProjectSettingDone = false
+    
     func getSheetWidth(height: CGFloat) -> CGFloat {
         max(height * 110 / 100, 868)
     }

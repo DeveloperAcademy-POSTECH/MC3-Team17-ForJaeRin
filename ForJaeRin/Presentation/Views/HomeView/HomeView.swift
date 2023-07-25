@@ -33,7 +33,10 @@ struct HomeView: View {
             .background(Color.detailLayoutBackground)
             .sheet(isPresented: $vm.isSheetActive) {
                 // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
-                ImportPDFView(isSheetActive: $vm.isSheetActive)
+                ImportPDFView(
+                    isSheetActive: $vm.isSheetActive,
+                    isNewProjectSettingDone: $vm.isNewProjectSettingDone
+                )
                     .frame(
                         minWidth: vm.getSheetWidth(height: geometry.size.height),
                         maxWidth: vm.getSheetWidth(height: geometry.size.height),
@@ -41,6 +44,14 @@ struct HomeView: View {
                     )
                     .environmentObject(projectFileManager)
                     .environmentObject(myData)
+            }
+            .navigationDestination(isPresented: $vm.isNewProjectSettingDone) {
+                ProjectDocumentView()
+                    .environmentObject(projectFileManager)
+                    .environmentObject(myData)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
+                    .frame(maxWidth: .infinity)
             }
             .onAppear {
                 initProject()

@@ -28,6 +28,7 @@ struct SettingGroupView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
+        .border(width: 1, edges: [.bottom], color: Color.systemGray100)
         .onAppear {
             resetGroupIndex()
         }
@@ -88,7 +89,7 @@ extension SettingGroupView {
                     TempPDFView(
                         /// groupData에 그룹 최소 인덱스와 최대 인덱스 사이에 속해야 한다.
                         index: index,
-                        imgSize: vm.calcCardWidth(containerWidth: width),
+                        imgSize: vm.calcCardWidth(containerWidth: width - 80),
                         hilight:
                             vm.focusGroup != -1 &&
                         Int(myData.groupData[vm.focusGroup][3])! <= index &&
@@ -111,6 +112,8 @@ extension SettingGroupView {
                     }
                 }
             }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 40)
             .frame(maxWidth: .infinity)
         }
         .frame(maxWidth: width, maxHeight: height)

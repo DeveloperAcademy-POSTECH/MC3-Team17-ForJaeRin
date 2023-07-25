@@ -27,6 +27,8 @@ struct ImportPDFView: View {
     // MARK: Sheet 창을 닫기 위한 바인딩 값
     @Binding var isSheetActive: Bool
     
+    @Binding var isNewProjectSettingDone: Bool
+    
     var body: some View {
         VStack(spacing: 0) {
             headerContainerView()
@@ -126,9 +128,11 @@ extension ImportPDFView {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             footerButtonView(
-                info: vm.NEXT_BUTTON_INFO,
+                info: vm.step == .setGroup
+                ? vm.DONE_BUTTON_INFO
+                : vm.NEXT_BUTTON_INFO,
                 isActive: vm.checkIsCanGoToNext(myData: myData)) {
-                    vm.handleNextButton()
+                    vm.handleNextButton(isSheetActive: $isSheetActive, isNewProjectSettingDone: $isNewProjectSettingDone)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
@@ -158,7 +162,7 @@ extension ImportPDFView {
             )
             : AppButtonStyle(
                 backgroundColor: Color.systemPoint,
-                width: vm.FOOTER_BUTTON_SIZE,
+                width: vm.FOOTER_BUTTON_SIZE + 28,
                 height: 42
             )
         )
@@ -169,6 +173,7 @@ extension ImportPDFView {
 struct ImportPDFView_Previews: PreviewProvider {
     static var previews: some View {
         @State var isSheetActive = false
-        ImportPDFView(isSheetActive: $isSheetActive)
+        @State var isNewProjectSettingDone = false
+        ImportPDFView(isSheetActive: $isSheetActive, isNewProjectSettingDone: $isNewProjectSettingDone)
     }
 }

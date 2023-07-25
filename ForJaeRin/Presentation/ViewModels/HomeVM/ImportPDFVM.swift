@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ImportPDFStep: Int, CaseIterable {
     case importPDFFile
@@ -43,15 +44,22 @@ class ImportPDFVM: ObservableObject {
         label: "다음"
     )
     
+    let DONE_BUTTON_INFO = (
+        icon: "exclamationmark.bubble.fill",
+        label: "저장하기"
+    )
+    
     func handlePrevButton() {
         if step.rawValue >= 1 {
             step = ImportPDFStep.allCases[step.rawValue - 1]
         }
     }
     
-    func handleNextButton() {
+    func handleNextButton(isSheetActive: Binding<Bool>, isNewProjectSettingDone: Binding<Bool>) {
         if step == .setGroup {
             print("설정 완료 이벤트 시작!")
+            isSheetActive.wrappedValue.toggle()
+            isNewProjectSettingDone.wrappedValue.toggle()
         } else {
             step = ImportPDFStep.allCases[step.rawValue + 1]
         }
