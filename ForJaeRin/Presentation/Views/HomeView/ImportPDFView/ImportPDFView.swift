@@ -173,6 +173,14 @@ extension ImportPDFView {
     private func deliveryData() {
         if let document = projectFileManager.pdfDocument {
             // 초기화
+            document.PDFPages = []
+            myData.images.indices.forEach { index in
+                document.PDFPages.append(PDFPage(
+                    keywords: myData.keywords[index],
+                    script: myData.script[index])
+                )
+            }
+            
             document.PDFGroups = []
             myData.groupData.enumerated().forEach { _, groupData in
                 document.PDFGroups.append(PDFGroup(

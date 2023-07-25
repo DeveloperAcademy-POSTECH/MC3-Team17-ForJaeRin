@@ -88,7 +88,6 @@ extension ProjectDocumentView {
             // goToHome
             Button {
                     dismiss()
-            
             } label: {
                 Label("home", systemImage: "house.fill")
                     .labelStyle(ToolbarIconOnlyLabelStyle())
@@ -126,6 +125,16 @@ extension ProjectDocumentView {
                     }
                     .buttonStyle(.plain)
                     Button {
+                        // MARK: - 임시 그룹 설정을 위한,,
+                        myData.keywords.enumerated().forEach { index, keyword in
+                            projectFileManager.pdfDocument?.PDFPages[index].keywords = []
+                            
+                            keyword.forEach { item in
+                                if item != "" {
+                                    projectFileManager.pdfDocument?.PDFPages[index].keywords.append(item)
+                                }
+                            }
+                        }
                         vm.currentSection = .flow
                     } label: {
                         Label(

@@ -51,13 +51,18 @@ struct PresentationPageListItem: View {
                 scriptContainer()
                 dottedDivider()
                 // 키워드 컨테이너
-                keywordContainer()
+                ScrollView {
+                    keywordContainer()
+                }
+                .frame(maxHeight: 230)
+                
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
             .padding(.horizontal, 92)
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
+        .frame(maxHeight: .infinity)
         .onAppear {
             // pageScript = pdfPage.script
             // keywords = pdfPage.keywords
