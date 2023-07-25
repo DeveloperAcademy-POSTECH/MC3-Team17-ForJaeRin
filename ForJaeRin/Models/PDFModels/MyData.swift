@@ -43,4 +43,11 @@ class MyData: ObservableObject {
         self.groupData = []
     }
     
+    func checkIsGroupDataInit(index: Int) -> Bool {
+        groupData[index][0] != ""
+        && groupData[index][1] != ""
+        && groupData[index][2] != ""
+        && groupData[index][3] != "-1"
+        && groupData[index][4] != "-1"
+    }
 }

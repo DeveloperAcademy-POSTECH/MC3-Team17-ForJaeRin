@@ -133,6 +133,16 @@ extension Color {
 }
 
 extension Color {
+    static var textFieldBackground: Self {
+        .black.opacity(0.015)
+    }
+    
+    static var textFieldBorder: Self {
+        .black.opacity(0.04)
+    }
+}
+
+extension Color {
     static var detailLayoutBackground = sub100
 }
 
