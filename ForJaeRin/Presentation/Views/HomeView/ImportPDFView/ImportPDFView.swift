@@ -185,7 +185,7 @@ extension ImportPDFView {
             myData.groupData.enumerated().forEach { _, groupData in
                 document.PDFGroups.append(PDFGroup(
                     name: groupData[0],
-                    range: (start: Int(groupData[3])!, end: Int(groupData[4])!),
+                    range: PDFGroupRange(start: Int(groupData[3])!, end: Int(groupData[4])!),
                     setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
             }
         }
