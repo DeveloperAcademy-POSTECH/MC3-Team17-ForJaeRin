@@ -11,6 +11,7 @@ import Foundation
 struct ProjectMetadata {
     var projectName: String
     var projectGoal: String
+    var projectTarget: String
     var presentationTime: Int
     var creatAt: Date
 }

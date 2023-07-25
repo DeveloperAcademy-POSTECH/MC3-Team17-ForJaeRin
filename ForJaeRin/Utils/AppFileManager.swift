@@ -128,6 +128,7 @@ struct RootModel: Codable {
     struct ProjectMetadata: Codable {
         let projectName: String
         let projectGoal: String
+        let projectTarget: String
         let presentationTime: Int
         let createAt: String
     }

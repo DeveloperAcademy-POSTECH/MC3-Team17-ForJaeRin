@@ -12,7 +12,7 @@ struct SettingGroupView: View {
     /// [그룹 이름, 그룹 할당 분, 그룹 할당 초, 그룹 최소 인덱스, 그룹 최대 인덱스]
     @State var groupData: [[String]] = []
     /// 각 PDF별 그룹 번호
-    @State var groupIndex: [Int]
+    @State var groupIndex: [Int] = []
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
     /// 현재 보고 있는 그룹 번호(-1은 안 보고 있음)
     @State var focusGroup = -1
@@ -75,7 +75,8 @@ struct SettingGroupView: View {
                             focusGroup: $focusGroup,
                             index: index,
                             somethingIsEdit: $somethingIsEdit,
-                            groupIndex: $groupIndex
+                            groupIndex: $groupIndex,
+                            resetAction: resetGroupIndex
                         )
                     }
                     /// 그룹 추가 버튼
@@ -100,6 +101,9 @@ struct SettingGroupView: View {
             }.padding(.bottom, 0)
         }
         .padding(.top, 30)
+        .onAppear {
+            resetGroupIndex()
+        }
         .onChange(of: somethingIsEdit) {newValue in
             if newValue == false {
                 tapHistory = []
@@ -130,12 +134,23 @@ struct SettingGroupView: View {
                 }
             }
         } else {
-            for index in 0..<groupIndex.count {
-                if groupIndex[index] == -1 {
-                    answer.append(index)
-                }
+            for index in 0..<groupIndex.count where index == -1 {
+                answer.append(index)
             }
         }
         return answer
+    }
+    
+    func resetGroupIndex() {
+        groupIndex = Array(repeating: -1, count: myData.images.count)
+        
+        for contentIndex in 0..<groupIndex.count {
+            groupIndex[contentIndex] = -1
+        }
+        for eachGroup in 0..<myData.groupData.count {
+            for contentIndex in Int(myData.groupData[eachGroup][3])!...Int(myData.groupData[eachGroup][4])! {
+                groupIndex[contentIndex] = eachGroup
+            }
+        }
     }
 }

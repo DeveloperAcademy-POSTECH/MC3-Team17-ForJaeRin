@@ -45,6 +45,7 @@ struct FileImporterButtonView: View {
                     Text("PDF 파일 불러오기")
                 })
                 .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
+                .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary))
                 .fileImporter(isPresented: $isImporting,
                               allowedContentTypes: [.pdf],
                               onCompletion: { result in

@@ -18,6 +18,7 @@ import SwiftUI
  
  */
 // MARK: 새 프로젝트를 생성하기 위한 시트뷰
+
 struct ImportPDFView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var myData: MyData
@@ -34,17 +35,41 @@ struct ImportPDFView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .environmentObject(vm)
+        .environmentObject(myData)
     }
-    
-    func sendMyData() {
-        var tempStr = myData.time
-        tempStr.removeLast()
-        var tempInt = Int(tempStr)
-        var projectMetaData = ProjectMetadata(projectName: myData.title, projectGoal: myData.purpose, presentationTime: tempInt!, creatAt: Date())
-        
-        var pdfDocumentManager = PDFDocumentManager(url: myData.url, PDFPages: [], PDFGroups: [])
-        
-        var projectFileManager = ProjectFileManager()
+//    func sendMyData() {
+//        var tempStr = myData.time
+//        tempStr.removeLast()
+//        let tempInt = Int(tempStr)
+//        var projectMetaData = ProjectMetadata(
+//            projectName: myData.title,
+//            projectGoal: myData.purpose,
+//            presentationTime: tempInt!,
+//            creatAt: Date()
+//        )
+//
+//        var pdfDocumentManager = PDFDocumentManager(
+//            url: myData.url,
+//            PDFPages: [],
+//            PDFGroups: []
+//        )
+//
+//        var projectFileManager = ProjectFileManager()
+//    }
+}
+
+extension ImportPDFStep {
+    var view: any View {
+        switch self {
+        case .importPDFFile:
+            return FileImporterButtonView()
+        case .setMetaData:
+            return InputPresentationInfoView()
+        case .setScripts:
+            return InputScriptView()
+        case .setGroup:
+            return SettingGroupView()
+        }
     }
 }
 
@@ -80,29 +105,7 @@ extension ImportPDFView {
     // MARK: 바디 컨테이너 뷰 - 스탭별로 바뀌는 뷰
     func bodyContainerView() -> some View {
         VStack {
-            if vm.step == .importPDFFile {
-                FileImporterButtonView()
-                    .environmentObject(myData)
-                    .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary))
-            } else if vm.step == .setMetaData {
-                Spacer()
-                InputPresentationInfoView()
-                    .environmentObject(myData)
-                Spacer()
-            } else if vm.step == .setScripts {
-                Spacer()
-                InputScriptView()
-                    .environmentObject(myData)
-                Spacer()
-            } else if vm.step == .setGroup {
-                SettingGroupView(
-                    groupIndex: Array(repeating: -1, count: myData.images.count)
-                ).environmentObject(myData)
-            } else {
-                // JSON 파일 생성 후 저장 및 PDF 파일 복사본 같이 저장
-                
-                //
-            }
+            AnyView(vm.step.view)
         }
         .padding(.vertical, 40)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -144,19 +147,19 @@ extension ImportPDFView {
             Text(info.label)
         }
         .buttonStyle(
-            isActive
+            !isActive
             ? AppButtonStyle(
-                backgroundColor: Color.systemPoint,
-                width: vm.FOOTER_BUTTON_SIZE,
-                height: 42
-            )
-            : AppButtonStyle(
                 backgroundColor: Color.systemGray200,
                 width: vm.FOOTER_BUTTON_SIZE,
                 height: 42
             )
+            : AppButtonStyle(
+                backgroundColor: Color.systemPoint,
+                width: vm.FOOTER_BUTTON_SIZE,
+                height: 42
+            )
         )
-        .disabled(isActive)
+        .disabled(!isActive)
     }
 }
 

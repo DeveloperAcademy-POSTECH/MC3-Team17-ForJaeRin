@@ -44,30 +44,34 @@ class ImportPDFVM: ObservableObject {
     )
     
     func handlePrevButton() {
-        if step.rawValue > 1 {
+        if step.rawValue >= 1 {
             step = ImportPDFStep.allCases[step.rawValue - 1]
         }
     }
     
-    func checkIsStepFirst() -> Bool {
-        step == .importPDFFile
+    func handleNextButton() {
+        if step == .setGroup {
+            print("설정 완료 이벤트 시작!")
+        } else {
+            step = ImportPDFStep.allCases[step.rawValue + 1]
+        }
     }
     
-    func handleNextButton() {
-        step = ImportPDFStep.allCases[step.rawValue + 1]
+    func checkIsStepFirst() -> Bool {
+        step != .importPDFFile
     }
     
     // MARK: NextButon 클릭 시 동작
     func checkIsCanGoToNext(myData: MyData) -> Bool {
         if step == .importPDFFile {
-            return true
+            return false
         }
         
         if step == .setMetaData {
             if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
-                return true
+                return false
             }
         }
-        return false
+        return true
     }
 }

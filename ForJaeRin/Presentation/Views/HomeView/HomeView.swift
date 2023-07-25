@@ -69,6 +69,7 @@ struct HomeView: View {
             projectFileManager.projectMetadata = ProjectMetadata(
                 projectName: file.projectMetadata.projectName,
                 projectGoal: file.projectMetadata.projectGoal,
+                projectTarget: file.projectMetadata.projectTarget,
                 presentationTime: file.projectMetadata.presentationTime,
                 creatAt: Date())
             projectFileManager.practices = []

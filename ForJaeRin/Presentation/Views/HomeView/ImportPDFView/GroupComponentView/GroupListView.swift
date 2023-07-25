@@ -29,6 +29,7 @@ struct GroupListView: View {
     @FocusState var focusField: Bool
     @State var onDelete = false
     @EnvironmentObject var myData: MyData
+    var resetAction: () -> Void
     
     var body: some View {
         if index < myData.groupData.count {
@@ -81,7 +82,7 @@ struct GroupListView: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                                     withAnimation {
                                         myData.groupData.remove(at: index)
-                                        resetGroupIndex()
+                                        resetAction()
                                         editMode = false
                                         somethingIsEdit = false
                                         focusGroup = -1
@@ -165,7 +166,7 @@ struct GroupListView: View {
                                         }
                                         myData.groupData.insert(tempData, at: answerIndex)
                                     }
-                                    resetGroupIndex()
+                                    resetAction()
                                     tempData = ["", "", "", "-1", "-1"]
                                     print(myData.groupData)
                                 }
@@ -196,7 +197,7 @@ struct GroupListView: View {
                                 editMode = false
                                 focusGroup = -1
                                 somethingIsEdit = false
-                                resetGroupIndex()
+                                resetAction()
                                 tempData = ["", "", "", "-1", "-1"]
                             }
                         }, label: {
@@ -274,17 +275,6 @@ struct GroupListView: View {
                 .font(.system(size: 17))
                 .foregroundColor(.black.opacity(0.85))
                 .accentColor(Color.green)
-            }
-        }
-    }
-    
-    private func resetGroupIndex() {
-        for contentIndex in 0..<groupIndex.count {
-            groupIndex[contentIndex] = -1
-        }
-        for eachGroup in 0..<myData.groupData.count {
-            for contentIndex in Int(myData.groupData[eachGroup][3])!...Int(myData.groupData[eachGroup][4])! {
-                groupIndex[contentIndex] = eachGroup
             }
         }
     }
