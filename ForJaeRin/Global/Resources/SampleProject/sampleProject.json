@@ -111,6 +111,31 @@
                 }
             ]
         },
-        "practice": []
-
+        "practices": [
+            {
+                "saidKeywords": [
+                    ["개발자", "소통"],
+                    ["브릿지"],
+                    ["쉐어링"],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ],
+                "speechRanges": [
+                        {"start": 0, "group": 0},
+                        {"start": 11, "group": 1},
+                        {"start": 23, "group": 2},
+                        {"start": 30, "group": 3}
+                ],
+                "progressTime": 300,
+                "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at20:32:03.m4a"
+            }
+        ]
 }

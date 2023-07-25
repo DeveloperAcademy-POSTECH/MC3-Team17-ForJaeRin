@@ -13,6 +13,9 @@ import SwiftUI
  */
 // MARK: - 프로젝트 연습 결과 요약 뷰
 struct ProjectSummaryView: View {
+//    @EnvironmentObject var voiceManager: VoiceManager
+//    @EnvironmentObject var vm: PresentationVM
+//
     let data = [
         //[data 가져오기] 내가 말한 키워드 횟수
         (23.0, Color.primary500),
@@ -180,11 +183,9 @@ struct ProjectSummaryView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .border(.mint, width: 2)
                         //MARK: 구간 별 다시듣기
-                        Group {
-                            Text("여기")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .border(.red, width: 2)
+//                        listenAgain()
+//                        .frame(maxWidth: .infinity)
+//                        .border(.red, width: 2)
                         //MARK: 한 눈에 보기
                             VStack {
                                     HStack (spacing: 12){
@@ -214,12 +215,58 @@ struct ProjectSummaryView: View {
     }
 }
 
-extension ProjectSummaryView {
-    // MARK: 구간 별 다시듣기
-    private func listenAgain() -> some View {
-        
-    }
-}
+//extension ProjectSummaryView {
+//    // MARK: 구간 별 다시듣기
+//    private func listenAgain() -> some View {
+//        VStack(alignment: .leading, spacing: 8) {
+//            HStack(spacing: 15) {
+//                Text("구간 별 다시듣기")
+//                    .font(.systemHeadline)
+//                    .foregroundColor(.systemGray500)
+//                Image(systemName: "arrowtriangle.forward.fill")
+//                    .frame(width: 16, height: 21)
+//                    .foregroundColor(.systemGray400)
+//            }
+//            Text("원하는 그룹을 클릭하면 그 그룹부터 다시 들을 수 있어요")
+//                .font(.systemCaption1)
+//                .foregroundColor(.systemGray400)
+//            GeometryReader { geometry in
+//                let wholeWidthSize = geometry.size.width // 전체 width
+//                speechGroupBlockView(wholeWidthSize: wholeWidthSize)
+//            }
+//        }
+//    }
+//    private func speechGroupBlockView(wholeWidthSize: CGFloat) -> some View {
+//        HStack(spacing: 4) {
+//            ForEach(
+//                Array(vm.practice.speechRanges.enumerated()), id: \.0.self) { index, speechRange in
+//                    let size = vm.calcGroupBlockSize(
+//                        percent: getGroupVolumn(index: index),
+//                        whole: wholeWidthSize
+//                        )
+//                    VStack(alignment: .center) {
+//                        Rectangle()
+//                            .fill(GroupColor.allCases[speechRange.group].color)
+//                            .frame(maxHeight: 20)
+//                        Text("그룹 \(speechRange.group)")
+//                }
+//                .frame(maxWidth: size, alignment: .center)
+//            }
+//        }
+//        .frame(maxWidth: wholeWidthSize)
+//        .cornerRadius(12)
+//    }
+//    private func getGroupVolumn(index: Int) -> CGFloat {
+//        let whole = vm.practice.progressTime // 전체 발표 길이
+//        var part = 0
+//        if index == vm.practice.speechRanges.count - 1 {
+//            part = vm.practice.progressTime - vm.practice.speechRanges[index].start
+//        } else {
+//            part = vm.practice.speechRanges[index + 1].start - vm.practice.speechRanges[index].start
+//        }
+//        return CGFloat((part * 100) / whole)
+//    }
+//}
 
 
 

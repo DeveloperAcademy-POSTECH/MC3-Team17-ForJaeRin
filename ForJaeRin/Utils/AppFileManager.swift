@@ -181,7 +181,7 @@ class AppFileManager {
 class RootModel: Codable {
     let projectMetadata: ProjectMetadata
     let projectDocument: ProjectDocument
-    let practice: [String]
+    let practices: [Practice]
     
     struct ProjectMetadata: Codable {
         let projectName: String
@@ -210,5 +210,18 @@ class RootModel: Codable {
             let script: String
         }
     }
+        
+    struct Practice: Codable {
+        var saidKeywords: [[String]]
+        var speechRanges: [SpeechRange]
+        let progressTime: Int
+        var audioPath: String
+        
+        struct SpeechRange: Codable {
+            var start: Int
+            var group: Int
+        }
+    }
+    
     // swiftlint:enable nesting
 }
