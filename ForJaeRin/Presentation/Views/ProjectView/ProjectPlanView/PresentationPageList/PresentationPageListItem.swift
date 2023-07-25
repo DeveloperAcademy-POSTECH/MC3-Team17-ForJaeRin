@@ -12,7 +12,7 @@ struct PresentationPageListItem: View {
     @State var groupIndex: Int
     @State var pageIndex: Int
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
-    //@State var pdfPage: PDFPage
+    // @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
     @State var pageScript = ""
     @State var keywords: Keywords = []
@@ -51,16 +51,21 @@ struct PresentationPageListItem: View {
                 scriptContainer()
                 dottedDivider()
                 // 키워드 컨테이너
-                keywordContainer()
+                ScrollView {
+                    keywordContainer()
+                }
+                .frame(maxHeight: 230)
+                
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
             .padding(.horizontal, 92)
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
+        .frame(maxHeight: .infinity)
         .onAppear {
-            //pageScript = pdfPage.script
-            //keywords = pdfPage.keywords
+            // pageScript = pdfPage.script
+            // keywords = pdfPage.keywords
         }
     }
     
@@ -83,7 +88,7 @@ extension PresentationPageListItem {
     
     // MARK: 프레젠테이션(PDF) 컨테이너 - 로키가 잘 해줄꺼야
     private func pdfContainer(pageIndex: Int) -> some View {
-        //let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
+        // let pdfUrl = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
         
         return ZStack(alignment: .topLeading) {
             Text("\(pageIndex + 1)")
@@ -138,7 +143,6 @@ extension PresentationPageListItem {
                 .padding(.vertical, 24)
                 .padding(.horizontal, 36)
                 .frame(minWidth: 345, maxWidth: .infinity)
-                .environmentObject(myData)
         }
     }
     
@@ -154,7 +158,6 @@ extension PresentationPageListItem {
         return answer
     }
     
-    
     private func dottedDivider() -> some View {
         Rectangle()
             .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [3]))
@@ -169,12 +172,12 @@ struct PresentationPageListItem_Previews: PreviewProvider {
         let groupIndex = 0
         let pageIndex = 0
         let pdfGroup = PDFGroup(name: "그룹명", range: PDFGroupRange(start: 0, end: 3), setTime: 300)
-        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
+//        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
         PresentationPageListItem(
             groupIndex: groupIndex,
             pageIndex: pageIndex,
             pdfGroup: pdfGroup
-            //pdfPage: pdfPage
+            // pdfPage: pdfPage
         )
     }
 }

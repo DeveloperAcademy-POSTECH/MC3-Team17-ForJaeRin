@@ -40,8 +40,18 @@ class HomeVM: ObservableObject {
     
     let HORIZONTAL_PADDING: CGFloat = 92
     
+    // MARK: New Project Open Sheet Toggle State
+    @Published var isSheetActive = false
     // MARK: 프로젝트 파일 리스트
     @Published var files: [KkoProject] = []
+    // MARK: Sheet Height 조정을 상태
+    @Published var sheetSize = CGSize()
+    
+    @Published var isNewProjectSettingDone = false
+    
+    func getSheetWidth(height: CGFloat) -> CGFloat {
+        max(height * 110 / 100, 868)
+    }
     
     func calcCardWidth(containerWidth: CGFloat) -> CGFloat {
         (containerWidth - 4 * 32) / 5

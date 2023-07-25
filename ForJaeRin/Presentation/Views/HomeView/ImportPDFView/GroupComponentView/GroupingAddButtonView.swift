@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct GroupingAddButtonView: View {
-    @Binding var somethingIsEdit: Bool
-    @Binding var focusGroup: Int
+    @ObservedObject var vm: SettingGroupVM
     @EnvironmentObject var myData: MyData
     
     var body: some View {
         Button(action: {
-            somethingIsEdit = true
+            vm.somethingIsEdit = true
             myData.groupData.append(["", "", "", "-1", "-1"])
-            focusGroup = myData.groupData.count - 1
+            vm.focusGroup = myData.groupData.count - 1
         }, label: {
             Image(systemName: "plus.circle.fill")
                 .font(.system(size: 20))

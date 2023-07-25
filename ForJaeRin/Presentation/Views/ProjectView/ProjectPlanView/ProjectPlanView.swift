@@ -23,7 +23,6 @@ struct ProjectPlanView: View {
                     )
                     .background(Color.detailLayoutBackground)
                     .scrollContentBackground(.hidden)
-                    .environmentObject(myData)
                 }
             } else if vm.currentSection == .flow {
                 ProjectFlowView()

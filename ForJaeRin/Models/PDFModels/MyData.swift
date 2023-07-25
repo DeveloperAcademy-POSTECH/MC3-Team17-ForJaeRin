@@ -22,8 +22,11 @@ class MyData: ObservableObject {
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
-    // [그룹이름, 그룹에 할당된 분, 그룹에 할당된 초, 그룹에 할당된 첫번째 인덱스, 그룹에 할당된 마지막 인덱스]
-    @Published var groupData: [[String]] = []
+    @Published var groupData: [[String]] = [] {
+        didSet {
+            print(groupData)
+        }
+    }
     
     func clear() {
         self.images = [NSImage]()
@@ -40,4 +43,11 @@ class MyData: ObservableObject {
         self.groupData = []
     }
     
+    func checkIsGroupDataInit(index: Int) -> Bool {
+        groupData[index][0] != ""
+        && groupData[index][1] != ""
+        && groupData[index][2] != ""
+        && groupData[index][3] != "-1"
+        && groupData[index][4] != "-1"
+    }
 }
