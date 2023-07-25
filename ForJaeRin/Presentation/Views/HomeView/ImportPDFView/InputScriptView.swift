@@ -14,80 +14,96 @@ struct InputScriptView: View {
     @State var pageNumber: Int = 0
     
     var body: some View {
-        HStack {
-            VStack {
-                PDFScrollView(url: myData.url, pageNumber: $pageNumber)
-                    .environmentObject(myData)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color(hex: "2F2F2F").opacity(0.1), lineWidth: 1)
-                            .frame(width: 172, height: 586)
-                    )
-            }
-            .padding(.all)
-            
+        HStack(spacing: 12) {
+            pdfListView()
+            pdfDetailScriptView()
+        }
+        .padding(.horizontal, 40)
+        .frame(maxWidth: .infinity)
+    }
+}
+
+extension InputScriptView {
+    private func pdfListView() -> some View {
+        VStack {
+            PDFScrollView(pageNumber: $pageNumber, url: myData.url)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.systemGray100, lineWidth: 1)
+                        .frame(maxWidth: 172, maxHeight: .infinity)
+                )
+        }
+    }
+    
+    private func pdfDetailScriptView() -> some View {
+        GeometryReader { geometry in
+            let widthSize = geometry.size.width
+            let imgHeight = widthSize / 1.6 * 0.9
             VStack {
                 ZStack {
-                    ForEach(myData.images.indices, id: \.self) { number in
-                        Image(nsImage: myData.images[number])
-                            .resizable()
-                            .frame(width: 622, height: 337)
-                            .cornerRadius(12)
-                            .zIndex(number == pageNumber ? 1 : 0)
-                    }
+                    Image(nsImage: myData.images[pageNumber])
+                        .resizable()
+                        .frame(width: widthSize, height: imgHeight)
+                        .cornerRadius(12)
                 }
                 ZStack {
-                    ForEach(myData.images.indices, id: \.self) { number in
-                        TextEditor(text: $myData.script[number])
-                            .frame(width: 576, height: 171)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color(hex: "2F2F2F").opacity(0.1), lineWidth: 1)
-                                    .frame(width: 622, height: 203)
-                            )
-                            .padding(EdgeInsets(top: 32, leading: 0, bottom: 34, trailing: 0))
-                            .zIndex(number == pageNumber ? 1 : 0)
-                    }
+                    TextEditor(text: $myData.script[pageNumber])
+                        .systemFont(.body)
+                        .foregroundColor(Color.systemGray200)
+                        .padding(10)
+                        .frame(width: widthSize, height: geometry.size.height - imgHeight - 10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.systemGray100, lineWidth: 1)
+                                .frame(width: widthSize, height: geometry.size.height - imgHeight - 10)
+                        )
+                        
                 }
             }
+                .frame(maxWidth: geometry.size.width)
         }
     }
 }
 
-//
 struct PDFScrollView: View {
-    @State private var pdfImages = [NSImage]()
     @EnvironmentObject var myData: MyData
-    let url: URL
+    @State private var pdfImages = [NSImage]()
     @Binding var pageNumber: Int
+    let url: URL
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 ForEach(pdfImages.indices, id: \.self) { index in
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hex: "AC9FFF").opacity(0.25)) // 배경색 변경
-                            .frame(width: 132, height: 92)
+                            .fill(Color.primary200)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color(hex: "8B6DFF"), lineWidth: 1) // 테두리 색과 두께 변경
+                                    .stroke(Color.systemPrimary, lineWidth: 1)
                             )
                             .opacity(pageNumber == index ? 1.0 : 0.0)
-                        Image(nsImage: pdfImages[index])
-                            .resizable()
-                            .frame(width: 120, height: 65)
-                            .cornerRadius(4)
-                            .padding(EdgeInsets(top: 6, leading: 5, bottom: 22, trailing: 5))
-                        Text("\(index+1)")
-                            .font(.system(size: 12))
-                            .padding(EdgeInsets(top: 75, leading: 63, bottom: 3, trailing: 63))
+                        VStack(spacing: 0) {
+                            Image(nsImage: pdfImages[index])
+                                .resizable()
+                                .frame(width: 120, height: 65)
+                                .cornerRadius(4)
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 6)
+                            Text("\(index + 1)")
+                                .systemFont(.caption2)
+                                .foregroundColor(Color.systemGray400)
+                                .padding(.bottom, 3)
+                        }
                     }
+                    .frame(maxWidth: 132)
                     .onTapGesture {
                         pageNumber = index
                     }
                 }
             }
+            .padding(.vertical, 16)
+            .padding(.horizontal, 10)
         }
         .onAppear {
             if let pdfDocument = PDFDocument(url: url) {
@@ -99,7 +115,7 @@ struct PDFScrollView: View {
     }
     
     func loadPDF() -> PDFDocument? {
-        if let pdfURL = Bundle.main.url(forResource: "KHackathon_PDF", withExtension: "pdf") {
+        if Bundle.main.url(forResource: "KHackathon_PDF", withExtension: "pdf") != nil {
             return PDFDocument(url: url)
         }
         return nil
@@ -118,14 +134,22 @@ struct PDFScrollView: View {
                 let colorSpace = CGColorSpaceCreateDeviceRGB()
                 let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue
                 
-                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) {
+                if let context = CGContext(
+                    data: nil,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: 0,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                ) {
                     context.setFillColor(NSColor.white.cgColor)
                     context.fill(CGRect(x: 0, y: 0, width: width, height: height))
                     
                     page.draw(with: .cropBox, to: context)
                     
                     if let cgImage = context.makeImage() {
-                        let nsImage = NSImage(cgImage: cgImage, size: NSZeroSize)
+                        let nsImage = NSImage(cgImage: cgImage, size: .zero)
                         images.append(nsImage)
                     }
                 }
