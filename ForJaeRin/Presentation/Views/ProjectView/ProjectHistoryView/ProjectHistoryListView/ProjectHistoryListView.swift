@@ -18,7 +18,10 @@ struct ProjectHistoryListView: View {
     @State var currentTime: CGFloat = 0.0
     /// 음성 재생중
     @State var playing: Bool = false
+    /// 녹음을 재생하면 시간이 흐름
     @State var timer: Timer?
+    /// marker의 위치
+    @State private var location: CGPoint = CGPoint(x: 0, y: 50)
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -53,6 +56,7 @@ extension ProjectHistoryListView {
     /// Drop 위치 잘 판별할 것(x축)
     /// 정지 중이라면,
     /// currentTime만 옮긴다.(Tap, Drag and Drop 모두)
+    
     private func listenAgain() -> some View {
         VStack(alignment: .leading, spacing: 36) {
             // 텍스트
@@ -91,22 +95,57 @@ extension ProjectHistoryListView {
                     ZStack(alignment: .topLeading) {
                         VStack(spacing: 8) {
                             speechGroupBlockView(wholeWidthSize: wholeWidthSize)
+                            /// Tap
+                            /// 재생중이라면, 정지 후 currentTime 이동 후 재생
+                            /// 정지중이라면, currentTime 이동
                                 .onTapGesture(coordinateSpace: .local) { location in
-                                    replayVoiceManager.pauseRecording()
-                                    timer?.invalidate()
-                                    currentTime = locationToTime(
-                                        location: location.x,
-                                        size: wholeWidthSize
-                                    )
                                     if playing {
+                                        replayVoiceManager.pauseRecording()
+                                        timer?.invalidate()
+                                        currentTime = locationToTime(
+                                            location: location.x,
+                                            size: wholeWidthSize
+                                        )
                                         playVoice(time: currentTime)
+                                    } else {
+                                        currentTime = locationToTime(
+                                            location: location.x,
+                                            size: wholeWidthSize
+                                        )
                                     }
                             }
                             speechGroupTextView(wholeWidthSize: wholeWidthSize)
                         }.padding(.top, 53)
                         markerView()
                             .padding(.bottom, 17)
-                            .offset(x: timeToOffset(time: currentTime, size: wholeWidthSize))
+                            .position(x: timeToOffset(time: currentTime, size: wholeWidthSize), y: 50)
+                        /// Gesture
+                        /// 재생중이라면, .onChanged에 정지
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { value in
+                                        if playing {
+                                            replayVoiceManager.pauseRecording()
+                                            timer?.invalidate()
+                                            self.location.x = value.location.x
+                                            currentTime = locationToTime(
+                                                location: value.location.x,
+                                                size: wholeWidthSize
+                                            )
+                                        } else {
+                                            self.location.x = value.location.x
+                                            currentTime = locationToTime(
+                                                location: value.location.x,
+                                                size: wholeWidthSize
+                                            )
+                                        }
+                                    }
+                                    .onEnded { _ in
+                                        if playing {
+                                            playVoice(time: currentTime)
+                                        }
+                                    }
+                            )
                     }
                 }
                 Text(vm.secondsToTime(seconds: projectFileManager.practices![0].progressTime))
@@ -147,8 +186,10 @@ extension ProjectHistoryListView {
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
                         whole: wholeWidthSize)
+                            /// 색은 currentTime에 따라
                             Rectangle()
-                                .fill(GroupColor.allCases[speechRange.group].color)
+                                .fill(checkMarkerPosition(index: index)
+                                      ? GroupColor.allCases[speechRange.group].color : .systemGray100)
                                 .frame(maxWidth: size, maxHeight: 20, alignment: .center)
                             if index != projectFileManager.practices![0]
                                 .speechRanges.count - 1 {
@@ -197,7 +238,7 @@ extension ProjectHistoryListView {
     }
     
     private func timeToOffset(time: CGFloat, size: CGFloat) -> CGFloat {
-        return Double(time) * Double(size) / Double(projectFileManager.practices![0].progressTime) - 20
+        return Double(time) * Double(size) / Double(projectFileManager.practices![0].progressTime)
     }
     
     private func locationToTime(location: CGFloat, size: CGFloat) -> CGFloat {
@@ -213,6 +254,18 @@ extension ProjectHistoryListView {
                 currentTime += 0.05
             }
         }
+    }
+    
+    private func checkMarkerPosition(index: Int) -> Bool {
+        if index == projectFileManager.practices![0].speechRanges.count - 1 {
+            return CGFloat(projectFileManager.practices![0]
+                    .speechRanges[index].start) <= currentTime
+            && currentTime <= CGFloat(projectFileManager.practices![0].progressTime)
+        }
+        return CGFloat(projectFileManager.practices![0]
+            .speechRanges[index].start) <= currentTime
+        && currentTime <= CGFloat(projectFileManager.practices![0]
+            .speechRanges[index + 1].start)
     }
 }
 
