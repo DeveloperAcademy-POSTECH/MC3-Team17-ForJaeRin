@@ -34,6 +34,14 @@
 		A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAC92A655E05004B4972 /* DateManager.swift */; };
 		A92ABAD02A657208004B4972 /* Pretendard in Frameworks */ = {isa = PBXBuildFile; productRef = A92ABACF2A657208004B4972 /* Pretendard */; };
 		A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92ABAD12A657369004B4972 /* Font+Extension.swift */; };
+		A93602AE2A716A02001B20BE /* GroupChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602AD2A716A02001B20BE /* GroupChartView.swift */; };
+		A93602B02A716A30001B20BE /* StyleDetailChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602AF2A716A30001B20BE /* StyleDetailChartView.swift */; };
+		A93602B22A716A74001B20BE /* GroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602B12A716A74001B20BE /* GroupView.swift */; };
+		A93602B42A716AA3001B20BE /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602B32A716AA3001B20BE /* PieChartView.swift */; };
+		A93602B62A716AC5001B20BE /* CustomBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602B52A716AC5001B20BE /* CustomBarChartView.swift */; };
+		A93602B82A716E22001B20BE /* PracticeSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602B72A716E22001B20BE /* PracticeSummaryView.swift */; };
+		A93602BA2A716E45001B20BE /* MissedKeywordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602B92A716E45001B20BE /* MissedKeywordListView.swift */; };
+		A93602BC2A717AEA001B20BE /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93602BB2A717AEA001B20BE /* RoundedCornerView.swift */; };
 		A938398B2A5CF2410075A97F /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398A2A5CF2410075A97F /* HomeVM.swift */; };
 		A938398D2A5CF3020075A97F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A938398C2A5CF3020075A97F /* HomeView.swift */; };
 		A938399A2A5D3F430075A97F /* PresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93839992A5D3F430075A97F /* PresentationView.swift */; };
@@ -130,6 +138,14 @@
 		A92ABAC72A654132004B4972 /* ProjectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCardView.swift; sourceTree = "<group>"; };
 		A92ABAC92A655E05004B4972 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		A92ABAD12A657369004B4972 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		A93602AD2A716A02001B20BE /* GroupChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChartView.swift; sourceTree = "<group>"; };
+		A93602AF2A716A30001B20BE /* StyleDetailChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleDetailChartView.swift; sourceTree = "<group>"; };
+		A93602B12A716A74001B20BE /* GroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupView.swift; sourceTree = "<group>"; };
+		A93602B32A716AA3001B20BE /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		A93602B52A716AC5001B20BE /* CustomBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarChartView.swift; sourceTree = "<group>"; };
+		A93602B72A716E22001B20BE /* PracticeSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeSummaryView.swift; sourceTree = "<group>"; };
+		A93602B92A716E45001B20BE /* MissedKeywordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedKeywordListView.swift; sourceTree = "<group>"; };
+		A93602BB2A717AEA001B20BE /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
 		A938398A2A5CF2410075A97F /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		A938398C2A5CF3020075A97F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A93839992A5D3F430075A97F /* PresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationView.swift; sourceTree = "<group>"; };
@@ -249,6 +265,7 @@
 				A99526CE2A5E32C7008510CF /* FileSystemView */,
 				A91E901F2A5B1A0B00EBB3F2 /* ButtonView */,
 				A92ABAB52A630A94004B4972 /* ChipView.swift */,
+				A93602BB2A717AEA001B20BE /* RoundedCornerView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -345,6 +362,8 @@
 			isa = PBXGroup;
 			children = (
 				A938399B2A5D3F540075A97F /* ProjectHistoryView.swift */,
+				A93602B92A716E45001B20BE /* MissedKeywordListView.swift */,
+				A93602B72A716E22001B20BE /* PracticeSummaryView.swift */,
 				A97FBE572A5E95FD00B9F94B /* ProjectHistoryListView */,
 				A97FBE562A5E95DF00B9F94B /* ProjectSummaryView */,
 			);
@@ -585,6 +604,11 @@
 			isa = PBXGroup;
 			children = (
 				A97FBE5A2A5E962E00B9F94B /* ProjectSummaryView.swift */,
+				A93602AD2A716A02001B20BE /* GroupChartView.swift */,
+				A93602AF2A716A30001B20BE /* StyleDetailChartView.swift */,
+				A93602B12A716A74001B20BE /* GroupView.swift */,
+				A93602B32A716AA3001B20BE /* PieChartView.swift */,
+				A93602B52A716AC5001B20BE /* CustomBarChartView.swift */,
 			);
 			path = ProjectSummaryView;
 			sourceTree = "<group>";
@@ -850,9 +874,13 @@
 			files = (
 				A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */,
 				A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */,
+				A93602B62A716AC5001B20BE /* CustomBarChartView.swift in Sources */,
+				A93602B02A716A30001B20BE /* StyleDetailChartView.swift in Sources */,
 				A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */,
 				A92ABAB82A63BE48004B4972 /* PresentationPageListOnboardingView.swift in Sources */,
 				112F60B02A690F4100D19446 /* TempPDFView.swift in Sources */,
+				A93602AE2A716A02001B20BE /* GroupChartView.swift in Sources */,
+				A93602B82A716E22001B20BE /* PracticeSummaryView.swift in Sources */,
 				A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */,
 				A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */,
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
@@ -865,7 +893,9 @@
 				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
 				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
 				BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */,
+				A93602BA2A716E45001B20BE /* MissedKeywordListView.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
+				A93602BC2A717AEA001B20BE /* RoundedCornerView.swift in Sources */,
 				11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
@@ -910,6 +940,8 @@
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
 				112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */,
+				A93602B42A716AA3001B20BE /* PieChartView.swift in Sources */,
+				A93602B22A716A74001B20BE /* GroupView.swift in Sources */,
 				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
 				A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */,
 			);
@@ -1073,7 +1105,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1110,7 +1142,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

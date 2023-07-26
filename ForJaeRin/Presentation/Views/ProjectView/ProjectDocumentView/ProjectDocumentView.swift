@@ -49,8 +49,8 @@ struct ProjectDocumentView: View {
                             ProjectPlanView(vm: vm)
                                 .environmentObject(myData)
                         } else {
-                            // ProjectHistoryView()
-                            Text("준비 중,,")
+                             ProjectHistoryView()
+//                            Text("준비 중,,")
                         }
                     }
                 }

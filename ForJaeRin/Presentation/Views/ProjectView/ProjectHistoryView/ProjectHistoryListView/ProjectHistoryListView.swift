@@ -25,8 +25,6 @@ struct ProjectHistoryListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("첫번째 발표연습 기록")
-                .systemFont(.headline)
             listenAgain()
                 .frame(maxWidth: .infinity)
                 .background(Color.systemWhite)
@@ -41,7 +39,6 @@ struct ProjectHistoryListView: View {
                 currentTime = 0.0
             }
         })
-        .padding(.horizontal, 72)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
 }

@@ -17,13 +17,48 @@ import SwiftUI
  */
 // MARK: 프로젝트 연습 이력 관리(피드백)를 위한 페이지 뷰
 struct ProjectHistoryView: View {
+    let data = [
+        //[data 가져오기] 내가 말한 키워드 횟수
+        (23.0, Color.primary500),
+        //[data 가져오기] 말하지 못한 키워드 횟수 = 전체 키워드 갯수 - 내가 말한 키워드 횟수
+        (11.0, Color.systemGray100)
+    ]
+    
     var body: some View {
         VStack(spacing: 0) {
-//            ProjectSummaryView()
-            ProjectHistoryListView()
-                .environmentObject(VoiceManager.shared)
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("첫번째 발표연습 기록")
+                            .systemFont(.headline)
+                            .padding(.bottom, 80)
+                        PracticeSummaryView(slices: data)
+                            .frame(minHeight: 380)
+                            .border(.green, width: 2)
+                        ProjectHistoryListView()
+                            .environmentObject(VoiceManager.shared)
+                        MissedKeywordListView()
+                    }
+                    .padding(.top, 50)
+                    .padding(.horizontal, 72)
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .topLeading
+                    )
+                }
+                .frame(
+                    maxWidth: geometry.size.width,
+                    maxHeight: geometry.size.height,
+                    alignment: .topLeading
+                )
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity
+        )
+        .background(Color.detailLayoutBackground)
     }
 }
 
