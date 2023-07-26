@@ -78,6 +78,7 @@ extension PresentationView {
                 .padding(.vertical, 35)
             KeywordListView()
             VoiceVisualizationView()
+                .padding(.vertical, 24)
         }
         .frame(
             minWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,

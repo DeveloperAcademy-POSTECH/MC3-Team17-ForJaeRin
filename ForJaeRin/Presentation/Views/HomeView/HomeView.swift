@@ -209,7 +209,7 @@ extension HomeView {
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Text(vm.EMPTY_TEXT_INFO.label)
                 .foregroundColor(Color.systemGray300)
-                .font(Font.system(size: 20))
+                .systemFont(.body)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
