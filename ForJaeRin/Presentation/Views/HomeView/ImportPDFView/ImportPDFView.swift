@@ -162,7 +162,7 @@ extension ImportPDFView {
             )
             : AppButtonStyle(
                 backgroundColor: Color.systemPoint,
-                width: vm.FOOTER_BUTTON_SIZE + 28,
+                width: vm.FOOTER_BUTTON_SIZE,
                 height: 42
             )
         )
@@ -171,8 +171,13 @@ extension ImportPDFView {
     
     // MARK: - 임시 그룹 설정을 위한,,
     private func deliveryData() {
+        if myData.groupData.isEmpty {
+            return
+        }
+        
         if let document = projectFileManager.pdfDocument {
             // 초기화
+            document.url = myData.url
             document.PDFPages = []
             myData.images.indices.forEach { index in
                 document.PDFPages.append(PDFPage(

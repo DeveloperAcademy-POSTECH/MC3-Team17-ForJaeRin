@@ -51,10 +51,11 @@ struct PresentationPageListItem: View {
                 scriptContainer()
                 dottedDivider()
                 // 키워드 컨테이너
-                ScrollView {
-                    keywordContainer()
-                }
-                .frame(maxHeight: 230)
+//                ScrollView {
+//
+//                }
+//                .frame(maxHeight: 230)
+                keywordContainer()
                 
             }
             .background(Color.systemWhite)

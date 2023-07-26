@@ -21,6 +21,7 @@ struct PresentationTimerView: View {
     @State private var pogPosition = CGPoint()
     @State private var isAnimationReady = false
     @State private var size = CGSize.zero
+    @State private var isPlay = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -82,18 +83,22 @@ extension PresentationTimerView {
     private func audioButonContainer() -> some View {
         HStack(spacing: 32) {
             audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
-                voiceManager.startRecording()
-                speechRecognizer.startTranscribing()
-                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
+                if !isPlay {
+                    isPlay = true
+                    voiceManager.startRecording()
+                    speechRecognizer.startTranscribing()
+                    vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
+                }
             }
-            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
+            audioControllButton(info: vm.AUDIO_STOP_BUTTON_INFO) {
                 speechRecognizer.stopTranscribing()
                 voiceManager.stopRecording(index: 0)
+                isPlay = false
             }
             // MARK: 현재 저장한 음성을 듣기 위한 테스트 버튼
-            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
-                voiceManager.playRecording()
-            }
+//            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+//                voiceManager.playRecording()
+//            }
         }
         .padding(.vertical, 18)
         .padding(.horizontal, 28)
@@ -109,7 +114,7 @@ extension PresentationTimerView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color.systemGray200)
+                .foregroundColor(Color.systemGray500)
         }
         .buttonStyle(.plain)
         .frame(width: 28, height: 28)

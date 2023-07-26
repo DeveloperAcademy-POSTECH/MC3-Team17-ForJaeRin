@@ -49,7 +49,8 @@ struct ProjectDocumentView: View {
                             ProjectPlanView(vm: vm)
                                 .environmentObject(myData)
                         } else {
-                            ProjectHistoryView()
+                             ProjectHistoryView()
+//                            Text("준비 중,,")
                         }
                     }
                 }
@@ -126,6 +127,7 @@ extension ProjectDocumentView {
                     .buttonStyle(.plain)
                     Button {
                         // MARK: - 임시 그룹 설정을 위한,,
+                        projectFileManager.pdfDocument?.url = myData.url
                         myData.keywords.enumerated().forEach { index, keyword in
                             projectFileManager.pdfDocument?.PDFPages[index].keywords = []
                             

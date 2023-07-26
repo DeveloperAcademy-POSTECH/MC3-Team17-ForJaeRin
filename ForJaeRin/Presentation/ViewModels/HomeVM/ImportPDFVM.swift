@@ -32,7 +32,7 @@ class ImportPDFVM: ObservableObject {
     // MARK: 새 프로젝트 생성 시 프로세스 진행을 표시하기 위한 상태
     @Published var step: ImportPDFStep = .importPDFFile
     
-    let FOOTER_BUTTON_SIZE: CGFloat = 92
+    let FOOTER_BUTTON_SIZE: CGFloat = 120
     
     let PREV_BUTTON_INFO = (
         icon: "exclamationmark.bubble.fill",
@@ -57,6 +57,7 @@ class ImportPDFVM: ObservableObject {
     
     func handleNextButton(completion: @escaping () -> Void) {
         if step == .setGroup {
+            
             print("설정 완료 이벤트 시작!")
             completion()
         } else {
@@ -71,6 +72,10 @@ class ImportPDFVM: ObservableObject {
     // MARK: NextButon 클릭 시 동작
     func checkIsCanGoToNext(myData: MyData) -> Bool {
         if step == .importPDFFile {
+            return false
+        }
+        
+        if step == .setGroup && myData.groupData.isEmpty {
             return false
         }
         

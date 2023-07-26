@@ -15,9 +15,10 @@ import PDFKit
 
 // MARK: PDF뷰를 가져와서 연습모드에 띄울 뷰
 struct PresentationPDFView: View {
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var vm: PresentationVM
     private let pdfView = PDFView()
-    let document = PDFDocument(url: Bundle.main.url(forResource: "sample", withExtension: "pdf")!)!
+    var document: PDFDocument
     
     var body: some View {
         VStack {
