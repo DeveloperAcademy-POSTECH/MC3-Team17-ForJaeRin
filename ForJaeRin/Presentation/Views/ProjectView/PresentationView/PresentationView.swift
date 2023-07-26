@@ -186,6 +186,7 @@ extension PresentationView {
             }
             if checking && !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
                 vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
+//                print(vm.practice.saidKeywords)
             }
             
         }

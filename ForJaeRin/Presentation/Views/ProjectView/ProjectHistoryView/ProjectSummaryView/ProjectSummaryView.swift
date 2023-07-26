@@ -13,6 +13,7 @@ import SwiftUI
  */
 // MARK: - 프로젝트 연습 결과 요약 뷰
 struct ProjectSummaryView: View {
+    
     let data = [
         //[data 가져오기] 내가 말한 키워드 횟수
         (23.0, Color.primary500),
@@ -180,61 +181,7 @@ struct ProjectSummaryView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .border(.mint, width: 2)
                         //MARK: 구간 별 다시듣기
-//                        Group {
-//                            ZStack (alignment: .topLeading) {
-//                                Rectangle()
-//                                    .cornerRadius(10)
-//                                    .frame(height: 252)
-//                                    .foregroundColor(Color.systemWhite)
-//                                VStack {
-//                                    HStack {
-//                                        VStack(alignment: .leading, spacing: 8) {
-//                                            Text("구간 별 다시듣기")
-//                                                .systemFont(.headline)
-//                                            Text("원하는 그룹을 클릭하면 그 그룹부터 다시 들을 수 있어요")
-//                                                .systemFont(.caption1)
-//                                                .foregroundColor(Color.systemGray400)
-//                                        }
-//                                        Spacer()
-//                                    }
-//                                    .padding(.top, 26)
-//                                    .padding(.bottom, 42)
-//                                    .padding(.leading, 26)
-//
-//                                    VStack {
-//                                        HStack {
-//                                            Text("00:00")
-//                                                .systemFont(.caption1)
-//                                                .foregroundColor(Color.systemGray200)
-//                                                .padding(.leading, 28)
-//                                            Spacer()
-//                                            //[data 가져오기] 사용자가 연습한 전체 시간
-//                                            Text("15:23")
-//                                                .systemFont(.caption1)
-//                                                .foregroundColor(Color.systemGray200)
-//                                                .padding(.trailing, 28)
-//                                        }
-//
-//                                        //[data 가져오기] 그룹별 사용자가 연습한 시간 차트
-//                                        Rectangle()
-//                                            .cornerRadius(8)
-//                                            .frame(minWidth: 1140, maxWidth: .infinity, minHeight: 42, maxHeight: 42)
-//                                            .foregroundColor(Color.groupPurple)
-//                                            .padding(.horizontal)
-//
-//                                        HStack {
-//                                            //[data 가져오기] 그룹명
-//                                            Text("그룹명")
-//                                                .systemFont(.caption1)
-//                                                .foregroundColor(Color.systemGray400)
-//                                                .padding(.top, 10)
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                        .padding(.top, 28)
-//                        .border(.cyan, width: 2)
+                        
                         //MARK: 한 눈에 보기
                             VStack {
                                     HStack (spacing: 12){
@@ -263,7 +210,10 @@ struct ProjectSummaryView: View {
         .border(.green, width: 2)
     }
 }
-    
+
+
+
+
 // MARK: - 그룹 한 눈에 보기
 struct GroupView: View {
     

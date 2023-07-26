@@ -91,4 +91,7 @@ class PresentationVM: ObservableObject {
         icon: "stop.fill",
         label: "연습 중지"
     )
+    func calcGroupBlockSize(percent: CGFloat, whole: CGFloat) -> CGFloat {
+        percent * (whole / 100)
+    }
 }

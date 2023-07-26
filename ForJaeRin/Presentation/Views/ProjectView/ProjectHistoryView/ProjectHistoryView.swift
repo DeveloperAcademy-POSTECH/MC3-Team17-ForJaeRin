@@ -19,8 +19,9 @@ import SwiftUI
 struct ProjectHistoryView: View {
     var body: some View {
         VStack(spacing: 0) {
-            ProjectSummaryView()
-//                ProjectHistoryListView()
+//            ProjectSummaryView()
+            ProjectHistoryListView()
+                .environmentObject(VoiceManager.shared)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

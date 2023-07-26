@@ -83,7 +83,15 @@ struct HomeView: View {
                 projectTarget: file.projectMetadata.projectTarget,
                 presentationTime: file.projectMetadata.presentationTime,
                 creatAt: Date())
-            projectFileManager.practices = []
+            projectFileManager.practices = [Practice(
+                saidKeywords: file.practices[0].saidKeywords,
+                speechRanges: file.practices[0].speechRanges.map { speechRange in
+                    SpeechRange(start: speechRange.start, group: speechRange.group)
+                },
+                progressTime: file.practices[0].progressTime,
+                audioPath: URL(string: file.practices[0].audioPath)!
+                )
+                ]
         } catch {
             print("Error decoding JSON: \(error)")
         }
