@@ -34,12 +34,12 @@ struct ProjectHistoryView: View {
                             .padding(.bottom, 80)
                         PracticeSummaryView(slices: data)
                             .frame(minHeight: 380)
-                            .border(.green, width: 2)
                         ProjectHistoryListView()
+                            .frame(minHeight: 252)
                             .environmentObject(VoiceManager.shared)
                         MissedKeywordListView()
                     }
-                    .padding(.top, 50)
+                    .padding(.vertical, 50)
                     .padding(.horizontal, 72)
                     .frame(
                         maxWidth: .infinity,

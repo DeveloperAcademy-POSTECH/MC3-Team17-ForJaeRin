@@ -9,15 +9,15 @@ import SwiftUI
 
 struct PracticeSummaryView: View {
     @State var slices: [(Double, Color)]
-    @State var selectedTimeInfoIndex = -1
+    @State var selectedTimeInfoIndex = 0
     @State var practiceTimeResults: [PracticeTimeResult] = [
         PracticeTimeResult(groupName: "그룹 1", hopeTime: 80, realTime: 70),
         PracticeTimeResult(groupName: "그룹 2", hopeTime: 35, realTime: 50),
         PracticeTimeResult(groupName: "그룹 3", hopeTime: 70, realTime: 90),
-        PracticeTimeResult(groupName: "그룹 3", hopeTime: 70, realTime: 90),
-        PracticeTimeResult(groupName: "그룹 3", hopeTime: 70, realTime: 90),
-        PracticeTimeResult(groupName: "그룹 3", hopeTime: 70, realTime: 90),
-        PracticeTimeResult(groupName: "그룹 3", hopeTime: 70, realTime: 90)
+        PracticeTimeResult(groupName: "그룹 4", hopeTime: 70, realTime: 90),
+        PracticeTimeResult(groupName: "그룹 5", hopeTime: 70, realTime: 90),
+        PracticeTimeResult(groupName: "그룹 6", hopeTime: 70, realTime: 90),
+        PracticeTimeResult(groupName: "그룹 7", hopeTime: 70, realTime: 90)
     ]
     
     var body: some View {
@@ -25,17 +25,11 @@ struct PracticeSummaryView: View {
             HStack(spacing: 28) {
                 keywordSuccessView()
                     .frame(maxWidth: geometry.size.width / 3 * 1 - 56, maxHeight: .infinity)
-                    .border(.red, width: 2)
                 practiceTimeResultView()
                     .frame( maxWidth: .infinity, maxHeight: .infinity)
-                    .border(.red, width: 2)
-            }
-            .onAppear {
-                print(geometry.size)
             }
             .padding(.bottom, 28)
             .frame(maxWidth: geometry.size.width, minHeight: 380, maxHeight: geometry.size.height)
-            .border(.red, width: 2)
         }
     }
 }
@@ -132,6 +126,7 @@ extension PracticeSummaryView {
                 Text("설정한 시간 대비 실제 연습시간이에요")
                     .systemFont(.caption1)
                     .foregroundColor(Color.systemGray400)
+                    .padding(.bottom, 24)
                 HStack(spacing: 10) {
                     ForEach(Array(practiceTimeResults.enumerated()), id: \.1.self) { index, info in
                         compareTimeGrpahView(practiceTimeResult: info, index: index)
@@ -139,7 +134,8 @@ extension PracticeSummaryView {
                 }
                 .frame(
                     maxWidth: .infinity,
-                    maxHeight: .infinity
+                    maxHeight: .infinity,
+                    alignment: .center
                 )
             }
             .frame(
@@ -163,49 +159,61 @@ extension PracticeSummaryView {
     }
     
     private func compareTimeGrpahView(practiceTimeResult: PracticeTimeResult, index: Int) -> some View {
-        VStack(spacing: 0) {
-            Text((practiceTimeResult.hopeTime - practiceTimeResult.realTime).description)
-                .systemFont(.caption1)
-                .foregroundColor(Color.systemPrimary)
-                .bold(selectedTimeInfoIndex == index)
-                .padding(.bottom, 8)
-            ZStack {
-                // MARK: 배경
-                RoundedRectangle(cornerRadius: 4)
-                    .foregroundColor(Color.primary100)
-                    .cornerRadius(4)
-                HStack(alignment: .bottom) {
-                    // MARK: 계획
-                    RoundedCornerView(topLeft: 4, topRight: 4)
-                        .foregroundColor(Color.systemGray200)
-                        .frame(
-                            minWidth: 4,
-                            maxWidth: .infinity,
-                            maxHeight: CGFloat(practiceTimeResult.hopeTime
+        ZStack {
+            Rectangle()
+                .opacity(0.0001)
+            VStack(spacing: 0) {
+                Text((practiceTimeResult.hopeTime - practiceTimeResult.realTime).description)
+                    .systemFont(.caption1)
+                    .foregroundColor(Color.systemPrimary)
+                    .bold(selectedTimeInfoIndex == index)
+                    .padding(.bottom, 8)
+                ZStack {
+                    // MARK: 배경
+                    RoundedRectangle(cornerRadius: 4)
+                        .foregroundColor(
+                            selectedTimeInfoIndex == index
+                            ? Color.primary100
+                            : Color.clear
                         )
+                        .cornerRadius(4)
+                    HStack(alignment: .bottom) {
+                        // MARK: 계획
+                        RoundedCornerView(topLeft: 4, topRight: 4)
+                            .foregroundColor(Color.systemGray200)
+                            .frame(
+                                minWidth: 4,
+                                maxWidth: .infinity,
+                                maxHeight: CGFloat(practiceTimeResult.hopeTime
+                            )
+                        )
+                        // MARK: 실젠
+                        RoundedCornerView(topLeft: 4, topRight: 4)
+                            .foregroundColor(Color.systemPrimary)
+                            .frame(
+                                minWidth: 4,
+                                maxWidth: .infinity,
+                                maxHeight: CGFloat(practiceTimeResult.realTime)
+                            )
+                    }
+                    .padding(.top, 8)
+                    .padding(.horizontal, 16)
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .bottom
                     )
-                    // MARK: 실젠
-                    RoundedCornerView(topLeft: 4, topRight: 4)
-                        .foregroundColor(Color.systemPrimary)
-                        .frame(
-                            minWidth: 4,
-                            maxWidth: .infinity,
-                            maxHeight: CGFloat(practiceTimeResult.realTime)
-                        )
                 }
-                .padding(.top, 8)
-                .padding(.horizontal, 16)
-                .frame(
-                    maxWidth: .infinity,
-                    maxHeight: .infinity,
-                    alignment: .bottom
-                )
+                .frame(maxWidth: 76)
+                Text("\(practiceTimeResult.groupName)")
+                    .systemFont(.caption2)
+                    .foregroundColor(Color.systemGray300)
+                    .padding(.top, 12)
             }
-            .frame(maxWidth: 76)
-            Text("\(practiceTimeResult.groupName)")
-                .systemFont(.caption2)
-                .foregroundColor(Color.systemGray300)
-                .padding(.top, 12)
+        }
+        .frame(maxWidth: 76)
+        .onTapGesture {
+            selectedTimeInfoIndex = index
         }
     }
 }
