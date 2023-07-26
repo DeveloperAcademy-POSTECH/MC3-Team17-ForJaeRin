@@ -18,4 +18,9 @@ class ProjectHistoryVM: ObservableObject {
         let seconds = seconds % 60
         return String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
     }
+    
+    func gettingAudioPath(path: URL) -> String {
+        let pdfName = path.absoluteString.components(separatedBy: "/").last!
+        return pdfName
+    }
 }
