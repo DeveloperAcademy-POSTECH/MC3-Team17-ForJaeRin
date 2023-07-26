@@ -29,9 +29,11 @@ struct PresentationPageList: View {
                             pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
                             // pdfPage: document.PDFPages[index]
                         )
-                    }.onMove { fromIndex, toIndex in
-                        document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
                     }
+                    // MARK: - 페이지 이동 필요한지 논의 필요
+//                    .onMove { fromIndex, toIndex in
+//                        document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
+//                    }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in

@@ -19,6 +19,8 @@
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
 		43E88F9B2A64E36C001791DC /* MyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E88F9A2A64E36C001791DC /* MyData.swift */; };
 		A912BA992A613C4100A3321E /* sampleFile.json in Resources */ = {isa = PBXBuildFile; fileRef = A912BA982A613C4100A3321E /* sampleFile.json */; };
+		A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */; };
+		A91815F92A701CF000034A1A /* GroupListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91815F82A701CF000034A1A /* GroupListVM.swift */; };
 		A91E901D2A5B074A00EBB3F2 /* AppFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */; };
 		A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */; };
 		A91E90292A5B98BA00EBB3F2 /* VoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */; };
@@ -48,6 +50,7 @@
 		A945F0642A56ABC800DC62D7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A945F0632A56ABC800DC62D7 /* .swiftlint.yml */; };
 		A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */; };
 		A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */; };
+		A94D04B32A6E456C00D1DE77 /* ImportPDFVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */; };
 		A968E6A92A67C0B0008C6738 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = A968E6A82A67C0B0008C6738 /* sample.json */; };
 		A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */; };
 		A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */; };
@@ -112,6 +115,8 @@
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
 		43E88F9A2A64E36C001791DC /* MyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyData.swift; sourceTree = "<group>"; };
 		A912BA982A613C4100A3321E /* sampleFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleFile.json; sourceTree = "<group>"; };
+		A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupVM.swift; sourceTree = "<group>"; };
+		A91815F82A701CF000034A1A /* GroupListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListVM.swift; sourceTree = "<group>"; };
 		A91E901C2A5B074A00EBB3F2 /* AppFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFileManager.swift; sourceTree = "<group>"; };
 		A91E90202A5B1A1C00EBB3F2 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		A91E90282A5B98BA00EBB3F2 /* VoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceManager.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		A945F0632A56ABC800DC62D7 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFlowVM.swift; sourceTree = "<group>"; };
 		A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Type+Extension.swift"; sourceTree = "<group>"; };
+		A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPDFVM.swift; sourceTree = "<group>"; };
 		A968E6A82A67C0B0008C6738 /* sample.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		A968E6AD2A67CAD8008C6738 /* BorderModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderModifier.swift; sourceTree = "<group>"; };
 		A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentVM.swift; sourceTree = "<group>"; };
@@ -302,6 +308,9 @@
 			isa = PBXGroup;
 			children = (
 				A938398A2A5CF2410075A97F /* HomeVM.swift */,
+				A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */,
+				A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */,
+				A91815F82A701CF000034A1A /* GroupListVM.swift */,
 			);
 			path = HomeVM;
 			sourceTree = "<group>";
@@ -514,11 +523,11 @@
 		A97FBE3D2A5E4BB500B9F94B /* ImportPDFView */ = {
 			isa = PBXGroup;
 			children = (
-				112F60AC2A690E3200D19446 /* GroupComponentView */,
 				A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */,
 				4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */,
 				4373B8AD2A66714200518FF7 /* InputScriptView.swift */,
 				4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */,
+				112F60AC2A690E3200D19446 /* GroupComponentView */,
 			);
 			path = ImportPDFView;
 			sourceTree = "<group>";
@@ -850,6 +859,7 @@
 				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
 				A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */,
 				A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */,
+				A94D04B32A6E456C00D1DE77 /* ImportPDFVM.swift in Sources */,
 				4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */,
 				A98A289B2A6068320043C8C1 /* ProjectMetadataModel.swift in Sources */,
 				112F60B22A690F8600D19446 /* GroupListView.swift in Sources */,
@@ -872,6 +882,7 @@
 				A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */,
 				A98A28972A60604F0043C8C1 /* PDFGroupModel.swift in Sources */,
 				A99526CD2A5DBC43008510CF /* Color+Extension.swift in Sources */,
+				A91815F92A701CF000034A1A /* GroupListVM.swift in Sources */,
 				A938399C2A5D3F540075A97F /* ProjectHistoryView.swift in Sources */,
 				A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */,
 				A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */,
@@ -894,6 +905,7 @@
 				A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */,
 				A92ABAC12A64E5D1004B4972 /* ProjectDocumentView.swift in Sources */,
 				A94D04B12A6D48C000D1DE77 /* Type+Extension.swift in Sources */,
+				A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
@@ -1054,13 +1066,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = ForJaeRin/App/ForJaeRin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1090,13 +1103,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = ForJaeRin/App/ForJaeRin.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

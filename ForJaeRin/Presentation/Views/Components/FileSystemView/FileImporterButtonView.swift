@@ -14,8 +14,8 @@ import PDFKit
 // MARK: PDF를 불러오기 위한 View
 struct FileImporterButtonView: View {
     @EnvironmentObject var myData: MyData
+    @EnvironmentObject var vm: ImportPDFVM
     @State private var isImporting: Bool = false
-    @Binding var step: Int
     @State private var pdfImages = [NSImage]()
     
     var body: some View {
@@ -45,6 +45,7 @@ struct FileImporterButtonView: View {
                     Text("PDF 파일 불러오기")
                 })
                 .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
+                .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary))
                 .fileImporter(isPresented: $isImporting,
                               allowedContentTypes: [.pdf],
                               onCompletion: { result in
@@ -53,8 +54,7 @@ struct FileImporterButtonView: View {
                         print(success)
                         myData.clear()
                         myData.url = success
-                        print(success)
-                        step += 1
+                        vm.step = ImportPDFStep.allCases[vm.step.rawValue + 1]
                         //
                         if let pdfDocument = PDFDocument(url: myData.url) {
                             let images = self.convertPDFToImages(pdfDocument: pdfDocument)

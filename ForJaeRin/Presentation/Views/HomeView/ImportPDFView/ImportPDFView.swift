@@ -18,199 +18,186 @@ import SwiftUI
  
  */
 // MARK: 새 프로젝트를 생성하기 위한 시트뷰
+
 struct ImportPDFView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @EnvironmentObject var myData: MyData
+    @StateObject var vm = ImportPDFVM()
+
+    // MARK: Sheet 창을 닫기 위한 바인딩 값
     @Binding var isSheetActive: Bool
-    @State var nextAvailable = false
-    @Binding var step: Int {
-        didSet {
-            if step > 4 {
-                sendMyData()
-                isSheetActive = false
-            }
-        }
-    }
     
-    let mentions: [String] = ["PDF 가져오기", "PDF 가져오기", "발표 정보 입력하기", "스크립트 입력하기", "그룹 설정하기", ""]
+    @Binding var isNewProjectSettingDone: Bool
     
     var body: some View {
+        VStack(spacing: 0) {
+            headerContainerView()
+            bodyContainerView()
+            footerContainerView()
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
+        .environmentObject(vm)
+        .environmentObject(myData)
+    }
+//    func sendMyData() {
+//        var tempStr = myData.time
+//        tempStr.removeLast()
+//        let tempInt = Int(tempStr)
+//        var projectMetaData = ProjectMetadata(
+//            projectName: myData.title,
+//            projectGoal: myData.purpose,
+//            presentationTime: tempInt!,
+//            creatAt: Date()
+//        )
+//
+//        var pdfDocumentManager = PDFDocumentManager(
+//            url: myData.url,
+//            PDFPages: [],
+//            PDFGroups: []
+//        )
+//
+//        var projectFileManager = ProjectFileManager()
+//    }
+}
+
+extension ImportPDFStep {
+    var view: any View {
+        switch self {
+        case .importPDFFile:
+            return FileImporterButtonView().padding(.vertical, 40)
+        case .setMetaData:
+            return InputPresentationInfoView().padding(.vertical, 40)
+        case .setScripts:
+            return InputScriptView().padding(.vertical, 40)
+        case .setGroup:
+            return SettingGroupView().padding(.top, 40)
+        }
+    }
+}
+
+extension ImportPDFView {
+    // MARK: 헤더 컨테이너 뷰
+    private func headerContainerView() -> some View {
+        HStack {
+            HStack(spacing: 16) {
+                Text(vm.step.title)
+                    .systemFont(.headline)
+                Text("\(vm.step.rawValue + 1)/4")
+                    .systemFont(.caption1)
+                    .opacity(0.3)
+            }
+            Spacer()
+            Button {
+                isSheetActive = false
+            } label: {
+                Image(systemName: "xmark")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 16, maxHeight: 16)
+                    .foregroundColor(Color.systemGray200)
+            }
+            .buttonStyle(.plain)
+            .frame(maxWidth: 24, maxHeight: 24)
+        }
+        .padding(.top, 48)
+        .padding(.horizontal, 40)
+        .frame(maxWidth: .infinity, alignment: .topLeading)
+    }
+    
+    // MARK: 바디 컨테이너 뷰 - 스탭별로 바뀌는 뷰
+    private func bodyContainerView() -> some View {
         VStack {
-            // header
-            HStack {
-                HStack {
-                    Text(mentions[step])
-                        .font(.system(size: 24))
-                    Text("\(step)/4")
-                        .font(.system(size: 15))
-                        .opacity(0.3)
-                        .padding(EdgeInsets(top: 12, leading: 16, bottom: 0, trailing: 0))
-                }
-                .padding(EdgeInsets(top: 48, leading: 40, bottom: 0, trailing: 0))
-                
-                Spacer()
-                
-                Button {
-                    print("닫기")
-                    isSheetActive = false
-                } label: {
-                    Image(systemName: "xmark")
-                        // .frame(width: 20, height: 20)
-                }
-                .padding(EdgeInsets(top: 46, leading: 0, bottom: 0, trailing: 40))
-            }
-            .frame(width: 868, height: 77)
-            // body
-            VStack {
-                
-                if step == 1 {
-                    Spacer()
-                    FileImporterButtonView(step: $step)
-                        .environmentObject(myData)
-                        .buttonStyle(AppButtonStyle(backgroundColor: Color(hex: "8B6DFF")))
-                    Spacer()
-                } else if step == 2 {
-                    Spacer()
-                    InputPresentationInfoView()
-                        .environmentObject(myData)
-                    Spacer()
-                } else if step == 3 {
-                    Spacer()
-                    InputScriptView()
-                        .environmentObject(myData)
-                    Spacer()
-                } else if step == 4 {
-                    SettingGroupView(
-                        groupIndex: Array(repeating: -1, count: myData.images.count), nextAvailable: $nextAvailable
-                    ).environmentObject(myData)
-                } else {
-                    // JSON 파일 생성 후 저장 및 PDF 파일 복사본 같이 저장
-                    
-                    //
-                }
-                
-            }
-            HStack {
-                Button {
-                    print("prev")
-                    if step > 1 {
-                        step -= 1
-                    }
-                } label: {
-                    Text("이전")
-                }
-                .buttonStyle(previousButtonFuction() ?
-                             AppButtonStyle(backgroundColor : Color(hex: "2F2F2F").opacity(0.25), width: 92)
-                                : AppButtonStyle(width: 92))
-                .padding(EdgeInsets(top: 24, leading: 40, bottom: 29, trailing: 0))
-                .disabled(previousButtonFuction())
-                
-                Spacer()
-                
-                Button {
-                    print("next")
-                    step += 1
-                } label: {
-                    Text("다음")
-                }
-
-                .buttonStyle(nextButtonFuction() ?
-                             AppButtonStyle(backgroundColor: Color(hex: "2F2F2F").opacity(0.25), width: 92)
-                                : AppButtonStyle(width: 92))
-                .padding(EdgeInsets(top: 24, leading: 0, bottom: 29, trailing: 40))
-                .disabled(nextButtonFuction())
-
-            }
-            .frame(width: 868, height: 99)
-            .foregroundColor(Color(hex: "F6F5FA"))
-            .background(Color(hex: "F6F5FA"))
-            // footer
+            AnyView(vm.step.view)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
-    func previousButtonFuction () -> Bool {
-        if step == 1 {
-            return true
-        }
-        return false
-    }
-    
-    func nextButtonFuction () -> Bool {
-        if step == 1 {
-            return true
-        }
-        
-        if step == 2 {
-            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
-                return true
+    // MARK: 푸터 컨테이너 뷰
+    private func footerContainerView() -> some View {
+        HStack {
+            if vm.step != .importPDFFile {
+                footerButtonView(
+                    info: vm.PREV_BUTTON_INFO,
+                    isActive: vm.checkIsStepFirst()) {
+                        vm.handlePrevButton()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            footerButtonView(
+                info: vm.step == .setGroup
+                ? vm.DONE_BUTTON_INFO
+                : vm.NEXT_BUTTON_INFO,
+                isActive: vm.checkIsCanGoToNext(myData: myData)) {
+                    vm.handleNextButton(completion: deliveryData)
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
-        return false
+        .padding(.vertical, 28)
+        .padding(.horizontal, 40)
+        .background(Color.sub100)
+        .frame(maxWidth: .infinity)
     }
     
-    func sendMyData() {
-        
-        // MyData -> ProjectFileManager로 데이터 전달 시작!
-        var stringTime = myData.time
-        stringTime.removeLast()
-        var intTime = Int(stringTime)
-        var projectMetaData = ProjectMetadata(
-            projectName: myData.title,
-            projectGoal: myData.purpose,
-            presentationTime: intTime!,
-            creatAt: Date()
-        )
-        
-        var pdfPages: [PDFPage] = []
-        var pdfGroups: [PDFGroup] = []
-        
-        for index in 0..<myData.keywords.count {
-            pdfPages.append(PDFPage(keywords: myData.keywords[index], script: myData.script[index]))
+    // MARK: label로 변환해주기
+    private func footerButtonView(
+        info: (icon: String, label: String),
+        isActive: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            action()
+        } label: {
+            Text(info.label)
         }
-        
-        for index in 0..<myData.groupData.count {
-            pdfGroups.append(
-                PDFGroup(
-                    name: myData.groupData[index][0],
-                    range: PDFGroupRange(start: Int(myData.groupData[index][3])!,
-                                         end: Int(myData.groupData[index][4])!),
-                    setTime: Int(myData.groupData[index][1])! * 60 + Int(myData.groupData[index][2])!
-                )
+        .buttonStyle(
+            !isActive
+            ? AppButtonStyle(
+                backgroundColor: Color.systemGray200,
+                width: vm.FOOTER_BUTTON_SIZE,
+                height: 42
             )
-        }
-        
-        var pdfDocumentManager = PDFDocumentManager(
-            url: myData.url,
-            PDFPages: pdfPages,
-            PDFGroups: pdfGroups
+            : AppButtonStyle(
+                backgroundColor: Color.systemPoint,
+                width: vm.FOOTER_BUTTON_SIZE + 28,
+                height: 42
+            )
         )
-        
-        projectFileManager.projectURL = myData.url
-        projectFileManager.projectMetadata = projectMetaData
-        projectFileManager.pdfDocument = pdfDocumentManager
-        
-        // MyData -> ProjectFileManager로 데이터 전달 완료!
-        
-        projectFileManager.exportFile()
-        
-        //
-        
-        // MyData -> ProjectFileManager로 데이터 전달
-        // ProjectFileManager를 JSON으로 변환해서 저장
-        // PDF파일도 복사해서 같은 폴더 아래에 넣는다.
-        
-        // 해당 경로에 가서 프로젝트 이름으로 폴더를 만든다. -> 중복 이름이 있으면 실패
-        // // 폴더 만들면 해당 폴더 밑에 JSON 파일을 넣는다 + PDF 복사본도 넣는다
-        // // // 해당 폴더 경로를 최근 프로젝트 이력에 넣는다.
-        
+        .disabled(!isActive)
+    }
+    
+    // MARK: - 임시 그룹 설정을 위한,,
+    private func deliveryData() {
+        if let document = projectFileManager.pdfDocument {
+            // 초기화
+            document.PDFPages = []
+            myData.images.indices.forEach { index in
+                document.PDFPages.append(PDFPage(
+                    keywords: myData.keywords[index],
+                    script: myData.script[index])
+                )
+            }
+            
+            document.PDFGroups = []
+            myData.groupData.enumerated().forEach { _, groupData in
+                document.PDFGroups.append(PDFGroup(
+                    name: groupData[0],
+                    range: PDFGroupRange(start: Int(groupData[3])!, end: Int(groupData[4])!),
+                    setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
+            }
+        }
+        isSheetActive = false
+        isNewProjectSettingDone = true
     }
 }
 
 struct ImportPDFView_Previews: PreviewProvider {
     static var previews: some View {
         @State var isSheetActive = false
-        @State var step = 0
-        ImportPDFView(isSheetActive: $isSheetActive, step: $step)
+        @State var isNewProjectSettingDone = false
+        ImportPDFView(isSheetActive: $isSheetActive, isNewProjectSettingDone: $isNewProjectSettingDone)
     }
 }
