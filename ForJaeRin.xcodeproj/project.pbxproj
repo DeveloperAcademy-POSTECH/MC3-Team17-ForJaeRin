@@ -13,6 +13,7 @@
 		112F60AE2A690EBF00D19446 /* GroupingAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */; };
 		112F60B02A690F4100D19446 /* TempPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AF2A690F4100D19446 /* TempPDFView.swift */; };
 		112F60B22A690F8600D19446 /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60B12A690F8600D19446 /* GroupListView.swift */; };
+		11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */; };
 		4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */; };
 		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
@@ -105,6 +106,7 @@
 		112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingAddButtonView.swift; sourceTree = "<group>"; };
 		112F60AF2A690F4100D19446 /* TempPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPDFView.swift; sourceTree = "<group>"; };
 		112F60B12A690F8600D19446 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHistoryVM.swift; sourceTree = "<group>"; };
 		4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPresentationInfoView.swift; sourceTree = "<group>"; };
 		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */,
 				A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */,
 				A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */,
+				11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */,
 			);
 			path = ProjectVM;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				A968E6AE2A67CAD8008C6738 /* BorderModifier.swift in Sources */,
 				BBB2F3AF2A69800A0099B6D9 /* ProjectFlowView.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
+				11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A968E6B62A690555008C6738 /* KeywordListItem.swift in Sources */,

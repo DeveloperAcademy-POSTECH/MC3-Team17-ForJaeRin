@@ -114,28 +114,28 @@
         "practices": [
             {
                 "saidKeywords": [
-                    ["개발자", "소통"],
-                    ["브릿지"],
-                    ["쉐어링"],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    [],
-                    []
+                    [ "개발자", "소통" ],
+                    [ "브릿지" ],
+                    [ "쉐어링" ],
+                    [ "예시" ],
+                    [ "차이", "디테일" ],
+                    [ "소통", "방법" ],
+                    [ "HIG", "타이포그래피", "가독성" ],
+                    [ "폰트", "이름", "컬러" ],
+                    [ "귀찮", "쉽게" ],
+                    [ "케이스", "지정" ],
+                    [ "Xcode" ],
+                    [ "테드", "메세지" ],
+                    [  ]
                 ],
                 "speechRanges": [
                         {"start": 0, "group": 0},
-                        {"start": 11, "group": 1},
-                        {"start": 23, "group": 2},
-                        {"start": 30, "group": 3}
+                        {"start": 10, "group": 1},
+                        {"start": 30, "group": 2},
+                        {"start": 50, "group": 3}
                 ],
-                "progressTime": 300,
-                "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at20:32:03.m4a"
+                "progressTime": 60,
+                "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at20:48:52.m4a"
             }
         ]
 }
