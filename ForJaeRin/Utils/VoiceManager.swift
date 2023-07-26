@@ -113,6 +113,18 @@ class VoiceManager: ObservableObject {
         }
     }
     
+    func playRecording(audioPath: URL, time: Double) {
+        let filePath = audioPath
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: filePath)
+            audioPlayer?.volume = 5.0
+//            audioPlayer?.currentTime = time
+            audioPlayer?.play()
+        } catch {
+            print("faild to play file")
+        }
+    }
+    
     func covertSecToMinAndHour(seconds : Int) -> String {
         
         let (_,minute,second) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)

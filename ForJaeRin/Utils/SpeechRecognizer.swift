@@ -136,7 +136,7 @@ actor SpeechRecognizer: ObservableObject {
             bufferSize: 1024,
             format: recordingFormat) {(buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             request.append(buffer)
-                print(when)
+//                print(when)
         }
         audioEngine.prepare()
         try audioEngine.start()

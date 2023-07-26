@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct KeywordListItem: View {
+    
+    @EnvironmentObject var vm: PresentationVM
     var pdfPage: PDFPage
     let FONT_STYLE = NSFont.systemFont(ofSize: 18, weight: .semibold)
     var sidebarWidth: CGFloat
     @State var alignedKeywords: [Keywords] = []
     @State var keywordSizes: [CGFloat] = []
+    @State var index: Int
     var isSelected: Bool
     
     var body: some View {
@@ -67,6 +70,7 @@ struct KeywordListItem: View {
 
 extension KeywordListItem {
     private func keywordView(keyword: String) -> some View {
+        @State var springAnimation = false
         let fontStyle = isSelected
         ? FONT_STYLE
         : NSFont.systemFont(ofSize: 14, weight: .regular)
@@ -74,24 +78,25 @@ extension KeywordListItem {
         return Text(keyword)
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
+            .scaleEffect(vm.practice.saidKeywords[index].contains(keyword) ? 1.1 : 1)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.systemGray100, lineWidth: 1)
-                    .background(.clear)
+                    .stroke(Color.systemGray100, lineWidth: 2.5)
+                    .background(isSelected
+                                ? vm.practice.saidKeywords[index].contains(keyword)
+                                ? Color.primary200 : .clear
+                                : vm.practice.saidKeywords[index].contains(keyword)
+                                ? Color.primary100 : .clear)
                     .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
             )
-            .foregroundColor(isSelected ? Color.systemPrimary : Color.systemGray300
-            )
+            .foregroundColor(isSelected
+                             ? Color.systemPrimary
+                             : vm.practice.saidKeywords[index].contains(keyword)
+                             ? Color.primary400 : Color.systemGray300)
             .systemFont(isSelected ? .subTitle : .caption1)
             .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
-    }
-}
-
-struct KeywordListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        @State var isSelected = true
-        let pdfPage = PDFPage(keywords: ["HIG", "타이포그래피", "가독성", "자동", "사이즈", "일관된", "개발자"], script: "안중요하죠?")
-        
-        KeywordListItem(pdfPage: pdfPage, sidebarWidth: 302, isSelected: isSelected)
+            .cornerRadius(5)
+            .animation(.interpolatingSpring(stiffness: 170, damping: 8),
+                       value: vm.practice.saidKeywords[index].contains(keyword))
     }
 }
