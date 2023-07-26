@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class HomeVM: ObservableObject {
-    let LOGO_NAME = ""
+    let LOGO_NAME = "logo_main"
     let LOGO_SIZE = CGSize(width: 110, height: 40)
     let SYMBOL_INNER_SIZE: CGFloat = 54
     let SYMBOL_OUTER_SIZE: CGFloat = 85

@@ -31,21 +31,25 @@
       "size" : "128x128"
     },
     {
+      "filename" : "app_logo_256.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
+      "filename" : "app_logo.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
+      "filename" : "app_logo 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
+      "filename" : "app_logo_1024.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

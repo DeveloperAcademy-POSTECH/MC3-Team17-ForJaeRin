@@ -95,10 +95,12 @@ extension HomeView {
     private func topContainerView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
             Image(vm.LOGO_NAME)
+                .resizable()
+                .scaledToFit()
                 .frame(
                     width: vm.LOGO_SIZE.width,
                     height: vm.LOGO_SIZE.height)
-                .background(Color.systemBlack)
+//                .background(Color.systemBlack)
                 .padding(.top, 40)
                 .padding(.bottom, 10)
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
@@ -151,19 +153,18 @@ extension HomeView {
                     .font(Font.system(size: 16))
             }
             .buttonStyle(AppButtonStyle())
-            NavigationLink {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-                    .frame(maxWidth: .infinity)
-            } label: {
-                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
-            }
-            .buttonStyle(AppButtonStyle())
-            
+//            NavigationLink {
+//                ProjectDocumentView()
+//                    .environmentObject(projectFileManager)
+//                    .environmentObject(myData)
+//                    .presentedWindowStyle(.titleBar)
+//                    .navigationBarBackButtonHidden()
+//                    .frame(maxWidth: .infinity)
+//            } label: {
+//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+//                    .font(Font.system(size: 16))
+//            }
+//            .buttonStyle(AppButtonStyle())
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)
