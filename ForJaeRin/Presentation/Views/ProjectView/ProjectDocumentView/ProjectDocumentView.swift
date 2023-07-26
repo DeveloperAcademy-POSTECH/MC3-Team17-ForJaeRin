@@ -126,6 +126,7 @@ extension ProjectDocumentView {
                     .buttonStyle(.plain)
                     Button {
                         // MARK: - 임시 그룹 설정을 위한,,
+                        projectFileManager.pdfDocument?.url = myData.url
                         myData.keywords.enumerated().forEach { index, keyword in
                             projectFileManager.pdfDocument?.PDFPages[index].keywords = []
                             

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PDFKit
 
 /**
  앱의 메인이 되는 페이지입니다.
@@ -36,6 +37,7 @@ struct PresentationView: View {
         }
             .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
                 keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
+                print(vm.practice.saidKeywords[vm.currentPageIndex])
             })
             .onChange(of: vm.currentPageIndex, perform: { _ in
                 resetGroup()
@@ -61,7 +63,9 @@ extension PresentationView {
             PresentationTimerView()
                 .zIndex(10)
             VStack(spacing: 0) {
-                PresentationPDFView()
+                PresentationPDFView(
+                    document: PDFDocument(url: projectFileManager.pdfDocument!.url)!
+                )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

@@ -173,6 +173,7 @@ extension ImportPDFView {
     private func deliveryData() {
         if let document = projectFileManager.pdfDocument {
             // 초기화
+            document.url = myData.url
             document.PDFPages = []
             myData.images.indices.forEach { index in
                 document.PDFPages.append(PDFPage(
