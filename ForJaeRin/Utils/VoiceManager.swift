@@ -113,17 +113,30 @@ class VoiceManager: ObservableObject {
         }
     }
     
+    // MARK: 재생 시점을 정하고 재생할 때
     func playRecording(audioPath: URL, time: Double) {
-        let filePath = audioPath
+        currentPath = audioPath
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: filePath)
+            audioPlayer?.pause()
+            audioPlayer = try AVAudioPlayer(contentsOf: currentPath!)
             audioPlayer?.volume = 5.0
-//            audioPlayer?.currentTime = time
+            audioPlayer?.currentTime = time
             audioPlayer?.play()
         } catch {
             print("faild to play file")
         }
     }
+    
+    // MARK: 재생을 정지할 때
+    func pauseRecording() {
+        let filePath = currentPath!
+        do {
+            audioPlayer?.pause()
+        } catch {
+            print("faild to pause file")
+        }
+    }
+    
     
     func covertSecToMinAndHour(seconds : Int) -> String {
         

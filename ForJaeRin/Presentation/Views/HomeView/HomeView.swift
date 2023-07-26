@@ -161,18 +161,18 @@ extension HomeView {
                     .font(Font.system(size: 16))
             }
             .buttonStyle(AppButtonStyle())
-//            NavigationLink {
-//                ProjectDocumentView()
-//                    .environmentObject(projectFileManager)
-//                    .environmentObject(myData)
-//                    .presentedWindowStyle(.titleBar)
-//                    .navigationBarBackButtonHidden()
-//                    .frame(maxWidth: .infinity)
-//            } label: {
-//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-//                    .font(Font.system(size: 16))
-//            }
-//            .buttonStyle(AppButtonStyle())
+            NavigationLink {
+                ProjectDocumentView()
+                    .environmentObject(projectFileManager)
+                    .environmentObject(myData)
+                    .presentedWindowStyle(.titleBar)
+                    .navigationBarBackButtonHidden()
+                    .frame(maxWidth: .infinity)
+            } label: {
+                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+                    .font(Font.system(size: 16))
+            }
+            .buttonStyle(AppButtonStyle())
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)
