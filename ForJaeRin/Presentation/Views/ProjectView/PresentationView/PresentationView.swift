@@ -37,7 +37,7 @@ struct PresentationView: View {
         }
             .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
                 keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
-                print(vm.practice.saidKeywords[vm.currentPageIndex])
+                print(speechRecognizer.arr_transcript)
             })
             .onChange(of: vm.currentPageIndex, perform: { _ in
                 resetGroup()

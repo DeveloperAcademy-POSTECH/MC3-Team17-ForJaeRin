@@ -13,7 +13,11 @@ struct SystemFontModifier: ViewModifier {
     var font: SystemFont = .body
 
     func body(content: Content) -> some View {
-        content.font(font.value)
+        if font == .body {
+            content.font(font.value).lineSpacing(6) 
+        } else {
+            content.font(font.value)
+        }
     }
 }
 
