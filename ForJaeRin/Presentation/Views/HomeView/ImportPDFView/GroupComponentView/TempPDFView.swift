@@ -26,13 +26,15 @@ struct TempPDFView: View {
                         .frame(maxWidth: imgSize.width, maxHeight: .infinity)
                 )
             VStack(spacing: 8) {
-                Image(nsImage: myData.images[index])
-                    .resizable()
-                    .frame(width: imgSize.width - 16, height: (imgSize.width - 16) / 3 * 2)
-                    .cornerRadius(10)
-                Text("\(index + 1)")
-                    .systemFont(.caption2)
-                    .foregroundColor(Color.systemGray300)
+                if !myData.images.isEmpty {
+                    Image(nsImage: myData.images[index])
+                        .resizable()
+                        .frame(width: imgSize.width - 16, height: (imgSize.width - 16) / 3 * 2)
+                        .cornerRadius(10)
+                    Text("\(index + 1)")
+                        .systemFont(.caption2)
+                        .foregroundColor(Color.systemGray300)
+                }
             }
             .padding(.top, 8)
             .padding(.horizontal, 8)

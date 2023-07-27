@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import PDFKit
 
 struct ProjectCardView: View {
     // MARK: PDF에서 썸네일 가져와서 저장하고 싶어요 로키.
-    var thumanil: String
+    var path: URL
     var title: String
     var date: Date
     var width: CGFloat
@@ -23,7 +24,7 @@ struct ProjectCardView: View {
                     .foregroundColor(Color.clear)
                     .frame(width: width, height: width / 3 * 2)
                     .cornerRadius(10)
-                Image(systemName: "doc.text.fill")
+                Image(nsImage: pdfToImage(pdfUrl: path)!)
                     .resizable()
                     .scaledToFit()
                     .padding(24)
@@ -42,11 +43,22 @@ struct ProjectCardView: View {
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
-}
-
-struct ProjectCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectCardView(thumanil: "none", title: "wwdc23 경험", date: Date(), width: 200
-        )
+    
+    func pdfToImage(pdfUrl: URL) -> NSImage? {
+        let pdfDocument = PDFDocument(url: pdfUrl)
+        guard let page = pdfDocument?.page(at: 0) else {
+            return nil
+        }
+        
+        let pageRect = page.bounds(for: .mediaBox)
+        let thumbnail = NSImage(size: pageRect.size, flipped: false, drawingHandler: { (rect: NSRect) -> Bool in
+            guard let context = NSGraphicsContext.current?.cgContext else { return false }
+            context.setFillColor(NSColor.white.cgColor)
+            context.fill(rect)
+            page.draw(with: .mediaBox, to: context)
+            return true
+        })
+        
+        return thumbnail
     }
 }

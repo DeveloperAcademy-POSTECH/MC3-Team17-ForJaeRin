@@ -14,6 +14,7 @@ class AppFileManager {
     private init() {}
     
     let fileManager = FileManager.default
+    @Published var files: [KkoProject] = []
     
     // MARK: 파일 디렉토리 url
     lazy var documentUrl = AppFileManager.shared.fileManager.urls(
@@ -122,7 +123,7 @@ class AppFileManager {
     // new
     func encodeJSON(codableProjectModel: CodableProjectModel, projectURL: URL) {
         // 디렉토리 Path - 프로젝트 이름
-        var dirPath = documentUrl.appendingPathComponent(
+        let dirPath = documentUrl.appendingPathComponent(
             codableProjectModel.projectMetadata.projectName,
             conformingTo: .directory
         )
@@ -165,7 +166,8 @@ class AppFileManager {
         
         // PDF 파일 복사본 저장.
         let sourceURL = projectURL
-        let destinationURL = dirPath.appendingPathComponent("copy.pdf")
+        let pdfName = projectURL.absoluteString.components(separatedBy: "/").last!
+        let destinationURL = dirPath.appendingPathComponent(pdfName)
 
         do {
             try fileManager.copyItem(at: sourceURL, to: destinationURL)
@@ -173,6 +175,61 @@ class AppFileManager {
         } catch let error {
             print("Failed to copy file: \(error.localizedDescription)")
         }
+    }
+    
+    func savePreviousProject(codableProjectModel: CodableProjectModel, projectURL: URL) {
+        let dirPath = documentUrl.appendingPathComponent(
+            codableProjectModel.projectMetadata.projectName,
+            conformingTo: .directory
+        )
+        print("codableProjectModel.projectMetadata.projectName", codableProjectModel.projectMetadata.projectName)
+        let pdfName = projectURL.absoluteString.components(separatedBy: "/").last!
+        print("pdfName: ", pdfName)
+        let destinationURL = dirPath.appendingPathComponent(pdfName)
+        
+        files.append(
+            KkoProject(
+                path: destinationURL,
+                title: codableProjectModel.projectMetadata.projectName,
+                createAt: Date()
+            )
+        )
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            let data = try encoder.encode(files)
+
+            // User 디렉토리 경로
+            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+            let fileURL = directory.appendingPathComponent("projectPath.json")
+
+            // JSON 데이터 쓰기
+            try data.write(to: fileURL)
+
+            print("KkoProject 리스트를 JSON 파일으로 성공적으로 저장되었습니다.")
+        } catch {
+            print("저장에 실패했습니다: \(error.localizedDescription)")
+        }
+    }
+    
+    func readPreviousProject() {
+        do {
+            let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = directory.appendingPathComponent("projectPath.json")
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let jsonData = try decoder.decode([KkoProject].self, from: data)
+            
+            files = jsonData
+            print("PreviousProject JSON파일 불러오기 성공했다!")
+            print("files.count: ", files.count)
+        } catch {
+            print("PreviousProject JSON파일 불러오기 실패했습니다: \(error.localizedDescription)")
+        }
+        
     }
     
 }
