@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingGroupView: View {
     @EnvironmentObject var myData: MyData
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     /// [그룹 이름, 그룹 할당 분, 그룹 할당 초, 그룹 최소 인덱스, 그룹 최대 인덱스]
     @StateObject var vm = SettingGroupVM()
     

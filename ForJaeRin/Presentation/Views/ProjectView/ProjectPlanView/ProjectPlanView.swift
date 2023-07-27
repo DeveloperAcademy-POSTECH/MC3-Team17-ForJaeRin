@@ -18,11 +18,13 @@ struct ProjectPlanView: View {
         VStack(spacing: 0) {
             if vm.currentSection == .edit {
                 if isViewReady {
-                    PresentationPageList(
-                        pdfDocumentPages: projectFileManager.pdfDocument!.PDFPages
-                    )
-                    .background(Color.detailLayoutBackground)
-                    .scrollContentBackground(.hidden)
+                    if let document = projectFileManager.pdfDocument {
+                        PresentationPageList(
+                            pdfDocumentPages: document.PDFPages
+                        )
+                        .background(Color.detailLayoutBackground)
+                        .scrollContentBackground(.hidden)
+                    }
                 }
             } else if vm.currentSection == .flow {
                 ProjectFlowView()
