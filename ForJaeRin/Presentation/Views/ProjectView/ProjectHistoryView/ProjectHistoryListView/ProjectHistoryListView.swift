@@ -31,10 +31,10 @@ struct ProjectHistoryListView: View {
                 .cornerRadius(12)
         }
         .onChange(of: currentTime, perform: { _ in
-            if currentTime >= CGFloat(projectFileManager.practices![0].progressTime) {
+            if currentTime >= CGFloat(projectFileManager.practices!.last!.progressTime) {
                 timer?.invalidate()
                 playing = false
-                currentTime = CGFloat(projectFileManager.practices![0].progressTime)
+                currentTime = CGFloat(projectFileManager.practices!.last!.progressTime)
             } else if currentTime < 0 {
                 currentTime = 0.0
             }
@@ -83,6 +83,7 @@ extension ProjectHistoryListView {
                         .foregroundColor(.systemGray500)
                         .padding(.top, 53)
                 }.buttonStyle(.plain)
+                    .keyboardShortcut(.space, modifiers: []) 
             Text("00:00")
                 .font(.systemCaption1)
                 .foregroundColor(.systemGray300)
@@ -145,7 +146,7 @@ extension ProjectHistoryListView {
                             )
                     }
                 }
-                Text(vm.secondsToTime(seconds: projectFileManager.practices![0].progressTime))
+                Text(vm.secondsToTime(seconds: projectFileManager.practices!.last!.progressTime))
                     .font(.systemCaption1)
                     .foregroundColor(.systemGray300)
                     .padding(.top, 53)
@@ -178,17 +179,18 @@ extension ProjectHistoryListView {
         HStack(spacing: 0) {
             ForEach(
                 Array(
-                    projectFileManager.practices![0]
+                    projectFileManager.practices!.last!
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
-                        whole: wholeWidthSize)
+                        whole: blankCount(size: wholeWidthSize)
+                    )
                             /// 색은 currentTime에 따라
                             Rectangle()
                                 .fill(checkMarkerPosition(index: index)
                                       ? GroupColor.allCases[speechRange.group].color : .systemGray100)
                                 .frame(maxWidth: size, maxHeight: 20, alignment: .center)
-                            if index != projectFileManager.practices![0]
+                            if index != projectFileManager.practices!.last!
                                 .speechRanges.count - 1 {
                                 Rectangle()
                                     .fill(Color.systemWhite)
@@ -204,11 +206,11 @@ extension ProjectHistoryListView {
         HStack(spacing: 4) {
             ForEach(
                 Array(
-                    projectFileManager.practices![0]
+                    projectFileManager.practices!.last!
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
-                        whole: wholeWidthSize
+                        whole: blankCount(size: wholeWidthSize)
                         )
                 VStack {
                     Text((projectFileManager.pdfDocument?.PDFGroups[speechRange.group].name)!)
@@ -222,29 +224,33 @@ extension ProjectHistoryListView {
     }
     
     private func getGroupVolumn(index: Int) -> CGFloat {
-        let whole = projectFileManager.practices![0].progressTime // 전체 발표 길이
+        let whole = projectFileManager.practices!.last!.progressTime // 전체 발표 길이
         var part = 0
-        if index == projectFileManager.practices![0].speechRanges.count - 1 {
-            part = projectFileManager.practices![0].progressTime -
-            projectFileManager.practices![0].speechRanges[index].start
+        if index == projectFileManager.practices!.last!.speechRanges.count - 1 {
+            part = projectFileManager.practices!.last!.progressTime -
+            projectFileManager.practices!.last!.speechRanges[index].start
         } else {
-            part = projectFileManager.practices![0].speechRanges[index + 1].start -
-            projectFileManager.practices![0].speechRanges[index].start
+            part = projectFileManager.practices!.last!.speechRanges[index + 1].start -
+            projectFileManager.practices!.last!.speechRanges[index].start
         }
         return CGFloat(Double(part * 100) / Double(whole))
     }
     
     private func timeToOffset(time: CGFloat, size: CGFloat) -> CGFloat {
-        return Double(time) * Double(size) / Double(projectFileManager.practices![0].progressTime)
+        return Double(time) * Double(size) / Double(projectFileManager.practices!.last!.progressTime)
+    }
+    
+    private func blankCount(size: CGFloat) -> CGFloat {
+        return size - 4 * (CGFloat(projectFileManager.practices!.last!.speechRanges.count) - 1)
     }
     
     private func locationToTime(location: CGFloat, size: CGFloat) -> CGFloat {
-        return Double(projectFileManager.practices![0].progressTime) * Double(location) / Double(size)
+        return Double(projectFileManager.practices!.last!.progressTime) * Double(location) / Double(size)
     }
     
     private func playVoice(time: CGFloat) {
         replayVoiceManager.playRecording(audioPath: AppFileManager.shared.directoryPath
-            .appendingPathComponent(vm.gettingAudioPath(path: projectFileManager.practices![0].audioPath),
+            .appendingPathComponent(vm.gettingAudioPath(path: projectFileManager.practices!.last!.audioPath),
                                     conformingTo: .mpeg4Audio), time: time)
         timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             if playing {
@@ -254,14 +260,14 @@ extension ProjectHistoryListView {
     }
     
     private func checkMarkerPosition(index: Int) -> Bool {
-        if index == projectFileManager.practices![0].speechRanges.count - 1 {
-            return CGFloat(projectFileManager.practices![0]
+        if index == projectFileManager.practices!.last!.speechRanges.count - 1 {
+            return CGFloat(projectFileManager.practices!.last!
                     .speechRanges[index].start) <= currentTime
-            && currentTime <= CGFloat(projectFileManager.practices![0].progressTime)
+            && currentTime <= CGFloat(projectFileManager.practices!.last!.progressTime)
         }
-        return CGFloat(projectFileManager.practices![0]
+        return CGFloat(projectFileManager.practices!.last!
             .speechRanges[index].start) <= currentTime
-        && currentTime <= CGFloat(projectFileManager.practices![0]
+        && currentTime <= CGFloat(projectFileManager.practices!.last!
             .speechRanges[index + 1].start)
     }
 }
