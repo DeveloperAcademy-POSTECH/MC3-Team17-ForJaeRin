@@ -57,7 +57,7 @@
                     "script": "테드에게 전하는 메세지로 발표 마무리하도록 하겠습니다 테드… 그러니까 이 뷰 디테일도 잡을 수 있어요 패딩 맞춰주세요…!"
                 },
                 {
-                    "keywords": [ "감사" ],
+                    "keywords": [ "감사", "미안" ],
                     "script": "감사합니다."
                 }
             ],
@@ -68,7 +68,7 @@
                         "start": 0,
                         "end": 2
                     },
-                    "setTime": 30
+                    "setTime": 10
                 },
                 {
                     "name": "그룹 - 2",
@@ -76,7 +76,7 @@
                         "start": 3,
                         "end": 5
                     },
-                    "setTime": 120
+                    "setTime": 7
                 },
                 {
                     "name": "그룹 - 3",
@@ -84,7 +84,7 @@
                         "start": 6,
                         "end": 6
                     },
-                    "setTime": 60
+                    "setTime": 3
                 },
                 {
                     "name": "그룹 - 4",
@@ -92,7 +92,7 @@
                         "start": 7,
                         "end": 8
                     },
-                    "setTime": 120
+                    "setTime": 13
                 },
                 {
                     "name": "그룹 - 5",
@@ -100,15 +100,23 @@
                         "start": 9,
                         "end": 9
                     },
-                    "setTime": 60
+                    "setTime": 12
                 },
                 {
                     "name": "그룹 - 6",
                     "range": {
                         "start": 10,
+                        "end": 11
+                    },
+                    "setTime": 7
+                },
+                {
+                    "name": "그룹 - 7",
+                    "range": {
+                        "start": 12,
                         "end": 12
                     },
-                    "setTime": 30
+                    "setTime": 8
                 }
             ]
         },
@@ -119,21 +127,25 @@
                     [ "브릿지" ],
                     [ "쉐어링" ],
                     [ "예시" ],
-                    [ "차이", "디테일" ],
+                    [ "차이", "디테일", "디자이너", "개발자", "소통", "잘", "전달" ],
                     [ "소통", "방법" ],
                     [ "HIG", "타이포그래피", "가독성" ],
-                    [ "폰트", "이름", "컬러" ],
+                    [ "스타일", "가이드", "폰트", "이름", "컬러", "아이콘" ],
                     [ "귀찮", "쉽게" ],
-                    [ "케이스", "지정" ],
-                    [ "Xcode" ],
+                    [ "스타일", "케이스", "지정", "편리", "효율적", "공유" ],
+                    [ "결론적", "Xcode", "디테일" ],
                     [ "테드", "메세지" ],
-                    [  ]
+                    [ "감사" ]
                 ],
                 "speechRanges": [
                         {"start": 0, "group": 0},
-                        {"start": 10, "group": 1},
-                        {"start": 30, "group": 2},
-                        {"start": 50, "group": 3}
+                        {"start": 9, "group": 1},
+                        {"start": 14, "group": 2},
+                        {"start": 30, "group": 3},
+                        {"start": 37, "group": 4},
+                        {"start": 43, "group": 5},
+                        {"start": 47, "group": 4},
+                        {"start": 57, "group": 6}
                 ],
                 "progressTime": 60,
                 "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at21:29:47.m4a"
