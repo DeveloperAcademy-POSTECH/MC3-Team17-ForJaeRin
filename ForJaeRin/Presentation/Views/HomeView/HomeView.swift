@@ -92,7 +92,15 @@ struct HomeView: View {
                 },
                 progressTime: file.practices[0].progressTime,
                 audioPath: URL(string: file.practices[0].audioPath)!
-            )
+            ),
+                                            Practice(
+                                                saidKeywords: file.practices[1].saidKeywords,
+                                                speechRanges: file.practices[1].speechRanges.map { speechRange in
+                                                    SpeechRange(start: speechRange.start, group: speechRange.group)
+                                                },
+                                                progressTime: file.practices[1].progressTime,
+                                                audioPath: URL(string: file.practices[1].audioPath)!
+                                            )
             ]
         } catch {
             print("Error decoding JSON: \(error)")
@@ -258,12 +266,8 @@ extension HomeView {
                             myData.purpose = projectFileManager.projectMetadata!.projectGoal
                             myData.images = convertPDFToImages(pdfDocument: PDFDocument(url: file.path)!)
                             for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
-                                myData.keywords.append(
-                                    (projectFileManager.pdfDocument?.PDFPages[index].keywords)!
-                                )
-                                myData.script.append(
-                                    (projectFileManager.pdfDocument?.PDFPages[index].script)!
-                                )
+                                myData.keywords.append((projectFileManager.pdfDocument?.PDFPages[index].keywords)!)
+                                myData.script.append((projectFileManager.pdfDocument?.PDFPages[index].script)!)
                             }
                             for index in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
                                 let start = projectFileManager.pdfDocument?.PDFGroups[index].range.start

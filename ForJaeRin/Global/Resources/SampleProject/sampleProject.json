@@ -149,6 +149,35 @@
                 ],
                 "progressTime": 60,
                 "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at21:29:47.m4a"
+            },
+            {
+                "saidKeywords": [
+                    [ "개발자", "소통" ],
+                    [ "브릿지" ],
+                    [ "쉐어링" ],
+                    [ "예시" ],
+                    [ "차이", "디테일", "디자이너", "개발자", "소통", "잘", "전달" ],
+                    [ "소통", "방법" ],
+                    [ "HIG", "타이포그래피", "가독성" ],
+                    [ "스타일", "가이드", "폰트", "이름", "컬러", "아이콘" ],
+                    [ "귀찮", "쉽게" ],
+                    [ "스타일", "케이스", "지정", "편리", "효율적", "공유" ],
+                    [ "결론적", "Xcode", "디테일" ],
+                    [ "테드", "메세지" ],
+                    [ "감사" ]
+                ],
+                "speechRanges": [
+                        {"start": 0, "group": 0},
+                        {"start": 9, "group": 1},
+                        {"start": 14, "group": 2},
+                        {"start": 30, "group": 3},
+                        {"start": 37, "group": 4},
+                        {"start": 43, "group": 5},
+                        {"start": 47, "group": 4},
+                        {"start": 57, "group": 6}
+                ],
+                "progressTime": 60,
+                "audioPath": "file:///Users/leeyongjun/Library/Containers/kkojangro.ForJaeRin/Data/Documents/2023-07-25at21:29:47.m4a"
             }
         ]
 }

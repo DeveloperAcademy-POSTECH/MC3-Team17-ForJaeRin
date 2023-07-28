@@ -16,6 +16,8 @@ struct PresentationPageListItem: View {
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
     @State var pageScript = ""
     @State var keywords: Keywords = []
+    @FocusState var isFocus: Bool
+    let scriptPlaceHolder = "스크립트를 입력해주세요."
     
     @EnvironmentObject var myData: MyData
     
@@ -52,10 +54,10 @@ struct PresentationPageListItem: View {
                 scriptContainer()
                 dottedDivider()
                 // 키워드 컨테이너
-//                ScrollView {
-//
-//                }
-//                .frame(maxHeight: 230)
+                //                ScrollView {
+                //
+                //                }
+                //                .frame(maxHeight: 230)
                 keywordContainer()
                 
             }
@@ -126,10 +128,21 @@ extension PresentationPageListItem {
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
         HStack {
-            TextEditor(text: $myData.script[pageIndex])
-                .systemFont(.body)
-                .foregroundColor(Color.systemGray400)
-                .frame(minHeight: 182-48, maxHeight: 182-48)
+            ZStack(alignment: .topLeading) {
+                if myData.script[pageIndex].isEmpty {
+                    Text(scriptPlaceHolder)
+                        .systemFont(.body)
+                        .foregroundColor(Color.systemGray100)
+                        .zIndex(1)
+                        .onTapGesture {
+                            isFocus = true
+                        }
+                }
+                TextEditor(text: $myData.script[pageIndex])
+                    .systemFont(.body)
+                    .foregroundColor(Color.systemGray400)
+                    .frame(minHeight: 182-48, maxHeight: 182-48)
+            }
         }
         .frame(maxWidth: 206, maxHeight: 182)
         .padding(.leading, 35)
@@ -142,9 +155,9 @@ extension PresentationPageListItem {
             KeywordView(
                 pageNumber: pageIndex,
                 lastIndex: enteredKeywordCount(pageNumber: pageIndex))
-                .padding(.vertical, 24)
-                .padding(.horizontal, 36)
-                .frame(minWidth: 345, maxWidth: .infinity)
+            .padding(.vertical, 24)
+            .padding(.horizontal, 36)
+            .frame(minWidth: 345, maxWidth: .infinity)
         }
     }
     
@@ -177,7 +190,7 @@ struct PresentationPageListItem_Previews: PreviewProvider {
         let groupIndex = 0
         let pageIndex = 0
         let pdfGroup = PDFGroup(name: "그룹명", range: PDFGroupRange(start: 0, end: 3), setTime: 300)
-//        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
+        //        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
         PresentationPageListItem(
             groupIndex: groupIndex,
             pageIndex: pageIndex,

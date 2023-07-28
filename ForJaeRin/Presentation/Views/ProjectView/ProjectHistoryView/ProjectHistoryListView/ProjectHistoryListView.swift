@@ -83,7 +83,7 @@ extension ProjectHistoryListView {
                         .foregroundColor(.systemGray500)
                         .padding(.top, 53)
                 }.buttonStyle(.plain)
-                    .keyboardShortcut(.space, modifiers: []) 
+                    .keyboardShortcut(.space, modifiers: [])
             Text("00:00")
                 .font(.systemCaption1)
                 .foregroundColor(.systemGray300)
