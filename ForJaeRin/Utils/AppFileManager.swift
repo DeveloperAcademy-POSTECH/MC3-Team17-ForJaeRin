@@ -10,11 +10,12 @@ import Foundation
 class AppFileManager {
     /// FileManager 역할을 담당하는 싱글톤 객체
     static var shared = AppFileManager()
+
+    let fileManager = FileManager.default
+    
+    @Published var files: [KkoProject] = []
     
     private init() {}
-    
-    let fileManager = FileManager.default
-    @Published var files: [KkoProject] = []
     
     // MARK: 파일 디렉토리 url
     lazy var documentUrl = AppFileManager.shared.fileManager.urls(
@@ -120,7 +121,8 @@ class AppFileManager {
     // MARK: 임시 json 경로
     let url = Bundle.main.url(forResource: "sampleProject", withExtension: "json")
     
-    // new
+    // CodableProjecctModel을 Json파일로 변환하고 저장.
+    // 파일 위치는 PDF 파일 제목으로 폴더를 만들고 해당 폴더 밑에 저장
     func encodeJSON(codableProjectModel: CodableProjectModel, projectURL: URL) {
         // 디렉토리 Path - 프로젝트 이름
         let dirPath = documentUrl.appendingPathComponent(
@@ -135,13 +137,6 @@ class AppFileManager {
             let data = try encoder.encode(codableProjectModel)
 
             // 사용자의 문서 디렉토리에 JSON 파일을 저장
-            let documentDirectory = try FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create:false
-            )
-            
             do {
                 /// 생성할 폴더가 이미 만들어져 있는지 확인
                 if !FileManager.default.fileExists(atPath: dirPath.path) {
@@ -152,11 +147,10 @@ class AppFileManager {
                         attributes: nil)
                 }
             } catch {
-                /// 만들어져 있다면 폴더 생성
                 print("create folder error. do something, \(error)")
             }
             
-            // json 파일 저장
+            // 해당 폴더 밑에 json 파일 저장
             let fileURL = dirPath.appendingPathComponent("appProjectList.json")
             try data.write(to: fileURL)
             
@@ -164,7 +158,7 @@ class AppFileManager {
             print("Error: \(error)")
         }
         
-        // PDF 파일 복사본 저장.
+        // 해당 폴더 밑에 PDF 파일 복사본 저장.
         let sourceURL = projectURL
         let pdfName = projectURL.absoluteString.components(separatedBy: "/").last!
         let destinationURL = dirPath.appendingPathComponent(pdfName)
@@ -177,14 +171,15 @@ class AppFileManager {
         }
     }
     
-    func savePreviousProject(codableProjectModel: CodableProjectModel, projectURL: URL) {
+    // 이전 프로젝트 기록들은 "@Published var files: [KkoProject] = []"가 가지고 있다.
+    // files안에 현재 저장된 PDF데이터를 넣는다.
+    func addPreviousProject(codableProjectModel: CodableProjectModel, projectURL: URL) {
         let dirPath = documentUrl.appendingPathComponent(
             codableProjectModel.projectMetadata.projectName,
             conformingTo: .directory
         )
-        print("codableProjectModel.projectMetadata.projectName", codableProjectModel.projectMetadata.projectName)
+        
         let pdfName = projectURL.absoluteString.components(separatedBy: "/").last!
-        print("pdfName: ", pdfName)
         let destinationURL = dirPath.appendingPathComponent(pdfName)
         
         files.append(
@@ -194,7 +189,11 @@ class AppFileManager {
                 createAt: Date()
             )
         )
-        
+    }
+    
+    // 이전 프로젝트 기록들은 "@Published var files: [KkoProject] = []"가 가지고 있다.
+    // files안에 있는 KkoProject 모두를 projectPath.json 이라는 파일에 저장한다.
+    func writePreviousProject() {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         
@@ -215,6 +214,8 @@ class AppFileManager {
         }
     }
     
+    // projectPath.json 이라는 파일을 읽어서 이전 프로젝트를 불러온다.
+    // 해당 파일에는 이전 프로젝트 기록들을 저장한다.
     func readPreviousProject() {
         do {
             let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

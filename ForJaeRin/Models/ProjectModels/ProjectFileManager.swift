@@ -31,13 +31,15 @@ final class ProjectFileManager: ObservableObject {
         )
     }
     
-    public func savePreviousProject() {
-        print("ProjectFileManager에서 savaPreviousProject 시작")
-        AppFileManager.shared.savePreviousProject(
+    public func addPreviousProject() {
+        AppFileManager.shared.addPreviousProject(
             codableProjectModel: makeCodableProjectModel(),
             projectURL: projectURL!
         )
-        print("ProjectFileManager에서 savaPreviousProject 끝")
+    }
+    
+    public func writePreviousProject() {
+        AppFileManager.shared.writePreviousProject()
     }
     
     // ProjectFileManager를 이용해서 CodableProjectModel을 만들어서 전달
@@ -59,22 +61,7 @@ final class ProjectFileManager: ObservableObject {
     }
     
     // CodableProjectModel에 있는 데이터를 이용해서 ProjectFileManager을 만들고 전달
-    public func makeProjectModel(codableData: CodableProjectModel, url: URL){
-        
-//        let projectFileManager = ProjectFileManager()
-//        projectFileManager.projectMetadata = ProjectMetadata(
-//            projectName: codableData.projectMetadata.projectName,
-//            projectGoal: codableData.projectMetadata.projectGoal,
-//            projectTarget: codableData.projectMetadata.projectGoal,
-//            presentationTime: codableData.projectMetadata.presentationTime,
-//            creatAt: Date()
-//        )
-//        projectFileManager.pdfDocument = PDFDocumentManager(
-//            url: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!,
-//            PDFPages: codableData.pdfDocumentManager.PDFPages,
-//            PDFGroups: codableData.pdfDocumentManager.PDFGroups
-//        )
-//        projectFileManager.practices = []
+    public func makeProjectModel(codableData: CodableProjectModel, url: URL) {
         self.projectURL = url
         self.projectMetadata = ProjectMetadata(
             projectName: codableData.projectMetadata.projectName,
@@ -89,7 +76,6 @@ final class ProjectFileManager: ObservableObject {
             PDFGroups: codableData.pdfDocumentManager.PDFGroups
         )
         self.practices = []
-        
     }
 }
 
