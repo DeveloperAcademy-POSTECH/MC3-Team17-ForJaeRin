@@ -17,26 +17,32 @@ import SwiftUI
  */
 // MARK: 프로젝트 연습 이력 관리(피드백)를 위한 페이지 뷰
 struct ProjectHistoryView: View {
-    let data = [
-        //[data 가져오기] 내가 말한 키워드 횟수
-        (23.0, Color.primary500),
-        //[data 가져오기] 말하지 못한 키워드 횟수 = 전체 키워드 갯수 - 내가 말한 키워드 횟수
-        (11.0, Color.systemGray100)
-    ]
+    @StateObject var vm = ProjectHistoryVM()
+    @EnvironmentObject var projectFileManager: ProjectFileManager
     
     var body: some View {
         VStack(spacing: 0) {
             GeometryReader { geometry in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        Text("첫번째 발표연습 기록")
+                        /// 첫, 두, 세 적용
+                        Text(vm.numberToHanguel(number: projectFileManager.practices!.count)+"번째 발표연습 기록")
                             .systemFont(.headline)
-                            .padding(.bottom, 80)
-                        PracticeSummaryView(slices: data)
+                            .padding(.bottom, 48)
+                        PracticeSummaryView(
+                            slices: [
+                            (Double(saidKeywords()), Color.primary500),
+                            (
+                                Double(totalKeywords()) - Double(saidKeywords()),
+                                Color.systemGray100
+                            )
+                        ])
                             .frame(minHeight: 380)
+                            .padding(.bottom, 28)
                         ProjectHistoryListView()
                             .frame(minHeight: 252)
                             .environmentObject(VoiceManager.shared)
+                            .padding(.bottom, 48)
                         MissedKeywordListView()
                     }
                     .padding(.vertical, 50)
@@ -59,6 +65,22 @@ struct ProjectHistoryView: View {
             maxHeight: .infinity
         )
         .background(Color.detailLayoutBackground)
+    }
+    
+    private func saidKeywords() -> Int {
+        var answer = 0
+        for keywords in projectFileManager.practices!.last!.saidKeywords {
+            answer += keywords.count
+        }
+        return answer
+    }
+    
+    private func totalKeywords() -> Int {
+        var answer = 0
+        for page in projectFileManager.pdfDocument!.PDFPages {
+            answer += page.keywords.count
+        }
+        return answer
     }
 }
 

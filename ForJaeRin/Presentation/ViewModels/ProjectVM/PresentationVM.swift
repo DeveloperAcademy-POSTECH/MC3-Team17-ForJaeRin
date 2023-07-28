@@ -24,12 +24,15 @@ class PresentationVM: ObservableObject {
         /// 일시정지 버튼을 누르면 STT가 정지됨
         /// 연습 끝내기 버튼을 누르면 STT가 정지됨
         saidKeywords: [],
+        
         /// 재생 버튼을 누르면 currentPageIndex의 group과 0:00를 저장한다.
         /// PresentationPDFView에서 currentPageIndex가 변경되면 projectFilmManager를 통해 group index를 알고
         /// group index가 change된다면 voiceManager.timer를 통해 시간과 변경된 groupindex를 함께 저장한다.
         speechRanges: [],
+        
         /// PresentationView에서 연습 끝내기 버튼이 눌리면 총 발표 시간이 추가된다.
         progressTime: 0,
+        
         audioPath: AppFileManager.shared.directoryPath)
     @Published var isSidebarActive = true
     
