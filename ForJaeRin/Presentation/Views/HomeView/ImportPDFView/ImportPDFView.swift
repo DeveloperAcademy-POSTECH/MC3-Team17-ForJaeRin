@@ -43,25 +43,6 @@ struct ImportPDFView: View {
         .environmentObject(vm)
         .environmentObject(myData)
     }
-//    func sendMyData() {
-//        var tempStr = myData.time
-//        tempStr.removeLast()
-//        let tempInt = Int(tempStr)
-//        var projectMetaData = ProjectMetadata(
-//            projectName: myData.title,
-//            projectGoal: myData.purpose,
-//            presentationTime: tempInt!,
-//            creatAt: Date()
-//        )
-//
-//        var pdfDocumentManager = PDFDocumentManager(
-//            url: myData.url,
-//            PDFPages: [],
-//            PDFGroups: []
-//        )
-//
-//        var projectFileManager = ProjectFileManager()
-//    }
 }
 
 extension ImportPDFStep {
@@ -207,7 +188,8 @@ extension ImportPDFView {
         
         projectFileManager.projectURL = myData.url
         projectFileManager.exportFile()
-        projectFileManager.savePreviousProject()
+        projectFileManager.addPreviousProject()
+        projectFileManager.writePreviousProject()
         
         isSheetActive = false
         isNewProjectSettingDone = true

@@ -310,7 +310,15 @@ extension HomeView {
                 let colorSpace = CGColorSpaceCreateDeviceRGB()
                 let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue
                 
-                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) {
+                if let context = CGContext(
+                    data: nil,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: 0,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                ) {
                     context.setFillColor(NSColor.white.cgColor)
                     context.fill(CGRect(x: 0, y: 0, width: width, height: height))
                     
