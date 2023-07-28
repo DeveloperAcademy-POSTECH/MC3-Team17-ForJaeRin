@@ -233,6 +233,14 @@ class AppFileManager {
         
     }
     
+    func deletePreviousProject(file: KkoProject) {
+        for index in 0..<files.count {
+            if files[index].id == file.id {
+                files.remove(at: index)
+            }
+        }
+    }
+    
 }
 
 // MARK: 임시 JSON 구조체

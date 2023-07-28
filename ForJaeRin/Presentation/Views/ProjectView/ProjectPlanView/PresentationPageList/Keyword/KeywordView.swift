@@ -78,6 +78,7 @@ struct KeywordView: View {
             }
             Spacer()
         }.onAppear {
+            print(myData.keywords)
             withAnimation {
                 resetKeywordIndexList()
             }
@@ -91,6 +92,7 @@ struct KeywordView: View {
             keywordIndexList[index] = []
         }
         for index in 0...lastIndex {
+            print("myData.keywords[pageNumber: \(pageNumber)].count: ", myData.keywords[pageNumber].count, ", index: \(index) ")
             filledWidth = filledWidth + (myData.keywords[pageNumber][index] == "" ?
                                          "키워드 입력" :
                                             myData.keywords[pageNumber][index])

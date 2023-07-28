@@ -225,13 +225,21 @@ extension HomeView {
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
             spacing: 56) {
-                ForEach(files, id: \.id) { file in
+                ForEach(files.reversed(), id: \.id) { file in
                     ProjectCardView(
                         path: file.path,
                         title: file.title,
                         date: file.createAt,
                         width: vm.calcCardWidth(containerWidth: containerWidth)
                     )
+                    .contextMenu {
+                        Button(action: {
+                            AppFileManager.shared.deletePreviousProject(file: file)
+                        }, label: {
+                            Text("Delete")
+                            Image(systemName: "trash")
+                        })
+                    }
                     .onTapGesture {
                         // PDF파일의 경로를 통해서 해당 파일에 같이 있는 appProjectList.json을 읽는다.
                         // 해당 파일을 읽고 CodableProjectFileManager에 값을 초기화
@@ -248,7 +256,10 @@ extension HomeView {
                             let data = try Data(contentsOf: tempURL)
                             let decoder = JSONDecoder()
                             let codableProjectModel = try decoder.decode(CodableProjectModel.self, from: data)
-                            projectFileManager.makeProjectModel(codableData: codableProjectModel, url: file.path)
+                            projectFileManager.makeProjectModel(
+                                codableData: codableProjectModel,
+                                url: file.path
+                            )
                             // myData에 데이터넣기
                             myData.clear()
                             myData.url = file.path

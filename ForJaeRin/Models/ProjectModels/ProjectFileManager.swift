@@ -44,6 +44,7 @@ final class ProjectFileManager: ObservableObject {
     
     // ProjectFileManager를 이용해서 CodableProjectModel을 만들어서 전달
     public func makeCodableProjectModel() -> CodableProjectModel {
+        
         let codableProjectModel = CodableProjectModel(
             projectMetadata: CodableProjectMetadata(
                 projectName: self.projectMetadata!.projectName,
