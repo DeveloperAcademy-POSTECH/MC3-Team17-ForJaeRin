@@ -36,7 +36,7 @@ extension PracticeSummaryView {
                 Text("키워드 달성도")
                     .systemFont(.headline)
                 Text("내가 설정한 키워드를 말한 횟수예요")
-                    .systemFont(.caption1)
+                    .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
             }
             .frame(
@@ -119,7 +119,7 @@ extension PracticeSummaryView {
                 Text("연습 소요시간")
                     .systemFont(.headline)
                 Text("설정한 시간 대비 실제 연습시간이에요")
-                    .systemFont(.caption1)
+                    .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
                     .padding(.bottom, 4)
                 HStack(spacing: 10) {

@@ -43,6 +43,7 @@ extension MissedKeywordListView {
                     ) { keyword in
                         Text(keyword)
                             .systemFont(.subTitle)
+                            .multilineTextAlignment(.center)
                             .foregroundColor(
                                 projectFileManager.practices!.last!.saidKeywords[pageIndex].contains(keyword)
                                 ? index == 0
@@ -69,11 +70,16 @@ extension MissedKeywordListView {
                             .cornerRadius(8)
                     }
                     if pageIndex != pageIndexes.last! {
-                        Rectangle()
-                            .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
-                            .foregroundColor(Color.systemGray200)
-                            .frame(maxWidth: .infinity,  minHeight: 1, maxHeight: 1)
-                            .padding(.vertical, 8)
+                        GeometryReader { geometry in
+                            Path { path in
+                                let startPoint = CGPoint(x: 0, y: geometry.size.height / 2)
+                                let endPoint = CGPoint(x: geometry.size.width, y: geometry.size.height / 2)
+                                path.move(to: startPoint)
+                                path.addLine(to: endPoint)
+                            }
+                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                            .foregroundColor(.systemGray400)
+                        }.frame(height: 16)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .top)

@@ -23,6 +23,7 @@ struct KeywordView: View {
     @State var cursorIndex: Int = 7
     @EnvironmentObject var myData: MyData
     @State var editSomething = false
+    @State var test = ""
     
     var body: some View {
         VStack(spacing: 0) {
@@ -43,12 +44,6 @@ struct KeywordView: View {
                                         print(keywordIndexList)
                                     }
                                 })
-                                .contextMenu {
-                                    if lastIndex > 0 {
-                                        Button("Delete") {deleteKeyword(index: index)
-                                        }
-                                    }
-                                }
                                 .onDrag {
                                     NSItemProvider(object: String(index) as NSString)
                                 }
@@ -76,7 +71,6 @@ struct KeywordView: View {
                     Spacer()
                 }
             }
-            Spacer()
         }.onAppear {
             withAnimation {
                 resetKeywordIndexList()

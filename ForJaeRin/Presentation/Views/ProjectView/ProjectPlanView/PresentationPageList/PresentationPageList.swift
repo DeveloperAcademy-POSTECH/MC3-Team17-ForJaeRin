@@ -15,31 +15,22 @@ struct PresentationPageList: View {
     @EnvironmentObject var myData: MyData
     
     var body: some View {
-        GeometryReader { geometry in
-            let document = projectFileManager.pdfDocument!
-            ScrollView {
-                List {
-                    if isOnboardingActive {
-                        PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
-                    }
-                    ForEach(myData.images.indices, id: \.self) { index in
-                        PresentationPageListItem(
-                            groupIndex: document.findGroupIndex(pageIndex: index),
-                            pageIndex: index,
-                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
-                            // pdfPage: document.PDFPages[index]
-                        )
-                    }
-                    // MARK: - 페이지 이동 필요한지 논의 필요
-//                    .onMove { fromIndex, toIndex in
-//                        document.PDFPages.move(fromOffsets: fromIndex, toOffset: toIndex)
-//                    }
+        let document = projectFileManager.pdfDocument!
+        ScrollView {
+                if isOnboardingActive {
+                    PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
-                    pdfDocumentPages = newValue
-                })
-            }
+                ForEach(myData.images.indices, id: \.self) { index in
+                    PresentationPageListItem(
+                        groupIndex: document.findGroupIndex(pageIndex: index),
+                        pageIndex: index,
+                        pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
+                        // pdfPage: document.PDFPages[index]
+                    )
+                }
+            .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
+                pdfDocumentPages = newValue
+            })
         }
     }
 }

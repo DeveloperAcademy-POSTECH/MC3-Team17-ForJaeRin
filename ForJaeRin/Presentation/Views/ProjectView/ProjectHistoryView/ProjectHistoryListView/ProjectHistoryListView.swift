@@ -62,7 +62,7 @@ extension ProjectHistoryListView {
                     .font(.systemHeadline)
                     .foregroundColor(.systemGray500)
                 Text("원하는 그룹을 클릭하면 그 그룹부터 다시 들을 수 있어요")
-                    .font(.systemCaption1)
+                    .systemFont(.body)
                     .foregroundColor(.systemGray400)
             }
             .padding([.top, .leading], 28)
