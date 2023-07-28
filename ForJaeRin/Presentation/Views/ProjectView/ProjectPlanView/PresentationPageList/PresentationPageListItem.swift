@@ -34,6 +34,7 @@ struct PresentationPageListItem: View {
                         .cornerRadius(50)
                         .frame(maxWidth: 255, maxHeight: 26)
                     TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                        .fixedSize()
                         .systemFont(.caption1)
                         .foregroundColor(GroupColor.allCases[groupIndex].text)
                         .multilineTextAlignment(.center)
@@ -155,6 +156,9 @@ extension PresentationPageListItem {
             } else {
                 break
             }
+        }
+        if answer > 0 {
+            answer -= 1
         }
         return answer
     }
