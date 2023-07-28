@@ -13,7 +13,18 @@ struct SectionHeaderView: View {
     var info: SectionHeaderInfo = (title: "타이틀", subTitle: nil)
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: .spacing100) {
+            Text(info.title)
+                .font(.systemHeadline)
+                .foregroundColor(Color.systemGray500)
+            if let subTitle = info.subTitle {
+                Text(subTitle)
+                    .foregroundColor(Color.systemGray300)
+                    .font(.body)
+            }
+        }
+        .multilineTextAlignment(.leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

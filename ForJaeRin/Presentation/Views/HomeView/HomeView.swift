@@ -122,7 +122,7 @@ extension HomeView {
             //                .background(Color.systemBlack)
                 .padding(.top, .spacing700)
                 .padding(.bottom, .spacing200)
-            sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
+            SectionHeaderView(info: vm.TOP_TEXT_INFO)
             newProjectButtonView()
         }
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)
