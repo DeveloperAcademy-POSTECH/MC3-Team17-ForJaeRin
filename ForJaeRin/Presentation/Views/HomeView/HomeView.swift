@@ -93,14 +93,14 @@ struct HomeView: View {
                 progressTime: file.practices[0].progressTime,
                 audioPath: URL(string: file.practices[0].audioPath)!
             ),
-                                            Practice(
-                                                saidKeywords: file.practices[1].saidKeywords,
-                                                speechRanges: file.practices[1].speechRanges.map { speechRange in
-                                                    SpeechRange(start: speechRange.start, group: speechRange.group)
-                                                },
-                                                progressTime: file.practices[1].progressTime,
-                                                audioPath: URL(string: file.practices[1].audioPath)!
-                                            )
+                Practice(
+                    saidKeywords: file.practices[1].saidKeywords,
+                    speechRanges: file.practices[1].speechRanges.map { speechRange in
+                        SpeechRange(start: speechRange.start, group: speechRange.group)
+                    },
+                    progressTime: file.practices[1].progressTime,
+                    audioPath: URL(string: file.practices[1].audioPath)!
+                )
             ]
         } catch {
             print("Error decoding JSON: \(error)")
@@ -115,12 +115,13 @@ extension HomeView {
             Image(vm.LOGO_NAME)
                 .resizable()
                 .scaledToFit()
+                .border(.red, width: 2)
                 .frame(
                     width: vm.LOGO_SIZE.width,
                     height: vm.LOGO_SIZE.height)
             //                .background(Color.systemBlack)
-                .padding(.top, 40)
-                .padding(.bottom, 10)
+                .padding(.top, .spacing700)
+                .padding(.bottom, .spacing200)
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
             newProjectButtonView()
         }
@@ -171,18 +172,19 @@ extension HomeView {
                     .font(Font.system(size: 16))
             }
             .buttonStyle(AppButtonStyle())
-            NavigationLink {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-                    .frame(maxWidth: .infinity)
-            } label: {
-                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
-            }
-            .buttonStyle(AppButtonStyle())
+            // MARK: - 개발 편의를 위한 네비게이션 버튼
+//            NavigationLink {
+//                ProjectDocumentView()
+//                    .environmentObject(projectFileManager)
+//                    .environmentObject(myData)
+//                    .presentedWindowStyle(.titleBar)
+//                    .navigationBarBackButtonHidden()
+//                    .frame(maxWidth: .infinity)
+//            } label: {
+//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+//                    .font(Font.system(size: 16))
+//            }
+//            .buttonStyle(AppButtonStyle())
         }
         .frame(maxWidth: .infinity)
         .padding(.bottom, 56)

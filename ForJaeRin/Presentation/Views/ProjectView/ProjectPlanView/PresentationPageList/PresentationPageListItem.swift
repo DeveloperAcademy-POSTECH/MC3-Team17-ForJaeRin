@@ -101,14 +101,6 @@ extension PresentationPageListItem {
                 .systemFont(.caption1)
                 .foregroundColor(Color.systemGray400)
             VStack {
-                //                PDFKitView(url: pdfUrl, pageNumber: pageIndex)
-                //                    .frame(maxWidth: 212, maxHeight: 118)
-                //                    .overlay(
-                //                        RoundedRectangle(cornerRadius: 10)
-                //                            .stroke(Color.systemGray100,lineWidth:1)
-                //                            .foregroundColor(Color.clear)
-                //                            .cornerRadius(10)
-                //                      )
                 Image(nsImage: myData.images[pageIndex])
                     .resizable()
                     .frame(width: 212, height: 118)
