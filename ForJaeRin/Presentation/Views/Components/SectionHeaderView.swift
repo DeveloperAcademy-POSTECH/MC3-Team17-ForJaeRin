@@ -20,7 +20,7 @@ struct SectionHeaderView: View {
             if let subTitle = info.subTitle {
                 Text(subTitle)
                     .foregroundColor(Color.systemGray300)
-                    .font(.body)
+                    .font(.systemBody)
             }
         }
         .multilineTextAlignment(.leading)
