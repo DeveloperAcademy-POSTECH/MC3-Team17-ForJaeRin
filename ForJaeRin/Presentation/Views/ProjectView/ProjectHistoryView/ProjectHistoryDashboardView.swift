@@ -101,7 +101,7 @@ struct ProjectHistoryDashboardView: View {
     }
 }
 
-extension ProjectHistoryDasyboardView {
+extension ProjectHistoryDashboardView {
     // MARK: - 타이틀
     private func historyDashboardTitleView() -> some View {
         Text("{발표대상}에게 {발표목적}을 전달하기 위한 발표")
