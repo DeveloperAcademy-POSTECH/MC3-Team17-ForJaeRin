@@ -28,6 +28,10 @@ struct ProjectHistoryDasyboardView: View {
         }
     }
     
+    private func calcPracticeTime(second: Int) -> String {
+        DateManager.secondsToTime(seconds: second)
+    }
+    
     private func requestSummaryData(index: Int) -> String {
         switch index {
         case 0:
@@ -78,15 +82,9 @@ extension ProjectHistoryDasyboardView {
                 .padding(.bottom, 24)
             /// 리스트
             VStack {
-                historyListHeaer()
+                historyListHeader()
                 ScrollView(showsIndicators: false) {
                     if let practices = projectFileManager.practices {
-                        ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
-                            historyListItem(index: index, practice: practice)
-                        }
-                        ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
-                            historyListItem(index: index, practice: practice)
-                        }
                         ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
                             historyListItem(index: index, practice: practice)
                         }
@@ -108,7 +106,7 @@ extension ProjectHistoryDasyboardView {
         )
     }
     
-    private func historyListHeaer() -> some View {
+    private func historyListHeader() -> some View {
         HStack(spacing: 0) {
             Rectangle()
                 .foregroundColor(Color.clear)
@@ -148,7 +146,7 @@ extension ProjectHistoryDasyboardView {
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity)
             // time
-            Text("\(practice.progressTime)")
+            Text("\(calcPracticeTime(second: practice.progressTime))")
                 .systemFont(.body)
                 .bold()
                 .foregroundColor(Color.systemGray500)

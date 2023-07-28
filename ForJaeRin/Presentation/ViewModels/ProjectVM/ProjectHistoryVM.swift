@@ -17,22 +17,11 @@ class ProjectHistoryVM: ObservableObject {
     }
     
     func secondsToTime(seconds: Int) -> String {
-        let minutes = seconds / 60
-        let seconds = seconds % 60
-        return String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
+        DateManager.secondsToTime(seconds: seconds)
     }
     
     func intToTime(second: Int) -> String {
-        if second >= 0 {
-            let minutes = second / 60
-            let seconds = second % 60
-            return "+" + String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
-        } else {
-            let second = second * (-1)
-            let minutes = second / 60
-            let seconds = second % 60
-            return "-" + String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
-        }
+        DateManager.intToTime(second: second)
     }
     
     func gettingAudioPath(path: URL) -> String {
