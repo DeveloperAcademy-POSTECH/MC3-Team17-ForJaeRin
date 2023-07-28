@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		112F60A42A6831BF00D19446 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A32A6831BF00D19446 /* String+Extension.swift */; };
-		112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A62A68322B00D19446 /* KeywordFieldView.swift */; };
 		112F60A92A68326100D19446 /* KeywordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60A82A68326100D19446 /* KeywordView.swift */; };
 		112F60AE2A690EBF00D19446 /* GroupingAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */; };
 		112F60B02A690F4100D19446 /* TempPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60AF2A690F4100D19446 /* TempPDFView.swift */; };
 		112F60B22A690F8600D19446 /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112F60B12A690F8600D19446 /* GroupListView.swift */; };
 		11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */; };
+		1193E70B2A739FCC0010E0FE /* KeywordFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1193E70A2A739FCC0010E0FE /* KeywordFieldView.swift */; };
 		4373B8AC2A66713400518FF7 /* InputPresentationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */; };
 		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
@@ -113,12 +113,12 @@
 
 /* Begin PBXFileReference section */
 		112F60A32A6831BF00D19446 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		112F60A62A68322B00D19446 /* KeywordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFieldView.swift; sourceTree = "<group>"; };
 		112F60A82A68326100D19446 /* KeywordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordView.swift; sourceTree = "<group>"; };
 		112F60AD2A690EBF00D19446 /* GroupingAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingAddButtonView.swift; sourceTree = "<group>"; };
 		112F60AF2A690F4100D19446 /* TempPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPDFView.swift; sourceTree = "<group>"; };
 		112F60B12A690F8600D19446 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
 		11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHistoryVM.swift; sourceTree = "<group>"; };
+		1193E70A2A739FCC0010E0FE /* KeywordFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordFieldView.swift; sourceTree = "<group>"; };
 		4373B8AB2A66713400518FF7 /* InputPresentationInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPresentationInfoView.swift; sourceTree = "<group>"; };
 		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
@@ -232,8 +232,8 @@
 		112F60A52A68320600D19446 /* Keyword */ = {
 			isa = PBXGroup;
 			children = (
-				112F60A62A68322B00D19446 /* KeywordFieldView.swift */,
 				112F60A82A68326100D19446 /* KeywordView.swift */,
+				1193E70A2A739FCC0010E0FE /* KeywordFieldView.swift */,
 			);
 			path = Keyword;
 			sourceTree = "<group>";
@@ -886,6 +886,7 @@
 				A93602B82A716E22001B20BE /* PracticeSummaryView.swift in Sources */,
 				A99526D02A5E334D008510CF /* FileExporterButtonView.swift in Sources */,
 				A92ABACA2A655E05004B4972 /* DateManager.swift in Sources */,
+				1193E70B2A739FCC0010E0FE /* KeywordFieldView.swift in Sources */,
 				A92ABAB62A630A94004B4972 /* ChipView.swift in Sources */,
 				A92ABABE2A64E363004B4972 /* KkoFileModel.swift in Sources */,
 				A92ABAD22A657369004B4972 /* Font+Extension.swift in Sources */,
@@ -943,7 +944,6 @@
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
 				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
-				112F60A72A68322B00D19446 /* KeywordFieldView.swift in Sources */,
 				A93602B42A716AA3001B20BE /* PieChartView.swift in Sources */,
 				A93602B22A716A74001B20BE /* GroupView.swift in Sources */,
 				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
@@ -1109,7 +1109,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1146,7 +1146,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = V7Y39HNV38;
+				DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
