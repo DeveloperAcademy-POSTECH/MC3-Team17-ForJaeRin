@@ -22,7 +22,7 @@ struct InputPresentationInfoView: View {
     let items = ["5분", "10분", "15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 24) {
             GeometryReader { geometry in
                 Image(nsImage: myData.images[0])
                     .resizable()
@@ -37,7 +37,6 @@ struct InputPresentationInfoView: View {
                 projectTitleInputView()
                 projectInfoInputView()
             }
-            .padding(.top, 24)
             .frame(maxWidth: .infinity, alignment: .topLeading)
         }
         .frame(maxWidth: 456, maxHeight: 532, alignment: .center)
@@ -66,21 +65,23 @@ extension InputPresentationInfoView {
         VStack(alignment: .leading, spacing: 10) {
             Text("발표 상세")
                 .systemFont(.body)
-            ZStack {
+            VStack(spacing: 0) {
+                Spacer()
+                targetInputView()
+                Divider()
+                purposeInputView()
+                Divider()
+                timeInputView()
+                Spacer()
+            }
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
                 RoundedRectangle(cornerRadius: 6)
                     .stroke(Color(.black).opacity(0.04))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color(.black).opacity(0.015))
-                VStack(spacing: 0) {
-                    targetInputView()
-                    Divider()
-                    purposeInputView()
-                    Divider()
-                    timeInputView()
-                }
-                .padding(.horizontal, 10)
-                .frame(maxWidth: .infinity)
-            }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            )
         }
     }
     

@@ -48,16 +48,16 @@ struct ProjectDocumentView: View {
                         if vm.currentTab == .practice {
                             Button {
                                 print("myData.groupData", myData.groupData)
-                                print("projectFileManager.pdfDocument?.PDFGroups", projectFileManager.pdfDocument?.PDFGroups)
+                                print("projectFileManager.pdfDocument?.PDFGroups",
+                                      projectFileManager.pdfDocument?.PDFGroups
+                                )
                             } label: {
                                 Text("테스트")
                             }
-
                             ProjectPlanView(vm: vm)
                                 .environmentObject(myData)
                         } else {
-                             ProjectHistoryView()
-//                            Text("준비 중,,")
+                            ProjectHistoryDashboardView()
                         }
                     }
                 }

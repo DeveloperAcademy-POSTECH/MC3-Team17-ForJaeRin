@@ -179,7 +179,7 @@ enum GroupColor: CaseIterable {
     var text: Color {
         switch self {
         case .groupPurple:
-            return Color.groupPurpleText
+            return Color.systemPrimary
         case .groupYellow:
             return Color.groupYellowText
         case .groupGreen:
@@ -191,7 +191,7 @@ enum GroupColor: CaseIterable {
         case .groupBlue:
             return Color.groupBlueText
         case .groupGray:
-            return Color.groupGrayText
+            return Color.systemGray500
         }
     }
 }

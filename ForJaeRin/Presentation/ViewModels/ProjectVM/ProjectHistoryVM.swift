@@ -8,28 +8,20 @@
 import Foundation
 
 class ProjectHistoryVM: ObservableObject {
+    let SUMMARY_INFO_TITLES = ["발표 날짜", "목표 소요 시간", "연습 횟수"]
+    
+    @Published var isHistoryDetailActive = false
     
     func calcGroupBlockSize(percent: CGFloat, whole: CGFloat) -> CGFloat {
         return percent * (Double(whole) / Double(100))
     }
     
     func secondsToTime(seconds: Int) -> String {
-        let minutes = seconds / 60
-        let seconds = seconds % 60
-        return String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
+        DateManager.secondsToTime(seconds: seconds)
     }
     
     func intToTime(second: Int) -> String {
-        if second >= 0 {
-            let minutes = second / 60
-            let seconds = second % 60
-            return "+" + String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
-        } else {
-            let second = second * (-1)
-            let minutes = second / 60
-            let seconds = second % 60
-            return "-" + String(format: "%02d", minutes) + ":" + String(format: "%02d", seconds)
-        }
+        DateManager.intToTime(second: second)
     }
     
     func gettingAudioPath(path: URL) -> String {

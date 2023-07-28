@@ -17,7 +17,7 @@ import SwiftUI
  */
 // MARK: 프로젝트 연습 이력 관리(피드백)를 위한 페이지 뷰
 struct ProjectHistoryView: View {
-    @StateObject var vm = ProjectHistoryVM()
+    @ObservedObject var vm = ProjectHistoryVM()
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     var body: some View {
@@ -29,6 +29,9 @@ struct ProjectHistoryView: View {
                         Text(vm.numberToHanguel(number: projectFileManager.practices!.count)+"번째 발표연습 기록")
                             .systemFont(.headline)
                             .padding(.bottom, 48)
+                            .onTapGesture {
+                                vm.isHistoryDetailActive = false
+                            }
                         PracticeSummaryView(
                             slices: [
                             (Double(saidKeywords()), Color.primary500),
