@@ -17,7 +17,7 @@ struct HomeView: View {
     @EnvironmentObject var myData: MyData
     // EnvironmentObject로 전달할 변수 여기서 선언
     @StateObject var vm = HomeVM()
-
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -38,13 +38,13 @@ struct HomeView: View {
                     isSheetActive: $vm.isSheetActive,
                     isNewProjectSettingDone: $vm.isNewProjectSettingDone
                 )
-                    .frame(
-                        minWidth: vm.getSheetWidth(height: geometry.size.height),
-                        maxWidth: vm.getSheetWidth(height: geometry.size.height),
-                        minHeight: geometry.size.height - 64
-                    )
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
+                .frame(
+                    minWidth: vm.getSheetWidth(height: geometry.size.height),
+                    maxWidth: vm.getSheetWidth(height: geometry.size.height),
+                    minHeight: geometry.size.height - 64
+                )
+                .environmentObject(projectFileManager)
+                .environmentObject(myData)
             }
             .navigationDestination(isPresented: $vm.isNewProjectSettingDone) {
                 ProjectDocumentView()
@@ -92,8 +92,8 @@ struct HomeView: View {
                 },
                 progressTime: file.practices[0].progressTime,
                 audioPath: URL(string: file.practices[0].audioPath)!
-                )
-                ]
+            )
+            ]
         } catch {
             print("Error decoding JSON: \(error)")
         }
@@ -110,7 +110,7 @@ extension HomeView {
                 .frame(
                     width: vm.LOGO_SIZE.width,
                     height: vm.LOGO_SIZE.height)
-//                .background(Color.systemBlack)
+            //                .background(Color.systemBlack)
                 .padding(.top, 40)
                 .padding(.bottom, 10)
             sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
@@ -221,72 +221,76 @@ extension HomeView {
     
     // MARK: 리스트가 있을 때 보여지는 그리드
     private func projectCardContainerView(files: [KkoProject], containerWidth: CGFloat) -> some View {
-            LazyVGrid(
+        LazyVGrid(
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
             spacing: 56) {
-            ForEach(files, id: \.id) { file in
-                ProjectCardView(
-                    path: file.path,
-                    title: file.title,
-                    date: file.createAt,
-                    width: vm.calcCardWidth(containerWidth: containerWidth)
-                )
-                .onTapGesture {
-                    // PDF파일의 경로를 통해서 해당 파일에 같이 있는 appProjectList.json을 읽는다.
-                    // 해당 파일을 읽고 CodableProjectFileManager에 값을 초기화
-                    // CodableProjectFileManager를 ProjectFileManager에 잘 넣고
-                    // MyData에도 값을 잘 넣는다.
-                    // PresentationView 화면으로 넘긴다.
-                    let tempURL = file.path
-                        .deletingLastPathComponent()
-                        .appendingPathComponent(
-                            "appProjectList.json",
-                            conformingTo: .json
-                        )
-                    do {
-                        let data = try Data(contentsOf: tempURL)
-                        let decoder = JSONDecoder()
-                        let codableProjectModel = try decoder.decode(CodableProjectModel.self, from: data)
-                        projectFileManager.makeProjectModel(codableData: codableProjectModel, url: file.path)
-                        // myData에 데이터넣기
-                        myData.clear()
-                        myData.url = file.path
-                        myData.title = projectFileManager.projectMetadata!.projectName
-                        myData.target = projectFileManager.projectMetadata!.projectTarget
-                        myData.time = String(projectFileManager.projectMetadata!.presentationTime)
-                        myData.purpose = projectFileManager.projectMetadata!.projectGoal
-                        myData.images = convertPDFToImages(pdfDocument: PDFDocument(url: file.path)!)
-                        for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
-                            myData.keywords.append((projectFileManager.pdfDocument?.PDFPages[index].keywords)!)
-                            myData.script.append((projectFileManager.pdfDocument?.PDFPages[index].script)!)
-                        }
-                        for index in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
-                            let start = projectFileManager.pdfDocument?.PDFGroups[index].range.start
-                            let end = projectFileManager.pdfDocument?.PDFGroups[index].range.end
-                            let minute = (projectFileManager.pdfDocument?.PDFGroups[index].setTime)! / 60
-                            let second =  (projectFileManager.pdfDocument?.PDFGroups[index].setTime)! % 60
-                            let name = projectFileManager.pdfDocument?.PDFGroups[index].name
-
-                            myData.groupData.append(
-                                [
-                                    name!,
-                                    String(minute),
-                                    String(second),
-                                    String(start!),
-                                    String(end!)
-                                ]
+                ForEach(files, id: \.id) { file in
+                    ProjectCardView(
+                        path: file.path,
+                        title: file.title,
+                        date: file.createAt,
+                        width: vm.calcCardWidth(containerWidth: containerWidth)
+                    )
+                    .onTapGesture {
+                        // PDF파일의 경로를 통해서 해당 파일에 같이 있는 appProjectList.json을 읽는다.
+                        // 해당 파일을 읽고 CodableProjectFileManager에 값을 초기화
+                        // CodableProjectFileManager를 ProjectFileManager에 잘 넣고
+                        // MyData에도 값을 잘 넣는다.
+                        // PresentationView 화면으로 넘긴다.
+                        let tempURL = file.path
+                            .deletingLastPathComponent()
+                            .appendingPathComponent(
+                                "appProjectList.json",
+                                conformingTo: .json
                             )
+                        do {
+                            let data = try Data(contentsOf: tempURL)
+                            let decoder = JSONDecoder()
+                            let codableProjectModel = try decoder.decode(CodableProjectModel.self, from: data)
+                            projectFileManager.makeProjectModel(codableData: codableProjectModel, url: file.path)
+                            // myData에 데이터넣기
+                            myData.clear()
+                            myData.url = file.path
+                            myData.title = projectFileManager.projectMetadata!.projectName
+                            myData.target = projectFileManager.projectMetadata!.projectTarget
+                            myData.time = String(projectFileManager.projectMetadata!.presentationTime)
+                            myData.purpose = projectFileManager.projectMetadata!.projectGoal
+                            myData.images = convertPDFToImages(pdfDocument: PDFDocument(url: file.path)!)
+                            for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
+                                myData.keywords.append(
+                                    (projectFileManager.pdfDocument?.PDFPages[index].keywords)!
+                                )
+                                myData.script.append(
+                                    (projectFileManager.pdfDocument?.PDFPages[index].script)!
+                                )
+                            }
+                            for index in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
+                                let start = projectFileManager.pdfDocument?.PDFGroups[index].range.start
+                                let end = projectFileManager.pdfDocument?.PDFGroups[index].range.end
+                                let minute = (projectFileManager.pdfDocument?.PDFGroups[index].setTime)! / 60
+                                let second =  (projectFileManager.pdfDocument?.PDFGroups[index].setTime)! % 60
+                                let name = projectFileManager.pdfDocument?.PDFGroups[index].name
+                                
+                                myData.groupData.append(
+                                    [
+                                        name!,
+                                        String(minute),
+                                        String(second),
+                                        String(start!),
+                                        String(end!)
+                                    ]
+                                )
+                            }
+                            //
+                            vm.isNewProjectSettingDone = true
+                        } catch {
+                            print("JSON 실패")
                         }
-                        //
-                        vm.isNewProjectSettingDone = true
-                    } catch {
-                        print("JSON 실패")
+                        
                     }
-                    
                 }
             }
-        }
     }
     
     func convertPDFToImages(pdfDocument: PDFDocument) -> [NSImage] {
@@ -302,10 +306,18 @@ extension HomeView {
                 let colorSpace = CGColorSpaceCreateDeviceRGB()
                 let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue
                 
-                if let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo) {
+                if let context = CGContext(
+                    data: nil,
+                    width: width,
+                    height: height,
+                    bitsPerComponent: 8,
+                    bytesPerRow: 0,
+                    space: colorSpace,
+                    bitmapInfo: bitmapInfo
+                ) {
                     context.setFillColor(NSColor.white.cgColor)
                     context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-
+                    
                     page.draw(with: .cropBox, to: context)
                     
                     if let cgImage = context.makeImage() {

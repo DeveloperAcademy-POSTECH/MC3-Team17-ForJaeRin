@@ -17,8 +17,6 @@ class MyData: ObservableObject {
     @Published var time: String = ""
     @Published var purpose: String = ""
     
-    @Published var pageIndex: Int = 0
-    
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
@@ -34,8 +32,6 @@ class MyData: ObservableObject {
         self.target = ""
         self.time = ""
         self.purpose = ""
-        
-        self.pageIndex = 0
         
         self.keywords = []
         self.script = []
