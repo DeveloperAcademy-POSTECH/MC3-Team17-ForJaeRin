@@ -194,8 +194,24 @@ extension ImportPDFView {
                     setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
             }
         }
+        
+        var stringTime = myData.time
+        stringTime.removeLast()
+        projectFileManager.projectMetadata = ProjectMetadata(
+            projectName: myData.title,
+            projectGoal: myData.purpose,
+            projectTarget: myData.target,
+            presentationTime: Int(stringTime)!,
+            creatAt: Date()
+        )
+        
+        projectFileManager.projectURL = myData.url
+        projectFileManager.exportFile()
+        projectFileManager.savePreviousProject()
+        
         isSheetActive = false
         isNewProjectSettingDone = true
+        
     }
 }
 

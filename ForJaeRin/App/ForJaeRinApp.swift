@@ -10,13 +10,15 @@ import SwiftUI
 @main
 struct ForJaeRinApp: App {
     @StateObject var projectFileManager = ProjectFileManager()
+    @StateObject var myData = MyData()
     @State var stack = NavigationPath()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                HomeView(myData: MyData())
+                HomeView()
                     .environmentObject(projectFileManager)
+                    .environmentObject(myData)
             }
             .presentedWindowToolbarStyle(.expanded)
             .frame(
