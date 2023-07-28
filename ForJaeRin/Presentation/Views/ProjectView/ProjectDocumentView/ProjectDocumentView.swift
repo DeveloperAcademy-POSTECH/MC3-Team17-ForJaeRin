@@ -57,7 +57,7 @@ struct ProjectDocumentView: View {
                             ProjectPlanView(vm: vm)
                                 .environmentObject(myData)
                         } else {
-                            ProjectHistoryDasyboardView()
+                            ProjectHistoryDashboardView()
                         }
                     }
                 }
