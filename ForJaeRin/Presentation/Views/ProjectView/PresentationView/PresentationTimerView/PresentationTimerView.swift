@@ -32,7 +32,7 @@ struct PresentationTimerView: View {
                     timerContainer()
                 }
                 .padding(.vertical, 8)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, .spacing150)
                 .frame(
                     maxWidth: vm.AUDIO_CONTROLLER_SIZE.width,
                     maxHeight: vm.AUDIO_CONTROLLER_SIZE.height
@@ -90,7 +90,7 @@ extension PresentationTimerView {
                     vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
                 }
             }
-            audioControllButton(info: vm.AUDIO_STOP_BUTTON_INFO) {
+            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
                 speechRecognizer.stopTranscribing()
                 voiceManager.stopRecording(index: 0)
                 isPlay = false
@@ -100,8 +100,8 @@ extension PresentationTimerView {
 //                voiceManager.playRecording()
 //            }
         }
-        .padding(.vertical, 18)
-        .padding(.horizontal, 28)
+        .padding(.vertical, 8)
+        .padding(.horizontal, 32)
     }
     
     private func audioControllButton(

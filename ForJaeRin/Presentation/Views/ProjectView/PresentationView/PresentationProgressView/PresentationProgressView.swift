@@ -20,7 +20,7 @@ struct PresentationProgressView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             VStack {
                 if let document = projectFileManager.pdfDocument {
-                    Text("\(Int(vm.currentPageIndex))/\(Int(document.PDFPages.count)) (장)")
+                    Text("\(Int(vm.currentPageIndex + 1))/\(Int(document.PDFPages.count)) (장)")
                         .systemFont(.caption2)
                         .foregroundColor(Color.systemGray200)
                         .frame(maxWidth: .infinity, alignment: .trailing)

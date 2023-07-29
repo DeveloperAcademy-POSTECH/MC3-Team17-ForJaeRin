@@ -55,7 +55,7 @@ class PresentationVM: ObservableObject {
     let PROGRESS_SECTION_TITLE = "PPT 진행상황"
     
     func calcProgress(wholeCount: Int) -> CGFloat {
-        CGFloat(currentPageIndex * 100 / wholeCount) * (ACTIVE_SIDEBAR_WIDTH - 64) / 100
+        CGFloat((currentPageIndex + 1) * 100 / wholeCount) * (ACTIVE_SIDEBAR_WIDTH - 64) / 100
     }
     
     // MARK: KeywordListView
