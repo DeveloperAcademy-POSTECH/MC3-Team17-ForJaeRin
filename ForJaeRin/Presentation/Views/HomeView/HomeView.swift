@@ -219,13 +219,8 @@ extension HomeView {
         LazyVGrid(
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
-<<<<<<< HEAD
-            spacing: 56) {
-                ForEach(files.reversed(), id: \.id) { file in
-=======
             spacing: .spacing500) {
                 ForEach(files, id: \.id) { file in
->>>>>>> a06bf8c0853f696539aafe480b7c565808555004
                     ProjectCardView(
                         path: file.path,
                         title: file.title,

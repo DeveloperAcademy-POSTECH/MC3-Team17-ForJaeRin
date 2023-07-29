@@ -26,14 +26,8 @@ struct ProjectCardView: View {
                     .cornerRadius(10)
                 Image(nsImage: pdfToImage(pdfUrl: path)!)
                     .resizable()
-<<<<<<< HEAD
-                // .scaledToFit()
-                // .padding(24)
-                    .frame(width: width, height: width / 3 * 2)
-=======
                     .scaledToFill()
                     .frame(width: width, height: width / 16 * 9)
->>>>>>> a06bf8c0853f696539aafe480b7c565808555004
                     .cornerRadius(10)
             }
             VStack(alignment: .leading, spacing: 0) {
