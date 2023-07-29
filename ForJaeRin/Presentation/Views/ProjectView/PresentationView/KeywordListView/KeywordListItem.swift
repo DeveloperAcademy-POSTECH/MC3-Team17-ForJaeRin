@@ -21,17 +21,19 @@ struct KeywordListItem: View {
         ZStack {
             ZStack {
                 ForEach(pdfPage.keywords.indices, id: \.self) { count in
-                    Text(pdfPage.keywords[count])
-                        .foregroundColor(.clear)
-                        .systemFont(.subTitle)
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 16)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(.clear)
-                                .background(.clear)
-                        )
-                        .saveSize(in: $keywordSizes[count])
+                    if pdfPage.keywords[count] != "" {
+                        Text(pdfPage.keywords[count])
+                            .foregroundColor(.clear)
+                            .systemFont(.subTitle)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 16)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.clear)
+                                    .background(.clear)
+                            )
+                            .saveSize(in: $keywordSizes[count])
+                    }
                 }
             }
             VStack(spacing: 4) {
@@ -122,9 +124,5 @@ extension KeywordListItem {
             .cornerRadius(5)
             .animation(.interpolatingSpring(stiffness: 170, damping: 8),
                        value: vm.practice.saidKeywords[index].contains(keyword))
-            .alignmentGuide(.leading) { item in
-                print(item.height)
-                return item.height - item.height
-            }
     }
 }

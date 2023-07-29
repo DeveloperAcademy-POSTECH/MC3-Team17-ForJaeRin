@@ -49,7 +49,7 @@ struct KeywordListView: View {
                                                 sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 48,
                                                 keywordSizes: Array(
                                                     repeating: CGSize.zero,
-                                                    count: document.PDFPages[index].keywords.count
+                                                    count: keywordCount(index: index)
                                                 ),
                                                 index: index,
                                                 isSelected: index == vm.currentPageIndex
@@ -95,6 +95,15 @@ struct KeywordListView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    func keywordCount(index: Int) -> Int {
+        var answer = 0
+        for each in projectFileManager.pdfDocument!.PDFPages[index].keywords {
+            if each != "" {
+                answer += 1
+            }
+        }
+        return answer
     }
 }
 
