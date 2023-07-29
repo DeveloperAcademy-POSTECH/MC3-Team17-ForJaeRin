@@ -20,7 +20,8 @@ class AppFileManager {
     // MARK: 파일 디렉토리 url
     lazy var documentUrl = AppFileManager.shared.fileManager.urls(
         for: .documentDirectory,
-        in: .userDomainMask)[0]
+        in: .userDomainMask
+    )[0]
     
     /// 새 이름의 폴더
     lazy var directoryPath = documentUrl.appendingPathComponent("MyNewDir", conformingTo: .directory)

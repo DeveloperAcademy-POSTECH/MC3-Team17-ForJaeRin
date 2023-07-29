@@ -264,6 +264,7 @@ extension HomeView {
                             let data = try Data(contentsOf: tempURL)
                             let decoder = JSONDecoder()
                             let codableProjectModel = try decoder.decode(CodableProjectModel.self, from: data)
+                            // ProjectFileManager에 데이터 넣기
                             projectFileManager.makeProjectModel(
                                 codableData: codableProjectModel,
                                 url: file.path
@@ -273,12 +274,16 @@ extension HomeView {
                             myData.url = file.path
                             myData.title = projectFileManager.projectMetadata!.projectName
                             myData.target = projectFileManager.projectMetadata!.projectTarget
-                            myData.time = String(projectFileManager.projectMetadata!.presentationTime)
+                            myData.time = String(projectFileManager.projectMetadata!.presentationTime) + "분"
                             myData.purpose = projectFileManager.projectMetadata!.projectGoal
                             myData.images = convertPDFToImages(pdfDocument: PDFDocument(url: file.path)!)
                             for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
-                                myData.keywords.append((projectFileManager.pdfDocument?.PDFPages[index].keywords)!)
-                                myData.script.append((projectFileManager.pdfDocument?.PDFPages[index].script)!)
+                                myData.keywords.append(
+                                    (projectFileManager.pdfDocument?.PDFPages[index].keywords)!
+                                )
+                                myData.script.append(
+                                    (projectFileManager.pdfDocument?.PDFPages[index].script)!
+                                )
                             }
                             for index in 0..<(projectFileManager.pdfDocument?.PDFGroups.count)! {
                                 let start = projectFileManager.pdfDocument?.PDFGroups[index].range.start
@@ -298,6 +303,7 @@ extension HomeView {
                                 )
                             }
                             //
+                            projectFileManager.myDataToProjectFileManager(myData: myData)
                             vm.isNewProjectSettingDone = true
                         } catch {
                             print("JSON 실패")
