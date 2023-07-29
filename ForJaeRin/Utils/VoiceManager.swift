@@ -137,7 +137,6 @@ class VoiceManager: ObservableObject {
         }
     }
     
-    
     func covertSecToMinAndHour(seconds : Int) -> String {
         
         let (_,minute,second) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
