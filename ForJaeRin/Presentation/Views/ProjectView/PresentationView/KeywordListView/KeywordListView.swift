@@ -98,10 +98,8 @@ struct KeywordListView: View {
     }
     func keywordCount(index: Int) -> Int {
         var answer = 0
-        for each in projectFileManager.pdfDocument!.PDFPages[index].keywords {
-            if each != "" {
-                answer += 1
-            }
+        for each in projectFileManager.pdfDocument!.PDFPages[index].keywords where each != "" {
+            answer += 1
         }
         return answer
     }

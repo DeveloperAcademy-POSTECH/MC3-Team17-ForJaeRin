@@ -17,7 +17,6 @@ class GroupListVM: ObservableObject {
     
     let GROUP_TITLE_FIELD_WIDTH: (editMode: CGFloat, nonEditMode: CGFloat) = (editMode: 137, nonEditMode: 173)
     
-    
     let DELETE_BUTTON_INFO = (icon: "trash.fill" , label: "삭제하기")
     
     func resetTempData() {

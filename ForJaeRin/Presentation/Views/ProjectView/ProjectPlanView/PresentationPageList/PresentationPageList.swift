@@ -16,7 +16,7 @@ struct PresentationPageList: View {
         let document = projectFileManager.pdfDocument!
         GeometryReader { geometry in
             ScrollView {
-                List {
+                LazyVStack {
                     if myData.isOnboardingActive {
                         PresentationPageListOnboardingView(isOnboardingActive: $myData.isOnboardingActive)
                     }
@@ -27,12 +27,10 @@ struct PresentationPageList: View {
                             pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
                         )
                     }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
-                    pdfDocumentPages = newValue
+                }.onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
+                        pdfDocumentPages = newValue
                 })
-            }
+            }.frame(width: geometry.size.width, height: geometry.size.height)
         }
     }
 }

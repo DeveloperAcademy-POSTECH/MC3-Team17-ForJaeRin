@@ -20,9 +20,9 @@ struct KeywordListItem: View {
     var body: some View {
         ZStack {
             ZStack {
-                ForEach(pdfPage.keywords.indices, id: \.self) { count in
-                    if pdfPage.keywords[count] != "" {
-                        Text(pdfPage.keywords[count])
+                ForEach(enteredKeywords().indices, id: \.self) { count in
+                    if enteredKeywords()[count] != "" {
+                        Text(enteredKeywords()[count])
                             .foregroundColor(.clear)
                             .systemFont(.subTitle)
                             .padding(.vertical, 12)
@@ -61,6 +61,15 @@ struct KeywordListItem: View {
             projectInit()
         }
     }
+    
+    private func enteredKeywords() -> [String] {
+        var newKeywords: [String] = []
+        for eachKeyword in pdfPage.keywords where eachKeyword != "" {
+            newKeywords.append(eachKeyword)
+        }
+        return newKeywords
+    }
+    
     private func projectInit() {
         var width = 0.0
         var line = 0
@@ -72,31 +81,9 @@ struct KeywordListItem: View {
             } else {
                 width += keywordSizes[_index].width
             }
-            alignedKeywords[line].append(pdfPage.keywords[_index])
+            alignedKeywords[line].append(enteredKeywords()[_index])
         }
     }
-    
-//    private func projectInit() {
-//        var line = 0
-//        var prevSize: CGFloat = 0
-//        pdfPage.keywords.forEach { keyword in
-//            let size = keyword.widthOfString(fontStyle: FONT_STYLE) + 32
-//            prevSize += size
-//            if prevSize >= sidebarWidth {
-//                prevSize = 0
-//                line += 1
-//                alignedKeywords.append([])
-//                alignedKeywords[line].append(keyword)
-//            } else if prevSize <= sidebarWidth - 48 {
-//                if alignedKeywords.isEmpty {
-//                    alignedKeywords.append([])
-//                    alignedKeywords[line].append(keyword)
-//                } else {
-//                    alignedKeywords[line].append(keyword)
-//                }
-//            }
-//        }
-//    }
 }
 
 extension KeywordListItem {
