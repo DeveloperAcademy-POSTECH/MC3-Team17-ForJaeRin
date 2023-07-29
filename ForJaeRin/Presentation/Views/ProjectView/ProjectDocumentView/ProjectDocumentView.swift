@@ -80,7 +80,6 @@ struct ProjectDocumentView: View {
             }
         }
     }
-    
     private func handleGoToback() {
         if myData.isHistoryDetailActive {
             myData.isHistoryDetailActive = false
@@ -200,6 +199,11 @@ extension ProjectDocumentView {
                             .environmentObject(VoiceManager.shared)
                             .environmentObject(projectFileManager)
                             .environmentObject(vm)
+//                            .onAppear {
+//                                // 키워드 or 스크립트 변경된거까지 다시 저장
+//                                projectFileManager.myDataToProjectFileManager(myData: myData)
+//                                projectFileManager.exportFile()
+//                            }
                     } label: {
                         Label(
                             Plans.practice.planName,

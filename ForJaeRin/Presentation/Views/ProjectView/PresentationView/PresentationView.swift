@@ -28,23 +28,23 @@ struct PresentationView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     
     var body: some View {
-            VStack(spacing: 0) {
-                toolbarView()
-                HStack(spacing: 0) {
-                    splitLeftView()
-                    splitRightView()
+        VStack(spacing: 0) {
+            toolbarView()
+            HStack(spacing: 0) {
+                splitLeftView()
+                splitRightView()
             }
         }
-            .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
-                keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
-                print(speechRecognizer.arr_transcript)
-            })
-            .onChange(of: vm.currentPageIndex, perform: { _ in
-                resetGroup()
-            })
-            .onChange(of: vm.currentPageGroup, perform: { newValue in
-                vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: newValue))
-            })
+        .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
+            keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
+            print(speechRecognizer.arr_transcript)
+        })
+        .onChange(of: vm.currentPageIndex, perform: { _ in
+            resetGroup()
+        })
+        .onChange(of: vm.currentPageGroup, perform: { newValue in
+            vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: newValue))
+        })
         .onAppear {
             // saidKeywords에 pdf 페이지 수만큼 [] append
             for _ in 0..<(projectFileManager.pdfDocument?.PDFPages.count ?? 0) {
@@ -83,7 +83,8 @@ extension PresentationView {
         .frame(
             minWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,
             maxWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,
-        maxHeight: .infinity, alignment: .topLeading)
+            maxHeight: .infinity, alignment: .topLeading
+        )
         .border(width: 1, edges: [.leading], color: Color.systemGray100)
         .background(Color.systemWhite)
     }
@@ -122,7 +123,7 @@ extension PresentationView {
             .buttonStyle(.plain)
         }
     }
-
+    
     private func toolbarDynamicItemView() -> some View {
         HStack(spacing: 56) {
             // MARK: 사이드 바를 토글시키기 위한 버튼
@@ -132,14 +133,21 @@ extension PresentationView {
                 }
             } label: {
                 Label(vm.TOOLBAR_RIGHT_BUTTON_INFO.label, systemImage: vm.TOOLBAR_RIGHT_BUTTON_INFO.icon)
-                .labelStyle(ToolbarIconOnlyLabelStyle())
-                .frame(maxWidth: 64, maxHeight: 64)
-                .foregroundColor(Color.systemGray400)
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 64, maxHeight: 64)
+                    .foregroundColor(Color.systemGray400)
             }
             .buttonStyle(.plain)
             // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
             Button {
                 // MARK: 로직 작성 필요
+                // 내가 뭘 넣을꺼다
+                if let check = VoiceManager.shared.currentPath {
+                    vm.practice.audioPath = VoiceManager.shared.currentPath!
+                    projectFileManager.practices?.append(vm.practice)
+                    projectFileManager.exportFile()
+                }
+                //
                 speechRecognizer.stopTranscribing()
                 vm.practice.progressTime = voiceManager.countSec
                 projectDocumentVM.currentTab = .record
@@ -154,18 +162,18 @@ extension PresentationView {
                 width: 122,
                 height: 46)
             )
-//            NavigationLink {
-//                PresentationView(projectFileManager: projectFileManager)
-//
-//            } label: {
-//                Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
-//                    .systemFont(.body)
-//            }
-//            .buttonStyle(AppButtonStyle(
-//                backgroundColor: Color.systemPoint,
-//                width: 122,
-//                height: 46)
-//            )
+            //            NavigationLink {
+            //                PresentationView(projectFileManager: projectFileManager)
+            //
+            //            } label: {
+            //                Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
+            //                    .systemFont(.body)
+            //            }
+            //            .buttonStyle(AppButtonStyle(
+            //                backgroundColor: Color.systemPoint,
+            //                width: 122,
+            //                height: 46)
+            //            )
         }
     }
     
@@ -192,7 +200,6 @@ extension PresentationView {
             if checking && !vm.practice.saidKeywords[vm.currentPageIndex].contains(keyword) {
                 vm.practice.saidKeywords[vm.currentPageIndex].append(keyword)
             }
-            
         }
     }
     
