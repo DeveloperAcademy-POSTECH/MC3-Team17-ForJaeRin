@@ -118,6 +118,10 @@ extension ProjectDocumentView {
                 HStack {
                     Button {
                         vm.currentSection = .edit
+                        
+                        // 키워드 or 스크립트 변경된거까지 다시 저장
+                        projectFileManager.myDataToProjectFileManager(myData: myData)
+                        projectFileManager.exportFile()
                     } label: {
                         Label(
                             Plans.edit.planName,
@@ -141,6 +145,10 @@ extension ProjectDocumentView {
                             }
                         }
                         vm.currentSection = .flow
+                        
+                        // 키워드 or 스크립트 변경된거까지 다시 저장
+                        projectFileManager.myDataToProjectFileManager(myData: myData)
+                        projectFileManager.exportFile()
                     } label: {
                         Label(
                             Plans.flow.planName,

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct SpeechRange {
+struct SpeechRange: Codable {
     var start: Int
     var group: Int
 }
 
 // MARK: 프로젝트 연습정보를 담기위한 구조체
-struct Practice: Identifiable {
+struct Practice: Identifiable, Codable {
     var id = UUID()
     // MARK: 그룹별로 키워드를 보여준다고 했는데, 그럼 최대 그룹 * 페이지 만큼 들어오는 걸까요?
     var saidKeywords: [Keywords]

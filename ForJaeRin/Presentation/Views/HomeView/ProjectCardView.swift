@@ -50,13 +50,16 @@ struct ProjectCardView: View {
         }
         
         let pageRect = page.bounds(for: .mediaBox)
-        let thumbnail = NSImage(size: pageRect.size, flipped: false, drawingHandler: { (rect: NSRect) -> Bool in
-            guard let context = NSGraphicsContext.current?.cgContext else { return false }
-            context.setFillColor(NSColor.white.cgColor)
-            context.fill(rect)
-            page.draw(with: .mediaBox, to: context)
-            return true
-        })
+        let thumbnail = NSImage(
+            size: pageRect.size,
+            flipped: false,
+            drawingHandler: { (rect: NSRect) -> Bool in
+                guard let context = NSGraphicsContext.current?.cgContext else { return false }
+                context.setFillColor(NSColor.white.cgColor)
+                context.fill(rect)
+                page.draw(with: .mediaBox, to: context)
+                return true
+            })
         
         return thumbnail
     }
