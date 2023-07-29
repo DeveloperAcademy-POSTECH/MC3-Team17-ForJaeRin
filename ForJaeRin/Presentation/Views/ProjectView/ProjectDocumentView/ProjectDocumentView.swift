@@ -58,7 +58,8 @@ struct ProjectDocumentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
             print("projectFileManager.projectMetadata?.projectName", projectFileManager.projectMetadata?.projectName)
-
+            // MARK: - 온보딩 토글 임시
+//            myData.isOnboardingActive = true
         }
     }
 }
