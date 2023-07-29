@@ -29,9 +29,6 @@ struct ProjectHistoryView: View {
                         Text(vm.numberToHanguel(number: projectFileManager.practices!.count)+"번째 발표연습 기록")
                             .systemFont(.headline)
                             .padding(.bottom, 48)
-                            .onTapGesture {
-                                vm.isHistoryDetailActive = false
-                            }
                         PracticeSummaryView(
                             slices: [
                             (Double(saidKeywords()), Color.primary500),

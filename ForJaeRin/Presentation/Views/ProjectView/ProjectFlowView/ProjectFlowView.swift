@@ -129,7 +129,7 @@ extension ProjectFlowView {
         ZStack(alignment: .bottomLeading) {
             if index < pdfPages.count - 1 {
                 Rectangle()
-                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6]))
                     .foregroundColor(Color.systemGray200)
                     .frame(maxWidth: .infinity ,minHeight: 1, maxHeight: 1, alignment: .bottom)
                     .background(Color.detailLayoutBackground)
@@ -141,18 +141,20 @@ extension ProjectFlowView {
                         .foregroundColor(Color.systemGray400)
                         .frame(maxWidth: 20, maxHeight: 20)
                     ForEach(pdfPages[index].keywords, id: \.self) { keyword in
-                        ZStack {
-                            Text(keyword)
-                                .systemFont(.subTitle)
-                                .foregroundColor(Color.systemGray400)
-                                .padding(.vertical, 12)
-                                .padding(.horizontal, 16)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.systemGray200)
-                                        .background(Color.clear)
-                                        .cornerRadius(5)
-                                )
+                        if !keyword.isEmpty {
+                            ZStack {
+                                Text(keyword)
+                                    .systemFont(.subTitle)
+                                    .foregroundColor(Color.systemGray400)
+                                    .padding(.vertical, 12)
+                                    .padding(.horizontal, 16)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.systemGray200)
+                                            .background(Color.clear)
+                                            .cornerRadius(5)
+                                    )
+                            }
                         }
                     }
                 }

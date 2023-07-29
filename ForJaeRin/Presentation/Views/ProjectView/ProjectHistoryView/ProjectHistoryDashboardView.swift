@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ProjectHistoryDashboardView: View {
     @StateObject var vm = ProjectHistoryVM()
+    @EnvironmentObject var myData: MyData
     @EnvironmentObject var projectFileManager: ProjectFileManager
 
     var body: some View {
-        if vm.isHistoryDetailActive {
+        if myData.isHistoryDetailActive {
             ProjectHistoryView(vm: vm)
         } else {
             VStack(alignment: .leading, spacing: 0) {

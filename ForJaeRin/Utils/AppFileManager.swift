@@ -231,7 +231,6 @@ class AppFileManager {
         } catch {
             print("PreviousProject JSON파일 불러오기 실패했습니다: \(error.localizedDescription)")
         }
-        
     }
     
     func deletePreviousProject(file: KkoProject) {
