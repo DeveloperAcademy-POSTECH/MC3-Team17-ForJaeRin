@@ -11,9 +11,9 @@ import PDFKit
 struct InputScriptView: View {
     @EnvironmentObject var myData: MyData
     @State var pageNumber: Int = 0
-    @FocusState var isFocus: Bool
     
     let scriptPlaceHolder = "이 슬라이드에서 전달할 내용을 입력해주세요.\n나중에도 수정 및 추가가 가능하니 지금 다 채우지 않아도 돼요."
+    @State var test: String = ""
     
     var body: some View {
         HStack(spacing: 12) {
@@ -50,19 +50,15 @@ extension InputScriptView {
                         .cornerRadius(12)
                 }
                 ZStack(alignment: .topLeading) {
-                    if myData.script[pageNumber].isEmpty {
-                        Text(scriptPlaceHolder)
-                            .systemFont(.body)
-                            .foregroundColor(Color.systemGray200)
-                            .padding(10)
-                            .padding(.horizontal, 6)
-                            .zIndex(1)
-                            .onTapGesture {
-                                isFocus = true
-                            }
-                    }
+//                    if myData.script[pageNumber].isEmpty {
+//                        Text(scriptPlaceHolder)
+//                            .systemFont(.body)
+//                            .foregroundColor(Color.systemGray200)
+//                            .padding(10)
+//                            .padding(.horizontal, 6)
+//                            .zIndex(1)
+//                    }
                     TextEditor(text: $myData.script[pageNumber])
-                        .focused($isFocus)
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray500)
                     .padding(10)

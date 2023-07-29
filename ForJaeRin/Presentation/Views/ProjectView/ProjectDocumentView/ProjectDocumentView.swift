@@ -46,16 +46,7 @@ struct ProjectDocumentView: View {
                 VStack {
                     VStack {
                         if vm.currentTab == .practice {
-                            Button {
-                                print("myData.groupData", myData.groupData)
-                                print("projectFileManager.pdfDocument?.PDFGroups",
-                                      projectFileManager.pdfDocument?.PDFGroups
-                                )
-                            } label: {
-                                Text("테스트")
-                            }
                             ProjectPlanView(vm: vm)
-                                .environmentObject(myData)
                         } else {
                             ProjectHistoryDashboardView()
                         }
@@ -67,7 +58,8 @@ struct ProjectDocumentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
             print("projectFileManager.projectMetadata?.projectName", projectFileManager.projectMetadata?.projectName)
-
+            // MARK: - 온보딩 토글 임시
+//            myData.isOnboardingActive = true
         }
     }
 }

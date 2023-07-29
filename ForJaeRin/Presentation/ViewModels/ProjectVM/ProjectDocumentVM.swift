@@ -14,7 +14,7 @@ enum Tabs {
     var tabName: String {
         switch self {
         case .practice:
-            return "연습하기"
+            return "연습 준비하기"
         case .record:
             return "연습 기록보기"
         }
