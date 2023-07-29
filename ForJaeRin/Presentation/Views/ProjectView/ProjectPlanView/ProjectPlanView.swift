@@ -16,7 +16,9 @@ struct ProjectPlanView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if vm.currentSection == .edit {
+            if vm.currentSection == .flow {
+                ProjectFlowView()
+            } else {
                 if isViewReady {
                     if let document = projectFileManager.pdfDocument {
                         PresentationPageList(
@@ -26,8 +28,6 @@ struct ProjectPlanView: View {
                         .scrollContentBackground(.hidden)
                     }
                 }
-            } else if vm.currentSection == .flow {
-                ProjectFlowView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

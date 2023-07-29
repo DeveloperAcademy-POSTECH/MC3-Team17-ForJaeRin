@@ -134,7 +134,7 @@ extension HomeView {
             SectionHeaderView(info: vm.BOTTOM_TEXT_INFO)
                 .padding(.top, .spacing800)
                 .padding(.horizontal, vm.HORIZONTAL_PADDING)
-            projectListView(files: [])
+            projectListView(files: AppFileManager.shared.files)
         }
     }
         
