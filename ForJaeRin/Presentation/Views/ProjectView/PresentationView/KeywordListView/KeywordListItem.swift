@@ -42,11 +42,11 @@ struct KeywordListItem: View {
                         ForEach(keywords, id: \.self) { keyword in
                             keywordView(keyword: keyword)
                         }
-                    }.frame(maxWidth: sidebarWidth - 24)
+                    }.frame(maxWidth: sidebarWidth - 28)
                 }
             }
         }.frame(
-            maxWidth: sidebarWidth - 24,
+            maxWidth: sidebarWidth,
             alignment: .center
         )
         .padding(.vertical, 24)

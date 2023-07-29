@@ -23,8 +23,7 @@ struct FileImporterButtonView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                .foregroundColor(Color(hex: "2F2F2F"))
-                .opacity(0.25)
+                .foregroundColor(Color.systemGray200)
                 .background(Color.clear)
                 .frame(width: 532, height: 431)
             
@@ -32,20 +31,20 @@ struct FileImporterButtonView: View {
                 Image(systemName: "folder.badge.plus")
                     .resizable()
                     .frame(width: 84, height: 58)
-                    .foregroundColor(Color(hex: "2F2F2F").opacity(0.25))
+                    .foregroundColor(Color.systemGray200)
                     .padding(EdgeInsets(top: 17, leading: 10.5, bottom: 22, trailing: 2.5))
                     .frame(width: 97, height: 97)
                 Text("PDF 파일을 여기에 끌어서 추가할 수 있어요")
-                    .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
-                    .foregroundColor(Color(hex: "000000"))
-                    .opacity(0.5)
+                    .systemFont(.caption1)
+                    .padding(.vertical, 24)
+                    .foregroundColor(Color.systemGray400)
                 Button(action: {
                     isImporting = true
                 }, label: {
                     Text("PDF 파일 불러오기")
+                        .systemFont(.body)
                 })
-                .padding(EdgeInsets(top: 24, leading: 0, bottom: 0, trailing: 0))
-                .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary))
+                .buttonStyle(AppButtonStyle(backgroundColor: Color.systemPrimary, height: 46))
                 .fileImporter(isPresented: $isImporting,
                               allowedContentTypes: [.pdf],
                               onCompletion: { result in

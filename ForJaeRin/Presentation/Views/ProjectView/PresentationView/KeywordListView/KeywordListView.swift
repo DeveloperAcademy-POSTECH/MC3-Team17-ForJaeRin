@@ -23,11 +23,11 @@ struct KeywordListView: View {
                 .bold()
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 32)
+                .padding(.horizontal, .spacing300)
             ZStack(alignment: .top) {
                 Rectangle()
                     .fill(Color.clear)
-                    .frame(maxWidth: .infinity, maxHeight: 24)
+                    .frame(maxWidth: .infinity, maxHeight: .spacing500)
                     .background(LinearGradient(
                         stops: [
                         Gradient.Stop(color: .white, location: 0.00),
@@ -46,7 +46,7 @@ struct KeywordListView: View {
                                         ForEach(document.PDFPages.indices, id: \.self) { index in
                                             KeywordListItem(
                                                 pdfPage: document.PDFPages[index],
-                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 48,
+                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - .spacing300 * 2,
                                                 keywordSizes: Array(
                                                     repeating: CGSize.zero,
                                                     count: keywordCount(index: index)
@@ -74,7 +74,7 @@ struct KeywordListView: View {
                             .frame(alignment: .center)
                             Rectangle()
                                 .fill(Color.clear)
-                                .frame(maxWidth: .infinity, maxHeight: 24)
+                                .frame(maxWidth: .infinity, maxHeight: .spacing500)
                                 .background(LinearGradient(
                                     stops: [
                                         Gradient.Stop(color: .white.opacity(0), location: 0.00),
@@ -90,7 +90,7 @@ struct KeywordListView: View {
                         maxHeight: .infinity
                     )
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, .spacing300)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }

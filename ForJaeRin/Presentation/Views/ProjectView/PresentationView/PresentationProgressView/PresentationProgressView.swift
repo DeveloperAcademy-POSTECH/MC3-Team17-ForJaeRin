@@ -43,7 +43,7 @@ struct PresentationProgressView: View {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 32)
+        .padding(.horizontal, .spacing300)
     }
 }
 

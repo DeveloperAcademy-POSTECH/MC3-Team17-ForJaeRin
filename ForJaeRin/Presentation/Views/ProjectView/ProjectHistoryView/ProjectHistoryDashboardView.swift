@@ -11,7 +11,7 @@ struct ProjectHistoryDashboardView: View {
     @StateObject var vm = ProjectHistoryVM()
     @EnvironmentObject var myData: MyData
     @EnvironmentObject var projectFileManager: ProjectFileManager
-
+    
     var body: some View {
         if myData.isHistoryDetailActive {
             ProjectHistoryView(vm: vm)
@@ -35,7 +35,7 @@ struct ProjectHistoryDashboardView: View {
     private func parseDateToTitle(fileName: String) -> String {
         var result = ""
         guard let dotIndex = fileName.lastIndex(of: "."),
-                let slashIndex = fileName.lastIndex(of: "/") else {return result}
+              let slashIndex = fileName.lastIndex(of: "/") else {return result}
         
         let startIndex = fileName.index(after: slashIndex)
         let endIndex = fileName.index(before: dotIndex)
@@ -50,7 +50,7 @@ struct ProjectHistoryDashboardView: View {
             if index == 0 {
                 _token += "년 "
             } else if index == 1 {
-                 _token += "월 "
+                _token += "월 "
             } else {
                 _token += "일"
             }
@@ -144,7 +144,7 @@ extension ProjectHistoryDashboardView {
                         ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
                             historyListItem(index: index, practice: practice)
                                 .onTapGesture {
-                                    vm.isHistoryDetailActive.toggle()
+                                    myData.isHistoryDetailActive = true
                                 }
                         }
                     }

@@ -93,24 +93,28 @@ struct ProjectDocumentView: View {
 extension ProjectDocumentView {
     // MARK: toolbarView
     private func toolbarView() -> some View {
-        HStack(spacing: 0) {
-            // 고정 영역
-            toolbarStaticItemView()
-            Spacer()
-            // 탭에 따라 변경되는 영역
-            toolbarDynamicItemView()
+        ZStack {
+            HStack(spacing: 0) {
+                // 고정 영역
+                toolbarStaticItemView()
+                Spacer()
+                // 탭에 따라 변경되는 영역
+                toolbarDynamicItemView()
+            }
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: vm.TOOLBAR_HEIGHT,
+                alignment: .center
+            )
+            .padding(.top, 12)
+            .padding(.bottom, 8)
+            .padding(.horizontal, 28)
+            .background(Color.systemWhite)
+            .border(width: 1, edges: [.bottom], color: Color.systemGray100)
+            Text(projectFileManager.projectMetadata?.projectName ?? "프로젝트 명")
+                .systemFont(.body)
+            
         }
-        .frame(
-            maxWidth: .infinity,
-            maxHeight: vm.TOOLBAR_HEIGHT,
-            alignment: .center
-        )
-        .padding(.top, 12)
-        .padding(.bottom, 8)
-        .padding(.horizontal, 28)
-        .padding(.trailing, 60)
-        .background(Color.systemWhite)
-        .border(width: 1, edges: [.bottom], color: Color.systemGray100)
     }
     
     private func toolbarStaticItemView() -> some View {
