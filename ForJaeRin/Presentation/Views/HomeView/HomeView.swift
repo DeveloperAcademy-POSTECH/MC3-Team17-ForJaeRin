@@ -93,14 +93,14 @@ struct HomeView: View {
                 progressTime: file.practices[0].progressTime,
                 audioPath: URL(string: file.practices[0].audioPath)!
             ),
-                                            Practice(
-                                                saidKeywords: file.practices[1].saidKeywords,
-                                                speechRanges: file.practices[1].speechRanges.map { speechRange in
-                                                    SpeechRange(start: speechRange.start, group: speechRange.group)
-                                                },
-                                                progressTime: file.practices[1].progressTime,
-                                                audioPath: URL(string: file.practices[1].audioPath)!
-                                            )
+                Practice(
+                    saidKeywords: file.practices[1].saidKeywords,
+                    speechRanges: file.practices[1].speechRanges.map { speechRange in
+                        SpeechRange(start: speechRange.start, group: speechRange.group)
+                    },
+                    progressTime: file.practices[1].progressTime,
+                    audioPath: URL(string: file.practices[1].audioPath)!
+                )
             ]
         } catch {
             print("Error decoding JSON: \(error)")
@@ -118,10 +118,10 @@ extension HomeView {
                 .frame(
                     width: vm.LOGO_SIZE.width,
                     height: vm.LOGO_SIZE.height)
-            //                .background(Color.systemBlack)
-                .padding(.top, 40)
-                .padding(.bottom, 10)
-            sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
+                .padding(.top, .spacing800)
+                .padding(.bottom, .spacing200)
+            SectionHeaderView(info: vm.TOP_TEXT_INFO)
+                .padding(.bottom, .spacing800)
             newProjectButtonView()
         }
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)
@@ -131,80 +131,66 @@ extension HomeView {
     
     private func bottomContainerView() -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            sectionTextView(sectionHeaderInfo: vm.BOTTOM_TEXT_INFO)
-                .padding(.top, 40)
+            SectionHeaderView(info: vm.BOTTOM_TEXT_INFO)
+                .padding(.top, .spacing800)
                 .padding(.horizontal, vm.HORIZONTAL_PADDING)
-            projectListView(files: vm.files)
+            projectListView(files: AppFileManager.shared.files)
         }
     }
-    
-    // MARK: 텍스트 컨테이너
-    private func sectionTextView(sectionHeaderInfo: SectionHeaderInfo) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(sectionHeaderInfo.title)
-                .font(.systemHeadline)
-                .bold()
-            if let subTitle = sectionHeaderInfo.subTitle {
-                Text(subTitle)
-                    .foregroundColor(Color.systemGray300)
-                    .font(.body)
-            }
-        }
-        .multilineTextAlignment(.leading)
-        .padding(.bottom, 32)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    
+        
     // MARK: 새 프로젝트 생성하기 버튼 - 클릭 시 ImportPDFView sheet 열기
     private func newProjectButtonView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: .spacing200) {
             Image(systemName: vm.NEW_PROJECT_BUTTON_INFO.icon)
                 .resizable()
                 .scaledToFit()
-                .frame(width: vm.SYMBOL_INNER_SIZE, height: vm.SYMBOL_INNER_SIZE)
-                .foregroundColor(Color.systemGray300)
-                .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
+                .foregroundColor(Color.systemGray200)
+                .frame(width:  vm.SYMBOL_OUTER_SIZE, height: .spacing800, alignment: .top)
+                .offset(x: 5, y: 5)
             Button {
                 vm.isSheetActive.toggle()
             } label: {
                 Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
+                    .systemFont(.body)
             }
-            .buttonStyle(AppButtonStyle())
-            NavigationLink {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-                    .frame(maxWidth: .infinity)
-            } label: {
-                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
-            }
-            .buttonStyle(AppButtonStyle())
+            .buttonStyle(AppButtonStyle(width: 180, height: 46))
+            // MARK: - 개발 편의를 위한 네비게이션 버튼
+//            NavigationLink {
+//                ProjectDocumentView()
+//                    .environmentObject(projectFileManager)
+//                    .environmentObject(myData)
+//                    .presentedWindowStyle(.titleBar)
+//                    .navigationBarBackButtonHidden()
+//                    .frame(maxWidth: .infinity)
+//            } label: {
+//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+//                    .font(Font.system(size: 16))
+//            }
+//            .buttonStyle(AppButtonStyle())
         }
-        .frame(maxWidth: .infinity)
-        .padding(.bottom, 56)
+        .frame(maxWidth: .infinity, alignment: .top)
+        .padding(.bottom, .spacing800)
     }
     
     // MARK: 프로젝트 리스트
     private func projectListView(files: [KkoProject]) -> some View {
         Group {
-            if AppFileManager.shared.files.isEmpty {
+            if files.isEmpty {
                 emptyItemView()
+                    .padding(.top, .spacing800)
             } else {
                 GeometryReader { geometry in
                     let containerWidth = geometry.size.width - vm.HORIZONTAL_PADDING * 2
                     ScrollView(showsIndicators: false, content: {
                         projectCardContainerView(
-                            files: AppFileManager.shared.files,
+                            files: files,
                             containerWidth: containerWidth
                         )
                         .padding(.bottom, 32)
                     })
                     .frame(width: containerWidth,
                            height: geometry.size.height)
+                    .padding(.top, .spacing200)
                     .padding(.horizontal, vm.HORIZONTAL_PADDING)
                 }
             }
@@ -213,12 +199,11 @@ extension HomeView {
     
     // MARK: 리스트가 없을 때 보여지는 뷰
     private func emptyItemView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: .spacing200) {
             Image(systemName: vm.EMPTY_TEXT_INFO.icon)
                 .resizable()
                 .scaledToFit()
-                .frame(width: vm.SYMBOL_INNER_SIZE, height: vm.SYMBOL_INNER_SIZE)
-                .foregroundColor(Color.systemGray300)
+                .foregroundColor(Color.systemGray200)
                 .frame(width:  vm.SYMBOL_OUTER_SIZE, height: vm.SYMBOL_OUTER_SIZE)
             Text(vm.EMPTY_TEXT_INFO.label)
                 .foregroundColor(Color.systemGray300)
@@ -228,12 +213,19 @@ extension HomeView {
     }
     
     // MARK: 리스트가 있을 때 보여지는 그리드
-    private func projectCardContainerView(files: [KkoProject], containerWidth: CGFloat) -> some View {
+    private func projectCardContainerView(
+        files: [KkoProject],
+        containerWidth: CGFloat) -> some View {
         LazyVGrid(
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
+<<<<<<< HEAD
             spacing: 56) {
                 ForEach(files.reversed(), id: \.id) { file in
+=======
+            spacing: .spacing500) {
+                ForEach(files, id: \.id) { file in
+>>>>>>> a06bf8c0853f696539aafe480b7c565808555004
                     ProjectCardView(
                         path: file.path,
                         title: file.title,

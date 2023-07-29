@@ -16,28 +16,33 @@ struct ProjectCardView: View {
     var width: CGFloat
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: .spacing100) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .inset(by: 1)
                     .stroke(Color.primary200)
                     .foregroundColor(Color.clear)
-                    .frame(width: width, height: width / 3 * 2)
+                    .frame(width: width, height: width / 16 * 9)
                     .cornerRadius(10)
                 Image(nsImage: pdfToImage(pdfUrl: path)!)
                     .resizable()
+<<<<<<< HEAD
                 // .scaledToFit()
                 // .padding(24)
                     .frame(width: width, height: width / 3 * 2)
+=======
+                    .scaledToFill()
+                    .frame(width: width, height: width / 16 * 9)
+>>>>>>> a06bf8c0853f696539aafe480b7c565808555004
                     .cornerRadius(10)
             }
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .foregroundColor(Color.systemGray500)
-                    .font(Font.system(size: 16))
+                    .systemFont(.body)
                 Text(DateManager.formatDateToString(date: date))
                     .foregroundColor(Color.systemGray300)
-                    .font(Font.system(size: 13))
+                    .systemFont(.caption1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
