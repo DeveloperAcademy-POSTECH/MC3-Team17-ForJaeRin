@@ -134,7 +134,7 @@ actor SpeechRecognizer: ObservableObject {
         inputNode.installTap(
             onBus: 0,
             bufferSize: 1024,
-            format: recordingFormat) {(buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            format: recordingFormat) {(buffer: AVAudioPCMBuffer, _: AVAudioTime) in
             request.append(buffer)
 //                print(when)
         }

@@ -29,59 +29,56 @@ struct KeywordFieldView: View {
 //                    .frame(width: 2, height: 60)
 //                    .foregroundColor(Color.blue)
 //            }
-//            if availableEdit || newKeyword.isEmpty {
-//                Text(newKeyword == "" ? "키워드 입력" : newKeyword1)
-//                    .systemFont(.subTitle)
-//                    .border(.blue)
-//                    .padding(.horizontal, 16)
-//                    .padding(.vertical, 12)
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 5)
-//                            .inset(by: 0.5)
-//                            .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
-//                            .background(!colorDeep ? .clear : Color.primary100)
-//                    )
-                TextField("키워드 입력", text: $newKeyword
-//                          onEditingChanged: { isEditing in
-//                              if isEditing {
-//                                  editSomething = true
-//                                  focusedField = true
-//                                  availableEdit = true
-//                                  colorDeep = true
-//                              } else {
-//                                  // print("지금 !")
-//                                  colorDeep = false
-//                                  editSomething = false
-//                                  availableEdit = false
-//                              }
-//                }
-                )
-                .fixedSize()
+            if availableEdit || newKeyword.isEmpty {
+                TextField("키워드 입력", text: $newKeyword,
+                          onEditingChanged: { isEditing in
+                    if isEditing {
+                        editSomething = true
+                        focusedField = true
+                        availableEdit = true
+                        colorDeep = true
+                    } else {
+                        colorDeep = false
+                        editSomething = false
+                        availableEdit = false
+                    }
+                    
+                })
                 .focused($focusedField)
+                .fixedSize()
                 .textFieldStyle(PlainTextFieldStyle())
-//                .systemFont(.subTitle)
-                .foregroundColor(Color(red: 0.54, green: 0.43, blue: 1))
+                .systemFont(.subTitle)
+                .foregroundColor(.primary500)
                 .border(.red)
-//            } else {
-//                Text("\(newKeyword)")
-//                    .systemFont(.subTitle)
-//                    .foregroundColor(Color.systemPrimary)
-//                    .padding(.horizontal, 16)
-//                    .padding(.vertical, 12)
-//                    .fixedSize()
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 5)
-//                            .inset(by: 0.5)
-//                            .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
-//                            .background(!colorDeep ? .clear : Color.primary100)
-//                    )
-//                    .onTapGesture(count: 2) {
-//                        focusedField = true
-//                        editSomething = true
-//                        colorDeep = true
-//                        availableEdit = true
-//                    }
-//            }
-        }.frame(height: 54)
+                .padding(.leading, 16)
+                .padding(.trailing, 12.5)
+                .padding(.vertical, 12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .inset(by: 0.5)
+                        .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
+                        .background(!colorDeep ? .clear : Color.primary100)
+                )
+            } else {
+                Text("\(newKeyword)")
+                    .systemFont(.subTitle)
+                    .foregroundColor(Color.systemPrimary)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .fixedSize()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .inset(by: 0.5)
+                            .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
+                            .background(!colorDeep ? .clear : Color.primary100)
+                    )
+                    .onTapGesture(count: 2) {
+                        focusedField = true
+                        editSomething = true
+                        colorDeep = true
+                        availableEdit = true
+                    }
+            }
+        }
     }
 }

@@ -137,6 +137,7 @@ extension PresentationPageListItem {
                             isFocus = true
                         }
                         .padding(.leading, 4)
+                        .padding(.top, 12)
                 }
                 TextEditor(text: $myData.script[pageIndex])
                     .systemFont(.body)
@@ -146,30 +147,27 @@ extension PresentationPageListItem {
         }
         .frame(maxWidth: 206, maxHeight: 182)
         .padding(.leading, 8)
+        .border(.blue)
 //        .padding(.trailing, .spacing500)
     }
     
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             KeywordView(
                 pageNumber: pageIndex,
                 lastIndex: enteredKeywordCount(pageNumber: pageIndex))
-            .padding(.vertical, .spacing400)
+            .border(.blue)
+            .padding(.vertical, 12)
             .padding(.leading, .spacing500)
             .padding(.trailing, .spacing200 + .spacing500)
-            .frame(minWidth: 345, maxWidth: .infinity)
-        }
+        }.border(.red)
     }
     
     private func enteredKeywordCount(pageNumber: Int) -> Int {
         var answer = 0
-        for allKeyword in myData.keywords[pageNumber] {
-            if allKeyword != "" {
-                answer += 1
-            } else {
-                break
-            }
+        for allKeyword in myData.keywords[pageNumber] where allKeyword != "" {
+            answer += 1
         }
         if answer > 0 {
             answer -= 1
