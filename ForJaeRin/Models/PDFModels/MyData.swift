@@ -12,6 +12,8 @@ class MyData: ObservableObject {
     // MARK: 최초 키워드 리스트 설정 시 온보딩 활성화 여부
     @AppStorage("isOnboardingActive") var isOnboardingActive = true
     
+    @Published var isHistoryDetailActive = false
+    
     @Published var url: URL = Bundle.main.url(forResource: "sample", withExtension: "pdf")!
     
     @Published var images: [NSImage] = [NSImage]()
