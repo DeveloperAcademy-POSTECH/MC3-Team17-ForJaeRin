@@ -22,34 +22,9 @@ struct PresentationPageListItem: View {
     @EnvironmentObject var myData: MyData
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             if checkGroupFirstItem() {
-                ZStack {
-                    Rectangle()
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [7]))
-                        .foregroundColor(GroupColor.allCases[groupIndex].text)
-                        .frame(maxWidth: .infinity ,minHeight:1, maxHeight: 1)
-                    RoundedRectangle(cornerRadius: 50)
-                        .stroke(GroupColor.allCases[groupIndex].text,lineWidth:1)
-                        .foregroundColor(Color.systemWhite)
-                        .background(Color.systemWhite)
-                        .cornerRadius(50)
-                        .frame(maxWidth: 255, maxHeight: 26)
-                    TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
-                        .fixedSize()
-                        .systemFont(.caption1)
-                        .foregroundColor(GroupColor.allCases[groupIndex].text)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(.top, myData.isOnboardingActive
-                         ? .spacing300
-                         :  pageIndex == 0
-                         ? .spacing600
-                         : .spacing300
-                )
-                .padding(.bottom, .spacing300)
-                .padding(.horizontal, .spacing1000)
-                .frame(maxWidth: .infinity, minHeight: 26)
+                groupNotiView()
             }
             HStack(spacing: 0) {
                 // 그룹 인디케이터
@@ -61,15 +36,12 @@ struct PresentationPageListItem: View {
                 scriptContainer()
                 dottedDivider()
                 // 키워드 컨테이너
-                //                ScrollView {
-                //
-                //                }
-                //                .frame(maxHeight: 230)
                 keywordContainer()
                 
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
+            .padding(.bottom, .spacing300)
             .padding(.horizontal, .spacing1000)
             .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
         }
@@ -90,6 +62,35 @@ struct PresentationPageListItem: View {
 }
 
 extension PresentationPageListItem {
+    private func groupNotiView() -> some View {
+        ZStack {
+            Rectangle()
+                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [7]))
+                .foregroundColor(GroupColor.allCases[groupIndex].text)
+                .frame(maxWidth: .infinity ,minHeight:1, maxHeight: 1)
+            RoundedRectangle(cornerRadius: 50)
+                .stroke(GroupColor.allCases[groupIndex].text,lineWidth:1)
+                .foregroundColor(Color.systemWhite)
+                .background(Color.systemWhite)
+                .cornerRadius(50)
+                .frame(maxWidth: 255, maxHeight: 26)
+            TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
+                .fixedSize()
+                .systemFont(.caption1)
+                .foregroundColor(GroupColor.allCases[groupIndex].text)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.top, myData.isOnboardingActive
+                 ? .spacing300
+                 :  pageIndex == 0
+                 ? .spacing600
+                 : .spacing300
+        )
+        .padding(.bottom, .spacing300)
+        .padding(.horizontal, .spacing1000)
+        .frame(maxWidth: .infinity, minHeight: 26)
+    }
+    
     // MARK: 그룹 인디케이터
     private func groupIndicator() -> some View {
         Rectangle()
@@ -118,8 +119,8 @@ extension PresentationPageListItem {
                             .cornerRadius(10)
                     )
             }
-            .padding(.leading, 50)
-            .padding(.trailing, 35)
+            .padding(.leading, .spacing500)
+            .padding(.trailing, .spacing500)
             .frame(maxWidth: 318)
         }
     }
@@ -136,16 +137,18 @@ extension PresentationPageListItem {
                         .onTapGesture {
                             isFocus = true
                         }
+                        .padding(.leading, 4)
                 }
                 TextEditor(text: $myData.script[pageIndex])
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
                     .frame(minHeight: 182-48, maxHeight: 182-48)
+                    .border(.red, width: 2)
             }
         }
         .frame(maxWidth: 206, maxHeight: 182)
-        .padding(.leading, 35)
-        .padding(.trailing, 4)
+        .padding(.leading, 8)
+        .padding(.trailing, .spacing500)
     }
     
     // MARK: 키워드 컨테이너
@@ -154,8 +157,9 @@ extension PresentationPageListItem {
             KeywordView(
                 pageNumber: pageIndex,
                 lastIndex: enteredKeywordCount(pageNumber: pageIndex))
-            .padding(.vertical, 24)
-            .padding(.horizontal, 36)
+            .padding(.vertical, .spacing400)
+            .padding(.leading, .spacing500)
+            .padding(.trailing, .spacing200 + .spacing500)
             .frame(minWidth: 345, maxWidth: .infinity)
         }
     }
