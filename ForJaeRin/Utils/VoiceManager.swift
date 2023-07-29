@@ -147,11 +147,7 @@ class VoiceManager: ObservableObject {
     // MARK: 재생을 정지할 때
     func pauseRecording() {
         let filePath = currentPath!
-        do {
-            audioPlayer?.pause()
-        } catch {
-            print("faild to pause file")
-        }
+        audioPlayer?.pause()
     }
     
     func covertSecToMinAndHour(seconds : Int) -> String {

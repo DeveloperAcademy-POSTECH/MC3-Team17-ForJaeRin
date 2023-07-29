@@ -14,20 +14,25 @@ struct PresentationPageList: View {
     
     var body: some View {
         let document = projectFileManager.pdfDocument!
-        ScrollView {
-                if myData.isOnboardingActive {
-                    PresentationPageListOnboardingView(isOnboardingActive: $myData.isOnboardingActive)
+        GeometryReader { geometry in
+            ScrollView {
+                List {
+                    if myData.isOnboardingActive {
+                        PresentationPageListOnboardingView(isOnboardingActive: $myData.isOnboardingActive)
+                    }
+                    ForEach(myData.images.indices, id: \.self) { index in
+                        PresentationPageListItem(
+                            groupIndex: document.findGroupIndex(pageIndex: index),
+                            pageIndex: index,
+                            pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
+                        )
+                    }
                 }
-                ForEach(myData.images.indices, id: \.self) { index in
-                    PresentationPageListItem(
-                        groupIndex: document.findGroupIndex(pageIndex: index),
-                        pageIndex: index,
-                        pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)]
-                    )
-                }
-            .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
-                pdfDocumentPages = newValue
-            })
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
+                    pdfDocumentPages = newValue
+                })
+            }
         }
     }
 }

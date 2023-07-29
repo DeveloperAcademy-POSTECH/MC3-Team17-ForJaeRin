@@ -64,4 +64,14 @@ class ProjectDocumentVM: ObservableObject {
     @Published var isLeftSidebarActive = true
     @Published var currentSection: Plans = .edit
     @Published var currentTab: Tabs = .practice
+    @Published var isSheetActive = false
+    @Published var isNewProjectSettingDone = false
+    
+    func getSheetWidth(height: CGFloat) -> CGFloat {
+        max(height * 110 / 100, 868)
+    }
+    
+    func calcCardWidth(containerWidth: CGFloat) -> CGFloat {
+        (containerWidth - 4 * 28) / 5
+    }
 }
