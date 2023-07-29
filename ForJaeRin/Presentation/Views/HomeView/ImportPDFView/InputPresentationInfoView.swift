@@ -19,27 +19,36 @@ struct InputPresentationInfoView: View {
         creatAt: Date()
     )
     @State private var selectedItem: String = "선택"
-    let items = ["5분", "10분", "15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
+    @State private var date: Date = Date()
+    var underTenMinutes = Array(1...10).map { String("\($0)분") }
+    let items = ["15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
     
     var body: some View {
         VStack(spacing: 24) {
             GeometryReader { geometry in
-                Image(nsImage: myData.images[0])
-                    .resizable()
-                    .scaledToFill()
-                    .frame(
-                        maxWidth: geometry.size.width,
-                        maxHeight: geometry.size.width / 1.6 * 0.9
-                    )
-                    .cornerRadius(10)
+                VStack {
+                    Image(nsImage: myData.images[0])
+                        .resizable()
+                        .scaledToFill()
+                        .frame(
+                            maxWidth: geometry.size.width,
+                            maxHeight: geometry.size.width / 1.6 * 0.9
+                        )
+                        .cornerRadius(10)
+                    ScrollView(showsIndicators: false) {
+                        VStack(spacing: .spacing150) {
+                            projectTitleInputView()
+                            projectInfoInputView()
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                    .padding(.vertical, .spacing300)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            VStack(spacing: 12) {
-                projectTitleInputView()
-                projectInfoInputView()
-            }
-            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: 456, maxHeight: 532, alignment: .center)
+        .frame(maxWidth: 456, maxHeight: .infinity)
     }
 }
 
@@ -73,50 +82,54 @@ extension InputPresentationInfoView {
                 Divider()
                 timeInputView()
                 Spacer()
+                dateInputView()
             }
             .padding(.horizontal, 10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .stroke(Color(.black).opacity(0.04))
-                    .background(Color(.black).opacity(0.015))
+                    .stroke(Color.textFieldBorder)
+                    .background(Color.textFieldBackground)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
     private func targetInputView() -> some View {
         HStack {
-            Text("발표 대상")
+            Text("대상")
+                .systemFont(.caption1)
                 .padding(.trailing, 24)
-            TextField("발표 대상을 입력해주세요", text: $myData.target)
+            TextField("무엇을 위한 발표인지 입력해주세요", text: $myData.target)
                 .textFieldStyle(PlainTextFieldStyle())
                 .systemFont(.caption1)
                 .multilineTextAlignment(.trailing)
-                .frame(maxWidth: .infinity, maxHeight: 40)
+                .frame(maxWidth: .infinity, minHeight: 30)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private func purposeInputView() -> some View {
         HStack {
-            Text("발표 목적")
+            Text("목적")
+                .systemFont(.caption1)
                 .padding(.trailing, 24)
-            TextField("발표 목적을 입력해주세요", text: $myData.purpose)
+            TextField("누구에게 발표하는지 입력해주세요", text: $myData.purpose)
                 .textFieldStyle(PlainTextFieldStyle())
                 .systemFont(.caption1)
                 .multilineTextAlignment(.trailing)
-                .frame(maxWidth: .infinity, maxHeight: 40)
+                .frame(maxWidth: .infinity, minHeight: 40)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private func timeInputView() -> some View {
         HStack {
-            Text("발표 예상 소요시간")
+            Text("소요시간")
+                .systemFont(.caption1)
             Spacer()
             Menu {
-                ForEach(items, id: \.self) { item in
+                ForEach(underTenMinutes + items, id: \.self) { item in
                     Button {
                         selectedItem = item
                         myData.time = item
@@ -131,6 +144,24 @@ extension InputPresentationInfoView {
         }
         .padding(.top, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private func dateInputView() -> some View {
+        HStack {
+            Text("날짜")
+                .systemFont(.caption1)
+                .padding(.trailing, 24)
+            Spacer()
+            DatePicker("발표날짜", selection: $date, displayedComponents: [.date])
+                .systemFont(.caption1)
+                .labelsHidden()
+                .datePickerStyle(.stepperField)
+                .accentColor(Color.systemPrimary)
+                .background(Color.clear)
+                .frame(maxWidth: 72)
+                .padding(.trailing, 12)
+        }
+        .padding(.bottom, 8)
     }
 }
 

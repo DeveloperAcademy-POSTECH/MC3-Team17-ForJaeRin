@@ -21,11 +21,7 @@ class VoiceManager: ObservableObject {
     @Published var isRecording : Bool = false
     @Published var countSec = 0
     @Published var timerCount : Timer?
-    @Published var timer : String = "0:00" {
-        didSet {
-            // print(timer)
-        }
-    }
+    @Published var timer : String = "00:00"
     
     @Published var visualTimer: Timer?
     @Published var average: Float = 0
@@ -147,15 +143,22 @@ class VoiceManager: ObservableObject {
     // MARK: 재생을 정지할 때
     func pauseRecording() {
         let filePath = currentPath!
-        audioPlayer?.pause()
+        do {
+            audioPlayer?.pause()
+        } catch {
+            print("faild to pause file")
+        }
     }
     
     func covertSecToMinAndHour(seconds : Int) -> String {
         
         let (_,minute,second) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
         let _second : String = second < 10 ? "0\(second)" : "\(second)"
-        return "\(minute):\(_second)"
-        
+        if minute < 9 {
+            return "0\(minute):\(_second)"
+        } else {
+            return "\(minute):\(_second)"
+        }
     }
     
     private func startMonitoring() {

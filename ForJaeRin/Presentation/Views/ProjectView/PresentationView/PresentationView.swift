@@ -75,10 +75,10 @@ extension PresentationView {
     func splitRightView() -> some View {
         VStack(spacing: 0) {
             PresentationProgressView()
-                .padding(.vertical, 35)
+                .padding(.vertical, .spacing600)
             KeywordListView()
             VoiceVisualizationView()
-                .padding(.vertical, 24)
+                .padding(.vertical, .spacing600)
         }
         .frame(
             minWidth: vm.isSidebarActive ? vm.ACTIVE_SIDEBAR_WIDTH : 0,

@@ -51,7 +51,7 @@ extension ImportPDFStep {
         case .importPDFFile:
             return FileImporterButtonView().padding(.vertical, 40)
         case .setMetaData:
-            return InputPresentationInfoView().padding(.vertical, 40)
+            return InputPresentationInfoView().padding(.top, 40)
         case .setScripts:
             return InputScriptView().padding(.vertical, 40)
         case .setGroup:
