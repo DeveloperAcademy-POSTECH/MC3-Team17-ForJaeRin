@@ -18,7 +18,6 @@ struct ProjectPlanView: View {
         VStack(spacing: 0) {
             if vm.currentSection == .flow {
                 ProjectFlowView()
-                    .border(.red)
             } else {
                 if isViewReady {
                     if let document = projectFileManager.pdfDocument {

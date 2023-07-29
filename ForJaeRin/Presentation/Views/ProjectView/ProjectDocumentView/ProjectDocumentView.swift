@@ -23,7 +23,6 @@ struct ProjectDocumentView: View {
         VStack(spacing: 0) {
             // custom toolbar
             toolbarView()
-                .border(.blue, width: 2)
             HStack(spacing: 0) {
                 // left sidebar
                 VStack {
@@ -61,6 +60,14 @@ struct ProjectDocumentView: View {
             print("projectFileManager.projectMetadata?.projectName", projectFileManager.projectMetadata?.projectName)
             // MARK: - 온보딩 토글 임시
 //            myData.isOnboardingActive = true
+        }
+    }
+    
+    private func handleGoToback() {
+        if vm.currentSection == .flow {
+            vm.currentSection = .edit
+        } else if vm.currentSection == .practice {
+            
         }
     }
 }
@@ -105,6 +112,15 @@ extension ProjectDocumentView {
 
             } label: {
                 Label("leftSidebar", systemImage: "sidebar.leading")
+                    .labelStyle(ToolbarIconOnlyLabelStyle())
+                    .frame(maxWidth: 28, maxHeight: 28)
+                    .foregroundColor(Color.systemGray400)
+            }
+            .buttonStyle(.plain)
+            Button {
+                handleGoToback()
+            } label: {
+                Label("leftSidebar", systemImage: "chevron.left")
                     .labelStyle(ToolbarIconOnlyLabelStyle())
                     .frame(maxWidth: 28, maxHeight: 28)
                     .foregroundColor(Color.systemGray400)

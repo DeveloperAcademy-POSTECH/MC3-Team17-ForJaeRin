@@ -142,12 +142,11 @@ extension PresentationPageListItem {
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
                     .frame(minHeight: 182-48, maxHeight: 182-48)
-                    .border(.red, width: 2)
             }
         }
         .frame(maxWidth: 206, maxHeight: 182)
         .padding(.leading, 8)
-        .padding(.trailing, .spacing500)
+//        .padding(.trailing, .spacing500)
     }
     
     // MARK: 키워드 컨테이너
