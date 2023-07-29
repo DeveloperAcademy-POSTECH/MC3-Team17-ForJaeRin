@@ -11,69 +11,97 @@ struct KeywordListItem: View {
     
     @EnvironmentObject var vm: PresentationVM
     var pdfPage: PDFPage
-    let FONT_STYLE = NSFont.systemFont(ofSize: 18, weight: .semibold)
     var sidebarWidth: CGFloat
-    @State var alignedKeywords: [Keywords] = []
-    @State var keywordSizes: [CGFloat] = []
+    @State var alignedKeywords: [Keywords] = [[]]
+    @State var keywordSizes: [CGSize]
     @State var index: Int
     var isSelected: Bool
     
     var body: some View {
-            VStack(spacing: 12) {
+        ZStack {
+            ZStack {
+                ForEach(pdfPage.keywords.indices, id: \.self) { count in
+                    if pdfPage.keywords[count] != "" {
+                        Text(pdfPage.keywords[count])
+                            .foregroundColor(.clear)
+                            .systemFont(.subTitle)
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 16)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.clear)
+                                    .background(.clear)
+                            )
+                            .saveSize(in: $keywordSizes[count])
+                    }
+                }
+            }
+            VStack(spacing: 4) {
                 ForEach(alignedKeywords, id: \.self) { keywords in
                     HStack(spacing: 0) {
                         ForEach(keywords, id: \.self) { keyword in
                             keywordView(keyword: keyword)
                         }
-                    }
-                    .frame(maxWidth: sidebarWidth - 24)
+                    }.frame(maxWidth: sidebarWidth - 24)
                 }
             }
-            .frame(
-                maxWidth: sidebarWidth - 24,
-                alignment: .center
+        }.frame(
+            maxWidth: sidebarWidth - 24,
+            alignment: .center
+        )
+        .padding(.vertical, 24)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .foregroundColor(isSelected
+                 ? Color.detailLayoutBackground
+                 : Color.clear
             )
-            .padding(.vertical, 24)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(isSelected
-                     ? Color.detailLayoutBackground
-                     : Color.clear
-                )
-            )
-            .onAppear {
-                projectInit()
-            }
-    }
-    private func projectInit() {
-        var line = 0
-        var prevSize: CGFloat = 0
-        pdfPage.keywords.forEach { keyword in
-            let size = keyword.widthOfString(fontStyle: FONT_STYLE) + 32
-            prevSize += size
-            if prevSize >= sidebarWidth {
-                prevSize = 0
-                line += 1
-                alignedKeywords.append([])
-                alignedKeywords[line].append(keyword)
-            } else if prevSize <= sidebarWidth - 48 {
-                if alignedKeywords.isEmpty {
-                    alignedKeywords.append([])
-                    alignedKeywords[line].append(keyword)
-                } else {
-                    alignedKeywords[line].append(keyword)
-                }
-            }
+        )
+        .onChange(of: keywordSizes) { _ in
+            projectInit()
         }
     }
+    private func projectInit() {
+        var width = 0.0
+        var line = 0
+        for _index in 0..<keywordSizes.count {
+            if width + keywordSizes[_index].width > sidebarWidth - 24 {
+                width = keywordSizes[_index].width
+                line += 1
+                alignedKeywords.append([])
+            } else {
+                width += keywordSizes[_index].width
+            }
+            alignedKeywords[line].append(pdfPage.keywords[_index])
+        }
+    }
+    
+//    private func projectInit() {
+//        var line = 0
+//        var prevSize: CGFloat = 0
+//        pdfPage.keywords.forEach { keyword in
+//            let size = keyword.widthOfString(fontStyle: FONT_STYLE) + 32
+//            prevSize += size
+//            if prevSize >= sidebarWidth {
+//                prevSize = 0
+//                line += 1
+//                alignedKeywords.append([])
+//                alignedKeywords[line].append(keyword)
+//            } else if prevSize <= sidebarWidth - 48 {
+//                if alignedKeywords.isEmpty {
+//                    alignedKeywords.append([])
+//                    alignedKeywords[line].append(keyword)
+//                } else {
+//                    alignedKeywords[line].append(keyword)
+//                }
+//            }
+//        }
+//    }
 }
 
 extension KeywordListItem {
     private func keywordView(keyword: String) -> some View {
         @State var springAnimation = false
-        let fontStyle = isSelected
-        ? FONT_STYLE
-        : NSFont.systemFont(ofSize: 14, weight: .regular)
         
         return Text(keyword)
             .padding(.vertical, 12)
@@ -87,14 +115,12 @@ extension KeywordListItem {
                                 ? Color.primary200 : .clear
                                 : vm.practice.saidKeywords[index].contains(keyword)
                                 ? Color.primary100 : .clear)
-                    .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
             )
             .foregroundColor(isSelected
                              ? Color.systemPrimary
                              : vm.practice.saidKeywords[index].contains(keyword)
                              ? Color.primary400 : Color.systemGray300)
             .systemFont(isSelected ? .subTitle : .caption1)
-            .frame(width: keyword.widthOfString(fontStyle: fontStyle) + 32)
             .cornerRadius(5)
             .animation(.interpolatingSpring(stiffness: 170, damping: 8),
                        value: vm.practice.saidKeywords[index].contains(keyword))
