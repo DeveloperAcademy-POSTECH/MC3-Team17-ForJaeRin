@@ -19,6 +19,8 @@
 		4373B8AE2A66714200518FF7 /* InputScriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AD2A66714200518FF7 /* InputScriptView.swift */; };
 		4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */; };
 		43E88F9B2A64E36C001791DC /* MyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E88F9A2A64E36C001791DC /* MyData.swift */; };
+		A90609592A7410E500B62BA5 /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90609582A7410E500B62BA5 /* CGFloat+Extension.swift */; };
+		A906095B2A74139500B62BA5 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906095A2A74139500B62BA5 /* SectionHeaderView.swift */; };
 		A912BA992A613C4100A3321E /* sampleFile.json in Resources */ = {isa = PBXBuildFile; fileRef = A912BA982A613C4100A3321E /* sampleFile.json */; };
 		A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */; };
 		A91815F92A701CF000034A1A /* GroupListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91815F82A701CF000034A1A /* GroupListVM.swift */; };
@@ -71,7 +73,6 @@
 		A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */; };
 		A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE462A5E823300B9F94B /* KeywordListView.swift */; };
 		A97FBE492A5E84E400B9F94B /* PresentationPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE482A5E84E400B9F94B /* PresentationPDFView.swift */; };
-		A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE4C2A5E867500B9F94B /* PDFView.swift */; };
 		A97FBE4F2A5E887900B9F94B /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A97FBE4E2A5E887900B9F94B /* sample.pdf */; };
 		A97FBE522A5E892A00B9F94B /* AudioControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE512A5E892A00B9F94B /* AudioControllerView.swift */; };
 		A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */; };
@@ -125,6 +126,8 @@
 		4373B8AD2A66714200518FF7 /* InputScriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptView.swift; sourceTree = "<group>"; };
 		4373B8AF2A66714F00518FF7 /* SettingGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupView.swift; sourceTree = "<group>"; };
 		43E88F9A2A64E36C001791DC /* MyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyData.swift; sourceTree = "<group>"; };
+		A90609582A7410E500B62BA5 /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		A906095A2A74139500B62BA5 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		A912BA982A613C4100A3321E /* sampleFile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = sampleFile.json; sourceTree = "<group>"; };
 		A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingGroupVM.swift; sourceTree = "<group>"; };
 		A91815F82A701CF000034A1A /* GroupListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListVM.swift; sourceTree = "<group>"; };
@@ -181,7 +184,6 @@
 		A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceVisualizationView.swift; sourceTree = "<group>"; };
 		A97FBE462A5E823300B9F94B /* KeywordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordListView.swift; sourceTree = "<group>"; };
 		A97FBE482A5E84E400B9F94B /* PresentationPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationPDFView.swift; sourceTree = "<group>"; };
-		A97FBE4C2A5E867500B9F94B /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		A97FBE4E2A5E887900B9F94B /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		A97FBE512A5E892A00B9F94B /* AudioControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioControllerView.swift; sourceTree = "<group>"; };
 		A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationTimerView.swift; sourceTree = "<group>"; };
@@ -265,11 +267,11 @@
 		A91E901E2A5B19FE00EBB3F2 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				A97FBE4B2A5E866B00B9F94B /* PDFView */,
 				A99526CE2A5E32C7008510CF /* FileSystemView */,
 				A91E901F2A5B1A0B00EBB3F2 /* ButtonView */,
 				A92ABAB52A630A94004B4972 /* ChipView.swift */,
 				A93602BB2A717AEA001B20BE /* RoundedCornerView.swift */,
+				A906095A2A74139500B62BA5 /* SectionHeaderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -473,6 +475,7 @@
 				A92ABAD12A657369004B4972 /* Font+Extension.swift */,
 				112F60A32A6831BF00D19446 /* String+Extension.swift */,
 				A94D04B02A6D48C000D1DE77 /* Type+Extension.swift */,
+				A90609582A7410E500B62BA5 /* CGFloat+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -580,14 +583,6 @@
 				A97FBE482A5E84E400B9F94B /* PresentationPDFView.swift */,
 			);
 			path = PresentationPDFView;
-			sourceTree = "<group>";
-		};
-		A97FBE4B2A5E866B00B9F94B /* PDFView */ = {
-			isa = PBXGroup;
-			children = (
-				A97FBE4C2A5E867500B9F94B /* PDFView.swift */,
-			);
-			path = PDFView;
 			sourceTree = "<group>";
 		};
 		A97FBE502A5E891C00B9F94B /* AudioControllerView */ = {
@@ -905,6 +900,7 @@
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A93602BC2A717AEA001B20BE /* RoundedCornerView.swift in Sources */,
 				11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */,
+				A90609592A7410E500B62BA5 /* CGFloat+Extension.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
 				A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */,
 				A968E6B62A690555008C6738 /* KeywordListItem.swift in Sources */,
@@ -935,6 +931,7 @@
 				A938399E2A5DA13F0075A97F /* CustomLabel.swift in Sources */,
 				112F60A92A68326100D19446 /* KeywordView.swift in Sources */,
 				A93602BE2A7343A5001B20BE /* ProjectHistoryDashboardView.swift in Sources */,
+				A906095B2A74139500B62BA5 /* SectionHeaderView.swift in Sources */,
 				A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */,
 				4373B8B02A66714F00518FF7 /* SettingGroupView.swift in Sources */,
 				A97FBE472A5E823300B9F94B /* KeywordListView.swift in Sources */,
@@ -947,7 +944,6 @@
 				A91815F72A6F9BDF00034A1A /* SettingGroupVM.swift in Sources */,
 				A945F0372A56788500DC62D7 /* ForJaeRinApp.swift in Sources */,
 				A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */,
-				A97FBE4D2A5E867500B9F94B /* PDFView.swift in Sources */,
 				A93602B42A716AA3001B20BE /* PieChartView.swift in Sources */,
 				A93602B22A716A74001B20BE /* GroupView.swift in Sources */,
 				A91E90212A5B1A1C00EBB3F2 /* ButtonView.swift in Sources */,
@@ -1113,11 +1109,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = JMM62MZQM5;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ForJaeRin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "high pitch";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";
@@ -1150,11 +1148,13 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ForJaeRin/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "high pitch";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app.";

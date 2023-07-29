@@ -150,14 +150,21 @@ extension ImportPDFView {
         .disabled(!isActive)
     }
     
-    // MARK: - 임시 그룹 설정을 위한,,
-    private func deliveryData() {
-        if myData.groupData.isEmpty {
-            return
-        }
+    func myDataToProjectFileManager() {
+        // MyData -> ProjectFileManager
+        projectFileManager.projectURL = myData.url
+        
+        var stringTime = myData.time
+        stringTime.removeLast()
+        projectFileManager.projectMetadata = ProjectMetadata(
+            projectName: myData.title,
+            projectGoal: myData.purpose,
+            projectTarget: myData.target,
+            presentationTime: Int(stringTime)!,
+            creatAt: Date()
+        )
         
         if let document = projectFileManager.pdfDocument {
-            // 초기화
             document.url = myData.url
             document.PDFPages = []
             myData.images.indices.forEach { index in
@@ -175,18 +182,12 @@ extension ImportPDFView {
                     setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
             }
         }
+    }
+    
+    // MARK: - 임시 그룹 설정을 위한,,
+    private func deliveryData() {
+        myDataToProjectFileManager()
         
-        var stringTime = myData.time
-        stringTime.removeLast()
-        projectFileManager.projectMetadata = ProjectMetadata(
-            projectName: myData.title,
-            projectGoal: myData.purpose,
-            projectTarget: myData.target,
-            presentationTime: Int(stringTime)!,
-            creatAt: Date()
-        )
-        
-        projectFileManager.projectURL = myData.url
         projectFileManager.exportFile()
         projectFileManager.addPreviousProject()
         projectFileManager.writePreviousProject()

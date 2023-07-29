@@ -44,6 +44,7 @@ final class ProjectFileManager: ObservableObject {
     
     // ProjectFileManager를 이용해서 CodableProjectModel을 만들어서 전달
     public func makeCodableProjectModel() -> CodableProjectModel {
+        
         let codableProjectModel = CodableProjectModel(
             projectMetadata: CodableProjectMetadata(
                 projectName: self.projectMetadata!.projectName,
@@ -76,6 +77,41 @@ final class ProjectFileManager: ObservableObject {
             PDFGroups: codableData.pdfDocumentManager.PDFGroups
         )
         self.practices = []
+    }
+    
+    // MyData -> ProjectFileManager
+    func myDataToProjectFileManager(myData: MyData) {
+        self.projectURL = myData.url
+        
+        var stringTime = myData.time
+        stringTime.removeLast()
+        self.projectMetadata = ProjectMetadata(
+            projectName: myData.title,
+            projectGoal: myData.purpose,
+            projectTarget: myData.target,
+            presentationTime: Int(stringTime)!,
+            creatAt: Date()
+        )
+        
+        if let document = self.pdfDocument {
+            document.url = myData.url
+            document.PDFPages = []
+            myData.images.indices.forEach { index in
+                print("myData.images.index: \(index)")
+                document.PDFPages.append(PDFPage(
+                    keywords: myData.keywords[index],
+                    script: myData.script[index])
+                )
+            }
+            
+            document.PDFGroups = []
+            myData.groupData.enumerated().forEach { _, groupData in
+                document.PDFGroups.append(PDFGroup(
+                    name: groupData[0],
+                    range: PDFGroupRange(start: Int(groupData[3])!, end: Int(groupData[4])!),
+                    setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
+            }
+        }
     }
 }
 

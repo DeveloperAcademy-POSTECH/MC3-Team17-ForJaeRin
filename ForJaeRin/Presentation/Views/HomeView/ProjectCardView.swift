@@ -16,28 +16,27 @@ struct ProjectCardView: View {
     var width: CGFloat
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: .spacing100) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .inset(by: 1)
                     .stroke(Color.primary200)
                     .foregroundColor(Color.clear)
-                    .frame(width: width, height: width / 3 * 2)
+                    .frame(width: width, height: width / 16 * 9)
                     .cornerRadius(10)
                 Image(nsImage: pdfToImage(pdfUrl: path)!)
                     .resizable()
-                    .scaledToFit()
-                    .padding(24)
-                    .frame(width: width, height: width / 3 * 2)
+                    .scaledToFill()
+                    .frame(width: width, height: width / 16 * 9)
                     .cornerRadius(10)
             }
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .foregroundColor(Color.systemGray500)
-                    .font(Font.system(size: 16))
+                    .systemFont(.body)
                 Text(DateManager.formatDateToString(date: date))
                     .foregroundColor(Color.systemGray300)
-                    .font(Font.system(size: 13))
+                    .systemFont(.caption1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -51,13 +50,16 @@ struct ProjectCardView: View {
         }
         
         let pageRect = page.bounds(for: .mediaBox)
-        let thumbnail = NSImage(size: pageRect.size, flipped: false, drawingHandler: { (rect: NSRect) -> Bool in
-            guard let context = NSGraphicsContext.current?.cgContext else { return false }
-            context.setFillColor(NSColor.white.cgColor)
-            context.fill(rect)
-            page.draw(with: .mediaBox, to: context)
-            return true
-        })
+        let thumbnail = NSImage(
+            size: pageRect.size,
+            flipped: false,
+            drawingHandler: { (rect: NSRect) -> Bool in
+                guard let context = NSGraphicsContext.current?.cgContext else { return false }
+                context.setFillColor(NSColor.white.cgColor)
+                context.fill(rect)
+                page.draw(with: .mediaBox, to: context)
+                return true
+            })
         
         return thumbnail
     }

@@ -20,7 +20,8 @@ class AppFileManager {
     // MARK: 파일 디렉토리 url
     lazy var documentUrl = AppFileManager.shared.fileManager.urls(
         for: .documentDirectory,
-        in: .userDomainMask)[0]
+        in: .userDomainMask
+    )[0]
     
     /// 새 이름의 폴더
     lazy var directoryPath = documentUrl.appendingPathComponent("MyNewDir", conformingTo: .directory)
@@ -231,6 +232,14 @@ class AppFileManager {
             print("PreviousProject JSON파일 불러오기 실패했습니다: \(error.localizedDescription)")
         }
         
+    }
+    
+    func deletePreviousProject(file: KkoProject) {
+        for index in 0..<files.count {
+            if files[index].id == file.id {
+                files.remove(at: index)
+            }
+        }
     }
     
 }

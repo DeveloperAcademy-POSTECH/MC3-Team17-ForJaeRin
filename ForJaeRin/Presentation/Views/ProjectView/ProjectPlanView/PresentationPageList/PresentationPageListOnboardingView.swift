@@ -15,7 +15,7 @@ struct PresentationPageListOnboardingView: View {
             backgackgroundView()
             HStack {
                 HStack(spacing: 0) {
-                    Spacer(minLength: 70 + 92)
+                    Spacer(minLength: 70 + .spacing1000)
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color.primary200)
@@ -48,7 +48,7 @@ struct PresentationPageListOnboardingView: View {
             .padding(.trailing, 92)
             .offset(x: -18, y: 9)
         }
-        .padding(.top, 50)
+        .padding(.top, .spacing600)
         .frame(maxWidth: .infinity, minHeight: 98)
     }
 }
@@ -65,8 +65,7 @@ extension PresentationPageListOnboardingView {
                 .inset(by: 0.5)
                 .stroke(Color.primary400)
         )
-        .padding(.leading, 92)
-        .padding(.trailing, 92)
+        .padding(.horizontal, .spacing1000)
     }
     
     private func scriptInfoView() -> some View {

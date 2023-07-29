@@ -11,13 +11,12 @@ struct ProjectFlowView: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
 
     var body: some View {
-        VStack(spacing: 46) {
+        VStack(spacing: .spacing600) {
             topContainer()
             bottomContainer()
         }
-        .padding(.top, 50)
-        .padding(.bottom, 64)
-        .padding(.horizontal, 97)
+        .padding(.vertical, .spacing600)
+        .padding(.horizontal, .spacing1000)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.detailLayoutBackground)
     }
@@ -27,7 +26,8 @@ extension ProjectFlowView {
     // MARK: 상단 컨테이너
     private func topContainer() -> some View {
         VStack(spacing: 0) {
-            sectionTextView(sectionHeaderInfo: vm.TOP_TEXT_INFO)
+            SectionHeaderView(info: vm.TOP_TEXT_INFO)
+                .padding(.bottom, .spacing500 - 4)
             GeometryReader { geometry in
                 if let pdfDocument = projectFileManager.pdfDocument {
                     let wholeWidthSize = geometry.size.width // 전체 width
@@ -38,29 +38,11 @@ extension ProjectFlowView {
                 } else {}
             }
         }
-        .padding(.top, 36)
-        .padding(.bottom, 18)
-        .padding(.horizontal, 27)
+        .padding(.vertical, .spacing400)
+        .padding(.horizontal, .spacing300)
         .background(Color.systemWhite)
         .cornerRadius(12)
         .frame(maxWidth: .infinity,maxHeight: 224, alignment: .topLeading)
-    }
-    
-    // MARK: 텍스트 컨테이너
-    private func sectionTextView(sectionHeaderInfo: SectionHeaderInfo) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(sectionHeaderInfo.title)
-                .font(.systemHeadline)
-                .bold()
-            if let subTitle = sectionHeaderInfo.subTitle {
-                Text(subTitle)
-                    .foregroundColor(Color.systemGray300)
-                    .font(.body)
-            }
-        }
-        .multilineTextAlignment(.leading)
-        .padding(.bottom, 32)
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     // MARK: Group Black
@@ -120,9 +102,9 @@ extension ProjectFlowView {
     
     // MARK: 하단 컨테이너
     private func bottomContainer() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 20)
+                .frame(maxWidth: .infinity, maxHeight: .spacing200)
                 .foregroundColor(GroupColor.allCases[vm.selectedGroup].color)
                 .alignmentGuide(.top) { _ in 0 }
             
@@ -145,18 +127,19 @@ extension ProjectFlowView {
     // MARK: 그룹별 키워드 목록
     private func groupKeywordListView(pdfPages: [PDFPage], index: Int) -> some View {
         ZStack(alignment: .bottomLeading) {
-            Rectangle()
-                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
-                .foregroundColor(Color.systemGray200)
-                .frame(maxWidth: .infinity ,minHeight: 1, maxHeight: 1, alignment: .bottom)
-                .background(Color.detailLayoutBackground)
+            if index < pdfPages.count - 1 {
+                Rectangle()
+                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                    .foregroundColor(Color.systemGray200)
+                    .frame(maxWidth: .infinity ,minHeight: 1, maxHeight: 1, alignment: .bottom)
+                    .background(Color.detailLayoutBackground)
+            }
             VStack {
-                HStack {
+                HStack(spacing: .spacing200) {
                     Text("\(index + 1)")
                         .systemFont(.caption1)
                         .foregroundColor(Color.systemGray400)
                         .frame(maxWidth: 20, maxHeight: 20)
-                        .padding(.trailing, 10)
                     ForEach(pdfPages[index].keywords, id: \.self) { keyword in
                         ZStack {
                             Text(keyword)
@@ -175,7 +158,7 @@ extension ProjectFlowView {
                 }
             }
             .padding(.vertical, 26)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .frame(minWidth: 96, maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         }
         .padding(.horizontal, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
