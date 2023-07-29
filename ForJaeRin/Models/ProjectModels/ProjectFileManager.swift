@@ -56,7 +56,7 @@ final class ProjectFileManager: ObservableObject {
                 PDFPages: self.pdfDocument!.PDFPages,
                 PDFGroups: self.pdfDocument!.PDFGroups
             ),
-            practices: []
+            practices: self.practices!
         )
         return codableProjectModel
     }
@@ -76,7 +76,7 @@ final class ProjectFileManager: ObservableObject {
             PDFPages: codableData.pdfDocumentManager.PDFPages,
             PDFGroups: codableData.pdfDocumentManager.PDFGroups
         )
-        self.practices = []
+        self.practices = codableData.practices
     }
     
     // MyData -> ProjectFileManager
@@ -118,5 +118,5 @@ final class ProjectFileManager: ObservableObject {
 struct CodableProjectModel: Codable {
     var projectMetadata: CodableProjectMetadata
     var pdfDocumentManager: CodablePDFDocumentManager
-    var practices: [String]
+    var practices: [Practice]
 }

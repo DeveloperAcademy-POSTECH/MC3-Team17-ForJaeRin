@@ -57,7 +57,6 @@ struct ProjectDocumentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
-            print("projectFileManager.projectMetadata?.projectName", projectFileManager.projectMetadata?.projectName)
             // MARK: - 온보딩 토글 임시
 //            myData.isOnboardingActive = true
         }
@@ -164,6 +163,11 @@ extension ProjectDocumentView {
                             .environmentObject(VoiceManager.shared)
                             .environmentObject(projectFileManager)
                             .environmentObject(vm)
+//                            .onAppear {
+//                                // 키워드 or 스크립트 변경된거까지 다시 저장
+//                                projectFileManager.myDataToProjectFileManager(myData: myData)
+//                                projectFileManager.exportFile()
+//                            }
                     } label: {
                         Label(
                             Plans.practice.planName,
