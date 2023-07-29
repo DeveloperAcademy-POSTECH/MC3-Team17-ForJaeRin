@@ -46,7 +46,11 @@ struct KeywordListView: View {
                                         ForEach(document.PDFPages.indices, id: \.self) { index in
                                             KeywordListItem(
                                                 pdfPage: document.PDFPages[index],
-                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 32,
+                                                sidebarWidth: vm.ACTIVE_SIDEBAR_WIDTH - 48,
+                                                keywordSizes: Array(
+                                                    repeating: CGSize.zero,
+                                                    count: document.PDFPages[index].keywords.count
+                                                ),
                                                 index: index,
                                                 isSelected: index == vm.currentPageIndex
                                             )
