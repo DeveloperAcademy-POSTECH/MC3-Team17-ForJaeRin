@@ -18,48 +18,74 @@ struct ProjectDocumentView: View {
     @EnvironmentObject var document: KkoDocument
     @EnvironmentObject var myData: MyData
     @StateObject var vm = ProjectDocumentVM()
+    @StateObject var importPDFVM = ImportPDFVM()
     
     var body: some View {
-        VStack(spacing: 0) {
-            // custom toolbar
-            toolbarView()
-            HStack(spacing: 0) {
-                // left sidebar
-                VStack {
-                    VStack(spacing: 0) {
-                        List(vm.mainTabs, id: \.self, selection: $vm.currentTab) { mainTab in
-                            Label(mainTab.tabName, systemImage: mainTab.iconName)
-                                .labelStyle(LeftSidebarLabelStyle(
-                                    isSelected: vm.currentTab.tabName == mainTab.tabName ))
-                                .listRowBackground(Color.systemWhite)
-                                .listStyle(.plain)
-                                .frame(minHeight: 40)
-                        }
-                    }
-                }
-                .frame(
-                    maxWidth: vm.isLeftSidebarActive ? 172 : 0,
-                    maxHeight: .infinity,
-                    alignment: .topLeading)
-                .background(Color.systemWhite)
-                // rightsidebar
-                VStack {
+        GeometryReader { geometry in
+            VStack(spacing: 0) {
+                // custom toolbar
+                toolbarView()
+                HStack(spacing: 0) {
+                    // left sidebar
                     VStack {
-                        if vm.currentTab == .practice {
-                            ProjectPlanView(vm: vm)
-                        } else {
-                            ProjectHistoryDashboardView()
+                        VStack(spacing: 0) {
+                            List(vm.mainTabs, id: \.self, selection: $vm.currentTab) { mainTab in
+                                Label(mainTab.tabName, systemImage: mainTab.iconName)
+                                    .labelStyle(LeftSidebarLabelStyle(
+                                        isSelected: vm.currentTab.tabName == mainTab.tabName ))
+                                    .listRowBackground(Color.systemWhite)
+                                    .listStyle(.plain)
+                                    .frame(minHeight: 40)
+                            }
                         }
                     }
+                    .frame(
+                        maxWidth: vm.isLeftSidebarActive ? 172 : 0,
+                        maxHeight: .infinity,
+                        alignment: .topLeading)
+                    .background(Color.systemWhite)
+                    // rightsidebar
+                    VStack {
+                        VStack {
+                            if vm.currentTab == .practice {
+                                ProjectPlanView(vm: vm)
+                            } else {
+                                ProjectHistoryDashboardView()
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .sheet(isPresented: $vm.isSheetActive) {
+                // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
+                ImportPDFView(
+                    vm: importPDFVM,
+                    isSheetActive: $vm.isSheetActive,
+                    isNewProjectSettingDone: $vm.isNewProjectSettingDone
+                )
+                .frame(
+                    minWidth: vm.getSheetWidth(height: geometry.size.height),
+                    maxWidth: vm.getSheetWidth(height: geometry.size.height),
+                    minHeight: geometry.size.height - 64
+                )
+                .environmentObject(projectFileManager)
+                .environmentObject(myData)
+            }
+            .onAppear {
+                importPDFVM.step = .setGroup
+                // MARK: - 온보딩 토글 임시
+    //            myData.isOnboardingActive = true
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .onAppear {
-            print("projectFileManager.projectMetadata?.projectName", projectFileManager.projectMetadata?.projectName)
-            // MARK: - 온보딩 토글 임시
-//            myData.isOnboardingActive = true
+    }
+    
+    private func handleGoToback() {
+        if myData.isHistoryDetailActive {
+            myData.isHistoryDetailActive = false
+        } else if vm.currentSection == .flow {
+            vm.currentSection = .edit
         }
     }
 }
@@ -109,6 +135,17 @@ extension ProjectDocumentView {
                     .foregroundColor(Color.systemGray400)
             }
             .buttonStyle(.plain)
+            if myData.isHistoryDetailActive || vm.currentSection == .flow {
+                Button {
+                    handleGoToback()
+                } label: {
+                    Label("redo", systemImage: "chevron.left")
+                        .labelStyle(ToolbarIconOnlyLabelStyle())
+                        .frame(maxWidth: 28, maxHeight: 28)
+                        .foregroundColor(Color.systemGray400)
+                }
+                .buttonStyle(.plain)
+            }
         }
     }
     
@@ -117,8 +154,7 @@ extension ProjectDocumentView {
             if vm.currentTab == .practice {
                 HStack {
                     Button {
-                        vm.currentSection = .edit
-                        
+                        vm.isSheetActive = true
                         // 키워드 or 스크립트 변경된거까지 다시 저장
                         projectFileManager.myDataToProjectFileManager(myData: myData)
                         projectFileManager.exportFile()
@@ -127,7 +163,7 @@ extension ProjectDocumentView {
                             Plans.edit.planName,
                             systemImage: Plans.edit.iconName
                         )
-                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .edit))
+                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  false))
                         .frame(maxWidth: 64, maxHeight: 64)
                         .foregroundColor(Color.systemGray400)
                     }
@@ -154,7 +190,7 @@ extension ProjectDocumentView {
                             Plans.flow.planName,
                             systemImage: Plans.flow.iconName
                         )
-                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  vm.currentSection == .flow))
+                        .labelStyle(ToolbarVerticalLabelStyle(isSelected:  false))
                         .frame(maxWidth: 64, maxHeight: 64)
                         .foregroundColor(Color.systemGray400)
                     }
