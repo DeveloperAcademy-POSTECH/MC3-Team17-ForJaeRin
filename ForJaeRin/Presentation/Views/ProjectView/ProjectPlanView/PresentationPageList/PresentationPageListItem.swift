@@ -37,15 +37,14 @@ struct PresentationPageListItem: View {
                 dottedDivider()
                 // 키워드 컨테이너
                 keywordContainer()
-                
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
-            .padding(.bottom, .spacing300)
-            .padding(.horizontal, .spacing1000)
-            .frame(maxWidth: .infinity, minHeight: 182, idealHeight: 200, maxHeight: 230)
+            .padding(.bottom, .spacing150)
+            .frame(maxWidth: .infinity, minHeight: 200, idealHeight: 200, maxHeight: 230)
         }
-        .frame(maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.horizontal, .spacing1000)
         .onAppear {
             // pageScript = pdfPage.script
             // keywords = pdfPage.keywords
@@ -80,14 +79,14 @@ extension PresentationPageListItem {
                 .foregroundColor(GroupColor.allCases[groupIndex].text)
                 .multilineTextAlignment(.center)
         }
-        .padding(.top, myData.isOnboardingActive
+        .padding(.top, myData.isOnboardingActive && pdfGroup.range.start == 0
                  ? .spacing300
-                 :  pageIndex == 0
+                 :  pdfGroup.range.start == 0
                  ? .spacing600
-                 : .spacing300
+                 : 0
         )
         .padding(.bottom, .spacing300)
-        .padding(.horizontal, .spacing1000)
+//        .padding(.horizontal, .spacing1000)
         .frame(maxWidth: .infinity, minHeight: 26)
     }
     

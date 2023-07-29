@@ -23,6 +23,7 @@ struct ProjectDocumentView: View {
         VStack(spacing: 0) {
             // custom toolbar
             toolbarView()
+                .border(.blue, width: 2)
             HStack(spacing: 0) {
                 // left sidebar
                 VStack {
