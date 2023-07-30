@@ -19,6 +19,10 @@ struct PresentationPageListItem: View {
     @FocusState var isFocus: Bool
     let scriptPlaceHolder = "스크립트를 입력해주세요."
     
+    @Binding var clickedKeywordIndex: Int?
+    @FocusState var focusField: Int?
+    @Binding var lastIndexes: [Int]
+    
     @EnvironmentObject var myData: MyData
     
     var body: some View {
@@ -156,23 +160,14 @@ extension PresentationPageListItem {
         VStack(spacing: 0) {
             KeywordView(
                 pageNumber: pageIndex,
-                lastIndex: enteredKeywordCount(pageNumber: pageIndex))
+                lastIndexes: $lastIndexes,
+                focusField: _focusField,
+                clickedKeywordIndex: $clickedKeywordIndex)
             .border(.blue)
             .padding(.vertical, 12)
             .padding(.leading, .spacing500)
             .padding(.trailing, .spacing200 + .spacing500)
         }.border(.red)
-    }
-    
-    private func enteredKeywordCount(pageNumber: Int) -> Int {
-        var answer = 0
-        for allKeyword in myData.keywords[pageNumber] where allKeyword != "" {
-            answer += 1
-        }
-        if answer > 0 {
-            answer -= 1
-        }
-        return answer
     }
     
     private func dottedDivider() -> some View {
@@ -181,20 +176,5 @@ extension PresentationPageListItem {
             .foregroundColor(Color.systemGray100)
             .frame(minWidth:1, maxWidth: 1)
             .padding(.vertical, 24)
-    }
-}
-
-struct PresentationPageListItem_Previews: PreviewProvider {
-    static var previews: some View {
-        let groupIndex = 0
-        let pageIndex = 0
-        let pdfGroup = PDFGroup(name: "그룹명", range: PDFGroupRange(start: 0, end: 3), setTime: 300)
-        //        let pdfPage = PDFPage(keywords: ["test", "test2"], script: "test..." )
-        PresentationPageListItem(
-            groupIndex: groupIndex,
-            pageIndex: pageIndex,
-            pdfGroup: pdfGroup
-            // pdfPage: pdfPage
-        )
     }
 }
