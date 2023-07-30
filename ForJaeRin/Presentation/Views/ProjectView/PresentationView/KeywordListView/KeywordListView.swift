@@ -54,7 +54,7 @@ struct KeywordListView: View {
                                                 index: index,
                                                 isSelected: index == vm.currentPageIndex
                                             )
-                                            .onTapGesture(count: 2) {
+                                            .onTapGesture {
                                                 vm.currentPageIndex = index
                                             }
                                             .frame(maxWidth: geometry.size.width)
