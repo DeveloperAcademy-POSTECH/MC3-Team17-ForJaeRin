@@ -11,6 +11,8 @@ import PDFKit
 class MyData: ObservableObject {
     // MARK: 최초 키워드 리스트 설정 시 온보딩 활성화 여부
     @AppStorage("isOnboardingActive") var isOnboardingActive = true
+    // MARK: 최초 키워드 리스트 설정 시 온보딩 활성화 여부
+    @AppStorage("isGroupSettingOnboardingActive") var isGroupSettingOnboardingActive = true
     
     @Published var isHistoryDetailActive = false
     
@@ -20,12 +22,19 @@ class MyData: ObservableObject {
     
     @Published var title: String = ""
     @Published var target: String = ""
-    @Published var time: String = ""
+    @Published var time: String = "선택" {
+        didSet {
+            print(time)
+        }
+    }
     @Published var purpose: String = ""
-    
+    @Published var date: Date = Date() {
+        didSet {
+            print(date)
+        }
+    }
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
-    
     @Published var groupData: [[String]] = [] {
         didSet {
             print(groupData)
@@ -38,7 +47,7 @@ class MyData: ObservableObject {
         self.target = ""
         self.time = ""
         self.purpose = ""
-        
+        self.date = Date()
         self.keywords = []
         self.script = []
         

@@ -82,7 +82,7 @@ struct PresentationTimerView: View {
 extension PresentationTimerView {
     private func audioButonContainer() -> some View {
         HStack(spacing: 32) {
-            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO) {
+            audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO, isActive: isPlay) {
                 if !isPlay {
                     isPlay = true
                     voiceManager.startRecording(title: projectFileManamger.projectMetadata!.projectName)
@@ -90,7 +90,7 @@ extension PresentationTimerView {
                     vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
                 }
             }
-            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO) {
+            audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO, isActive: false) {
                 speechRecognizer.stopTranscribing()
                 voiceManager.stopRecording(index: 0)
                 isPlay = false
@@ -106,6 +106,7 @@ extension PresentationTimerView {
     
     private func audioControllButton(
         info: (icon: String, label: String),
+        isActive: Bool,
         action: @escaping () -> Void) -> some View {
         Button {
             action()
@@ -114,7 +115,7 @@ extension PresentationTimerView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color.systemGray500)
+                .foregroundColor(isActive ? Color.systemGray200 : Color.systemGray500)
         }
         .buttonStyle(.plain)
         .frame(width: 28, height: 28)
