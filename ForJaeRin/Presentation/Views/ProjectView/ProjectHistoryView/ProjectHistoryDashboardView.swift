@@ -73,7 +73,7 @@ struct ProjectHistoryDashboardView: View {
     // MARK: - 메타데이터에 데이터 추가 후 작업
     private func requestPracticeDate() -> String {
         guard let metadata = projectFileManager.projectMetadata else {return "잘못된 요청"}
-        return "발표날짜"
+        return DateManager.formatDateToString(date: metadata.presentationDate)
     }
     
     private func requestLimiedTime() -> String {
@@ -106,10 +106,10 @@ extension ProjectHistoryDashboardView {
     // MARK: - 타이틀
     private func historyDashboardTitleView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("{발표대상}에게")
+            Text("\(myData.target)에게")
                 .systemFont(.headline)
                 .foregroundColor(Color.systemGray500)
-            Text("{발표목적}을 전달하기 위한 발표")
+            Text("\(myData.purpose)을 전달하기 위한 발표")
                 .systemFont(.headline)
                 .foregroundColor(Color.systemGray500)
         }

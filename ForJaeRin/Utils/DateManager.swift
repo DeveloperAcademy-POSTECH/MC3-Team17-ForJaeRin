@@ -14,6 +14,12 @@ enum DateManager {
         return dateFormatter.string(from: date)
     }
     
+    static func formatStringToDate(date: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        return dateFormatter.date(from: date)!
+    }
+    
     static func secondsToTime(seconds: Int) -> String {
         let minutes = seconds / 60
         let seconds = seconds % 60

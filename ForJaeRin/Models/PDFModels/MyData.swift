@@ -28,11 +28,9 @@ class MyData: ObservableObject {
         }
     }
     @Published var purpose: String = ""
-    @Published var date: Date = Date() {
-        didSet {
-            print(date)
-        }
-    }
+    @Published var createAt: Date = Date()
+    @Published var presentationDate: Date = Date()
+    
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     @Published var groupData: [[String]] = [] {
@@ -47,7 +45,9 @@ class MyData: ObservableObject {
         self.target = ""
         self.time = ""
         self.purpose = ""
-        self.date = Date()
+        self.createAt = Date()
+        self.presentationDate = Date()
+
         self.keywords = []
         self.script = []
         
@@ -64,12 +64,18 @@ class MyData: ObservableObject {
     
     func projectFileManagerToMyData(projectFileManager: ProjectFileManager) {
         self.clear()
+        
         self.url = projectFileManager.projectURL!
+        
         self.title = projectFileManager.projectMetadata!.projectName
         self.target = projectFileManager.projectMetadata!.projectTarget
         self.time = String(projectFileManager.projectMetadata!.presentationTime)
         self.purpose = projectFileManager.projectMetadata!.projectGoal
+        self.presentationDate = projectFileManager.projectMetadata!.presentationDate
+        self.createAt = projectFileManager.projectMetadata!.creatAt
+        
         self.images = convertPDFToImages(pdfDocument: PDFDocument(url: self.url)!)
+        
         for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
             self.keywords.append((projectFileManager.pdfDocument?.PDFPages[index].keywords)!)
             self.script.append((projectFileManager.pdfDocument?.PDFPages[index].script)!)

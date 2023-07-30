@@ -56,55 +56,8 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
             }
             .onAppear {
-                initProject()
                 AppFileManager.shared.readPreviousProject()
             }
-        }
-    }
-    // MARK: 테스트용 데이터 가져와서 넣기
-    private func initProject() {
-        do {
-            let data = try Data(contentsOf: AppFileManager.shared.url!)
-            let file = try AppFileManager.shared.decodeJson(from: data)
-            
-            let PDFPages = file.projectDocument.PDFPages.map { pdfpage in
-                PDFPage(keywords: pdfpage.keywords, script: pdfpage.script)
-            }
-            let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in
-                PDFGroup(
-                    name: pdfGroup.name,
-                    range: PDFGroupRange(start: pdfGroup.range.start, end: pdfGroup.range.end),
-                    setTime: pdfGroup.setTime)
-            }
-            projectFileManager.pdfDocument = PDFDocumentManager(
-                url: AppFileManager.shared.url!,
-                PDFPages: PDFPages,
-                PDFGroups: PDFGroups)
-            projectFileManager.projectMetadata = ProjectMetadata(
-                projectName: file.projectMetadata.projectName,
-                projectGoal: file.projectMetadata.projectGoal,
-                projectTarget: file.projectMetadata.projectTarget,
-                presentationTime: file.projectMetadata.presentationTime,
-                creatAt: Date())
-            projectFileManager.practices = [Practice(
-                saidKeywords: file.practices[0].saidKeywords,
-                speechRanges: file.practices[0].speechRanges.map { speechRange in
-                    SpeechRange(start: speechRange.start, group: speechRange.group)
-                },
-                progressTime: file.practices[0].progressTime,
-                audioPath: URL(string: file.practices[0].audioPath)!
-            ),
-                Practice(
-                    saidKeywords: file.practices[1].saidKeywords,
-                    speechRanges: file.practices[1].speechRanges.map { speechRange in
-                        SpeechRange(start: speechRange.start, group: speechRange.group)
-                    },
-                    progressTime: file.practices[1].progressTime,
-                    audioPath: URL(string: file.practices[1].audioPath)!
-                )
-            ]
-        } catch {
-            print("Error decoding JSON: \(error)")
         }
     }
 }
@@ -221,7 +174,7 @@ extension HomeView {
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
             spacing: .spacing500) {
-                ForEach(files, id: \.id) { file in
+                ForEach(files.reversed(), id: \.id) { file in
                     ProjectCardView(
                         path: file.path,
                         title: file.title,
