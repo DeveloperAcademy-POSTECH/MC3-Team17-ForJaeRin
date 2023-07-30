@@ -66,7 +66,7 @@ class ImportPDFVM: ObservableObject {
     }
     
     func checkIsStepFirst() -> Bool {
-        step != .importPDFFile
+        step != .importPDFFile && step != .setMetaData
     }
     
     // MARK: NextButon 클릭 시 동작
@@ -80,11 +80,14 @@ class ImportPDFVM: ObservableObject {
         }
         
         // MARK: 테스트를 위한 주석
-//        if step == .setMetaData {
-//            if myData.title == "" || myData.purpose == "" || myData.target == "" || myData.time == "" {
+//        if step == .setMetaData
+//            && myData.title == ""
+//            || myData.purpose == ""
+//            || myData.target == ""
+//            || myData.time == "" {
 //                return false
-//            }
 //        }
+        
         return true
     }
     

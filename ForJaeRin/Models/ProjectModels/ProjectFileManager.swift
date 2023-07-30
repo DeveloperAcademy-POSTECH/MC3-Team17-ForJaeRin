@@ -49,8 +49,11 @@ final class ProjectFileManager: ObservableObject {
             projectMetadata: CodableProjectMetadata(
                 projectName: self.projectMetadata!.projectName,
                 projectGoal: self.projectMetadata!.projectGoal,
+                projectTarget: self.projectMetadata!.projectTarget,
                 presentationTime: self.projectMetadata!.presentationTime,
-                createAt: DateManager.formatDateToString(date: self.projectMetadata!.creatAt)
+                createAt: DateManager.formatDateToString(date: self.projectMetadata!.creatAt),
+                updateAt: DateManager.formatDateToString(date: self.projectMetadata!.updateAt),
+                presentationDate: DateManager.formatDateToString(date: self.projectMetadata!.presentationDate)
             ),
             pdfDocumentManager: CodablePDFDocumentManager(
                 PDFPages: self.pdfDocument!.PDFPages,
@@ -69,7 +72,9 @@ final class ProjectFileManager: ObservableObject {
             projectGoal: codableData.projectMetadata.projectGoal,
             projectTarget: codableData.projectMetadata.projectGoal,
             presentationTime: codableData.projectMetadata.presentationTime,
-            creatAt: Date()
+            creatAt: DateManager.formatStringToDate(date: codableData.projectMetadata.createAt),
+            updateAt: Date(),
+            presentationDate: DateManager.formatStringToDate(date: codableData.projectMetadata.presentationDate)
         )
         self.pdfDocument = PDFDocumentManager(
             url: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!,
@@ -90,7 +95,9 @@ final class ProjectFileManager: ObservableObject {
             projectGoal: myData.purpose,
             projectTarget: myData.target,
             presentationTime: Int(stringTime)!,
-            creatAt: Date()
+            creatAt: Date(),
+            updateAt: Date(),
+            presentationDate: myData.presentationDate
         )
         
         if let document = self.pdfDocument {

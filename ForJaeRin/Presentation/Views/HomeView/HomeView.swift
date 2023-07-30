@@ -34,14 +34,15 @@ struct HomeView: View {
             .background(Color.detailLayoutBackground)
             .sheet(isPresented: $vm.isSheetActive) {
                 // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
+                let height = min(geometry.size.height - 64, 804)
                 ImportPDFView(
                     isSheetActive: $vm.isSheetActive,
                     isNewProjectSettingDone: $vm.isNewProjectSettingDone
                 )
                 .frame(
-                    minWidth: vm.getSheetWidth(height: geometry.size.height),
-                    maxWidth: vm.getSheetWidth(height: geometry.size.height),
-                    minHeight: geometry.size.height - 64
+                    minWidth: vm.getSheetWidth(height: height),
+                    maxWidth: vm.getSheetWidth(height: height),
+                    minHeight: height
                 )
                 .environmentObject(projectFileManager)
                 .environmentObject(myData)
@@ -55,55 +56,8 @@ struct HomeView: View {
                     .frame(maxWidth: .infinity)
             }
             .onAppear {
-                initProject()
                 AppFileManager.shared.readPreviousProject()
             }
-        }
-    }
-    // MARK: 테스트용 데이터 가져와서 넣기
-    private func initProject() {
-        do {
-            let data = try Data(contentsOf: AppFileManager.shared.url!)
-            let file = try AppFileManager.shared.decodeJson(from: data)
-            
-            let PDFPages = file.projectDocument.PDFPages.map { pdfpage in
-                PDFPage(keywords: pdfpage.keywords, script: pdfpage.script)
-            }
-            let PDFGroups = file.projectDocument.PDFGroups.map { pdfGroup in
-                PDFGroup(
-                    name: pdfGroup.name,
-                    range: PDFGroupRange(start: pdfGroup.range.start, end: pdfGroup.range.end),
-                    setTime: pdfGroup.setTime)
-            }
-            projectFileManager.pdfDocument = PDFDocumentManager(
-                url: AppFileManager.shared.url!,
-                PDFPages: PDFPages,
-                PDFGroups: PDFGroups)
-            projectFileManager.projectMetadata = ProjectMetadata(
-                projectName: file.projectMetadata.projectName,
-                projectGoal: file.projectMetadata.projectGoal,
-                projectTarget: file.projectMetadata.projectTarget,
-                presentationTime: file.projectMetadata.presentationTime,
-                creatAt: Date())
-            projectFileManager.practices = [Practice(
-                saidKeywords: file.practices[0].saidKeywords,
-                speechRanges: file.practices[0].speechRanges.map { speechRange in
-                    SpeechRange(start: speechRange.start, group: speechRange.group)
-                },
-                progressTime: file.practices[0].progressTime,
-                audioPath: URL(string: file.practices[0].audioPath)!
-            ),
-                Practice(
-                    saidKeywords: file.practices[1].saidKeywords,
-                    speechRanges: file.practices[1].speechRanges.map { speechRange in
-                        SpeechRange(start: speechRange.start, group: speechRange.group)
-                    },
-                    progressTime: file.practices[1].progressTime,
-                    audioPath: URL(string: file.practices[1].audioPath)!
-                )
-            ]
-        } catch {
-            print("Error decoding JSON: \(error)")
         }
     }
 }
@@ -155,18 +109,18 @@ extension HomeView {
             }
             .buttonStyle(AppButtonStyle(width: 180, height: 46))
             // MARK: - 개발 편의를 위한 네비게이션 버튼
-            NavigationLink {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-                    .frame(maxWidth: .infinity)
-            } label: {
-                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
-            }
-            .buttonStyle(AppButtonStyle())
+//            NavigationLink {
+//                ProjectDocumentView()
+//                    .environmentObject(projectFileManager)
+//                    .environmentObject(myData)
+//                    .presentedWindowStyle(.titleBar)
+//                    .navigationBarBackButtonHidden()
+//                    .frame(maxWidth: .infinity)
+//            } label: {
+//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+//                    .font(Font.system(size: 16))
+//            }
+//            .buttonStyle(AppButtonStyle())
         }
         .frame(maxWidth: .infinity, alignment: .top)
         .padding(.bottom, .spacing800)
@@ -220,7 +174,7 @@ extension HomeView {
             columns: vm.requestCardListColumns(containerWidth: containerWidth),
             alignment: .leading,
             spacing: .spacing500) {
-                ForEach(files, id: \.id) { file in
+                ForEach(files.reversed(), id: \.id) { file in
                     ProjectCardView(
                         path: file.path,
                         title: file.title,

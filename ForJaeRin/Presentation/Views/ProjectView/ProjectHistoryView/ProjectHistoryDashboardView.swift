@@ -21,8 +21,8 @@ struct ProjectHistoryDashboardView: View {
                 historySummaryView()
                 historyListView()
             }
-            .padding(.bottom, 50)
-            .padding(.horizontal, 72)
+            .padding(.bottom, .spacing700)
+            .padding(.horizontal, .spacing900)
             .background(Color.detailLayoutBackground)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -73,7 +73,7 @@ struct ProjectHistoryDashboardView: View {
     // MARK: - 메타데이터에 데이터 추가 후 작업
     private func requestPracticeDate() -> String {
         guard let metadata = projectFileManager.projectMetadata else {return "잘못된 요청"}
-        return "발표날짜"
+        return DateManager.formatDateToString(date: metadata.presentationDate)
     }
     
     private func requestLimiedTime() -> String {
@@ -105,10 +105,16 @@ struct ProjectHistoryDashboardView: View {
 extension ProjectHistoryDashboardView {
     // MARK: - 타이틀
     private func historyDashboardTitleView() -> some View {
-        Text("{발표대상}에게 {발표목적}을 전달하기 위한 발표")
-            .systemFont(.headline)
-            .foregroundColor(Color.systemGray500)
-            .padding(.vertical, 50)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("\(myData.target)에게")
+                .systemFont(.headline)
+                .foregroundColor(Color.systemGray500)
+            Text("\(myData.purpose)을 전달하기 위한 발표")
+                .systemFont(.headline)
+                .foregroundColor(Color.systemGray500)
+        }
+        .padding(.top, .spacing600)
+        .padding(.bottom, .spacing500)
     }
     
     // MARK: - 발표 요약
@@ -126,7 +132,7 @@ extension ProjectHistoryDashboardView {
                 }
             }
         }
-        .padding(.bottom, 80)
+        .padding(.bottom, .spacing700)
     }
     
     // MARK: - 기록 리스트

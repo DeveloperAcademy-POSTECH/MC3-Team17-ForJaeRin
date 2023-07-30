@@ -11,6 +11,8 @@ import PDFKit
 class MyData: ObservableObject {
     // MARK: 최초 키워드 리스트 설정 시 온보딩 활성화 여부
     @AppStorage("isOnboardingActive") var isOnboardingActive = true
+    // MARK: 최초 키워드 리스트 설정 시 온보딩 활성화 여부
+    @AppStorage("isGroupSettingOnboardingActive") var isGroupSettingOnboardingActive = true
     
     @Published var isHistoryDetailActive = false
     
@@ -20,12 +22,17 @@ class MyData: ObservableObject {
     
     @Published var title: String = ""
     @Published var target: String = ""
-    @Published var time: String = ""
+    @Published var time: String = "선택" {
+        didSet {
+            print(time)
+        }
+    }
     @Published var purpose: String = ""
+    @Published var createAt: Date = Date()
+    @Published var presentationDate: Date = Date()
     
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
-    
     @Published var groupData: [[String]] = [] {
         didSet {
             print(groupData)
@@ -38,7 +45,9 @@ class MyData: ObservableObject {
         self.target = ""
         self.time = ""
         self.purpose = ""
-        
+        self.createAt = Date()
+        self.presentationDate = Date()
+
         self.keywords = []
         self.script = []
         
@@ -55,12 +64,18 @@ class MyData: ObservableObject {
     
     func projectFileManagerToMyData(projectFileManager: ProjectFileManager) {
         self.clear()
+        
         self.url = projectFileManager.projectURL!
+        
         self.title = projectFileManager.projectMetadata!.projectName
         self.target = projectFileManager.projectMetadata!.projectTarget
         self.time = String(projectFileManager.projectMetadata!.presentationTime)
         self.purpose = projectFileManager.projectMetadata!.projectGoal
+        self.presentationDate = projectFileManager.projectMetadata!.presentationDate
+        self.createAt = projectFileManager.projectMetadata!.creatAt
+        
         self.images = convertPDFToImages(pdfDocument: PDFDocument(url: self.url)!)
+        
         for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
             self.keywords.append((projectFileManager.pdfDocument?.PDFPages[index].keywords)!)
             self.script.append((projectFileManager.pdfDocument?.PDFPages[index].script)!)

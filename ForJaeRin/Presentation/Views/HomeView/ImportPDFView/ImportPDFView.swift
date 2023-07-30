@@ -85,7 +85,7 @@ extension ImportPDFView {
             .frame(maxWidth: 24, maxHeight: 24)
         }
         .padding(.top, 48)
-        .padding(.horizontal, 40)
+        .padding(.horizontal, .spacing500)
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
@@ -118,7 +118,7 @@ extension ImportPDFView {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.vertical, 28)
-        .padding(.horizontal, 40)
+        .padding(.horizontal, .spacing500)
         .background(Color.sub100)
         .frame(maxWidth: .infinity)
     }
@@ -161,27 +161,38 @@ extension ImportPDFView {
             projectGoal: myData.purpose,
             projectTarget: myData.target,
             presentationTime: Int(stringTime)!,
-            creatAt: Date()
+            creatAt: myData.createAt,
+            updateAt: Date(),
+            presentationDate: myData.presentationDate
         )
         
-        if let document = projectFileManager.pdfDocument {
-            document.url = myData.url
-            document.PDFPages = []
-            myData.images.indices.forEach { index in
-                document.PDFPages.append(PDFPage(
+        var pdfPages = [PDFPage]()
+        for index in 0..<myData.images.count {
+            pdfPages.append(
+                PDFPage(
                     keywords: myData.keywords[index],
-                    script: myData.script[index])
+                    script: myData.script[index]
                 )
-            }
-            
-            document.PDFGroups = []
-            myData.groupData.enumerated().forEach { _, groupData in
-                document.PDFGroups.append(PDFGroup(
-                    name: groupData[0],
-                    range: PDFGroupRange(start: Int(groupData[3])!, end: Int(groupData[4])!),
-                    setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
-            }
+            )
         }
+        
+        var pdfGroups = [PDFGroup]()
+        for index in 0..<myData.groupData.count {
+            let groupData = myData.groupData[index]
+            pdfGroups.append(PDFGroup(
+                name: groupData[0],
+                range: PDFGroupRange(start: Int(groupData[3])!, end: Int(groupData[4])!),
+                setTime: (Int(groupData[1]) ?? 0) * 60 + (Int(groupData[2]) ?? 0)))
+        }
+        
+        let pdfDocument = PDFDocumentManager(
+            url: myData.url,
+            PDFPages: pdfPages,
+            PDFGroups: pdfGroups
+        )
+        projectFileManager.pdfDocument = pdfDocument
+        
+        projectFileManager.practices = []
     }
     
     // MARK: - 임시 그룹 설정을 위한,,

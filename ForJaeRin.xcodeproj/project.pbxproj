@@ -78,6 +78,7 @@
 		A97FBE552A5E896B00B9F94B /* PresentationTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */; };
 		A97FBE592A5E962500B9F94B /* ProjectHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE582A5E962500B9F94B /* ProjectHistoryListView.swift */; };
 		A97FBE5B2A5E962E00B9F94B /* ProjectSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE5A2A5E962E00B9F94B /* ProjectSummaryView.swift */; };
+		A9848A002A7646B900794882 /* InputScriptVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98489FF2A7646B900794882 /* InputScriptVM.swift */; };
 		A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */; };
 		A98A28932A605D570043C8C1 /* PDFPageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28922A605D570043C8C1 /* PDFPageModel.swift */; };
 		A98A28952A605ED40043C8C1 /* ProjectFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A28942A605ED40043C8C1 /* ProjectFileManager.swift */; };
@@ -189,6 +190,7 @@
 		A97FBE542A5E896B00B9F94B /* PresentationTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationTimerView.swift; sourceTree = "<group>"; };
 		A97FBE582A5E962500B9F94B /* ProjectHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectHistoryListView.swift; sourceTree = "<group>"; };
 		A97FBE5A2A5E962E00B9F94B /* ProjectSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSummaryView.swift; sourceTree = "<group>"; };
+		A98489FF2A7646B900794882 /* InputScriptVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScriptVM.swift; sourceTree = "<group>"; };
 		A98A28902A605CA60043C8C1 /* PDFDocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFDocumentManager.swift; sourceTree = "<group>"; };
 		A98A28922A605D570043C8C1 /* PDFPageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPageModel.swift; sourceTree = "<group>"; };
 		A98A28942A605ED40043C8C1 /* ProjectFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileManager.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				A94D04B22A6E456C00D1DE77 /* ImportPDFVM.swift */,
 				A91815F62A6F9BDF00034A1A /* SettingGroupVM.swift */,
 				A91815F82A701CF000034A1A /* GroupListVM.swift */,
+				A98489FF2A7646B900794882 /* InputScriptVM.swift */,
 			);
 			path = HomeVM;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				A93602BA2A716E45001B20BE /* MissedKeywordListView.swift in Sources */,
 				A98A289E2A60D1720043C8C1 /* ProjectPlanView.swift in Sources */,
 				A93602BC2A717AEA001B20BE /* RoundedCornerView.swift in Sources */,
+				A9848A002A7646B900794882 /* InputScriptVM.swift in Sources */,
 				11739E6C2A6FF90000A5D357 /* ProjectHistoryVM.swift in Sources */,
 				A90609592A7410E500B62BA5 /* CGFloat+Extension.swift in Sources */,
 				A92ABAC82A654132004B4972 /* ProjectCardView.swift in Sources */,
@@ -1109,7 +1113,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = BKVJ4G5G3J;
+                DEVELOPMENT_TEAM = BKVJ4G5G3J;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
