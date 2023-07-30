@@ -59,6 +59,7 @@ struct ProjectDocumentView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .sheet(isPresented: $vm.isSheetActive) {
+                let height = min(geometry.size.height - 64, 804)
                 // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
                 ImportPDFView(
                     vm: importPDFVM,
@@ -67,8 +68,8 @@ struct ProjectDocumentView: View {
                 )
                 .frame(
                     minWidth: vm.getSheetWidth(height: geometry.size.height),
-                    maxWidth: vm.getSheetWidth(height: geometry.size.height),
-                    minHeight: geometry.size.height - 64
+                    maxWidth: vm.getSheetWidth(height: height),
+                    minHeight: height
                 )
                 .environmentObject(projectFileManager)
                 .environmentObject(myData)

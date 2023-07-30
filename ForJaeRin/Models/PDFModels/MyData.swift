@@ -20,9 +20,17 @@ class MyData: ObservableObject {
     
     @Published var title: String = ""
     @Published var target: String = ""
-    @Published var time: String = ""
+    @Published var time: String = "선택" {
+        didSet {
+            print(time)
+        }
+    }
     @Published var purpose: String = ""
-    
+    @Published var date: Date = Date() {
+        didSet {
+            print(date)
+        }
+    }
     @Published var keywords: [Keywords] = []
     @Published var script: [String] = []
     
@@ -38,7 +46,7 @@ class MyData: ObservableObject {
         self.target = ""
         self.time = ""
         self.purpose = ""
-        
+        self.date = Date()
         self.keywords = []
         self.script = []
         

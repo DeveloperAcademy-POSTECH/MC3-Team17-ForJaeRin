@@ -34,14 +34,15 @@ struct HomeView: View {
             .background(Color.detailLayoutBackground)
             .sheet(isPresented: $vm.isSheetActive) {
                 // MARK: 새 프로젝트 열기 데이터를 받기 위한 뷰
+                let height = min(geometry.size.height - 64, 804)
                 ImportPDFView(
                     isSheetActive: $vm.isSheetActive,
                     isNewProjectSettingDone: $vm.isNewProjectSettingDone
                 )
                 .frame(
-                    minWidth: vm.getSheetWidth(height: geometry.size.height),
-                    maxWidth: vm.getSheetWidth(height: geometry.size.height),
-                    minHeight: geometry.size.height - 64
+                    minWidth: vm.getSheetWidth(height: height),
+                    maxWidth: vm.getSheetWidth(height: height),
+                    minHeight: height
                 )
                 .environmentObject(projectFileManager)
                 .environmentObject(myData)
@@ -155,18 +156,18 @@ extension HomeView {
             }
             .buttonStyle(AppButtonStyle(width: 180, height: 46))
             // MARK: - 개발 편의를 위한 네비게이션 버튼
-            NavigationLink {
-                ProjectDocumentView()
-                    .environmentObject(projectFileManager)
-                    .environmentObject(myData)
-                    .presentedWindowStyle(.titleBar)
-                    .navigationBarBackButtonHidden()
-                    .frame(maxWidth: .infinity)
-            } label: {
-                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
-                    .font(Font.system(size: 16))
-            }
-            .buttonStyle(AppButtonStyle())
+//            NavigationLink {
+//                ProjectDocumentView()
+//                    .environmentObject(projectFileManager)
+//                    .environmentObject(myData)
+//                    .presentedWindowStyle(.titleBar)
+//                    .navigationBarBackButtonHidden()
+//                    .frame(maxWidth: .infinity)
+//            } label: {
+//                Text(vm.NEW_PROJECT_BUTTON_INFO.label)
+//                    .font(Font.system(size: 16))
+//            }
+//            .buttonStyle(AppButtonStyle())
         }
         .frame(maxWidth: .infinity, alignment: .top)
         .padding(.bottom, .spacing800)
