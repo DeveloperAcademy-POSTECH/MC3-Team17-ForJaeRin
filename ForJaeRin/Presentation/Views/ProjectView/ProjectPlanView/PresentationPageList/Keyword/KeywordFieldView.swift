@@ -12,73 +12,49 @@ struct KeywordFieldView: View {
     @Binding var newKeyword: String
     /// 찐한 색 !
     @State var colorDeep = false
-    /// textField or text
-    @State var availableEdit = false
     /// focus 조절
-    @FocusState private var focusedField: Bool
-    /// cursor의 index와 텍스트필드의 인덱스가 동일한지 확인
-    var cursorIndex: Int
+    @FocusState var focusField: Int?
+    /// 해당 키워드의 인덱스
     var index: Int
-    /// 수정중인지 넘김
-    @Binding var editSomething: Bool
+    var pageIndex: Int
+    
+    @Binding var clickedKeywordIndex: Int?
     
     var body: some View {
         VStack(alignment: .leading) {
-//            if cursorIndex == index {
-//                Rectangle()
-//                    .frame(width: 2, height: 60)
-//                    .foregroundColor(Color.blue)
-//            }
-            if availableEdit || newKeyword.isEmpty {
-                TextField("키워드 입력", text: $newKeyword,
-                          onEditingChanged: { isEditing in
-                    if isEditing {
-                        editSomething = true
-                        focusedField = true
-                        availableEdit = true
-                        colorDeep = true
-                    } else {
-                        colorDeep = false
-                        editSomething = false
-                        availableEdit = false
+            TextField("키워드 입력", text: $newKeyword)
+                .focused($focusField, equals: 7 * pageIndex + index)
+            .fixedSize()
+            .textFieldStyle(PlainTextFieldStyle())
+            .systemFont(.subTitle)
+            .foregroundColor(.primary500)
+            .padding(.leading, 16)
+            .padding(.trailing, 12.5)
+            .padding(.vertical, 12)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .inset(by: 0.5)
+                    .stroke(
+                        $focusField.wrappedValue == 7 * pageIndex + index
+                        || clickedKeywordIndex == 7 * pageIndex + index
+                        ? Color.systemPrimary
+                        : Color.systemGray100, lineWidth: 1)
+                    .background(
+                        $focusField.wrappedValue == 7 * pageIndex + index
+                        || clickedKeywordIndex == 7 * pageIndex + index
+                        ? Color.primary100
+                        : Color(white: 0.5, opacity: 0.0001))
+                    .onTapGesture {
+                        $focusField.wrappedValue = nil
+                        clickedKeywordIndex = 7 * pageIndex + index
                     }
-                    
-                })
-                .focused($focusedField)
-                .fixedSize()
-                .textFieldStyle(PlainTextFieldStyle())
-                .systemFont(.subTitle)
-                .foregroundColor(.primary500)
-                .border(.red)
-                .padding(.leading, 16)
-                .padding(.trailing, 12.5)
-                .padding(.vertical, 12)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5)
-                        .inset(by: 0.5)
-                        .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
-                        .background(!colorDeep ? .clear : Color.primary100)
-                )
-            } else {
-                Text("\(newKeyword)")
-                    .systemFont(.subTitle)
-                    .foregroundColor(Color.systemPrimary)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .fixedSize()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .inset(by: 0.5)
-                            .stroke(!colorDeep ? Color.systemGray100 : Color.systemPrimary, lineWidth: 1)
-                            .background(!colorDeep ? .clear : Color.primary100)
-                    )
-                    .onTapGesture(count: 2) {
-                        focusedField = true
-                        editSomething = true
-                        colorDeep = true
-                        availableEdit = true
-                    }
+            )
+            .onSubmit {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    focusField = nil
+                }
             }
+            .onDeleteCommand(perform: { print("Delete command received!") })
         }
     }
 }
