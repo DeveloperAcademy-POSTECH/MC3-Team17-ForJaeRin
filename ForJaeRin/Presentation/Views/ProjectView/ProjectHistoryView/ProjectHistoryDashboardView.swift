@@ -78,7 +78,7 @@ struct ProjectHistoryDashboardView: View {
     
     private func requestLimiedTime() -> String {
         guard let metadata = projectFileManager.projectMetadata else {return "잘못된 요청"}
-        return "\((metadata.presentationTime / 60).description)분"
+        return "\(metadata.presentationTime)분"
     }
     
     private func requestPracticeCount() -> String {
