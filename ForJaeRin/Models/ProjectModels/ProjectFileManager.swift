@@ -70,11 +70,12 @@ final class ProjectFileManager: ObservableObject {
         self.projectMetadata = ProjectMetadata(
             projectName: codableData.projectMetadata.projectName,
             projectGoal: codableData.projectMetadata.projectGoal,
-            projectTarget: codableData.projectMetadata.projectGoal,
+            projectTarget: codableData.projectMetadata.projectTarget,
             presentationTime: codableData.projectMetadata.presentationTime,
             creatAt: DateManager.formatStringToDate(date: codableData.projectMetadata.createAt),
             updateAt: Date(),
-            presentationDate: DateManager.formatStringToDate(date: codableData.projectMetadata.presentationDate)
+            presentationDate:
+                DateManager.formatStringToDate(date: codableData.projectMetadata.presentationDate)
         )
         self.pdfDocument = PDFDocumentManager(
             url: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!,

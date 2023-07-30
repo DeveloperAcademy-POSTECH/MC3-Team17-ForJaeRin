@@ -218,6 +218,8 @@ extension HomeView {
                             myData.time = String(projectFileManager.projectMetadata!.presentationTime) + "분"
                             myData.purpose = projectFileManager.projectMetadata!.projectGoal
                             myData.images = convertPDFToImages(pdfDocument: PDFDocument(url: file.path)!)
+                            myData.presentationDate = projectFileManager.projectMetadata!.presentationDate
+                            myData.createAt = projectFileManager.projectMetadata!.creatAt
                             for index in 0..<(projectFileManager.pdfDocument?.PDFPages.count)! {
                                 myData.keywords.append(
                                     (projectFileManager.pdfDocument?.PDFPages[index].keywords)!
