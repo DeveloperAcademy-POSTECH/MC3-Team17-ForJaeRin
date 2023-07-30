@@ -10,10 +10,10 @@ import PDFKit
 
 struct InputScriptView: View {
     @EnvironmentObject var myData: MyData
-    @State var pageNumber: Int = 0
+    @StateObject var vm = InputScriptVM()
     
     let scriptPlaceHolder = "이 슬라이드에서 전달할 내용을 입력해주세요.\n나중에도 수정 및 추가가 가능하니 지금 다 채우지 않아도 돼요."
-    @State var test: String = ""
+    @FocusState var isFocus: Bool
     
     var body: some View {
         HStack(spacing: 12) {
@@ -22,13 +22,20 @@ struct InputScriptView: View {
         }
         .padding(.horizontal, 40)
         .frame(maxWidth: .infinity)
+        .onAppear {
+            vm.script = myData.script
+        }
+        .onReceive(vm.$pageNumber) { if !vm.script.isEmpty { myData.script[$0] = vm.script[$0] }}
+        .onDisappear {
+            myData.script = vm.script
+        }
     }
 }
 
 extension InputScriptView {
     private func pdfListView() -> some View {
         VStack {
-            PDFScrollView(pageNumber: $pageNumber, url: myData.url)
+            PDFScrollView(vm: vm, url: myData.url)
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
                         .stroke(Color.systemGray100, lineWidth: 1)
@@ -44,30 +51,36 @@ extension InputScriptView {
 
             VStack {
                 ZStack {
-                    Image(nsImage: myData.images[pageNumber])
+                    Image(nsImage: myData.images[vm.pageNumber])
                         .resizable()
                         .frame(width: widthSize, height: imgHeight)
                         .cornerRadius(12)
                 }
                 ZStack(alignment: .topLeading) {
-//                    if myData.script[pageNumber].isEmpty {
-//                        Text(scriptPlaceHolder)
-//                            .systemFont(.body)
-//                            .foregroundColor(Color.systemGray200)
-//                            .padding(10)
-//                            .padding(.horizontal, 6)
-//                            .zIndex(1)
-//                    }
-                    TextEditor(text: $myData.script[pageNumber])
-                    .systemFont(.body)
-                    .foregroundColor(Color.systemGray500)
-                    .padding(10)
-                    .frame(maxWidth: widthSize, maxHeight: .infinity)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.systemGray100, lineWidth: 1)
-                            .frame(maxWidth: widthSize, maxHeight: .infinity)
-                    )
+                    if !vm.script.isEmpty {
+                        if vm.script[vm.pageNumber].isEmpty {
+                            Text(scriptPlaceHolder)
+                                .systemFont(.body)
+                                .foregroundColor(Color.systemGray200)
+                                .padding(10)
+                                .padding(.horizontal, 6)
+                                .zIndex(1)
+                                .onTapGesture {
+                                    isFocus = true
+                                }
+                        }
+                        TextEditor(text: $vm.script[vm.pageNumber])
+                        .systemFont(.body)
+                        .foregroundColor(Color.systemGray500)
+                        .focused($isFocus)
+                        .padding(10)
+                        .frame(maxWidth: widthSize, maxHeight: .infinity)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.systemGray100, lineWidth: 1)
+                                .frame(maxWidth: widthSize, maxHeight: .infinity)
+                        )
+                    }
                 }
             }
             .frame(maxWidth: geometry.size.width)
@@ -77,8 +90,8 @@ extension InputScriptView {
 
 struct PDFScrollView: View {
     @EnvironmentObject var myData: MyData
+    @ObservedObject var vm: InputScriptVM
     @State private var pdfImages = [NSImage]()
-    @Binding var pageNumber: Int
     let url: URL
     
     var body: some View {
@@ -92,7 +105,7 @@ struct PDFScrollView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.systemPrimary, lineWidth: 1)
                             )
-                            .opacity(pageNumber == index ? 1.0 : 0.0)
+                            .opacity(vm.pageNumber == index ? 1.0 : 0.0)
                         VStack(spacing: 0) {
                             Image(nsImage: pdfImages[index])
                                 .resizable()
@@ -108,7 +121,7 @@ struct PDFScrollView: View {
                     }
                     .frame(maxWidth: 132)
                     .onTapGesture {
-                        pageNumber = index
+                        vm.pageNumber = index
                     }
                 }
             }
