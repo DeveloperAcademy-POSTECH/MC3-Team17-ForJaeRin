@@ -87,6 +87,7 @@ extension SettingGroupView {
         VStack(spacing: 0) {
             if myData.isGroupSettingOnboardingActive {
                 onboardingView()
+                    .padding(.horizontal, .spacing500)
             }
             ScrollView(showsIndicators: false) {
                 /// PDF뷰
@@ -119,7 +120,7 @@ extension SettingGroupView {
                     }
                 }
                 .padding(.vertical, 8)
-                .padding(.horizontal, 40)
+                .padding(.horizontal, .spacing500)
                 .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: width, maxHeight: height)
@@ -179,6 +180,8 @@ extension SettingGroupView {
                 }
                 .frame(alignment: .leading)
             }
+            .frame(maxWidth: .infinity)
+            
             Button {
                 myData.isGroupSettingOnboardingActive = false
             } label: {
@@ -197,7 +200,9 @@ extension SettingGroupView {
                 .foregroundColor(Color.primary200)
                 .background(Color.init(hex: "#EAE7FF"))
                 .cornerRadius(12)
+                .frame(maxWidth: .infinity)
         )
+        .frame(maxWidth: .infinity)
         .padding(.bottom, .spacing400)
     }
     

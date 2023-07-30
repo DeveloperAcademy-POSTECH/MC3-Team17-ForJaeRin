@@ -67,7 +67,7 @@ struct ProjectDocumentView: View {
                     isNewProjectSettingDone: $vm.isNewProjectSettingDone
                 )
                 .frame(
-                    minWidth: vm.getSheetWidth(height: geometry.size.height),
+                    minWidth: vm.getSheetWidth(height: height),
                     maxWidth: vm.getSheetWidth(height: height),
                     minHeight: height
                 )

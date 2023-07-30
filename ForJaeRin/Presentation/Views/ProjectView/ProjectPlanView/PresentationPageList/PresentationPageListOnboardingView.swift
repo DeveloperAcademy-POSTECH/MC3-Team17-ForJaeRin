@@ -12,32 +12,31 @@ struct PresentationPageListOnboardingView: View {
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            backgackgroundView()
             HStack {
-                HStack(spacing: 0) {
-                    Spacer(minLength: 70 + .spacing1000)
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color.primary200)
-                            .cornerRadius(10)
-                            .frame(width: 111, height: 62)
-                        Text("썸네일")
-                            .systemFont(.body)
-                            .foregroundColor(Color.systemPrimary)
-                    }
-                    Spacer(minLength: 35)
+                HStack {
+                    RoundedRectangle(cornerRadius: 5)
+                        .foregroundColor(Color.primary200)
+                        .cornerRadius(5)
+                        .frame(width: 188, height: 105)
                 }
                 .frame(maxWidth: 318)
                 Divider()
-                    .padding(.trailing, 35)
+                    .padding(.trailing, .spacing400)
                 scriptInfoView()
                 Divider()
-                    .padding(.leading, 35)
-                    .padding(.trailing, 18)
+                    .padding(.leading, .spacing400)
+                    .padding(.trailing, .spacing400)
                 keywordInfoView()
-                Spacer(minLength: 102)
+                    .frame(maxWidth: .infinity)
             }
-            .padding(.vertical, 18)
+            .padding(.vertical, .spacing400)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.primary400, lineWidth: 1)
+                    .background(Color.primary100)
+                    .cornerRadius(10)
+            )
+            .frame(maxWidth: .infinity)
             Button {
                 isOnboardingActive = false
             } label: {
@@ -45,44 +44,91 @@ struct PresentationPageListOnboardingView: View {
                     .foregroundColor(Color.primary400)
             }
             .buttonStyle(.plain)
-            .padding(.trailing, 92)
             .offset(x: -18, y: 9)
         }
         .padding(.top, .spacing600)
-        .frame(maxWidth: .infinity, minHeight: 98)
+        .frame(maxWidth: .infinity, maxHeight: 200)
+        .padding(.horizontal, .spacing1000)
     }
 }
 
 extension PresentationPageListOnboardingView {
-    private func backgackgroundView() -> some View {
-        Rectangle()
-        .foregroundColor(.clear)
-        .frame(maxWidth: .infinity, minHeight: 98)
-        .background(Color.primary100)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .inset(by: 0.5)
-                .stroke(Color.primary400)
-        )
-        .padding(.horizontal, .spacing1000)
-    }
-    
     private func scriptInfoView() -> some View {
-        Text("이 곳에 PPT 페이지별 스크립트를\n입력해주세요.")
-            .lineLimit(2)
+        Text("해당 슬라이드의 스크립트에요.\n언제든지 수정이 가능해요")
             .systemFont(.body)
-            .foregroundColor(Color.primary400)
+            .foregroundColor(Color.systemPrimary)
     }
     
     private func keywordInfoView() -> some View {
-        HStack(spacing: 13) {
+        HStack(spacing: .spacing400) {
+            VStack(alignment: .leading) {
+                HStack(spacing: 10) {
+                    HStack(spacing: 0) {
+                        Text("페이지별")
+                            .padding(.horizontal, 11)
+                            .padding(.vertical, 7)
+                            .cornerRadius(5)
+                            .foregroundColor(Color.systemPrimary)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .inset(by: 0.5)
+                                    .stroke(Color.systemGray100, lineWidth:1)
+                                    .foregroundColor(Color.clear)
+                                    .cornerRadius(5)
+                              )
+                            .systemFont(.caption1)
+                        Text("스크립트")
+                            .padding(.horizontal, 11)
+                            .padding(.vertical, 7)
+                            .cornerRadius(5)
+                            .foregroundColor(Color.systemPrimary)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .inset(by: 0.5)
+                                    .stroke(Color.systemGray100, lineWidth:1)
+                                    .foregroundColor(Color.clear)
+                                    .cornerRadius(5)
+                              )
+                            .systemFont(.caption1)
+                        Text("입력")
+                            .padding(.horizontal, 11)
+                            .padding(.vertical, 7)
+                            .cornerRadius(5)
+                            .foregroundColor(Color.systemPrimary)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .inset(by: 0.5)
+                                    .stroke(Color.systemGray100, lineWidth:1)
+                                    .foregroundColor(Color.clear)
+                                    .cornerRadius(5)
+                              )
+                            .systemFont(.caption1)
+                    }
+                    Image(systemName: "checkmark.circle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(Color.systemPrimary)
+                }
+                keywordInfoFalseMidView()
+                keywordInfoFalseBottomView()
+            }
+            Text("연습 시 키워드 체크를 위해,\n말할 단어를 박스 당 하나씩\n최대 7개까지 입력해주세요.")
+                .fixedSize()
+                .systemFont(.body)
+                .foregroundColor(Color.primary500)
+                .padding(.trailing, .spacing600)
+        }
+    }
+    
+    private func keywordInfoFalseMidView() -> some View {
+        HStack(spacing: 10) {
             HStack(spacing: 0) {
-                Text("페이지별")
+                Text("page별")
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
                     .cornerRadius(5)
-                    .foregroundColor(Color.systemPrimary)
+                    .foregroundColor(Color.systemGray300)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .inset(by: 0.5)
@@ -91,11 +137,11 @@ extension PresentationPageListOnboardingView {
                             .cornerRadius(5)
                       )
                     .systemFont(.caption1)
-                Text("스크립트")
+                Text("스크립트 입력")
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
                     .cornerRadius(5)
-                    .foregroundColor(Color.systemPrimary)
+                    .foregroundColor(Color.systemGray300)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .inset(by: 0.5)
@@ -108,7 +154,7 @@ extension PresentationPageListOnboardingView {
                     .padding(.horizontal, 11)
                     .padding(.vertical, 7)
                     .cornerRadius(5)
-                    .foregroundColor(Color.systemPrimary)
+                    .foregroundColor(Color.systemGray300)
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .inset(by: 0.5)
@@ -118,10 +164,61 @@ extension PresentationPageListOnboardingView {
                       )
                     .systemFont(.caption1)
             }
-            Text("키워드는 스크립트에 포함된 단어들로\n최대 7개까지 입력해주세요.")
-                .lineLimit(2)
-                .systemFont(.caption2)
-                .foregroundColor(Color.primary400)
+            Image(systemName: "xmark.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundColor(Color.systemGray200)
+        }
+    }
+    private func keywordInfoFalseBottomView() -> some View {
+        HStack(spacing: 10) {
+            HStack(spacing: 0) {
+                Text("page별")
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 7)
+                    .cornerRadius(5)
+                    .foregroundColor(Color.systemGray300)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .inset(by: 0.5)
+                            .stroke(Color.systemGray100, lineWidth:1)
+                            .foregroundColor(Color.clear)
+                            .cornerRadius(5)
+                      )
+                    .systemFont(.caption1)
+                Text("스크립트 입력")
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 7)
+                    .cornerRadius(5)
+                    .foregroundColor(Color.systemGray300)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .inset(by: 0.5)
+                            .stroke(Color.systemGray100, lineWidth:1)
+                            .foregroundColor(Color.clear)
+                            .cornerRadius(5)
+                      )
+                    .systemFont(.caption1)
+                Text("입력")
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 7)
+                    .cornerRadius(5)
+                    .foregroundColor(Color.systemGray300)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .inset(by: 0.5)
+                            .stroke(Color.systemGray100, lineWidth:1)
+                            .foregroundColor(Color.clear)
+                            .cornerRadius(5)
+                      )
+                    .systemFont(.caption1)
+            }
+            Image(systemName: "xmark.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundColor(Color.systemGray200)
         }
     }
 }
