@@ -25,7 +25,8 @@ struct ProjectPlanView: View {
                 if isViewReady {
                     if let document = projectFileManager.pdfDocument {
                         PresentationPageList(
-                            pdfDocumentPages: document.PDFPages
+                            pdfDocumentPages: document.PDFPages,
+                            lastIndexes: enteredKeywordCount()
                         )
                         .background(Color.detailLayoutBackground)
                         .scrollContentBackground(.hidden)
@@ -38,6 +39,20 @@ struct ProjectPlanView: View {
         .onAppear {
             isViewReady = true
         }
+    }
+    private func enteredKeywordCount() -> [Int] {
+        var lastIndexes: [Int] = []
+        for page in 0..<myData.images.count {
+            var answer = 0
+            for allKeyword in myData.keywords[page] where allKeyword != "" {
+                answer += 1
+            }
+            if answer > 0 {
+                answer -= 1
+            }
+            lastIndexes.append(answer)
+        }
+        return lastIndexes
     }
 }
 
