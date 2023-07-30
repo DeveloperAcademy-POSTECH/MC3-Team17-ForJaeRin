@@ -85,7 +85,7 @@ extension ImportPDFView {
             .frame(maxWidth: 24, maxHeight: 24)
         }
         .padding(.top, 48)
-        .padding(.horizontal, 40)
+        .padding(.horizontal, .spacing500)
         .frame(maxWidth: .infinity, alignment: .topLeading)
     }
     
@@ -118,7 +118,7 @@ extension ImportPDFView {
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding(.vertical, 28)
-        .padding(.horizontal, 40)
+        .padding(.horizontal, .spacing500)
         .background(Color.sub100)
         .frame(maxWidth: .infinity)
     }

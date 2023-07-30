@@ -32,12 +32,7 @@ class MyData: ObservableObject {
         }
     }
     @Published var keywords: [Keywords] = []
-    @Published var script: [String] = [] {
-        didSet {
-            print("script", script)
-        }
-    }
-    
+    @Published var script: [String] = []
     @Published var groupData: [[String]] = [] {
         didSet {
             print(groupData)

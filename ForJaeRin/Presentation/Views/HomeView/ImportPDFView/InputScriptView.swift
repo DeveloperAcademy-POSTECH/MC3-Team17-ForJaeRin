@@ -16,40 +16,79 @@ struct InputScriptView: View {
     @FocusState var isFocus: Bool
     
     var body: some View {
-        HStack(spacing: 12) {
-            pdfListView()
-            pdfDetailScriptView()
-        }
-        .padding(.horizontal, 40)
-        .frame(maxWidth: .infinity)
-        .onAppear {
-            vm.script = myData.script
-        }
-        .onReceive(vm.$pageNumber) { if !vm.script.isEmpty { myData.script[$0] = vm.script[$0] }}
-        .onDisappear {
-            myData.script = vm.script
+        GeometryReader { geometry in
+            let maxWidth = geometry.size.width
+            HStack(spacing: .spacing200) {
+                pdfListView(width: maxWidth / 5)
+                    .frame(maxWidth: maxWidth / 5)
+                pdfDetailScriptView()
+                    .frame(maxWidth: maxWidth / 5 * 4)
+            }
+            .padding(.horizontal, .spacing500)
+            .frame(maxWidth: maxWidth)
+            .onAppear {
+                vm.script = myData.script
+            }
+            .onReceive(vm.$pageNumber) {
+                if !vm.isScriptEmpty() { myData.script[$0] = vm.script[$0] }
+            }
+            .onDisappear {
+                myData.script = vm.script
+            }
         }
     }
 }
 
 extension InputScriptView {
-    private func pdfListView() -> some View {
-        VStack {
-            PDFScrollView(vm: vm, url: myData.url)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.systemGray100, lineWidth: 1)
-                        .frame(maxWidth: 172, maxHeight: .infinity)
-                )
+    private func pdfListView(width: CGFloat) -> some View {
+        ZStack(alignment: .top) {
+            Rectangle()
+                .fill(Color.clear)
+                .frame(maxWidth: .infinity, maxHeight: .spacing400)
+                .background(LinearGradient(
+                    stops: [
+                    Gradient.Stop(color: .white, location: 0.00),
+                    Gradient.Stop(color: .white.opacity(0), location: 1.00)
+                    ],
+                    startPoint: UnitPoint(x: 0.5, y: 0.1),
+                    endPoint: UnitPoint(x: 0.5, y: 1)
+                    ))
+                .zIndex(10)
+            VStack(spacing: 0) {
+                ZStack(alignment: .bottom) {
+                    PDFScrollView(
+                        vm: vm,
+                        url: myData.url,
+                        containerWidth: width
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Rectangle()
+                        .fill(Color.clear)
+                        .frame(maxWidth: .infinity, maxHeight: .spacing400)
+                        .background(LinearGradient(
+                            stops: [
+                                Gradient.Stop(color: .white.opacity(0), location: 0.00),
+                                Gradient.Stop(color: .white, location: 1.00)
+                            ],
+                            startPoint: UnitPoint(x: 0.5, y: 0),
+                            endPoint: UnitPoint(x: 0.5, y: 0.8)))
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.systemGray100, lineWidth: 1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     private func pdfDetailScriptView() -> some View {
         GeometryReader { geometry in
             let widthSize = geometry.size.width
             let imgHeight = widthSize / 1.6 * 0.9
-
-            VStack {
+            VStack(spacing: .spacing150 * 2) {
                 ZStack {
                     Image(nsImage: myData.images[vm.pageNumber])
                         .resizable()
@@ -57,7 +96,7 @@ extension InputScriptView {
                         .cornerRadius(12)
                 }
                 ZStack(alignment: .topLeading) {
-                    if !vm.script.isEmpty {
+                    if !vm.isScriptEmpty() {
                         if vm.script[vm.pageNumber].isEmpty {
                             Text(scriptPlaceHolder)
                                 .systemFont(.body)
@@ -93,10 +132,11 @@ struct PDFScrollView: View {
     @ObservedObject var vm: InputScriptVM
     @State private var pdfImages = [NSImage]()
     let url: URL
+    let containerWidth: CGFloat
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
+            VStack(spacing: 18) {
                 ForEach(pdfImages.indices, id: \.self) { index in
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -109,7 +149,7 @@ struct PDFScrollView: View {
                         VStack(spacing: 0) {
                             Image(nsImage: pdfImages[index])
                                 .resizable()
-                                .frame(width: 120, height: 65)
+                                .frame(width: containerWidth - 32, height: (containerWidth - 32) / 1.6 * 0.9)
                                 .cornerRadius(4)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 6)
@@ -119,7 +159,7 @@ struct PDFScrollView: View {
                                 .padding(.bottom, 3)
                         }
                     }
-                    .frame(maxWidth: 132)
+                    .frame(maxWidth: .infinity)
                     .onTapGesture {
                         vm.pageNumber = index
                     }
