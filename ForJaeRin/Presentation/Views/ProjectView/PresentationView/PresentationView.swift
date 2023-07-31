@@ -153,6 +153,8 @@ extension PresentationView {
                 
                 // 내가 만든 녹음 중지
                 voiceManager.stopRecording(index: 0)
+                // 녹음 카운트 00:00으로 초기화
+                
                 dismiss()
             } label: {
                 Text(vm.TOOLBAR_END_PRACTICE_INFO.label)

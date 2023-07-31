@@ -111,8 +111,12 @@ class VoiceManager: ObservableObject {
         
         // timer init
         self.countSec = 0
-        timerCount!.invalidate()
-        visualTimer!.invalidate()
+        if timerCount != nil {
+            timerCount!.invalidate()
+        }
+        if visualTimer != nil {
+            visualTimer!.invalidate()
+        }
     }
     
     func playRecording() {
