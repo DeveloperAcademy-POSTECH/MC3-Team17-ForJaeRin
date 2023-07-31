@@ -15,20 +15,27 @@ struct PresentationPageListOnboardingView: View {
         ZStack(alignment: .topTrailing) {
             HStack(spacing: 0) {
                 HStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundColor(Color.primary200)
-                        .cornerRadius(5)
-                        .frame(maxWidth: .infinity, maxHeight: 105)
+                    ZStack {
+                        Text("썸네일")
+                            .systemFont(.body)
+                            .foregroundColor(Color.systemPrimary)
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.primary200)
+                            .cornerRadius(5)
+                            .frame(maxWidth: .infinity, maxHeight: 105)
+                    }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.horizontal, .spacing400)
                 Divider()
                     .padding(.trailing, .spacing400)
-                scriptInfoView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Divider()
-                    .padding(.leading, .spacing400)
-                    .padding(.trailing, .spacing400)
+                if conatainerWidth - 48 > 786 {
+                    scriptInfoView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Divider()
+                        .padding(.leading, .spacing400)
+                        .padding(.trailing, .spacing400)
+                }
                 keywordInfoView()
                     .frame(minWidth: 516,  maxWidth: .infinity)
             }

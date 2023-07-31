@@ -14,6 +14,8 @@ struct PresentationPageList: View {
     @State var clickedKeywordIndex: Int?
     @FocusState var focusField: Int?
     @State var lastIndexes: [Int]
+    @State private var isShowingFullScreenImage = false // 린 추가
+    @State private var clickedListIndex = 0
     
     var body: some View {
         ZStack {
@@ -34,13 +36,22 @@ struct PresentationPageList: View {
                                 pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
                                 clickedKeywordIndex: $clickedKeywordIndex,
                                 focusField: _focusField,
-                                lastIndexes: $lastIndexes
+                                lastIndexes: $lastIndexes,
+                                clickedListIndex: $clickedListIndex,
+                                isShowingFullScreenImage: $isShowingFullScreenImage
                             )
                         }
                     }.onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
                             pdfDocumentPages = newValue
                     })
                 }.frame(width: geometry.size.width, height: geometry.size.height)
+                    .sheet(isPresented: $isShowingFullScreenImage) {
+                        FullScreenImageView(
+                            isPresented: $isShowingFullScreenImage,
+                            pageIndex: clickedListIndex,
+                            containerWidth: geometry.size.width
+                        )
+                    }
             }
             Button {
                 if clickedKeywordIndex != nil {
