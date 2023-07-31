@@ -12,10 +12,13 @@ class SettingGroupVM: ObservableObject {
     /// 각 PDF별 그룹 번호
     @Published var groupIndex: [Int] = []
     var columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
+    
+    /// SettingGroupView의 editModes로 통합되었습니다 !
+    @Published var editModes: [Bool] = []
     /// 현재 보고 있는 그룹 번호(-1은 안 보고 있음)
-    @Published var focusGroup = -1
+//    @Published var focusGroup = -1
     /// 현재 수정 혹은 추가 중이면 true(focusGroup이 0이상)
-    @Published var somethingIsEdit = false
+//    @Published var somethingIsEdit = false
     /// 클릭한 PDF 인덱스
     /// somethingIsEdit이 false로 변하면 tapHistory를 초기화해야한다.
     @Published var tapHistory: [Int] = [] {

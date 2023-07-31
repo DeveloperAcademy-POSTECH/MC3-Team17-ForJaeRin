@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Pretendard
 
 struct SettingGroupView: View {
     @EnvironmentObject var myData: MyData
@@ -16,7 +17,7 @@ struct SettingGroupView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             GeometryReader { geometry in
-                let sidebarWidth = geometry.size.width * 0.26
+                let sidebarWidth = (geometry.size.width - 80) * 0.3
                 HStack(spacing: 0) {
                     pptGridListView(
                         width: geometry.size.width - sidebarWidth,
@@ -33,11 +34,13 @@ struct SettingGroupView: View {
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)
         .onAppear {
             resetGroupIndex()
+            vm.editModes = Array(repeating: false, count: myData.groupData.count)
         }
-        .onChange(of: vm.somethingIsEdit) {newValue in
-            if newValue == false {
+        .onChange(of: vm.editModes) {newValue in
+            if !newValue.contains(true) {
                 vm.tapHistory = []
             }
+            print(vm.editModes)
         }
     }
     /// PDF를 탭할 때마다 선택 가능한 인덱스 리스트를 반환
@@ -98,28 +101,35 @@ extension SettingGroupView {
                             index: index,
                             imgSize: vm.calcCardWidth(containerWidth: width - 80),
                             hilight:
-                                vm.focusGroup != -1 &&
-                            Int(myData.groupData[vm.focusGroup][3])! <= index &&
-                            index <= Int(myData.groupData[vm.focusGroup][4])!
+                                vm.editModes.contains(true) &&
+                            Int(myData.groupData[getFocusedGroup()][3])! <= index &&
+                            index <= Int(myData.groupData[getFocusedGroup()][4])!
                         )
                         .opacity(tapAvailable().contains(index) ? 1.0 : 0.3)
                         .onTapGesture {
                             /// 탭은 somegthingIsEdit이고, 해당 index가 tapable해야 가능하다.
-                            if vm.somethingIsEdit && tapAvailable().contains(index) {
+                            if tapAvailable().contains(index) {
+                                if !vm.editModes.contains(true) {
+                                    myData.groupData.append(["", "", "", "-1", "-1"])
+                                    vm.editModes.append(true)
+                                }
                                 /// tapHistory의 길이는 0 -> 1 -> 2 -> 1 -> 2 ...
                                 if vm.tapHistory.count == 2 {
                                     vm.tapHistory = []
                                 }
                                 vm.tapHistory.append(index)
-                                print(vm.tapHistory)
+                                if vm.tapHistory.count == 2 && vm.tapHistory.min()! == vm.tapHistory.max()! {
+                                    vm.tapHistory.removeLast()
+                                }
+//                                print(vm.tapHistory)
                                 /// focusGroup의 groupData는 tapHistory로 관리된다
-                                myData.groupData[vm.focusGroup][3] = String(vm.tapHistory.min()!)
-                                myData.groupData[vm.focusGroup][4] = String(vm.tapHistory.max()!)
+                                myData.groupData[getFocusedGroup()][3] = String(vm.tapHistory.min()!)
+                                myData.groupData[getFocusedGroup()][4] = String(vm.tapHistory.max()!)
                             }
                         }
                     }
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, .spacing400)
                 .padding(.horizontal, .spacing500)
                 .frame(maxWidth: .infinity)
             }
@@ -203,42 +213,105 @@ extension SettingGroupView {
                 .frame(maxWidth: .infinity)
         )
         .frame(maxWidth: .infinity)
-        .padding(.bottom, .spacing400)
     }
     
     // MARK: - 우측 뷰
     private func groupInspectorView(width:CGFloat, height: CGFloat) -> some View {
-        ScrollView(showsIndicators: false) {
-            ZStack(alignment: .top) {
-                Rectangle()
-                    .foregroundColor(Color.sub50)
-                    .frame(minWidth: width, minHeight: height)
-                VStack(spacing: 0) {
+        ZStack(alignment: .top) {
+            Rectangle()
+                .foregroundColor(Color.sub50)
+                .frame(minWidth: width, minHeight: height)
+            VStack(spacing: 0) {
+                leftTimeView()
+                    .padding(.horizontal, .spacing150)
+                    .padding(.bottom, 8)
+                ScrollView(showsIndicators: false) {
                     ForEach(myData.groupData.indices, id: \.self) {index in
                         /// 그룹 리스트
                         GroupListView(settingGroupVM: vm, index: index, resetAction: resetGroupIndex)
+                            .padding(.horizontal, .spacing150)
+                            .padding(.top, 8)
                     }
                     /// 그룹 추가 버튼
                     if  myData.groupData.count < 7 {
                         GroupingAddButtonView(vm: vm)
-                        .padding(.top, 4)
+                        .padding(.horizontal, .spacing150)
                         .buttonStyle(.plain)
-                        /// 수정 혹은 추가 중이면 클릭 불가
-                        .disabled(vm.somethingIsEdit || !vm.groupIndex.contains(-1))
+                        .padding(.top, myData.groupData.isEmpty ? .spacing200 : .spacing100)
                     }
-                    if myData.groupData.isEmpty {
-                        Text("아이콘을 클릭해\n그룹을 추가해주세요")
-                            .systemFont(.caption1)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.black.opacity(0.35))
-                            .padding(.top, 8)
-                    }
-                    Spacer()
                 }
-                .padding(.top, 34)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }.frame(maxWidth: width, maxHeight: .infinity)
+    }
+    
+    private func leftTimeView() -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Spacer()
+                VStack {
+                    Text("설정 시간")
+                        .systemFont(.caption2)
+                        .foregroundColor(.systemGray300)
+                    Spacer()
+                    Text(String(format: "%02d", myDataTimeConvert())+":00")
+                        .font(Font.custom(Pretendard.semibold.fontName, size: 20))
+                        .foregroundColor(.systemBlack)
+                }
+                Spacer()
+                Rectangle()
+                    .fill(Color.systemGray100)
+                    .frame(maxWidth: 0.5, maxHeight: .infinity)
+                Spacer()
+                VStack {
+                    Text("남은 시간")
+                        .systemFont(.caption2)
+                        .foregroundColor(.systemGray300)
+                    Spacer()
+                    Text(leftTimeCalculator())
+                        .font(Font.custom(Pretendard.semibold.fontName, size: 20))
+                        .foregroundColor(.systemBlack)
+                }
+                Spacer()
+            }
+            .frame(height: 46)
+            .padding(.vertical, .spacing400)
+            Rectangle()
+                .foregroundColor(Color.systemGray100)
+                .frame(height: 1)
         }
-        .frame(maxWidth: width, maxHeight: .infinity)
+    }
+    
+    func getFocusedGroup() -> Int {
+        var answer = -1
+        for groupIndex in vm.editModes.indices where vm.editModes[groupIndex] {
+            answer = groupIndex
+        }
+        return answer
+    }
+    
+    func leftTimeCalculator() -> String {
+        var answer = myDataTimeConvert() * 60
+        for groupIndex in 0..<myData.groupData.count {
+            var minute = 0
+            var second = 0
+            if myData.groupData[groupIndex][1] != "" {
+                minute = Int(myData.groupData[groupIndex][1].filter { "0123456789".contains($0) })!
+            }
+            if myData.groupData[groupIndex][2] != "" {
+                second = Int(myData.groupData[groupIndex][2].filter { "0123456789".contains($0) })!
+            }
+            answer -= minute * 60 + second
+        }
+        if answer >= 0 {
+            return DateManager.secondsToTime(seconds: answer)
+        } else {
+            return DateManager.intToTime(second: answer)
+        }
+    }
+    
+    func myDataTimeConvert() -> Int {
+        let temp = myData.time
+        return Int(temp.dropLast())!
     }
 }

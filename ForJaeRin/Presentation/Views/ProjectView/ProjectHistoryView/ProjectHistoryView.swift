@@ -17,7 +17,7 @@ import SwiftUI
  */
 // MARK: 프로젝트 연습 이력 관리(피드백)를 위한 페이지 뷰
 struct ProjectHistoryView: View {
-    @ObservedObject var vm = ProjectHistoryVM()
+    @ObservedObject var vm: ProjectHistoryVM
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     var body: some View {
@@ -29,7 +29,7 @@ struct ProjectHistoryView: View {
                         Text(vm.numberToHanguel(number: projectFileManager.practices!.count)+"번째 발표연습 기록")
                             .systemFont(.headline)
                             .padding(.bottom, 48)
-                        PracticeSummaryView(
+                        PracticeSummaryView(vm: vm, 
                             slices: [
                             (Double(saidKeywords()), Color.primary500),
                             (
@@ -39,11 +39,11 @@ struct ProjectHistoryView: View {
                         ])
                             .frame(minHeight: 380)
                             .padding(.bottom, 28)
-//                        ProjectHistoryListView()
-//                            .frame(minHeight: 252)
-//                            .environmentObject(VoiceManager.shared)
-//                            .padding(.bottom, 48)
-                        MissedKeywordListView()
+                        ProjectHistoryListView(vm: vm)
+                            .frame(minHeight: 252)
+                            .environmentObject(VoiceManager.shared)
+                            .padding(.bottom, 48)
+                        MissedKeywordListView(vm: vm)
                     }
                     .padding(.vertical, 50)
                     .padding(.horizontal, 72)
@@ -69,7 +69,7 @@ struct ProjectHistoryView: View {
     
     private func saidKeywords() -> Int {
         var answer = 0
-        for keywords in projectFileManager.practices!.last!.saidKeywords {
+        for keywords in projectFileManager.practices![vm.practiceIndex].saidKeywords {
             answer += keywords.count
         }
         return answer
@@ -78,14 +78,16 @@ struct ProjectHistoryView: View {
     private func totalKeywords() -> Int {
         var answer = 0
         for page in projectFileManager.pdfDocument!.PDFPages {
-            answer += page.keywords.count
+            for keyword in page.keywords where keyword != "" {
+                answer += 1
+            }
         }
         return answer
     }
 }
 
-struct ProjectHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectHistoryView()
-    }
-}
+// struct ProjectHistoryView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProjectHistoryView()
+//    }
+// }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MissedKeywordListView: View {
-    @StateObject var vm = ProjectHistoryVM()
+    @ObservedObject var vm = ProjectHistoryVM()
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     var body: some View {
@@ -39,35 +39,36 @@ extension MissedKeywordListView {
                 ForEach(pageIndexes, id: \.self) { pageIndex in
                     ForEach(
                         projectFileManager.pdfDocument!
-                            .PDFPages[pageIndex].keywords, id: \.self
-                    ) { keyword in
-                        Text(keyword)
-                            .systemFont(.subTitle)
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(
-                                projectFileManager.practices!.last!.saidKeywords[pageIndex].contains(keyword)
-                                ? index == 0
-                                ? Color.primary500
-                                : index == 6
-                                ? Color.point500
-                                : GroupColor.allCases[index].text
-                                : .systemGray400
-                            )
-                            .padding(.horizontal, 8)
-                            .padding([.top, .bottom], 9.5)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .inset(by: 0.5)
-                                    .stroke(
-                                        projectFileManager.practices!.last!
-                                            .saidKeywords[pageIndex].contains(keyword)
-                                        ? index == 6
-                                        ? Color.point500
-                                        : GroupColor.allCases[index].text
-                                        : Color.systemGray100,
-                                        lineWidth: 1)
-                            )
-                            .cornerRadius(8)
+                            .PDFPages[pageIndex].keywords, id: \.self) { keyword in
+                                if keyword != "" {
+                                    Text(keyword)
+                                        .systemFont(.subTitle)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(
+                                            projectFileManager.practices![vm.practiceIndex].saidKeywords[pageIndex].contains(keyword)
+                                            ? index == 0
+                                            ? Color.primary500
+                                            : index == 6
+                                            ? Color.point500
+                                            : GroupColor.allCases[index].text
+                                            : .systemGray400
+                                        )
+                                        .padding(.horizontal, 8)
+                                        .padding([.top, .bottom], 9.5)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .inset(by: 0.5)
+                                                .stroke(
+                                                    projectFileManager.practices![vm.practiceIndex]
+                                                        .saidKeywords[pageIndex].contains(keyword)
+                                                    ? index == 6
+                                                    ? Color.point500
+                                                    : GroupColor.allCases[index].text
+                                                    : Color.systemGray100,
+                                                    lineWidth: 1)
+                                        )
+                                        .cornerRadius(8)
+                                }
                     }
                     if pageIndex != pageIndexes.last! {
                         GeometryReader { geometry in
@@ -78,7 +79,7 @@ extension MissedKeywordListView {
                                 path.addLine(to: endPoint)
                             }
                             .stroke(style: StrokeStyle(lineWidth: 1, dash: [4]))
-                            .foregroundColor(.systemGray400)
+                            .foregroundColor(.systemGray200)
                         }.frame(height: 16)
                     }
                 }
