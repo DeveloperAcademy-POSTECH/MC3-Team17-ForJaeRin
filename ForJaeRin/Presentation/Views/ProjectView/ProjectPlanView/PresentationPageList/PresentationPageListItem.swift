@@ -11,6 +11,7 @@ struct PresentationPageListItem: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State var groupIndex: Int
     @State var pageIndex: Int
+    @State private var isShowingFullScreenImage = false //린 추가
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
     // @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
@@ -36,6 +37,10 @@ struct PresentationPageListItem: View {
                 groupIndicator()
                 // 프레젠테이션(PDF) 컨테이너
                 pdfContainer(pageIndex: pageIndex)
+                    .sheet(isPresented: $isShowingFullScreenImage) {
+                                            FullScreenImageView(isPresented: $isShowingFullScreenImage, pageIndex: pageIndex)
+                                                .environmentObject(myData) // 환경 객체를 sheet로 전달합니다.
+                                        } // 린 추가
                 dottedDivider()
                 // 스크립트 컨테이너
                 scriptContainer()
@@ -138,6 +143,9 @@ extension PresentationPageListItem {
             .padding(.leading, .spacing500)
             .padding(.trailing, .spacing500)
             .frame(maxWidth: 318)
+            .onTapGesture {
+                           isShowingFullScreenImage = true
+                       } //린 추가
         }
     }
     
@@ -184,6 +192,29 @@ extension PresentationPageListItem {
         }
         .border(.red)
     }
+    
+    //린 추가 : 이미지 눌렀을 때 뜨는 창
+        struct FullScreenImageView: View {
+            @EnvironmentObject var myData: MyData
+            @Binding var isPresented: Bool
+            let pageIndex: Int
+
+            var body: some View {
+                ZStack {
+                    Image(nsImage: myData.images[pageIndex])
+                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 1134, maxHeight: 632)
+                        .fixedSize()
+                        .padding(.all, 0)
+                        .onTapGesture {
+                            isPresented = false
+                        }
+                }
+                .edgesIgnoringSafeArea(.all) // 창 크기를 조절할 수 없도록 설정
+                .background(Color.clear) // 흰색 여백을 없애기 위해 배경을 clear로 설정
+            }
+        }
     
     private func dottedDivider() -> some View {
         Rectangle()
