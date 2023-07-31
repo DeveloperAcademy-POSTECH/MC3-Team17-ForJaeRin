@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MissedKeywordListView: View {
-    @StateObject var vm = ProjectHistoryVM()
+    @ObservedObject var vm = ProjectHistoryVM()
     @EnvironmentObject var projectFileManager: ProjectFileManager
     
     var body: some View {
@@ -45,7 +45,7 @@ extension MissedKeywordListView {
                                         .systemFont(.subTitle)
                                         .multilineTextAlignment(.center)
                                         .foregroundColor(
-                                            projectFileManager.practices!.last!.saidKeywords[pageIndex].contains(keyword)
+                                            projectFileManager.practices![vm.practiceIndex].saidKeywords[pageIndex].contains(keyword)
                                             ? index == 0
                                             ? Color.primary500
                                             : index == 6
@@ -59,7 +59,7 @@ extension MissedKeywordListView {
                                             RoundedRectangle(cornerRadius: 8)
                                                 .inset(by: 0.5)
                                                 .stroke(
-                                                    projectFileManager.practices!.last!
+                                                    projectFileManager.practices![vm.practiceIndex]
                                                         .saidKeywords[pageIndex].contains(keyword)
                                                     ? index == 6
                                                     ? Color.point500

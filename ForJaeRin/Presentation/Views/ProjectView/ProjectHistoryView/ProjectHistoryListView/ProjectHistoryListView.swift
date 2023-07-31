@@ -11,7 +11,7 @@ import Pretendard
 
 // MARK: 프로젝트 연습 이력 리스트 뷰
 struct ProjectHistoryListView: View {
-    @StateObject var vm = ProjectHistoryVM()
+    @ObservedObject var vm: ProjectHistoryVM
     @EnvironmentObject var replayVoiceManager: VoiceManager
     @EnvironmentObject var projectFileManager: ProjectFileManager
     /// 음성 재생될 시점(초)
@@ -31,10 +31,10 @@ struct ProjectHistoryListView: View {
                 .cornerRadius(12)
         }
         .onChange(of: currentTime, perform: { _ in
-            if currentTime >= CGFloat(projectFileManager.practices!.last!.progressTime) {
+            if currentTime >= CGFloat(projectFileManager.practices![vm.practiceIndex].progressTime) {
                 timer?.invalidate()
                 playing = false
-                currentTime = CGFloat(projectFileManager.practices!.last!.progressTime)
+                currentTime = CGFloat(projectFileManager.practices![vm.practiceIndex].progressTime)
             } else if currentTime < 0 {
                 currentTime = 0.0
             }
@@ -146,7 +146,7 @@ extension ProjectHistoryListView {
                             )
                     }
                 }
-                Text(vm.secondsToTime(seconds: projectFileManager.practices!.last!.progressTime))
+                Text(vm.secondsToTime(seconds: projectFileManager.practices![vm.practiceIndex].progressTime))
                     .font(.systemCaption1)
                     .foregroundColor(.systemGray300)
                     .padding(.top, 53)
@@ -190,7 +190,7 @@ extension ProjectHistoryListView {
                                 .fill(checkMarkerPosition(index: index)
                                       ? GroupColor.allCases[speechRange.group].color : .systemGray100)
                                 .frame(maxWidth: size, maxHeight: 20, alignment: .center)
-                            if index != projectFileManager.practices!.last!
+                            if index != projectFileManager.practices![vm.practiceIndex]
                                 .speechRanges.count - 1 {
                                 Rectangle()
                                     .fill(Color.systemWhite)
@@ -224,34 +224,33 @@ extension ProjectHistoryListView {
     }
     
     private func getGroupVolumn(index: Int) -> CGFloat {
-        let whole = projectFileManager.practices!.last!.progressTime // 전체 발표 길이
+        let whole = projectFileManager.practices![vm.practiceIndex].progressTime // 전체 발표 길이
         var part = 0
-        if index == projectFileManager.practices!.last!.speechRanges.count - 1 {
-            part = projectFileManager.practices!.last!.progressTime -
-            projectFileManager.practices!.last!.speechRanges[index].start
+        if index == projectFileManager.practices![vm.practiceIndex].speechRanges.count - 1 {
+            part = projectFileManager.practices![vm.practiceIndex].progressTime -
+            projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
         } else {
-            part = projectFileManager.practices!.last!.speechRanges[index + 1].start -
-            projectFileManager.practices!.last!.speechRanges[index].start
+            part = projectFileManager.practices![vm.practiceIndex].speechRanges[index + 1].start -
+            projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
         }
         return CGFloat(Double(part * 100) / Double(whole))
     }
     
     private func timeToOffset(time: CGFloat, size: CGFloat) -> CGFloat {
-        return Double(time) * Double(size) / Double(projectFileManager.practices!.last!.progressTime)
+        return Double(time) * Double(size) / Double(projectFileManager.practices![vm.practiceIndex].progressTime)
     }
     
     private func blankCount(size: CGFloat) -> CGFloat {
-        return size - 4 * (CGFloat(projectFileManager.practices!.last!.speechRanges.count) - 1)
+        return size - 4 * (CGFloat(projectFileManager.practices![vm.practiceIndex].speechRanges.count) - 1)
     }
     
     private func locationToTime(location: CGFloat, size: CGFloat) -> CGFloat {
-        return Double(projectFileManager.practices!.last!.progressTime) * Double(location) / Double(size)
+        return Double(projectFileManager.practices![vm.practiceIndex].progressTime) * Double(location) / Double(size)
     }
     
     private func playVoice(time: CGFloat) {
-        replayVoiceManager.playRecording(audioPath: AppFileManager.shared.directoryPath
-            .appendingPathComponent(vm.gettingAudioPath(path: projectFileManager.practices!.last!.audioPath),
-                                    conformingTo: .mpeg4Audio), time: time)
+        print("ProjectHistoryListView, vm.practiceIndex: ", vm.practiceIndex)
+        replayVoiceManager.playRecording(audioPath: projectFileManager.practices![vm.practiceIndex].audioPath, time: time)
         timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             if playing {
                 currentTime += 0.05
@@ -260,23 +259,23 @@ extension ProjectHistoryListView {
     }
     
     private func checkMarkerPosition(index: Int) -> Bool {
-        if index == projectFileManager.practices!.last!.speechRanges.count - 1 {
-            return CGFloat(projectFileManager.practices!.last!
+        if index == projectFileManager.practices![vm.practiceIndex].speechRanges.count - 1 {
+            return CGFloat(projectFileManager.practices![vm.practiceIndex]
                     .speechRanges[index].start) <= currentTime
-            && currentTime <= CGFloat(projectFileManager.practices!.last!.progressTime)
+            && currentTime <= CGFloat(projectFileManager.practices![vm.practiceIndex].progressTime)
         }
-        return CGFloat(projectFileManager.practices!.last!
+        return CGFloat(projectFileManager.practices![vm.practiceIndex]
             .speechRanges[index].start) <= currentTime
-        && currentTime <= CGFloat(projectFileManager.practices!.last!
+        && currentTime <= CGFloat(projectFileManager.practices![vm.practiceIndex]
             .speechRanges[index + 1].start)
     }
 }
 
-struct ProjectHistoryListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProjectHistoryListView()
-    }
-}
+// struct ProjectHistoryListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProjectHistoryListView()
+//    }
+// }
 
 struct Purchase: Identifiable {
     let price: Decimal

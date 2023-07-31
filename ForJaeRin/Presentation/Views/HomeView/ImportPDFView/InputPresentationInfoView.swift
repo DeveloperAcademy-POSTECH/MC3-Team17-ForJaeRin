@@ -12,7 +12,7 @@ struct InputPresentationInfoView: View {
     @EnvironmentObject var myData: MyData
     @State private var selectedItem: String = "선택"
     @State private var date: Date = Date()
-    @State private var helpMe: String = ""
+
     var underTenMinutes = Array(1...10).map { String("\($0)분") }
     let items = ["15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
     
