@@ -13,13 +13,41 @@ struct GroupingAddButtonView: View {
     
     var body: some View {
         Button(action: {
-            vm.somethingIsEdit = true
+            vm.editModes.append(true)
             myData.groupData.append(["", "", "", "-1", "-1"])
-            vm.focusGroup = myData.groupData.count - 1
         }, label: {
-            Image(systemName: "plus.circle.fill")
-                .font(.system(size: 20))
-                .foregroundColor(Color.primary500)
+            if myData.groupData.isEmpty {
+                ZStack {
+                    VStack(spacing: 13) {
+                        Image(systemName: "plus")
+                            .resizable()
+                            .foregroundStyle(Color.primary500)
+                            .frame(width: 20, height: 20)
+                        Text("최소 3개, 최대 7개의\n그룹을 만들어 보세요")
+                            .systemFont(.caption1)
+                            .foregroundColor(.systemGray300)
+                    }
+                }
+                .frame(maxWidth: .infinity, minHeight: 124)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(.primary100)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                )
+                
+            } else {
+                Image(systemName: "plus")
+                    .resizable()
+                    .foregroundStyle(Color.primary500)
+                    .frame(width: 20, height: 20)
+                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, minHeight: 57)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundColor(.primary200)
+                    )
+            }
         })
+        .disabled(vm.editModes.contains(true))
     }
 }

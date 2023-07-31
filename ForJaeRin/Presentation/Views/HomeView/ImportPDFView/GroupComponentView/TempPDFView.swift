@@ -16,11 +16,11 @@ struct TempPDFView: View {
     var body: some View {
         ZStack {
             // MARK: - Box Decoration
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(hilight ? Color.primary200 : .clear)
                 .frame(maxWidth: imgSize.width, maxHeight: .infinity)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: 12)
                         .stroke(hilight ? Color.primary500 : .clear, lineWidth: 2)
                         .foregroundColor(Color.clear)
                         .frame(maxWidth: imgSize.width, maxHeight: .infinity)
@@ -31,6 +31,12 @@ struct TempPDFView: View {
                         .resizable()
                         .frame(width: imgSize.width - 16, height: (imgSize.width - 16) / 3 * 2)
                         .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.systemGray100,lineWidth:1)
+                                .foregroundColor(Color.clear)
+                                .cornerRadius(10)
+                        )
                     Text("\(index + 1)")
                         .systemFont(.caption2)
                         .foregroundColor(Color.systemGray300)
