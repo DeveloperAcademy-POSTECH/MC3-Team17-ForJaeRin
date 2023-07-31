@@ -10,6 +10,7 @@ import Foundation
 class ProjectHistoryVM: ObservableObject {
     let SUMMARY_INFO_TITLES = ["발표 날짜", "목표 소요 시간", "연습 횟수"]
     
+    @Published var practiceIndex = 0
     @Published var isHistoryDetailActive = false
     
     func calcGroupBlockSize(percent: CGFloat, whole: CGFloat) -> CGFloat {

@@ -10,7 +10,7 @@ import Pretendard
 
 struct PracticeSummaryView: View {
     
-    @StateObject var vm =  ProjectHistoryVM()
+    @ObservedObject var vm: ProjectHistoryVM
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State var slices: [(Double, Color)]
     @State var practiceTimeResults: [PracticeTimeResult] = []
@@ -67,9 +67,6 @@ extension PracticeSummaryView {
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .cornerRadius(12)
-        .onAppear {
-            print("keywordSuccessView 도착")
-        }
     }
     
     private func pieChartView() -> some View {
@@ -114,9 +111,6 @@ extension PracticeSummaryView {
             }
         }
         .aspectRatio(1, contentMode: .fit)
-        .onAppear {
-            print("pie 차트 내부 도착")
-        }
     }
     
     private func practiceTimeResultView() -> some View {
@@ -227,15 +221,15 @@ extension PracticeSummaryView {
                 maxTime = group.setTime
             }
         }
-        for (index, speech) in projectFileManager.practices!.last!.speechRanges.enumerated() {
+        for (index, speech) in projectFileManager.practices![vm.practiceIndex].speechRanges.enumerated() {
             var groupTime = 0
-            if index == projectFileManager.practices!.last!.speechRanges.count - 1 {
-                groupTime = projectFileManager.practices!.last!.progressTime
-                - projectFileManager.practices!.last!.speechRanges[index].start
+            if index == projectFileManager.practices![vm.practiceIndex].speechRanges.count - 1 {
+                groupTime = projectFileManager.practices![vm.practiceIndex].progressTime
+                - projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
                 practiceTimeResults[speech.group].realTime += groupTime
             } else {
-                groupTime = projectFileManager.practices!.last!.speechRanges[index + 1].start
-                - projectFileManager.practices!.last!.speechRanges[index].start
+                groupTime = projectFileManager.practices![vm.practiceIndex].speechRanges[index + 1].start
+                - projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
                 practiceTimeResults[speech.group].realTime += groupTime
             }
             if maxTime < groupTime {
