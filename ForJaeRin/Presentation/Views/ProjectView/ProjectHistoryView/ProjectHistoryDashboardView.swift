@@ -15,9 +15,6 @@ struct ProjectHistoryDashboardView: View {
     var body: some View {
         if myData.isHistoryDetailActive {
             ProjectHistoryView(vm: vm)
-                .onAppear {
-                    print("ProjectHistoryView 등장")
-                }
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 historyDashboardTitleView()
