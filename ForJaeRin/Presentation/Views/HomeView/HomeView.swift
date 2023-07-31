@@ -18,6 +18,9 @@ struct HomeView: View {
     // EnvironmentObject로 전달할 변수 여기서 선언
     @StateObject var vm = HomeVM()
     
+    @State var isProjectEmpty = true
+    @State var files: [KkoProject] = []
+    
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -44,8 +47,6 @@ struct HomeView: View {
                     maxWidth: vm.getSheetWidth(height: height),
                     minHeight: height
                 )
-                .environmentObject(projectFileManager)
-                .environmentObject(myData)
             }
             .navigationDestination(isPresented: $vm.isNewProjectSettingDone) {
                 ProjectDocumentView()
@@ -57,6 +58,15 @@ struct HomeView: View {
             }
             .onAppear {
                 AppFileManager.shared.readPreviousProject()
+                files = AppFileManager.shared.files
+            }
+            .onReceive(AppFileManager.shared.$files) {
+                if $0.isEmpty {
+                    isProjectEmpty = true
+                } else {
+                    isProjectEmpty = false
+                }
+                
             }
         }
     }
@@ -88,7 +98,7 @@ extension HomeView {
             SectionHeaderView(info: vm.BOTTOM_TEXT_INFO)
                 .padding(.top, .spacing800)
                 .padding(.horizontal, vm.HORIZONTAL_PADDING)
-            projectListView(files: AppFileManager.shared.files)
+            projectListView(_files: files)
         }
     }
         
@@ -127,9 +137,9 @@ extension HomeView {
     }
     
     // MARK: 프로젝트 리스트
-    private func projectListView(files: [KkoProject]) -> some View {
+    private func projectListView(_files: [KkoProject]) -> some View {
         Group {
-            if files.isEmpty {
+            if isProjectEmpty {
                 emptyItemView()
                     .padding(.top, .spacing800)
             } else {
@@ -137,7 +147,7 @@ extension HomeView {
                     let containerWidth = geometry.size.width - vm.HORIZONTAL_PADDING * 2
                     ScrollView(showsIndicators: false, content: {
                         projectCardContainerView(
-                            files: files,
+                            files: _files,
                             containerWidth: containerWidth
                         )
                         .padding(.bottom, 32)
@@ -149,6 +159,7 @@ extension HomeView {
                 }
             }
         }
+        .onReceive(AppFileManager.shared.$files) { files = $0 }
     }
     
     // MARK: 리스트가 없을 때 보여지는 뷰
@@ -167,7 +178,7 @@ extension HomeView {
     }
     
     // MARK: 리스트가 있을 때 보여지는 그리드
-    private func projectCardContainerView(
+    private func projectCardContainerView (
         files: [KkoProject],
         containerWidth: CGFloat) -> some View {
         LazyVGrid(

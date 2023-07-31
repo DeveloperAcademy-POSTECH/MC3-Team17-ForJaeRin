@@ -13,7 +13,11 @@ class AppFileManager {
 
     let fileManager = FileManager.default
     
-    @Published var files: [KkoProject] = []
+    @Published var files: [KkoProject] = [] {
+        didSet {
+            print("files", files)
+        }
+    }
     
     private init() {}
     
@@ -210,6 +214,7 @@ class AppFileManager {
             try data.write(to: fileURL)
 
             print("KkoProject 리스트를 JSON 파일으로 성공적으로 저장되었습니다.")
+            readPreviousProject()
         } catch {
             print("저장에 실패했습니다: \(error.localizedDescription)")
         }

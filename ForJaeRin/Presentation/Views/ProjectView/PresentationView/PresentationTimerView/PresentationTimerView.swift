@@ -122,8 +122,8 @@ extension PresentationTimerView {
     }
     
     private func timerContainer() -> some View {
-        let wholeTime = voiceManager.covertSecToMinAndHour(
-            seconds: projectFileManamger.projectMetadata!.presentationTime
+        let wholeTime = voiceManager.makeLimitTime(
+            minutes: projectFileManamger.projectMetadata!.presentationTime
         )
         let progressTime = voiceManager.timer
         
