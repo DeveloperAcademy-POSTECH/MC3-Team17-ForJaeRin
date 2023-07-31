@@ -11,6 +11,7 @@ struct PresentationPageListItem: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
     @State var groupIndex: Int
     @State var pageIndex: Int
+    @State private var isShowingFullScreenImage = false //린 추가
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
     // @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
@@ -22,6 +23,7 @@ struct PresentationPageListItem: View {
     @Binding var clickedKeywordIndex: Int?
     @FocusState var focusField: Int?
     @Binding var lastIndexes: [Int]
+    @State var currentHeight: CGFloat = 200.0
     
     @EnvironmentObject var myData: MyData
     
@@ -35,6 +37,10 @@ struct PresentationPageListItem: View {
                 groupIndicator()
                 // 프레젠테이션(PDF) 컨테이너
                 pdfContainer(pageIndex: pageIndex)
+                    .sheet(isPresented: $isShowingFullScreenImage) {
+                                            FullScreenImageView(isPresented: $isShowingFullScreenImage, pageIndex: pageIndex)
+                                                .environmentObject(myData) // 환경 객체를 sheet로 전달합니다.
+                                        } // 린 추가
                 dottedDivider()
                 // 스크립트 컨테이너
                 scriptContainer()
@@ -44,10 +50,11 @@ struct PresentationPageListItem: View {
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
-            .padding(.bottom, .spacing150)
-            .frame(maxWidth: .infinity, minHeight: 200, idealHeight: 200, maxHeight: 230)
+            .padding(.bottom, .spacing300)
+            // MARK: 이거 확인
+            .frame(maxWidth: .infinity, minHeight: 200)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        //.frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, .spacing1000)
         .onAppear {
             // pageScript = pdfPage.script
@@ -67,18 +74,29 @@ struct PresentationPageListItem: View {
 extension PresentationPageListItem {
     private func groupNotiView() -> some View {
         ZStack {
-            Rectangle()
-                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [7]))
+            GeometryReader { geometry in
+                Path { path in
+                    let startPoint = CGPoint(x: 0, y: geometry.size.height / 2)
+                    let endPoint = CGPoint(x: geometry.size.width, y: geometry.size.height / 2)
+                    path.move(to: startPoint)
+                    path.addLine(to: endPoint)
+                }
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [6]))
                 .foregroundColor(GroupColor.allCases[groupIndex].text)
-                .frame(maxWidth: .infinity ,minHeight:1, maxHeight: 1)
-            RoundedRectangle(cornerRadius: 50)
-                .stroke(GroupColor.allCases[groupIndex].text,lineWidth:1)
-                .foregroundColor(Color.systemWhite)
-                .background(Color.systemWhite)
-                .cornerRadius(50)
-                .frame(maxWidth: 255, maxHeight: 26)
+            }
+            Rectangle()
+                .foregroundColor(.clear)
+                .frame(width: 256, height: 28)
+                .background(.white)
+                .cornerRadius(30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .inset(by: 0.5)
+                        .stroke(GroupColor.allCases[groupIndex].text, lineWidth:1)
+                )
             TextField("그룹명을 작성해주세요", text: $pdfGroup.name)
                 .fixedSize()
+                .textFieldStyle(.plain)
                 .systemFont(.caption1)
                 .foregroundColor(GroupColor.allCases[groupIndex].text)
                 .multilineTextAlignment(.center)
@@ -89,9 +107,9 @@ extension PresentationPageListItem {
                  ? .spacing600
                  : 0
         )
+        .frame(maxWidth: .infinity, minHeight: 28)
         .padding(.bottom, .spacing300)
 //        .padding(.horizontal, .spacing1000)
-        .frame(maxWidth: .infinity, minHeight: 26)
     }
     
     // MARK: 그룹 인디케이터
@@ -125,6 +143,9 @@ extension PresentationPageListItem {
             .padding(.leading, .spacing500)
             .padding(.trailing, .spacing500)
             .frame(maxWidth: 318)
+            .onTapGesture {
+                           isShowingFullScreenImage = true
+                       } //린 추가
         }
     }
     
@@ -146,10 +167,10 @@ extension PresentationPageListItem {
                 TextEditor(text: $myData.script[pageIndex])
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
-                    .frame(minHeight: 182-48, maxHeight: 182-48)
+                    .frame(minHeight: 182-48, maxHeight: .infinity)
             }
         }
-        .frame(maxWidth: 206, maxHeight: 182)
+        .frame(maxWidth: 206, maxHeight: .infinity)
         .padding(.leading, 8)
         .border(.blue)
 //        .padding(.trailing, .spacing500)
@@ -157,18 +178,43 @@ extension PresentationPageListItem {
     
     // MARK: 키워드 컨테이너
     private func keywordContainer() -> some View {
-        VStack(spacing: 0) {
+        ZStack(alignment:.topLeading) {
             KeywordView(
                 pageNumber: pageIndex,
                 lastIndexes: $lastIndexes,
+                currentHeight: $currentHeight,
                 focusField: _focusField,
                 clickedKeywordIndex: $clickedKeywordIndex)
             .border(.blue)
             .padding(.vertical, 12)
-            .padding(.leading, .spacing500)
-            .padding(.trailing, .spacing200 + .spacing500)
-        }.border(.red)
+            .padding(.leading, .spacing400)
+            .padding(.trailing, .spacing600)
+        }
+        .border(.red)
     }
+    
+    //린 추가 : 이미지 눌렀을 때 뜨는 창
+        struct FullScreenImageView: View {
+            @EnvironmentObject var myData: MyData
+            @Binding var isPresented: Bool
+            let pageIndex: Int
+
+            var body: some View {
+                ZStack {
+                    Image(nsImage: myData.images[pageIndex])
+                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 1134, maxHeight: 632)
+                        .fixedSize()
+                        .padding(.all, 0)
+                        .onTapGesture {
+                            isPresented = false
+                        }
+                }
+                .edgesIgnoringSafeArea(.all) // 창 크기를 조절할 수 없도록 설정
+                .background(Color.clear) // 흰색 여백을 없애기 위해 배경을 clear로 설정
+            }
+        }
     
     private func dottedDivider() -> some View {
         Rectangle()

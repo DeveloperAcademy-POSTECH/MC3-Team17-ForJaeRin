@@ -227,7 +227,6 @@ class AppFileManager {
             
             files = jsonData
             print("PreviousProject JSON파일 불러오기 성공했다!")
-            print("files.count: ", files.count)
         } catch {
             print("PreviousProject JSON파일 불러오기 실패했습니다: \(error.localizedDescription)")
         }
@@ -236,7 +235,24 @@ class AppFileManager {
     func deletePreviousProject(file: KkoProject) {
         for index in 0..<files.count {
             if files[index].id == file.id {
+                print("index: \(index)")
+                // projectPath.json에서 경로 가져와서 해당 폴더 삭제
+                var removeDir = files[index].path.deletingLastPathComponent()
+                let fileManager = FileManager.default
+                do {
+                    try fileManager.removeItem(at: removeDir)
+                    print("delete버튼을 통해서 디렉토리 삭제 성공!")
+                } catch {
+                    print("delete버튼을 통해서 디렉토리 삭제 실패: \(error)")
+                }
+                
+                // files에서 삭제 후, 삭제가 적용된 files 기준으로 projectPath.json 재저장
                 files.remove(at: index)
+                writePreviousProject()
+                
+                // 이전 프로젝트 화면 뷰 reload
+                
+                break
             }
         }
     }
