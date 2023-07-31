@@ -14,6 +14,8 @@ struct PresentationPageList: View {
     @State var clickedKeywordIndex: Int?
     @FocusState var focusField: Int?
     @State var lastIndexes: [Int]
+    @State private var isShowingFullScreenImage = false // 린 추가
+    @State private var clickedListIndex = 0
     
     var body: some View {
         ZStack {
@@ -22,22 +24,34 @@ struct PresentationPageList: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         if myData.isOnboardingActive {
-                            PresentationPageListOnboardingView(isOnboardingActive: $myData.isOnboardingActive)
+                            PresentationPageListOnboardingView(
+                                conatainerWidth: geometry.size.width,
+                                isOnboardingActive: $myData.isOnboardingActive)
                         }
                         ForEach(myData.images.indices, id: \.self) { index in
                             PresentationPageListItem(
+                                containerWidth: geometry.size.width - 407,
                                 groupIndex: document.findGroupIndex(pageIndex: index),
                                 pageIndex: index,
                                 pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],
                                 clickedKeywordIndex: $clickedKeywordIndex,
                                 focusField: _focusField,
-                                lastIndexes: $lastIndexes
+                                lastIndexes: $lastIndexes,
+                                clickedListIndex: $clickedListIndex,
+                                isShowingFullScreenImage: $isShowingFullScreenImage
                             )
                         }
                     }.onReceive(projectFileManager.pdfDocument!.$PDFPages, perform: { newValue in
                             pdfDocumentPages = newValue
                     })
                 }.frame(width: geometry.size.width, height: geometry.size.height)
+                    .sheet(isPresented: $isShowingFullScreenImage) {
+                        FullScreenImageView(
+                            isPresented: $isShowingFullScreenImage,
+                            pageIndex: clickedListIndex,
+                            containerWidth: geometry.size.width
+                        )
+                    }
             }
             Button {
                 if clickedKeywordIndex != nil {

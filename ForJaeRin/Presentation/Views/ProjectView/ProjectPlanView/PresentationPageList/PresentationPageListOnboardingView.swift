@@ -8,26 +8,36 @@
 import SwiftUI
 
 struct PresentationPageListOnboardingView: View {
+    let conatainerWidth: CGFloat
     @Binding var isOnboardingActive: Bool
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            HStack {
+            HStack(spacing: 0) {
                 HStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundColor(Color.primary200)
-                        .cornerRadius(5)
-                        .frame(width: 188, height: 105)
+                    ZStack {
+                        Text("썸네일")
+                            .systemFont(.body)
+                            .foregroundColor(Color.systemPrimary)
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.primary200)
+                            .cornerRadius(5)
+                            .frame(maxWidth: .infinity, maxHeight: 105)
+                    }
                 }
-                .frame(maxWidth: 318)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal, .spacing400)
                 Divider()
                     .padding(.trailing, .spacing400)
-                scriptInfoView()
-                Divider()
-                    .padding(.leading, .spacing400)
-                    .padding(.trailing, .spacing400)
+                if conatainerWidth - 48 > 786 {
+                    scriptInfoView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Divider()
+                        .padding(.leading, .spacing400)
+                        .padding(.trailing, .spacing400)
+                }
                 keywordInfoView()
-                    .frame(maxWidth: .infinity)
+                    .frame(minWidth: 516,  maxWidth: .infinity)
             }
             .padding(.vertical, .spacing400)
             .background(
@@ -35,8 +45,9 @@ struct PresentationPageListOnboardingView: View {
                     .stroke(Color.primary400, lineWidth: 1)
                     .background(Color.primary100)
                     .cornerRadius(10)
+                    .frame(maxWidth: .infinity)
             )
-            .frame(maxWidth: .infinity)
+            .frame(minWidth: 728, maxWidth: conatainerWidth, maxHeight: 200)
             Button {
                 isOnboardingActive = false
             } label: {
@@ -47,7 +58,6 @@ struct PresentationPageListOnboardingView: View {
             .offset(x: -18, y: 9)
         }
         .padding(.top, .spacing600)
-        .frame(maxWidth: .infinity, maxHeight: 200)
         .padding(.horizontal, .spacing1000)
     }
 }
@@ -114,7 +124,7 @@ extension PresentationPageListOnboardingView {
                 keywordInfoFalseBottomView()
             }
             Text("연습 시 키워드 체크를 위해,\n말할 단어를 박스 당 하나씩\n최대 7개까지 입력해주세요.")
-                .fixedSize()
+//                .fixedSize()
                 .systemFont(.body)
                 .foregroundColor(Color.primary500)
                 .padding(.trailing, .spacing600)
@@ -220,13 +230,5 @@ extension PresentationPageListOnboardingView {
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color.systemGray200)
         }
-    }
-}
-
-struct PresentationPageListOnboardingView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        @State var isOnboardingActive = false
-        PresentationPageListOnboardingView(isOnboardingActive: $isOnboardingActive)
     }
 }

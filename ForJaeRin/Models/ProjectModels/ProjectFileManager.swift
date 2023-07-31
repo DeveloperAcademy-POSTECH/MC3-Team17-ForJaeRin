@@ -105,7 +105,6 @@ final class ProjectFileManager: ObservableObject {
             document.url = myData.url
             document.PDFPages = []
             myData.images.indices.forEach { index in
-                print("myData.images.index: \(index)")
                 document.PDFPages.append(PDFPage(
                     keywords: myData.keywords[index],
                     script: myData.script[index])

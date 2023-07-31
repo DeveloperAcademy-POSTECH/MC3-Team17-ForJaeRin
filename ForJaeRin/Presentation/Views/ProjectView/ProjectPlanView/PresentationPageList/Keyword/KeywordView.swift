@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KeywordView: View {
-    
+    let containerWidth: CGFloat
     @EnvironmentObject var myData: MyData
     @State var pageNumber: Int
     @Binding var lastIndexes: [Int]
@@ -31,7 +31,7 @@ struct KeywordView: View {
                         clickedKeywordIndex: $clickedKeywordIndex
                     )
                         .alignmentGuide(.leading) { item in
-                            if abs(width - item.width) > 407 {
+                            if abs(width - item.width) > containerWidth {
                                 width = 0.0; height -= item.height + 16
                             }
                             let result = width
@@ -80,6 +80,7 @@ struct KeywordView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
             resetKeywords()
         }

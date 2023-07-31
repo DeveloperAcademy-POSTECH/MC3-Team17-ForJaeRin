@@ -15,6 +15,9 @@ struct ProjectHistoryDashboardView: View {
     var body: some View {
         if myData.isHistoryDetailActive {
             ProjectHistoryView(vm: vm)
+                .onAppear {
+                    print("ProjectHistoryView 등장")
+                }
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 historyDashboardTitleView()
@@ -41,7 +44,7 @@ struct ProjectHistoryDashboardView: View {
         let endIndex = fileName.index(before: dotIndex)
         let temp = fileName[startIndex...endIndex].split(separator: "at")
         
-        let time = temp[1].split(separator: ":")[0] + ":" + temp[1].split(separator: ":")[1]
+        let time = temp[1].split(separator: "-")[0] + ":" + temp[1].split(separator: "-")[1]
         var date = ""
         
         Array(temp[0].split(separator: "-").enumerated()).forEach { index, token in
@@ -150,6 +153,12 @@ extension ProjectHistoryDashboardView {
                         ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
                             historyListItem(index: index, practice: practice)
                                 .onTapGesture {
+                                    // 데이터를 갈아껴야댐
+                                    print("projectFileManager.practices[index].id: ", projectFileManager.practices![index].id)
+                                    print("projectFileManager.practices[index].progressTime: ", projectFileManager.practices![index].progressTime)
+                                    print("projectFileManager.practices[index].audioPath: ", projectFileManager.practices![index].audioPath)
+                                    print("projectFileManager.practices[index].saidKeywords: ", projectFileManager.practices![index].saidKeywords)
+                                    print("projectFileManager.practices[index].speechRanges: ", projectFileManager.practices![index].speechRanges)
                                     myData.isHistoryDetailActive = true
                                 }
                         }
