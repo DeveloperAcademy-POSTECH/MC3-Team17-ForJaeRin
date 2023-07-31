@@ -138,10 +138,10 @@ extension PresentationView {
                     .foregroundColor(Color.systemGray400)
             }
             .buttonStyle(.plain)
+            
             // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
             Button {
                 // MARK: 로직 작성 필요
-                // 내가 뭘 넣을꺼다
                 if let check = VoiceManager.shared.currentPath {
                     vm.practice.audioPath = VoiceManager.shared.currentPath!
                     projectFileManager.practices?.append(vm.practice)
@@ -151,8 +151,11 @@ extension PresentationView {
                 speechRecognizer.stopTranscribing()
                 vm.practice.progressTime = voiceManager.countSec
                 projectDocumentVM.currentTab = .record
-                dismiss()
                 
+                // 내가 만든 녹음 중지
+                voiceManager.stopRecording(index: 0)
+                
+                dismiss()
             } label: {
                 Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
                     .systemFont(.body)

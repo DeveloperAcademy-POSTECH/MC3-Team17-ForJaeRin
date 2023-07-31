@@ -18,10 +18,10 @@ struct StyleDetailsChartView: View {
             VStack {
                 
                 CustomBarChart1(data: [
-                    //[data 가져오기]
-                    //사용자가 설정한 그룹 발표 시간 중 가장 최대값 : maxTime
-                    //y에 사용자가 설정한 그룹 발표 시간 : hopeTime
-                    //y에 들어갈 수식(goalGraph) : 200*(hopeTime/(maxTime+(maxTime*1/4)))
+                    // [data 가져오기]
+                    // 사용자가 설정한 그룹 발표 시간 중 가장 최대값 : maxTime
+                    // y에 사용자가 설정한 그룹 발표 시간 : hopeTime
+                    // y에 들어갈 수식(goalGraph) : 200*(hopeTime/(maxTime+(maxTime*1/4)))
                     (x: "Cachapa", y: Int(Double(200) * (Double(hopeTime) / (Double(maxTime) + (Double(maxTime) * 0.15)))))
                 ])
             }
@@ -29,9 +29,9 @@ struct StyleDetailsChartView: View {
             
             VStack {
                 CustomBarChart2(data: [
-                    //[data 가져오기]
-                    //y에 사용자가 실제로 말한 그룹 발표 시간 : realTime
-                    //y에 들어갈 수식(realGraph) : hopeTime-realTime
+                    // [data 가져오기]
+                    // y에 사용자가 실제로 말한 그룹 발표 시간 : realTime
+                    // y에 들어갈 수식(realGraph) : hopeTime-realTime
                     (x: "Cachapa", y: Int(Double(200) * (Double(realTime) / (Double(maxTime) + (Double(maxTime) * 0.15)))))
                 ])
             }

@@ -11,7 +11,7 @@ import SwiftUI
 struct GroupView: View {
     
     let group: String
-    //[data 가져오기] 그룹 내 키워드들 텍스트 가져와야 함
+    // [data 가져오기] 그룹 내 키워드들 텍스트 가져와야 함
     let groupKeyword1: [String] = ["차이", "디테일", "디자이너", "개발자", "소통", "잘", "전달"]
     let groupKeyword2: [String] = ["소통", "방법"]
     let groupKeyword3: [String] = ["HIG", "타이포그래피짱짱맨안녕하세요반가워요짱짱", "가독성", "자동", "사이즈", "일관된", "개발자"]
@@ -20,7 +20,7 @@ struct GroupView: View {
     let groupKeyword6: [String] = ["스타일", "케이스", "지정", "편리", "효율적", "공유"]
     let groupKeyword7: [String] = ["결론적", "Xcode", "디테일"]
     
-    //[data 가져오기] 그룹 내 키워드들을 사용자가 말했는지 여부 (true : 키워드 말함, false : 말하지 못함)
+    // [data 가져오기] 그룹 내 키워드들을 사용자가 말했는지 여부 (true : 키워드 말함, false : 말하지 못함)
     let groupKeyword1Feedback: [Bool] = [true, true, true, true, false, false, true]
     let groupKeyword2Feedback: [Bool] = [false, true]
     let groupKeyword3Feedback: [Bool] = [true, false, true, true, false, true, true]
@@ -135,13 +135,13 @@ struct GroupView: View {
     }
     
     // 키워드 갯수에 따라 사각형의 높이를 계산하는 함수
-    //if 페이지가 2장 이상일 경우에 구분선이 추가되는데, 위에서 계산한 minHeight에 32*(페이지 갯수-1)만큼 더해주면 될 듯. 그리고 구분선 추가
+    // if 페이지가 2장 이상일 경우에 구분선이 추가되는데, 위에서 계산한 minHeight에 32*(페이지 갯수-1)만큼 더해주면 될 듯. 그리고 구분선 추가
     func calculateRectangleHeight(keywordCount: Int) -> CGFloat {
         return CGFloat(20 + 8 + 40 * groupKeywordCount(for: group) + 8 * (groupKeywordCount(for: group)-1) + 8)
     }
     
     var body: some View {
-        ZStack (alignment: .topLeading) {
+        ZStack(alignment: .topLeading) {
             Rectangle()
                 .cornerRadius(12)
                 .frame(
@@ -162,8 +162,8 @@ struct GroupView: View {
                         .foregroundColor(color(for: group))
                 }
                 
-                //키워드 감싸는 사각형 (true면 기본 호출 & false면 피드백 호출)
-                VStack (spacing: 8){
+                // 키워드 감싸는 사각형 (true면 기본 호출 & false면 피드백 호출)
+                VStack(spacing: 8) {
                     ForEach(Array(zip(grouptext(for: group), groupKeywordFeedback(for: group))), id: \.0) { keyword, feedback in
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
