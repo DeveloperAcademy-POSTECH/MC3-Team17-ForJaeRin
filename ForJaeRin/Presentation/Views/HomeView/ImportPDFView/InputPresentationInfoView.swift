@@ -12,6 +12,7 @@ struct InputPresentationInfoView: View {
     @EnvironmentObject var myData: MyData
     @State private var selectedItem: String = "선택"
     @State private var date: Date = Date()
+    @State private var helpMe: String = ""
     var underTenMinutes = Array(1...10).map { String("\($0)분") }
     let items = ["15분", "20분", "25분", "30분", "35분", "40분", "45분", "50분", "55분", "60분"]
     
@@ -102,7 +103,7 @@ extension InputPresentationInfoView {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     private func purposeInputView() -> some View {
         HStack {
             Text("목적")
@@ -116,7 +117,7 @@ extension InputPresentationInfoView {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     private func timeInputView() -> some View {
         HStack {
             Text("소요시간")
@@ -139,7 +140,7 @@ extension InputPresentationInfoView {
         .padding(.vertical, 10)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     private func dateInputView() -> some View {
         HStack {
             Text("날짜")
@@ -162,7 +163,7 @@ extension InputPresentationInfoView {
 
 struct PDFViewer: NSViewRepresentable {
     var pdfDocument: PDFDocument
-    
+
     func makeNSView(context: Context) -> PDFView {
         let pdfView = PDFView()
         pdfView.document = pdfDocument
@@ -171,7 +172,7 @@ struct PDFViewer: NSViewRepresentable {
         pdfView.goToFirstPage(nil)
         return pdfView
     }
-    
+
     func updateNSView(_ pdfView: PDFView, context: Context) {
         pdfView.document = pdfDocument
         pdfView.goToFirstPage(nil)
@@ -181,7 +182,7 @@ struct PDFViewer: NSViewRepresentable {
 struct OnePDFImageView: View {
     let pdfUrl: URL
     @State private var image: NSImage?
-    
+
     var body: some View {
         Group {
             if let imgimg = self.image {
@@ -194,18 +195,18 @@ struct OnePDFImageView: View {
         }
         .onAppear(perform: loadImage)
     }
-    
+
     private func loadImage() {
             let imgimg = pdfToImage(pdfUrl: self.pdfUrl)
                 self.image = imgimg
     }
-    
+
     func pdfToImage(pdfUrl: URL) -> NSImage? {
         let pdfDocument = PDFDocument(url: pdfUrl)
         guard let page = pdfDocument?.page(at: 0) else {
             return nil
         }
-        
+
         let pageRect = page.bounds(for: .mediaBox)
         let nsImage = NSImage(size: pageRect.size, flipped: false, drawingHandler: { (rect: NSRect) -> Bool in
             guard let context = NSGraphicsContext.current?.cgContext else { return false }
@@ -214,7 +215,7 @@ struct OnePDFImageView: View {
             page.draw(with: .mediaBox, to: context)
             return true
         })
-        
+
         return nsImage
     }
 }
