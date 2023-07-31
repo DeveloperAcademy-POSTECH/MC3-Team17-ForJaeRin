@@ -9,9 +9,9 @@ import SwiftUI
 
 struct PresentationPageListItem: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
+    let containerWidth: CGFloat
     @State var groupIndex: Int
     @State var pageIndex: Int
-    @State private var isShowingFullScreenImage = false //린 추가
     @State var pdfGroup: PDFGroup // 뷰모델이 만들어지면 인덱스로 조회해오자.
     // @State var pdfPage: PDFPage
     // 그룹의 첫번째 인덱스 == 페이지 인덱스
@@ -23,8 +23,9 @@ struct PresentationPageListItem: View {
     @Binding var clickedKeywordIndex: Int?
     @FocusState var focusField: Int?
     @Binding var lastIndexes: [Int]
+    @Binding var clickedListIndex: Int
+    @Binding var isShowingFullScreenImage: Bool
     @State var currentHeight: CGFloat = 200.0
-    
     @EnvironmentObject var myData: MyData
     
     var body: some View {
@@ -35,18 +36,18 @@ struct PresentationPageListItem: View {
             HStack(spacing: 0) {
                 // 그룹 인디케이터
                 groupIndicator()
+                    .frame(maxWidth: 20)
                 // 프레젠테이션(PDF) 컨테이너
                 pdfContainer(pageIndex: pageIndex)
-                    .sheet(isPresented: $isShowingFullScreenImage) {
-                                            FullScreenImageView(isPresented: $isShowingFullScreenImage, pageIndex: pageIndex)
-                                                .environmentObject(myData) // 환경 객체를 sheet로 전달합니다.
-                                        } // 린 추가
+                    .frame(maxWidth: 318)
                 dottedDivider()
                 // 스크립트 컨테이너
                 scriptContainer()
+                    .frame(maxWidth: .infinity)
                 dottedDivider()
                 // 키워드 컨테이너
-                keywordContainer()
+                keywordContainer(containerWidth: 407)
+                    .frame(width: 407)
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
@@ -54,9 +55,9 @@ struct PresentationPageListItem: View {
             // MARK: 이거 확인
             .frame(maxWidth: .infinity, minHeight: 200)
         }
-        //.frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, .spacing1000)
         .onAppear {
+            print(containerWidth)
             // pageScript = pdfPage.script
             // keywords = pdfPage.keywords
         }
@@ -144,11 +145,11 @@ extension PresentationPageListItem {
             .padding(.trailing, .spacing500)
             .frame(maxWidth: 318)
             .onTapGesture {
-                           isShowingFullScreenImage = true
-                       } //린 추가
+                clickedListIndex = pageIndex
+               isShowingFullScreenImage = true
+           } // 린 추가
         }
     }
-    
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
         HStack {
@@ -162,60 +163,36 @@ extension PresentationPageListItem {
                             isFocus = true
                         }
                         .padding(.leading, 4)
-                        .padding(.top, 12)
                 }
                 TextEditor(text: $myData.script[pageIndex])
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
-                    .frame(minHeight: 182-48, maxHeight: .infinity)
+                    .frame(maxHeight: 117)
             }
         }
-        .frame(maxWidth: 206, maxHeight: .infinity)
+        .frame(maxWidth: .infinity)
         .padding(.leading, 8)
-        .border(.blue)
+        .padding(.vertical, .spacing400)
 //        .padding(.trailing, .spacing500)
     }
     
     // MARK: 키워드 컨테이너
-    private func keywordContainer() -> some View {
+    private func keywordContainer(containerWidth: CGFloat) -> some View {
         ZStack(alignment:.topLeading) {
             KeywordView(
+                containerWidth: containerWidth,
                 pageNumber: pageIndex,
                 lastIndexes: $lastIndexes,
                 currentHeight: $currentHeight,
                 focusField: _focusField,
                 clickedKeywordIndex: $clickedKeywordIndex)
-            .border(.blue)
             .padding(.vertical, 12)
             .padding(.leading, .spacing400)
             .padding(.trailing, .spacing600)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .border(.red)
+        .frame(maxWidth: .infinity)
     }
-    
-    //린 추가 : 이미지 눌렀을 때 뜨는 창
-        struct FullScreenImageView: View {
-            @EnvironmentObject var myData: MyData
-            @Binding var isPresented: Bool
-            let pageIndex: Int
-
-            var body: some View {
-                ZStack {
-                    Image(nsImage: myData.images[pageIndex])
-                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 1134, maxHeight: 632)
-                        .fixedSize()
-                        .padding(.all, 0)
-                        .onTapGesture {
-                            isPresented = false
-                        }
-                }
-                .edgesIgnoringSafeArea(.all) // 창 크기를 조절할 수 없도록 설정
-                .background(Color.clear) // 흰색 여백을 없애기 위해 배경을 clear로 설정
-            }
-        }
-    
     private func dottedDivider() -> some View {
         Rectangle()
             .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [3]))

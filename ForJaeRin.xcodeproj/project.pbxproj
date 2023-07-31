@@ -68,6 +68,7 @@
 		A968E6B12A67D589008C6738 /* ProjectDocumentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */; };
 		A968E6B42A6833ED008C6738 /* PresentationProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B32A6833ED008C6738 /* PresentationProgressView.swift */; };
 		A968E6B62A690555008C6738 /* KeywordListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A968E6B52A690555008C6738 /* KeywordListItem.swift */; };
+		A97576ED2A77DC4C00EFF091 /* FullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97576EC2A77DC4C00EFF091 /* FullScreenImageView.swift */; };
 		A97FBE3F2A5E4BCD00B9F94B /* ImportPDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */; };
 		A97FBE412A5E4C6E00B9F94B /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */; };
 		A97FBE442A5E50DC00B9F94B /* VoiceVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */; };
@@ -180,6 +181,7 @@
 		A968E6B02A67D589008C6738 /* ProjectDocumentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentVM.swift; sourceTree = "<group>"; };
 		A968E6B32A6833ED008C6738 /* PresentationProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationProgressView.swift; sourceTree = "<group>"; };
 		A968E6B52A690555008C6738 /* KeywordListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordListItem.swift; sourceTree = "<group>"; };
+		A97576EC2A77DC4C00EFF091 /* FullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageView.swift; sourceTree = "<group>"; };
 		A97FBE3E2A5E4BCD00B9F94B /* ImportPDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportPDFView.swift; sourceTree = "<group>"; };
 		A97FBE402A5E4C6E00B9F94B /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
 		A97FBE432A5E50DC00B9F94B /* VoiceVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceVisualizationView.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				A9D04BDD2A6CEAEE0025223A /* PresentationVM.swift */,
 				A94D04AE2A6D3D3E00D1DE77 /* ProjectFlowVM.swift */,
 				11739E6B2A6FF90000A5D357 /* ProjectHistoryVM.swift */,
+				A97576EC2A77DC4C00EFF091 /* FullScreenImageView.swift */,
 			);
 			path = ProjectVM;
 			sourceTree = "<group>";
@@ -876,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A97576ED2A77DC4C00EFF091 /* FullScreenImageView.swift in Sources */,
 				A94D04AF2A6D3D3E00D1DE77 /* ProjectFlowVM.swift in Sources */,
 				A98A28912A605CA60043C8C1 /* PDFDocumentManager.swift in Sources */,
 				A93602B62A716AC5001B20BE /* CustomBarChartView.swift in Sources */,
@@ -1113,7 +1117,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1152,7 +1156,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ForJaeRin/App/Preview Content\"";
-				DEVELOPMENT_TEAM = JMM62MZQM5;
+				DEVELOPMENT_TEAM = V7Y39HNV38;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

@@ -33,6 +33,7 @@ struct ProjectCardView: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .foregroundColor(Color.systemGray500)
+                    .lineLimit(1)
                     .systemFont(.body)
                 Text(DateManager.formatDateToString(date: date))
                     .foregroundColor(Color.systemGray300)
