@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 class PresentationVM: ObservableObject {
+    @AppStorage("isPresentationOnboardingActive") var isPresentationOnboardingActive = true
+    
     // MARK: 현재 진행상황과 인터랙션 하기 위한 인덱스
     @Published var currentPageIndex = 0 {
         didSet {

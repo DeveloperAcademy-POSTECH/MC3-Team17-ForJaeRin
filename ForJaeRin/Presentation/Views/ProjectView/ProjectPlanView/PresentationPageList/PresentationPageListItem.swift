@@ -186,7 +186,7 @@ extension PresentationPageListItem {
                 currentHeight: $currentHeight,
                 focusField: _focusField,
                 clickedKeywordIndex: $clickedKeywordIndex)
-            .padding(.vertical, 12)
+            .padding(.vertical, 16)
             .padding(.leading, .spacing400)
             .padding(.trailing, .spacing600)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

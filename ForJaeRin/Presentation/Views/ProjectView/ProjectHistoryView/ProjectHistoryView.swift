@@ -78,7 +78,9 @@ struct ProjectHistoryView: View {
     private func totalKeywords() -> Int {
         var answer = 0
         for page in projectFileManager.pdfDocument!.PDFPages {
-            answer += page.keywords.count
+            for keyword in page.keywords where keyword != "" {
+                answer += 1
+            }
         }
         return answer
     }

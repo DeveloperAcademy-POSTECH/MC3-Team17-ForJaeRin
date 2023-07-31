@@ -24,7 +24,7 @@ struct VoiceVisualizationView: View {
                     .cornerRadius(100)
                     .frame(maxWidth: vm.voiceScaleSize, maxHeight: vm.voiceScaleSize)
                 Circle()
-                    .fill(Color.systemPrimary)
+                    .fill(voiceManager.isRecording ? Color.systemPrimary : Color.primary300)
                     .frame(maxWidth: vm.VOICE_SCALE_SIZE.min, maxHeight: vm.VOICE_SCALE_SIZE.min)
                 Image(systemName: vm.VOICE_VISUALIZATION_ICON_INFO.icon)
                     .font(Font.system(size: 24))
