@@ -28,12 +28,21 @@ struct PresentationView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     
     var body: some View {
-        VStack(spacing: 0) {
-            toolbarView()
-            HStack(spacing: 0) {
-                splitLeftView()
-                splitRightView()
+        ZStack {
+            VStack(spacing: 0) {
+                toolbarView()
+                HStack(spacing: 0) {
+                    splitLeftView()
+                    splitRightView()
+                }
             }
+            if vm.isPresentationOnboardingActive {
+                PresentationOnboardingView(vm: vm)
+            }
+        }
+        .onAppear {
+            // MARK: - 온보딩 Active
+//            vm.isPresentationOnboardingActive = true
         }
         .onChange(of: speechRecognizer.arr_transcript, perform: { _ in
             keywordCheck((projectFileManager.pdfDocument?.PDFPages[vm.currentPageIndex].keywords)!)
