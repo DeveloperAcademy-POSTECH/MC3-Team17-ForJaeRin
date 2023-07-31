@@ -62,9 +62,8 @@ struct PresentationPageList: View {
                 Text("제거를 위한")
                     .foregroundColor(Color(white: 0.5, opacity: 0.0001))
             }
+            .keyboardShortcut(.escape, modifiers: [])
             .buttonStyle(.plain)
-            .keyboardShortcut(.delete, modifiers: [])
-            .keyboardShortcut(KeyEquivalent.delete, modifiers: [])
         }
         .onChange(of: focusField) { newValue in
             if newValue != nil { clickedKeywordIndex = nil }
@@ -73,9 +72,9 @@ struct PresentationPageList: View {
     
     private func deleteKeyword(index: Int) {
         withAnimation {
+            myData.keywords[index / 7].remove(at: Int(index % 7))
+            myData.keywords[index / 7].append("")
             if lastIndexes[index / 7] != 0 {
-                myData.keywords[index / 7].remove(at: Int(index % 7))
-                myData.keywords[index / 7].append("")
                 lastIndexes[index / 7] -= 1
             }
         }

@@ -28,6 +28,7 @@ struct KeywordView: View {
                         focusField: _focusField,
                         index: keywordIndex,
                         pageIndex: pageNumber,
+                        lastIndexes: $lastIndexes,
                         clickedKeywordIndex: $clickedKeywordIndex
                     )
                         .alignmentGuide(.leading) { item in
@@ -60,7 +61,7 @@ struct KeywordView: View {
                 }, label: {
                     Image(systemName: "plus.circle.fill")
                         .resizable()
-                        .foregroundColor(.primary400)
+                        .foregroundColor(.primary500)
                         .frame(width: 20, height: 20)
                         .frame(width: 45, height: 45)
                 })
