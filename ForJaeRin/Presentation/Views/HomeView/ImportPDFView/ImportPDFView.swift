@@ -26,7 +26,6 @@ struct ImportPDFView: View {
 
     // MARK: Sheet 창을 닫기 위한 바인딩 값
     @Binding var isSheetActive: Bool
-    
     @Binding var isNewProjectSettingDone: Bool
     
     var body: some View {
@@ -41,7 +40,6 @@ struct ImportPDFView: View {
             alignment: .topLeading
         )
         .environmentObject(vm)
-        .environmentObject(myData)
     }
 }
 

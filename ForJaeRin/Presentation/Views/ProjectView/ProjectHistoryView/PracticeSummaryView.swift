@@ -67,6 +67,9 @@ extension PracticeSummaryView {
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .cornerRadius(12)
+        .onAppear {
+            print("keywordSuccessView 도착")
+        }
     }
     
     private func pieChartView() -> some View {
@@ -111,6 +114,9 @@ extension PracticeSummaryView {
             }
         }
         .aspectRatio(1, contentMode: .fit)
+        .onAppear {
+            print("pie 차트 내부 도착")
+        }
     }
     
     private func practiceTimeResultView() -> some View {

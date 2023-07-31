@@ -16,7 +16,6 @@ struct FileImporterButtonView: View {
     @EnvironmentObject var myData: MyData
     @EnvironmentObject var vm: ImportPDFVM
     @State private var isImporting: Bool = false
-    @State private var pdfImages = [NSImage]()
     
     var body: some View {
         
@@ -57,13 +56,13 @@ struct FileImporterButtonView: View {
                         //
                         if let pdfDocument = PDFDocument(url: myData.url) {
                             let images = self.convertPDFToImages(pdfDocument: pdfDocument)
-                            self.pdfImages = images
+
                             myData.images = images
                             myData.script = [String](repeating: "", count: myData.images.count)
                             myData.keywords = [[String]](repeating: ["", "", "", "", "", "", ""],
                                                          count: myData.images.count)
                         }
-                        //
+                        
                     case .failure(let failure):
                         print(failure)
                     }

@@ -68,12 +68,12 @@ class VoiceManager: ObservableObject {
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd'at'HH:mm:ss"
+        dateFormatter.dateFormat = "YYYY-MM-dd'at'HH-mm-ss"
         
         let fileName = dirPath.appendingPathComponent(
             "\(dateFormatter.string(from: Date())).m4a",
             conformingTo: .mpeg4Audio)
-        //AppFileManager.shared.filePath = fileName
+        // AppFileManager.shared.filePath = fileName
         currentPath = fileName
         
         // recoder 세팅 (내부 녹음 품질을 정함)
@@ -161,11 +161,18 @@ class VoiceManager: ObservableObject {
         }
     }
     
+    func makeLimitTime(minutes: Int) -> String {
+        if minutes < 10 {
+            return "0\(minutes):00"
+        }
+        return "\(minutes):00"
+    }
+    
     private func startMonitoring() {
         audioRecorder?.isMeteringEnabled = true
         audioRecorder?.record()
         visualTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
-            // 7
+            //
             self.audioRecorder?.updateMeters()
             self.average = self.audioRecorder!.averagePower(forChannel: 0)
         })
