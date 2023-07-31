@@ -22,7 +22,9 @@ struct PresentationPageList: View {
                 ScrollView {
                     LazyVStack(spacing: 0) {
                         if myData.isOnboardingActive {
-                            PresentationPageListOnboardingView(isOnboardingActive: $myData.isOnboardingActive)
+                            PresentationPageListOnboardingView(
+                                conatainerWidth: geometry.size.width,
+                                isOnboardingActive: $myData.isOnboardingActive)
                         }
                         ForEach(myData.images.indices, id: \.self) { index in
                             PresentationPageListItem(

@@ -50,7 +50,7 @@ struct PresentationPageListItem: View {
                     .frame(maxWidth: .infinity)
                 dottedDivider()
                 // 키워드 컨테이너
-                keywordContainer()
+                keywordContainer(containerWidth: 407)
                     .frame(width: 407)
             }
             .background(Color.systemWhite)
@@ -182,9 +182,10 @@ extension PresentationPageListItem {
     }
     
     // MARK: 키워드 컨테이너
-    private func keywordContainer() -> some View {
+    private func keywordContainer(containerWidth: CGFloat) -> some View {
         ZStack(alignment:.topLeading) {
             KeywordView(
+                containerWidth: containerWidth,
                 pageNumber: pageIndex,
                 lastIndexes: $lastIndexes,
                 currentHeight: $currentHeight,
