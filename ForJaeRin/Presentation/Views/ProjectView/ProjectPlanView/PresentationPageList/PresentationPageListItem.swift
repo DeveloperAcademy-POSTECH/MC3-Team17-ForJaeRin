@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PresentationPageListItem: View {
     @EnvironmentObject var projectFileManager: ProjectFileManager
+    let containerWidth: CGFloat
     @State var groupIndex: Int
     @State var pageIndex: Int
     @State private var isShowingFullScreenImage = false //린 추가
@@ -35,18 +36,22 @@ struct PresentationPageListItem: View {
             HStack(spacing: 0) {
                 // 그룹 인디케이터
                 groupIndicator()
+                    .frame(maxWidth: 20)
                 // 프레젠테이션(PDF) 컨테이너
                 pdfContainer(pageIndex: pageIndex)
+                    .frame(maxWidth: 318)
                     .sheet(isPresented: $isShowingFullScreenImage) {
-                                            FullScreenImageView(isPresented: $isShowingFullScreenImage, pageIndex: pageIndex)
-                                                .environmentObject(myData) // 환경 객체를 sheet로 전달합니다.
-                                        } // 린 추가
+                    FullScreenImageView(isPresented: $isShowingFullScreenImage, pageIndex: pageIndex)
+                        .environmentObject(myData) // 환경 객체를 sheet로 전달합니다.
+                } // 린 추가
                 dottedDivider()
                 // 스크립트 컨테이너
                 scriptContainer()
+                    .frame(maxWidth: .infinity)
                 dottedDivider()
                 // 키워드 컨테이너
                 keywordContainer()
+                    .frame(width: 407)
             }
             .background(Color.systemWhite)
             .cornerRadius(10)
@@ -54,9 +59,10 @@ struct PresentationPageListItem: View {
             // MARK: 이거 확인
             .frame(maxWidth: .infinity, minHeight: 200)
         }
-        //.frame(maxWidth: .infinity, maxHeight: .infinity)
+        // .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.horizontal, .spacing1000)
         .onAppear {
+            print(containerWidth)
             // pageScript = pdfPage.script
             // keywords = pdfPage.keywords
         }
@@ -144,11 +150,10 @@ extension PresentationPageListItem {
             .padding(.trailing, .spacing500)
             .frame(maxWidth: 318)
             .onTapGesture {
-                           isShowingFullScreenImage = true
-                       } //린 추가
+               isShowingFullScreenImage = true
+           } // 린 추가
         }
     }
-    
     // MARK: 스크립트 컨테이너
     private func scriptContainer() -> some View {
         HStack {
@@ -167,12 +172,12 @@ extension PresentationPageListItem {
                 TextEditor(text: $myData.script[pageIndex])
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
-                    .frame(minHeight: 182-48, maxHeight: .infinity)
+                    .frame(maxHeight: 117)
             }
         }
-        .frame(maxWidth: 206, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(.leading, 8)
-        .border(.blue)
+        .padding(.vertical, .spacing400)
 //        .padding(.trailing, .spacing500)
     }
     
@@ -185,12 +190,12 @@ extension PresentationPageListItem {
                 currentHeight: $currentHeight,
                 focusField: _focusField,
                 clickedKeywordIndex: $clickedKeywordIndex)
-            .border(.blue)
             .padding(.vertical, 12)
             .padding(.leading, .spacing400)
             .padding(.trailing, .spacing600)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .border(.red)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     //린 추가 : 이미지 눌렀을 때 뜨는 창

@@ -26,6 +26,7 @@ struct PresentationPageList: View {
                         }
                         ForEach(myData.images.indices, id: \.self) { index in
                             PresentationPageListItem(
+                                containerWidth: geometry.size.width - 407,
                                 groupIndex: document.findGroupIndex(pageIndex: index),
                                 pageIndex: index,
                                 pdfGroup: document.PDFGroups[document.findGroupIndex(pageIndex: index)],

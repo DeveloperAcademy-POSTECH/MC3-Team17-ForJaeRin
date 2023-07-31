@@ -80,6 +80,7 @@ struct KeywordView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear {
             resetKeywords()
         }
