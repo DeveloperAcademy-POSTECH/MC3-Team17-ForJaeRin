@@ -75,9 +75,21 @@ class ImportPDFVM: ObservableObject {
             return false
         }
         
-        if step == .setGroup && myData.groupData.isEmpty {
-            return false
-        }
+        // MARK: 테스트를 위한 주석 - 그룹 설정
+        /// 그룹 설정이 완료되려면
+        /// 그룹 수가 3개 이상 7개 이하
+        /// 모든 페이지가 포함
+        /// 그룹 시간이 정확히 일치
+//        if step == .setGroup {
+//            if 3 <= myData.groupData.count
+//                && myData.groupData.count <= 7
+//                && checkGroupIndex()
+//                && leftTimeCalculator() == 0 {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
         
         // MARK: 테스트를 위한 주석
 //        if step == .setMetaData
@@ -89,7 +101,37 @@ class ImportPDFVM: ObservableObject {
 //        }
         
         return true
+        
+        func checkGroupIndex() -> Bool {
+            var groupNumber = Array(repeating: false, count: myData.keywords.count)
+            for groupIndex in myData.groupData {
+                if groupIndex[3] != "-1" && groupIndex[4] != "-1" {
+                    for index in Int(groupIndex[3])!...Int(groupIndex[4])! {
+                        groupNumber[index] = true
+                    }
+                }
+            }
+            if groupNumber.contains(false) {
+                return false
+            } else {
+                return true
+            }
+        }
+        func leftTimeCalculator() -> Int {
+            let temp = myData.time
+            var answer = Int(temp.dropLast())! * 60
+            for groupIndex in 0..<myData.groupData.count {
+                var minute = 0
+                var second = 0
+                if myData.groupData[groupIndex][1] != "" {
+                    minute = Int(myData.groupData[groupIndex][1].filter { "0123456789".contains($0) })!
+                }
+                if myData.groupData[groupIndex][2] != "" {
+                    second = Int(myData.groupData[groupIndex][2].filter { "0123456789".contains($0) })!
+                }
+                answer -= minute * 60 + second
+            }
+            return answer
+        }
     }
-    
-    // MARK: SettingGroupView
 }
