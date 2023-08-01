@@ -140,6 +140,7 @@ extension PresentationPageListItem {
                             .foregroundColor(Color.clear)
                             .cornerRadius(10)
                     )
+                    .cornerRadius(10)
             }
             .padding(.leading, .spacing500)
             .padding(.trailing, .spacing500)
