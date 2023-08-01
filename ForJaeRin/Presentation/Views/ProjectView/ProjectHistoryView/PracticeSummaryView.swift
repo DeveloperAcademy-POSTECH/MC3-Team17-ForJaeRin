@@ -243,15 +243,15 @@ extension PracticeSummaryView {
                 maxTime = group.setTime
             }
         }
-        for (index, speech) in projectFileManager.practices![vm.practiceIndex].speechRanges.enumerated() {
+        for (index, speech) in projectFileManager.practices![projectFileManager.practiceIndex].speechRanges.enumerated() {
             var groupTime = 0
-            if index == projectFileManager.practices![vm.practiceIndex].speechRanges.count - 1 {
-                groupTime = projectFileManager.practices![vm.practiceIndex].progressTime
-                - projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
+            if index == projectFileManager.practices![projectFileManager.practiceIndex].speechRanges.count - 1 {
+                groupTime = projectFileManager.practices![projectFileManager.practiceIndex].progressTime
+                - projectFileManager.practices![projectFileManager.practiceIndex].speechRanges[index].start
                 practiceTimeResults[speech.group].realTime += groupTime
             } else {
-                groupTime = projectFileManager.practices![vm.practiceIndex].speechRanges[index + 1].start
-                - projectFileManager.practices![vm.practiceIndex].speechRanges[index].start
+                groupTime = projectFileManager.practices![projectFileManager.practiceIndex].speechRanges[index + 1].start
+                - projectFileManager.practices![projectFileManager.practiceIndex].speechRanges[index].start
                 practiceTimeResults[speech.group].realTime += groupTime
             }
             if maxTime < groupTime {
