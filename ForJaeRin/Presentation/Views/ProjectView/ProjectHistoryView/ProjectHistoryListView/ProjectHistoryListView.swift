@@ -112,7 +112,7 @@ extension ProjectHistoryListView {
                                         )
                                     }
                             }
-                            speechGroupTextView(wholeWidthSize: wholeWidthSize)
+                            speechGroupTextView (wholeWidthSize: wholeWidthSize)
                         }.padding(.top, 53)
                         markerView()
                             .padding(.bottom, 17)
@@ -179,7 +179,7 @@ extension ProjectHistoryListView {
         HStack(spacing: 0) {
             ForEach(
                 Array(
-                    projectFileManager.practices!.last!
+                    projectFileManager.practices![vm.practiceIndex]
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
@@ -197,6 +197,8 @@ extension ProjectHistoryListView {
                                     .frame(maxWidth: 4, maxHeight: 20, alignment: .center)
                             }
             }
+        }.onAppear {
+            print(wholeWidthSize)
         }
         .cornerRadius(8)
         .frame(maxWidth: wholeWidthSize)
@@ -206,7 +208,7 @@ extension ProjectHistoryListView {
         HStack(spacing: 4) {
             ForEach(
                 Array(
-                    projectFileManager.practices!.last!
+                    projectFileManager.practices![vm.practiceIndex]
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
@@ -214,6 +216,7 @@ extension ProjectHistoryListView {
                         )
                 VStack {
                     Text((projectFileManager.pdfDocument?.PDFGroups[speechRange.group].name)!)
+                        .lineLimit(1)
                         .font(.systemCaption2)
                         .foregroundColor(.systemGray300)
                 }

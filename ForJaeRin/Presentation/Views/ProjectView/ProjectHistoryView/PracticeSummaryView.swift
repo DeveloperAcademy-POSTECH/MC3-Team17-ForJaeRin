@@ -116,8 +116,29 @@ extension PracticeSummaryView {
     private func practiceTimeResultView() -> some View {
         VStack {
             VStack(alignment: .leading, spacing: 8) {
-                Text("연습 소요시간")
-                    .systemFont(.headline)
+                HStack {
+                    Text("연습 소요시간")
+                        .systemFont(.headline)
+                    Spacer()
+                    VStack(spacing: 4) {
+                        HStack(spacing: 10) {
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.systemGray200)
+                                .frame(width: 19, height: 19)
+                            Text("목표 시간")
+                                .foregroundColor(Color.systemGray500)
+                                .systemFont(.caption1)
+                        }
+                        HStack(spacing: 10) {
+                            RoundedRectangle(cornerRadius: 6)
+                                .fill(Color.primary500)
+                                .frame(width: 19, height: 19)
+                            Text("소요 시간")
+                                .foregroundColor(Color.systemGray500)
+                                .systemFont(.caption1)
+                        }
+                    }
+                }
                 Text("설정한 시간 대비 실제 연습시간이에요")
                     .systemFont(.body)
                     .foregroundColor(Color.systemGray400)
@@ -203,9 +224,10 @@ extension PracticeSummaryView {
                     alignment: .bottom
                 )
             }
-            .frame(maxHeight: 200)
+            .frame(height: 200)
             .padding(.bottom, 12)
             Text("\(practiceTimeResult.groupName)")
+                .lineLimit(1)
                 .systemFont(.caption2)
                 .foregroundColor(Color.systemGray300)
         }
