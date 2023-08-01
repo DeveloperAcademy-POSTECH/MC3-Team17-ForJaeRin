@@ -186,6 +186,8 @@ extension PresentationView {
                 // 연습 끝내기 버튼
                 // 녹음 중지
                 voiceManager.stopRecording(index: 0)
+                
+                projectFileManager.practiceIndex = projectFileManager.practices!.count - 1
                 myData.isHistoryDetailActive = true
                 dismiss()
             } label: {

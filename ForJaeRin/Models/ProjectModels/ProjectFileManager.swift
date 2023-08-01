@@ -22,6 +22,8 @@ final class ProjectFileManager: ObservableObject {
     /// 연습 이력
     @Published
     var practices: [Practice]?
+    
+    @Published var practiceIndex = 0
         
     // MARK: 파일로 변환
     public func exportFile() {
