@@ -158,6 +158,7 @@ class VoiceManager: ObservableObject {
         let filePath = currentPath!
         do {
             audioPlayer?.pause()
+            audioRecorder?.pause()
             timerCount?.invalidate()
         } catch {
             print("faild to pause file")

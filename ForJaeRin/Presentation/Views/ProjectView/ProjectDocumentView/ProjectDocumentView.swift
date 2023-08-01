@@ -204,6 +204,7 @@ extension ProjectDocumentView {
                             .environmentObject(VoiceManager.shared)
                             .environmentObject(projectFileManager)
                             .environmentObject(vm)
+                            .environmentObject(myData)
 //                            .onAppear {
 //                                // 키워드 or 스크립트 변경된거까지 다시 저장
 //                                projectFileManager.myDataToProjectFileManager(myData: myData)
