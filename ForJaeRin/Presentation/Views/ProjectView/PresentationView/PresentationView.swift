@@ -52,7 +52,7 @@ struct PresentationView: View {
             resetGroup()
         })
         .onChange(of: vm.currentPageGroup, perform: { newValue in
-            vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: newValue))
+            vm.practice.speechRanges.append(SpeechRange(start: Int(voiceManager.countSec), group: newValue))
         })
         .onAppear {
             // saidKeywords에 pdf 페이지 수만큼 [] append
@@ -151,7 +151,7 @@ extension PresentationView {
             // MARK: 연습을 종료하고 연습 기록보는 페이지로 이동시키기 위한 버튼
             Button {
                 speechRecognizer.stopTranscribing()
-                vm.practice.progressTime = voiceManager.countSec
+                vm.practice.progressTime = Int(voiceManager.countSec)
                 projectDocumentVM.currentTab = .record
                 
                 if let check = VoiceManager.shared.currentPath {
@@ -160,7 +160,7 @@ extension PresentationView {
                     projectFileManager.exportFile()
                 }
                 
-                // 내가 만든 녹음 중지
+                //녹음 중지
                 voiceManager.stopRecording(index: 0)
                 dismiss()
             } label: {
