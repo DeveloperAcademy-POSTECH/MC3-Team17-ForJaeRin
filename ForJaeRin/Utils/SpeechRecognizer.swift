@@ -65,6 +65,7 @@ actor SpeechRecognizer: ObservableObject {
     
     @MainActor func startTranscribing() {
         Task {
+            print("speech recognize start")
             await transcribe()
         }
     }
@@ -103,6 +104,7 @@ actor SpeechRecognizer: ObservableObject {
                 resultHandler: { [weak self] result, error in
                 self?.recognitionHandler(audioEngine: audioEngine, result: result, error: error)
             })
+            print("transcribe start")
         } catch {
             self.reset()
             self.transcribe(error)

@@ -65,8 +65,12 @@ struct ProjectHistoryDashboardView: View {
     private func requestKeywordsCount(keywords: [Keywords]) -> String {
         let saidKeywords = keywords.flatMap {$0}.count.description
         guard let pdfPages = projectFileManager.pdfDocument?.PDFPages else {return saidKeywords}
-        let wholeKeywords = pdfPages.map {$0.keywords }.flatMap {$0}.count.description
-        
+        var wholeKeywords = 0
+        for page in pdfPages {
+            for keyword in page.keywords where keyword != "" {
+                wholeKeywords += 1
+            }
+        }
         return "\(saidKeywords)/\(wholeKeywords)개"
     }
     
@@ -226,7 +230,9 @@ extension ProjectHistoryDashboardView {
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity)
             Button {
-                vm.isHistoryDetailActive.toggle()
+                vm.practiceIndex = index
+                myData.isHistoryDetailActive = true
+//                vm.isHistoryDetailActive.toggle()
             } label: {
                 Image(systemName: "chevron.right")
                     .resizable()
@@ -237,6 +243,7 @@ extension ProjectHistoryDashboardView {
             .buttonStyle(.plain)
             .frame(maxWidth: 20, maxHeight: 24)
         }
+        .background(Color(white: 0.5, opacity: 0.0001))
         .padding(.vertical, 24)
         .frame(maxWidth: .infinity)
         .border(width: 1, edges: [.bottom], color: Color.systemGray100)

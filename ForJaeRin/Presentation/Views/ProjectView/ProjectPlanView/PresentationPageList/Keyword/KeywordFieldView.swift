@@ -69,14 +69,17 @@ struct KeywordFieldView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 20)
-                    }.buttonStyle(.plain)
-                        .offset(x: 10, y: -10)
+                    }
+                    .zIndex(1)
+                    .buttonStyle(.plain)
+                    .offset(x: 10, y: -10)
                 }
             }
         }
     }
     
     private func deleteKeyword(index: Int) {
+        print(index)
         withAnimation {
             myData.keywords[index / 7].remove(at: Int(index % 7))
             myData.keywords[index / 7].append("")

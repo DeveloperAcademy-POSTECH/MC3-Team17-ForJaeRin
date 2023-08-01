@@ -105,7 +105,7 @@ extension SettingGroupView {
                             Int(myData.groupData[getFocusedGroup()][3])! <= index &&
                             index <= Int(myData.groupData[getFocusedGroup()][4])!
                         )
-                        .opacity(tapAvailable().contains(index) ? 1.0 : 0.3)
+                        .environmentObject(vm)
                         .onTapGesture {
                             /// 탭은 somegthingIsEdit이고, 해당 index가 tapable해야 가능하다.
                             if tapAvailable().contains(index) {
@@ -270,7 +270,9 @@ extension SettingGroupView {
                     Spacer()
                     Text(leftTimeCalculator())
                         .font(Font.custom(Pretendard.semibold.fontName, size: 20))
-                        .foregroundColor(.systemBlack)
+                        .foregroundColor(leftTimeCalculator().first != "-"
+                                         ? .systemBlack : Color(hex: "FF0000"))
+                        .opacity(leftTimeCalculator().first != "-" ? 1.0 : 0.6)
                 }
                 Spacer()
             }

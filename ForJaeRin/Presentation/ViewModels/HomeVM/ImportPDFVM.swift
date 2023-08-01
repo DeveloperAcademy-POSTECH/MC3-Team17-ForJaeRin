@@ -83,8 +83,7 @@ class ImportPDFVM: ObservableObject {
         if step == .setGroup {
             if 3 <= myData.groupData.count
                 && myData.groupData.count <= 7
-                && checkGroupIndex()
-                && leftTimeCalculator() == 0 {
+                && checkGroupIndex() {
                 return true
             } else {
                 return false

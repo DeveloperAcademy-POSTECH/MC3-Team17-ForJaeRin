@@ -26,7 +26,7 @@ struct ProjectHistoryView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         /// 첫, 두, 세 적용
-                        Text(vm.numberToHanguel(number: projectFileManager.practices!.count)+"번째 발표연습 기록")
+                        Text(vm.numberToHanguel(number: vm.practiceIndex + 1)+"번째 발표연습 기록")
                             .systemFont(.headline)
                             .padding(.bottom, 48)
                         PracticeSummaryView(vm: vm, 
