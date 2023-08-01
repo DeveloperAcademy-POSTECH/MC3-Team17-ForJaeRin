@@ -94,7 +94,7 @@ extension GroupListView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color.primary500)
+                .foregroundColor(Color.point500)
         }).buttonStyle(.plain)
     }
     

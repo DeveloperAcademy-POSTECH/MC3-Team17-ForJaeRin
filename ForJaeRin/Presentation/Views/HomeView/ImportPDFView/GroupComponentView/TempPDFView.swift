@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TempPDFView: View {
     @EnvironmentObject var myData: MyData
+    @StateObject var vm = SettingGroupVM()
     var index: Int
     var imgSize: CGSize
     var hilight: Bool
@@ -37,9 +38,14 @@ struct TempPDFView: View {
                                 .foregroundColor(Color.clear)
                                 .cornerRadius(10)
                         )
-                    Text("\(index + 1)")
-                        .systemFont(.caption2)
-                        .foregroundColor(Color.systemGray300)
+                    ZStack {
+                        Text("\(index + 1)")
+                            .systemFont(.caption2)
+                            .foregroundColor(Color.systemGray300)
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .fill(vm.groupIndex[index] == -1 ? .clear : GroupColor.allCases[vm.groupIndex[index]].color)
+//                            .opacity(0.55)
+                    }
                 }
             }
             .padding(.top, 8)
