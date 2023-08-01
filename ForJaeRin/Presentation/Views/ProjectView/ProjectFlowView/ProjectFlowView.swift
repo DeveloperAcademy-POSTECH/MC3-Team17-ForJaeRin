@@ -129,8 +129,8 @@ extension ProjectFlowView {
         ZStack(alignment: .bottomLeading) {
             if index < pdfPages.count - 1 {
                 Rectangle()
-                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6]))
-                    .foregroundColor(Color.systemGray200)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                    .foregroundColor(Color.systemGray100)
                     .frame(maxWidth: .infinity ,minHeight: 1, maxHeight: 1, alignment: .bottom)
                     .background(Color.detailLayoutBackground)
             }
