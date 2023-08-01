@@ -179,7 +179,7 @@ extension ProjectHistoryListView {
         HStack(spacing: 0) {
             ForEach(
                 Array(
-                    projectFileManager.practices!.last!
+                    projectFileManager.practices![vm.practiceIndex]
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
@@ -206,7 +206,7 @@ extension ProjectHistoryListView {
         HStack(spacing: 4) {
             ForEach(
                 Array(
-                    projectFileManager.practices!.last!
+                    projectFileManager.practices![vm.practiceIndex]
                         .speechRanges.enumerated()), id: \.0.self) { index, speechRange in
                     let size = vm.calcGroupBlockSize(
                         percent: getGroupVolumn(index: index),
@@ -275,7 +275,7 @@ extension ProjectHistoryListView {
 //    static var previews: some View {
 //        ProjectHistoryListView()
 //    }
-// }
+//}
 
 struct Purchase: Identifiable {
     let price: Decimal
