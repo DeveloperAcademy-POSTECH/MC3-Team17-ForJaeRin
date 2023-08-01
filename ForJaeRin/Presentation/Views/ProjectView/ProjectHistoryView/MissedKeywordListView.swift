@@ -16,12 +16,12 @@ struct MissedKeywordListView: View {
             Text("말한 키워드 확인하기")
                 .systemFont(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            HStack(spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 ForEach(
                     Array(projectFileManager.pdfDocument!.PDFGroups.enumerated()),
                     id: \.0.self) { index, group in
                     keywordGroupList(pageIndexes: gettingPageIndex(group: group), index: index)
-                }.frame(maxHeight: .infinity)
+                }
             }
             .frame(maxHeight: .infinity, alignment: .top)
         }
@@ -91,10 +91,10 @@ extension MissedKeywordListView {
             .background(
                 Rectangle()
                     .foregroundColor(Color.systemWhite)
-                    .cornerRadius(12)
+                    
             )
         }
-        .frame(maxHeight: .infinity, alignment: .top)
+        .frame(alignment: .top)
         .cornerRadius(12)
     }
     
