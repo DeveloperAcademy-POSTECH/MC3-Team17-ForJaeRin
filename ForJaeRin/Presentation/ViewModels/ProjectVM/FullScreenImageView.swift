@@ -19,8 +19,8 @@ struct FullScreenImageView: View {
             Image(nsImage: myData.images[pageIndex])
                 .resizable()
                 .frame(
-                    maxWidth: myData.images[pageIndex].size.width,
-                    maxHeight: myData.images[pageIndex].size.height
+                    maxWidth: calcImageRatio().width,
+                    maxHeight: calcImageRatio().height
                 )
                 .fixedSize()
                 .padding(.all, 0)
@@ -30,8 +30,13 @@ struct FullScreenImageView: View {
         }
         .onAppear {
             print(myData.images[pageIndex].size)
+            print(containerWidth)
         }
         .edgesIgnoringSafeArea(.all) // 창 크기를 조절할 수 없도록 설정
         .background(Color.clear) // 흰색 여백을 없애기 위해 배경을 clear로 설정
+    }
+    
+    func calcImageRatio() -> CGSize {
+        CGSize(width: containerWidth - 48, height: (containerWidth - 48) * myData.images[pageIndex].size.height / myData.images[pageIndex].size.width)
     }
 }
