@@ -154,7 +154,7 @@ extension ProjectHistoryDashboardView {
                         ForEach(Array(practices.enumerated()), id: \.1.id) { index, practice in
                             historyListItem(index: index, practice: practice)
                                 .onTapGesture {
-                                    vm.practiceIndex = index
+                                    projectFileManager.practiceIndex = index
                                     myData.isHistoryDetailActive = true
                                 }
                         }
@@ -230,7 +230,7 @@ extension ProjectHistoryDashboardView {
                 .foregroundColor(Color.systemGray500)
                 .frame(maxWidth: .infinity)
             Button {
-                vm.practiceIndex = index
+                projectFileManager.practiceIndex = index
                 myData.isHistoryDetailActive = true
 //                vm.isHistoryDetailActive.toggle()
             } label: {

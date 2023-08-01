@@ -26,7 +26,7 @@ struct ProjectHistoryView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         /// 첫, 두, 세 적용
-                        Text(vm.numberToHanguel(number: vm.practiceIndex + 1)+"번째 발표연습 기록")
+                        Text(vm.numberToHanguel(number: projectFileManager.practiceIndex + 1)+"번째 발표연습 기록")
                             .systemFont(.headline)
                             .padding(.bottom, 48)
                         PracticeSummaryView(vm: vm, 
@@ -69,7 +69,7 @@ struct ProjectHistoryView: View {
     
     private func saidKeywords() -> Int {
         var answer = 0
-        for keywords in projectFileManager.practices![vm.practiceIndex].saidKeywords {
+        for keywords in projectFileManager.practices![projectFileManager.practiceIndex].saidKeywords {
             answer += keywords.count
         }
         return answer

@@ -121,7 +121,10 @@ extension ProjectDocumentView {
         HStack(spacing: 32) {
             // goToHome
             Button {
-                    dismiss()
+                // 키워드 or 스크립트 변경된거까지 다시 저장
+                projectFileManager.myDataToProjectFileManager(myData: myData)
+                projectFileManager.exportFile()
+                dismiss()
             } label: {
                 Label("home", systemImage: "house.fill")
                     .labelStyle(ToolbarIconOnlyLabelStyle())
@@ -130,8 +133,10 @@ extension ProjectDocumentView {
             }
             .buttonStyle(.plain)
             Button {
+                // 키워드 or 스크립트 변경된거까지 다시 저장
+                projectFileManager.myDataToProjectFileManager(myData: myData)
+                projectFileManager.exportFile()
                 vm.isLeftSidebarActive.toggle()
-
             } label: {
                 Label("leftSidebar", systemImage: "sidebar.leading")
                     .labelStyle(ToolbarIconOnlyLabelStyle())
@@ -141,6 +146,9 @@ extension ProjectDocumentView {
             .buttonStyle(.plain)
             if myData.isHistoryDetailActive || vm.currentSection == .flow {
                 Button {
+                    // 키워드 or 스크립트 변경된거까지 다시 저장
+                    projectFileManager.myDataToProjectFileManager(myData: myData)
+                    projectFileManager.exportFile()
                     handleGoToback()
                 } label: {
                     Label("redo", systemImage: "chevron.left")
