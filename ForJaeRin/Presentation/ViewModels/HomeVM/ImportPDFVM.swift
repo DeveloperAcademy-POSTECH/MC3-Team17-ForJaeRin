@@ -80,25 +80,25 @@ class ImportPDFVM: ObservableObject {
         /// 그룹 수가 3개 이상 7개 이하
         /// 모든 페이지가 포함
         /// 그룹 시간이 정확히 일치
-//        if step == .setGroup {
-//            if 3 <= myData.groupData.count
-//                && myData.groupData.count <= 7
-//                && checkGroupIndex()
-//                && leftTimeCalculator() == 0 {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
+        if step == .setGroup {
+            if 3 <= myData.groupData.count
+                && myData.groupData.count <= 7
+                && checkGroupIndex()
+                && leftTimeCalculator() == 0 {
+                return true
+            } else {
+                return false
+            }
+        }
         
         // MARK: 테스트를 위한 주석
-//        if step == .setMetaData
-//            && myData.title == ""
-//            || myData.purpose == ""
-//            || myData.target == ""
-//            || myData.time == "" {
-//                return false
-//        }
+        if step == .setMetaData
+            && myData.title == ""
+            || myData.purpose == ""
+            || myData.target == ""
+            || myData.time == "" {
+                return false
+        }
         
         return true
         

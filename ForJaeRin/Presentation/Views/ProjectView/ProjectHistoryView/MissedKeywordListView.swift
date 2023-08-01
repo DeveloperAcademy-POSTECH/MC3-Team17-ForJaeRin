@@ -40,6 +40,7 @@ extension MissedKeywordListView {
                     ForEach(
                         projectFileManager.pdfDocument!
                             .PDFPages[pageIndex].keywords, id: \.self) { keyword in
+                                
                                 if keyword != "" {
                                     Text(keyword)
                                         .systemFont(.subTitle)
@@ -92,7 +93,6 @@ extension MissedKeywordListView {
                     .foregroundColor(Color.systemWhite)
             )
         }
-        .cornerRadius(12)
         .frame(maxHeight: .infinity, alignment: .top)
         .cornerRadius(12)
     }
