@@ -19,7 +19,7 @@ class VoiceManager: ObservableObject {
     var currentPath: URL?
     
     @Published var isRecording : Bool = false
-    @Published var countSec = 0
+    @Published var countSec = 0.0
     @Published var timerCount : Timer?
     @Published var timer : String = "00:00"
     
@@ -49,58 +49,66 @@ class VoiceManager: ObservableObject {
     }
     
     func startRecording(title: String) {
-        
-        let dirPath = AppFileManager.shared.documentUrl
-            .appendingPathComponent(title, isDirectory: true)
-            .appendingPathComponent("Practice", isDirectory: true)
-        // 사용자의 문서 디렉토리에 JSON 파일을 저장
-        do {
-            /// 생성할 폴더가 이미 만들어져 있는지 확인
-            if !FileManager.default.fileExists(atPath: dirPath.path) {
-                /// 만들어져있지 않다면 폴더 생성
-                try FileManager.default.createDirectory(
-                    atPath: dirPath.path,
-                    withIntermediateDirectories: false,
-                    attributes: nil)
-            }
-        } catch {
-            print("create folder error. do something, \(error)")
-        }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-MM-dd'at'HH-mm-ss"
-        
-        let fileName = dirPath.appendingPathComponent(
-            "\(dateFormatter.string(from: Date())).m4a",
-            conformingTo: .mpeg4Audio)
-        // AppFileManager.shared.filePath = fileName
-        currentPath = fileName
-        
-        // recoder 세팅 (내부 녹음 품질을 정함)
-        let recorderSettings: [String: Any] = [
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 44100.0,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ]
-        
-        do {
-            // url을 통해서 기록
-            audioRecorder = try AVAudioRecorder(url: fileName, settings: recorderSettings)
-            // 오디오 파일 생성 및 준비
-            audioRecorder?.prepareToRecord()
-            startMonitoring()
-            // 해당 오디오파일에 녹음시작
+        if isRecording {
             audioRecorder?.record()
-            isRecording = true
-            // 타이머 on
-            timerCount = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-                self.countSec += 1
+            timerCount = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { _ in
+                self.countSec += 0.05
                 self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
             })
+        }
+        else {
+            let dirPath = AppFileManager.shared.documentUrl
+                .appendingPathComponent(title, isDirectory: true)
+                .appendingPathComponent("Practice", isDirectory: true)
+            // 사용자의 문서 디렉토리에 JSON 파일을 저장
+            do {
+                /// 생성할 폴더가 이미 만들어져 있는지 확인
+                if !FileManager.default.fileExists(atPath: dirPath.path) {
+                    /// 만들어져있지 않다면 폴더 생성
+                    try FileManager.default.createDirectory(
+                        atPath: dirPath.path,
+                        withIntermediateDirectories: false,
+                        attributes: nil)
+                }
+            } catch {
+                print("create folder error. do something, \(error)")
+            }
             
-        } catch {
-            print("Failed to Setup the Recording")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-dd'at'HH-mm-ss"
+            
+            let fileName = dirPath.appendingPathComponent(
+                "\(dateFormatter.string(from: Date())).m4a",
+                conformingTo: .mpeg4Audio)
+            // AppFileManager.shared.filePath = fileName
+            currentPath = fileName
+            
+            // recoder 세팅 (내부 녹음 품질을 정함)
+            let recorderSettings: [String: Any] = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 44100.0,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+            
+            do {
+                // url을 통해서 기록
+                audioRecorder = try AVAudioRecorder(url: fileName, settings: recorderSettings)
+                // 오디오 파일 생성 및 준비
+                audioRecorder?.prepareToRecord()
+                startMonitoring()
+                // 해당 오디오파일에 녹음시작
+                audioRecorder?.record()
+                isRecording = true
+                // 타이머 on
+                timerCount = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { _ in
+                    self.countSec += 0.05
+                    self.timer = self.covertSecToMinAndHour(seconds: self.countSec)
+                })
+                
+            } catch {
+                print("Failed to Setup the Recording")
+            }
         }
     }
     
@@ -117,6 +125,7 @@ class VoiceManager: ObservableObject {
         if visualTimer != nil {
             visualTimer!.invalidate()
         }
+        self.timer = "00:00"
     }
     
     func playRecording() {
@@ -149,20 +158,31 @@ class VoiceManager: ObservableObject {
         let filePath = currentPath!
         do {
             audioPlayer?.pause()
+            timerCount?.invalidate()
         } catch {
             print("faild to pause file")
         }
     }
     
-    func covertSecToMinAndHour(seconds : Int) -> String {
+    func covertSecToMinAndHour(seconds : Double) -> String {
         
-        let (_,minute,second) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
-        let _second : String = second < 10 ? "0\(second)" : "\(second)"
-        if minute < 9 {
-            return "0\(minute):\(_second)"
-        } else {
-            return "\(minute):\(_second)"
+//        let (_,minute,second) = (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+//        let _second : String = second < 10 ? "0\(second)" : "\(second)"
+//        if minute < 9 {
+//            return "0\(minute):\(_second)"
+//        } else {
+//            return "\(minute):\(_second)"
+//        }
+        if seconds >= 1 {
+            let (_,minute,_) = (Int(seconds) / 3600, (Int(seconds) % 3600) / 60, (Int(seconds) % 3600) % 60)
+            let _second : String = Int(seconds) < 10 ? "0\(Int(seconds))" : "\(Int(seconds))"
+            if minute < 9 {
+                return "0\(minute):\(_second)"
+            } else {
+                return "\(minute):\(_second)"
+            }
         }
+        return "00:00"
     }
     
     func makeLimitTime(minutes: Int) -> String {
