@@ -26,11 +26,30 @@ struct PresentationView: View {
     @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
     @StateObject var vm = PresentationVM()
     @StateObject var speechRecognizer = SpeechRecognizer()
+    @State var isShowTime = false {
+        didSet {
+            vm.isSidebarActive.toggle()
+        }
+    }
+    @State var isAniActive = false
+    @State var aniOffset: CGFloat = 0
     
     var body: some View {
         ZStack {
+            Button {
+                withAnimation {
+                    isShowTime.toggle()
+                }
+            } label: {
+                Text("..")
+                    .foregroundColor(Color.clear)
+            }
+            .keyboardShortcut(.return, modifiers: [])
             VStack(spacing: 0) {
-                toolbarView()
+                if !isShowTime {
+                    toolbarView()
+                        .transition(.move(edge: .top))
+                }
                 HStack(spacing: 0) {
                     splitLeftView()
                     splitRightView()
@@ -69,8 +88,10 @@ extension PresentationView {
     // MARK: PDF 및 연습 오디오 컨트롤러
     func splitLeftView() -> some View {
         return ZStack {
-            PresentationTimerView()
-                .zIndex(10)
+            if !isShowTime {
+                PresentationTimerView()
+                    .zIndex(10)
+            }
             VStack(spacing: 0) {
                 PresentationPDFView(
                     document: PDFDocument(url: projectFileManager.pdfDocument!.url)!
