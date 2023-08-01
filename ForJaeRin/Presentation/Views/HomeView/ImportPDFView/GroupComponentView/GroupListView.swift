@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Pretendard
 
 struct GroupListView: View {
     /// ellipsis를 누르면 vm.tempData에 저장한다.
@@ -94,7 +95,7 @@ extension GroupListView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 20, height: 20)
-                .foregroundColor(Color.primary500)
+                .foregroundColor(Color.point500)
         }).buttonStyle(.plain)
     }
     
@@ -257,7 +258,7 @@ extension GroupListView {
     private func nonEditModeOuterView() -> some View {
         HStack {
             Text("\(myData.groupData[index][0])")
-                .systemFont(.caption1)
+                .font(Font.custom(Pretendard.semibold.fontName, size: 14))
                 .foregroundColor(Color.systemGray500)
             Spacer()
             Button(action: {

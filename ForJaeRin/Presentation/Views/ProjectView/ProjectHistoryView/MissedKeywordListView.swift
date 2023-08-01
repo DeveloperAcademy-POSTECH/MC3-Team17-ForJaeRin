@@ -91,6 +91,7 @@ extension MissedKeywordListView {
             .background(
                 Rectangle()
                     .foregroundColor(Color.systemWhite)
+                    .cornerRadius(12)
             )
         }
         .frame(maxHeight: .infinity, alignment: .top)

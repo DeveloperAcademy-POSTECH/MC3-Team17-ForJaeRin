@@ -26,6 +26,7 @@ struct PresentationView: View {
     @EnvironmentObject var projectDocumentVM: ProjectDocumentVM
     @StateObject var vm = PresentationVM()
     @StateObject var speechRecognizer = SpeechRecognizer()
+    @EnvironmentObject var myData: MyData
     @State var isShowTime = false {
         didSet {
             vm.isSidebarActive.toggle()
@@ -177,12 +178,15 @@ extension PresentationView {
                 
                 if let check = VoiceManager.shared.currentPath {
                     vm.practice.audioPath = VoiceManager.shared.currentPath!
-                    projectFileManager.practices?.append(vm.practice)
+                    if vm.practice.progressTime != 0 {
+                        projectFileManager.practices?.append(vm.practice)
+                    }
                     projectFileManager.exportFile()
                 }
-                
-                //녹음 중지
+                // 연습 끝내기 버튼
+                // 녹음 중지
                 voiceManager.stopRecording(index: 0)
+                myData.isHistoryDetailActive = true
                 dismiss()
             } label: {
                 Text(vm.TOOLBAR_END_PRACTICE_INFO.label)

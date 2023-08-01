@@ -158,6 +158,7 @@ class VoiceManager: ObservableObject {
         let filePath = currentPath!
         do {
             audioPlayer?.pause()
+            audioRecorder?.pause()
             timerCount?.invalidate()
         } catch {
             print("faild to pause file")
@@ -175,7 +176,8 @@ class VoiceManager: ObservableObject {
 //        }
         if seconds >= 1 {
             let (_,minute,_) = (Int(seconds) / 3600, (Int(seconds) % 3600) / 60, (Int(seconds) % 3600) % 60)
-            let _second : String = Int(seconds) < 10 ? "0\(Int(seconds))" : "\(Int(seconds))"
+            var _second : String = Int(seconds) < 10 ? "0\(Int(seconds))" : "\(Int(seconds))"
+            _second = String(format: "%02d", Int(seconds) % 60)
             if minute < 9 {
                 return "0\(minute):\(_second)"
             } else {
