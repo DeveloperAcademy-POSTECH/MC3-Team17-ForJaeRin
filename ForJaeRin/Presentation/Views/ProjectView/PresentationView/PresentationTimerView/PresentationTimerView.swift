@@ -82,17 +82,18 @@ struct PresentationTimerView: View {
 extension PresentationTimerView {
     private func audioButonContainer() -> some View {
         HStack(spacing: 32) {
+            // 녹음수정 여기요
             audioControllButton(info: vm.AUDIO_PLAY_BUTTON_INFO, isActive: isPlay) {
                 if !isPlay {
                     isPlay = true
                     voiceManager.startRecording(title: projectFileManamger.projectMetadata!.projectName)
                     speechRecognizer.startTranscribing()
-                    vm.practice.speechRanges.append(SpeechRange(start: voiceManager.countSec, group: 0))
+                    vm.practice.speechRanges.append(SpeechRange(start: Int(voiceManager.countSec), group: 0))
                 }
             }
             audioControllButton(info: vm.AUDIO_PAUSE_BUTTON_INFO, isActive: false) {
                 speechRecognizer.stopTranscribing()
-                voiceManager.stopRecording(index: 0)
+                voiceManager.pauseRecording()
                 isPlay = false
             }
             // MARK: 현재 저장한 음성을 듣기 위한 테스트 버튼
