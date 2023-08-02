@@ -107,3 +107,17 @@ ex) [Design] DreamLog#4 - 응원 뷰 레이아웃 디자인
 - 수정 필요 시 수정하기
 
 ## 📁폴더링
+
+
+<br>
+
+  
+
+## **👨‍👨‍👧 Member**  
+
+|Anne|Coffee|Loki|Rin|Yong82|
+|:---:|:---:|:---:|:---:|:---:|
+|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/923abbee-7ffb-4acb-8ba5-39eb43d3ed01" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/2535fa34-b686-4329-aa78-f95844a768be" width="100">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/d5f6c3aa-c66c-433f-80fe-8beae064c33b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/69122165-3f9b-40c1-bf9c-ffb9c678cbb8" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/a25e3115-ddcf-4946-a4e0-a7810891a5c9" width="150">
+|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/AANNNEE)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/yuncoffee)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/KLJH1025)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/dimazsr)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/leeyongjun604)|
+
+<br>
