@@ -176,19 +176,20 @@ extension PresentationView {
                 vm.practice.progressTime = Int(voiceManager.countSec)
                 projectDocumentVM.currentTab = .record
                 
-                if let check = VoiceManager.shared.currentPath {
-                    vm.practice.audioPath = VoiceManager.shared.currentPath!
-                    if vm.practice.progressTime != 0 {
-                        projectFileManager.practices?.append(vm.practice)
-                    }
-                    projectFileManager.exportFile()
-                }
                 // 연습 끝내기 버튼
                 // 녹음 중지
                 voiceManager.stopRecording(index: 0)
                 
-                projectFileManager.practiceIndex = projectFileManager.practices!.count - 1
-                myData.isHistoryDetailActive = true
+                if let check = VoiceManager.shared.currentPath {
+                    vm.practice.audioPath = VoiceManager.shared.currentPath!
+                    if vm.practice.progressTime != 0 {
+                        projectFileManager.practices?.append(vm.practice)
+                        projectFileManager.practiceIndex = projectFileManager.practices!.count - 1
+                        myData.isHistoryDetailActive = true
+                    }
+                    projectFileManager.exportFile()
+                }
+                
                 dismiss()
             } label: {
                 Text(vm.TOOLBAR_END_PRACTICE_INFO.label)
