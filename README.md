@@ -4,22 +4,50 @@
 
 📆 2023. 06. 19. ~ 2023. 08. 04.
 
-[<img src="https://img.shields.io/badge/Swift-5.6-orange?">](https://developer.apple.com/kr/swift/) [<img src="https://img.shields.io/badge/Xcode-13.4.1-blue?">](https://developer.apple.com/kr/xcode/)
-
-# <img src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/de39ae3e-8675-4a2f-8d03-6125c5f20dc1" width=200px>
+[<img src="https://img.shields.io/badge/Swift-5.6-orange?">](https://developer.apple.com/kr/swift/) [<img src="https://img.shields.io/badge/Xcode-14.3.1-blue?">](https://developer.apple.com/kr/xcode/)
 
 </div>
 
-## 🎯 프로젝트 배경 - 목표
+## 🎯 **프로젝트 배경 - 목표**
+
+### 🙋🏻 어떻게 하면 발표를 잘할 수 있을까? 🙋🏻‍♀️
+#### ➡️ 저희는 키워드 기반의 발표 연습이 실제 발표력 향상에 효과적이라는 것을 알게 되었습니다.
 
 
-## 📁스크린샷
+스크립트를 보면서 하는 정적인 발표 연습이 아닌, 
+
+
+**키워드**를 통해 발표 내용을 연상시키게끔 유도함으로써
+
+
+내용을 까먹었더라도 키워드를 떠올리며 발표를 이어나갈 수 있게 하고자 하였습니다.
+
 
 <img width="1739" alt="Group 205" src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/725d897a-775c-4468-89c6-18f64d9ddf70">
 
-![Solution concept](https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/f33033b9-d385-4969-b68d-32730571b8e8)
 
-<br>
+## 🎥 **Preview**
+
+|PDF 파일 불러오기| 발표 정보 입력하기|
+|:---:|:---:|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/8df8b34b-7e37-4f4f-9219-40b6e9e3a01d"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/e39d8fa4-b8f7-4005-a640-4a598a3cbbea"/>|
+
+|발표 스크립트 작성하기| 발표 페이지 그룹 정하기|
+|:---:|:---:|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/ff27456b-6628-40f2-82bb-d258e33aed92"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/be665380-064a-4d46-9a01-068b860a6a35"/>|
+
+|발표 키워드 작성| 그룹 별 키워드 확인|
+|:---:|:---:|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/7a2b75d3-50e8-4431-b2ab-ea2b24a29aec"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/64b81c2a-232c-4a0a-ab03-472bd38bc175"/>|
+
+|발표 연습 | 발표 연습 상세 확인|
+|:---:|:---:|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/4805ac6d-98c2-4894-807f-9cddcdb87862"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/e3665e9f-0724-4810-8b73-9dbe03e116d1"/>|
+
+|이전 발표 프로젝트 불러오기| 이전 발표 연습 불러오기|
+|:---:|:---:|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/5eb9e572-3b9c-4b88-9554-326053b88ffe"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/e3665e9f-0724-4810-8b73-9dbe03e116d1"/>|
+
 
 ## **🧑🏻‍💻 Member 👩🏻‍💻**  
 
@@ -30,10 +58,10 @@
 
 
 
-## 📁폴더링
+## 📁 **폴더링**
 
 
-# 😎 **커밋 컨벤션**
+## 📔 **커밋 컨벤션**
   
 <details>
 <summary>팀 협업용 깃허브 컨벤션 문서 </summary>
@@ -56,38 +84,6 @@
     - View는 **// - MARK :** 주석을 통해 영역을 구분합니다.
 
 ## 📌 Git Guide
-> Issue -> 브랜치 생성 -> Pull 받은 후 작업 -> Commit -> Pull -> Push -> PR -> Merge
-
-0. 새로운 작업 진행 전, Pull 하고 진행.
-1. Issue는 기능 단위로 생성.
-2. Issue에 관한 Commit과 Push는 본인 브랜치로 진행.
-3. PR은 모든 작업 완료 후 보내기.
-
-> 브랜치명 예제 (ex.이슈번호 10)
-
-- 브랜치는 각 `feat/이슈번호-큰기능명/세부기능명`으로 생성합니다.
-- ex. feat/#10-MapView/UI
-
-<br>
-
-> 커밋 컨벤션
-```
-[CHORE] 코드 수정, 내부 파일 수정, 주석
-[FEAT] 새로운 기능 구현
-[ADD] Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시, 에셋 추가
-[FIX] 버그, 오류 해결
-[DEL] 쓸모없는 코드 삭제
-[DOCS] README나 WIKI 등의 문서 개정
-[MOVE] 프로젝트 내 파일이나 코드의 이동
-[RENAME] 파일 이름 변경이 있을 때 사용합니다
-[REFACTOR] 전면 수정이 있을 때 사용합니다
-[INIT] 프로젝트 생성
-```
-  </div>
-</details>
-
-<br>
-
 ## **Fork를 통한 협업**
 
 ### 원본(메인) 레포에서 브랜치를 생성하여 작업을 하는 것이 아니라
@@ -193,3 +189,13 @@ ex) [Design] DreamLog#4 - 응원 뷰 레이아웃 디자인
 - Labels 이슈와 동일하게 추가
 - 서로 코드리뷰 꼭 하기
 - 수정 필요 시 수정하기
+  </div>
+</details>
+
+<hr>
+
+<div align="center">
+  
+# <img src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/de39ae3e-8675-4a2f-8d03-6125c5f20dc1" width=200px>
+
+</div>
