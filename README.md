@@ -2,9 +2,9 @@
 
 <div align="center">
 
-📆 2023. 06. 19. ~ 2023. 08. 04.
+📆 2023. 06. 19. ~ 2023. 08. 04. (7 weeks)
 
-[<img src="https://img.shields.io/badge/Swift-5.6-orange?">](https://developer.apple.com/kr/swift/) [<img src="https://img.shields.io/badge/Xcode-14.3.1-blue?">](https://developer.apple.com/kr/xcode/)
+[<img src="https://img.shields.io/badge/Swift-5.7.1-orange?">](https://developer.apple.com/kr/swift/) [<img src="https://img.shields.io/badge/Xcode-14.3.1-blue?">](https://developer.apple.com/kr/xcode/) <img height="20" src="https://img.shields.io/badge/macOS-13.5+-lightgray"> <img height="20" src="https://img.shields.io/badge/Platform-macOS-pink"> 
 
 </div>
 
@@ -48,17 +48,21 @@
 
 ## 🔩 Tech & Skills
 
-<img width="103" src="https://img.shields.io/badge/SwiftUI-blue"> <img width="97" src="https://img.shields.io/badge/PDFKit-blue"> <img width="180" src="https://img.shields.io/badge/AVFoundation-blue"> <img width="103" src="https://img.shields.io/badge/Speech-blue"> <img width="63" src="https://img.shields.io/badge/STT-blue"> <br>
-<img width="103" src="https://img.shields.io/badge/Figma-red"> <img width="113" src="https://img.shields.io/badge/Github-yellow"> <img width="80" src="https://img.shields.io/badge/Miro-yellow"> <img width="108" src="https://img.shields.io/badge/Notion-yellow"> <img width="124" src="https://img.shields.io/badge/Discord-yellow">
+<img width="73" src="https://img.shields.io/badge/SwiftUI-blue"> <img width="69" src="https://img.shields.io/badge/PDFKit-blue"> <img width="128" src="https://img.shields.io/badge/AVFoundation-blue"> <img width="74" src="https://img.shields.io/badge/Speech-blue"> <img width="46" src="https://img.shields.io/badge/STT-blue"> <br>
+<img width="73" src="https://img.shields.io/badge/Figma-red"> 
+<img width="80" src="https://img.shields.io/badge/Github-yellow"> 
+<img width="57" src="https://img.shields.io/badge/Miro-yellow"> 
+<img width="77" src="https://img.shields.io/badge/Notion-yellow"> 
+<img width="87" src="https://img.shields.io/badge/Discord-yellow">
 
 
 ## **🧑🏻‍💻 Member 👩🏻‍💻**  
 
-|Anne|Coffee|Loki|Rin|Yong82|Yena|
+|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/666c6d3b-9528-48e2-9591-4c5b2e4ae37a" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/ac0a402f-b750-4f4b-a4dd-8b163cd9ea1b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/d5f6c3aa-c66c-433f-80fe-8beae064c33b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/69122165-3f9b-40c1-bf9c-ffb9c678cbb8" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/a25e3115-ddcf-4946-a4e0-a7810891a5c9" width="150">|<img alt="" src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/01b9714d-4f3d-4596-b0b6-7df901d81654" width="150">
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/923abbee-7ffb-4acb-8ba5-39eb43d3ed01" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/2535fa34-b686-4329-aa78-f95844a768be" width="100">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/d5f6c3aa-c66c-433f-80fe-8beae064c33b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/69122165-3f9b-40c1-bf9c-ffb9c678cbb8" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/a25e3115-ddcf-4946-a4e0-a7810891a5c9" width="150">|<img alt="" src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/01b9714d-4f3d-4596-b0b6-7df901d81654" width="150">
+|**Anne**|**Coffee**|**Loki**|**Rin**|**Yong82**|**Yena**|
+|Tech, Design|Tech|Tech|Tech, Design|Tech|Design|
 |[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/AANNNEE)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/yuncoffee)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/KLJH1025)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/dimazsr)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/leeyongjun604)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/leeyongjun604)|
-
 
 
 ## 📁 **폴더링**
