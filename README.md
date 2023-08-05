@@ -5,6 +5,7 @@
 📆 2023. 06. 19. ~ 2023. 08. 04. (7 weeks)
 
 [<img src="https://img.shields.io/badge/Swift-5.7.1-orange?">](https://developer.apple.com/kr/swift/) [<img src="https://img.shields.io/badge/Xcode-14.3.1-blue?">](https://developer.apple.com/kr/xcode/) <img height="20" src="https://img.shields.io/badge/macOS-13.5+-lightgray"> <img height="20" src="https://img.shields.io/badge/Platform-macOS-pink"> 
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FDeveloperAcademy-POSTECH%2FMC3-Team17-ForJaeRin&count_bg=%23C993EF&title_bg=%238008B4&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 </div>
 
