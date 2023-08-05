@@ -23,8 +23,6 @@
 내용을 까먹었더라도 키워드를 떠올리며 발표를 이어나갈 수 있게 하고자 하였습니다.
 
 
-<img width="1739" alt="Group 205" src="https://github.com/KLJH1025/MC3-Team17-
-
 
 ## 🎥 **Preview**
 
@@ -40,13 +38,18 @@
 |:---:|:---:|
 |<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/7a2b75d3-50e8-4431-b2ab-ea2b24a29aec"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/64b81c2a-232c-4a0a-ab03-472bd38bc175"/>|
 
-|발표 연습 | 발표 연습 상세 확인|
+|발표 연습|발표 연습 상세 확인|
 |:---:|:---:|
 |<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/54d638df-745e-4042-9984-eac741824610"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/0a7f29a0-bffa-4199-8674-83b7d91b744c"/>|
 
 |이전 발표 프로젝트 불러오기| 이전 발표 연습 불러오기|
 |:---:|:---:|
 |<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/5eb9e572-3b9c-4b88-9554-326053b88ffe"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/74c5f7c7-0fd0-4b1c-bd7d-31df9ac22c66"/>|
+
+## 🔩 Tech & Skills
+
+<img width="103" src="https://img.shields.io/badge/SwiftUI-blue"> <img width="97" src="https://img.shields.io/badge/PDFKit-blue"> <img width="180" src="https://img.shields.io/badge/AVFoundation-blue"> <img width="103" src="https://img.shields.io/badge/Speech-blue"> <img width="63" src="https://img.shields.io/badge/STT-blue"> <br>
+<img width="103" src="https://img.shields.io/badge/Figma-red"> <img width="113" src="https://img.shields.io/badge/Github-yellow"> <img width="80" src="https://img.shields.io/badge/Miro-yellow"> <img width="108" src="https://img.shields.io/badge/Notion-yellow"> <img width="124" src="https://img.shields.io/badge/Discord-yellow">
 
 
 ## **🧑🏻‍💻 Member 👩🏻‍💻**  
