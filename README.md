@@ -23,7 +23,7 @@
 내용을 까먹었더라도 키워드를 떠올리며 발표를 이어나갈 수 있게 하고자 하였습니다.
 
 
-<img width="1739" alt="Group 205" src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/725d897a-775c-4468-89c6-18f64d9ddf70">
+<img width="1739" alt="Group 205" src="https://github.com/KLJH1025/MC3-Team17-
 
 
 ## 🎥 **Preview**
@@ -42,11 +42,11 @@
 
 |발표 연습 | 발표 연습 상세 확인|
 |:---:|:---:|
-|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/4805ac6d-98c2-4894-807f-9cddcdb87862"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/e3665e9f-0724-4810-8b73-9dbe03e116d1"/>|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/54d638df-745e-4042-9984-eac741824610"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/0a7f29a0-bffa-4199-8674-83b7d91b744c"/>|
 
 |이전 발표 프로젝트 불러오기| 이전 발표 연습 불러오기|
 |:---:|:---:|
-|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/5eb9e572-3b9c-4b88-9554-326053b88ffe"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/e3665e9f-0724-4810-8b73-9dbe03e116d1"/>|
+|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/5eb9e572-3b9c-4b88-9554-326053b88ffe"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/74c5f7c7-0fd0-4b1c-bd7d-31df9ac22c66"/>|
 
 
 ## **🧑🏻‍💻 Member 👩🏻‍💻**  
@@ -59,6 +59,47 @@
 
 
 ## 📁 **폴더링**
+
+```
+HighPitch-macOS
+  |
+  └── HighPitch
+          |── 🗂 Utils
+          │   │── 📄 AppFileManager.swift
+          │   │── 📄 VoiceManager.swift
+          │   │── 📄 SpeechRecognizer.swift
+          │   │── 📄 AppFileDocument.swift
+          │   └── 📄 DataManager.swift
+          │
+          |── 🗂 Global
+          │   │── 📁 Resources
+          │   │── 📁 Modifier
+          │   └── 📁 Extension
+          │
+          └── 🗂 Presentation 
+              |── 📁 ViewModels
+              |     │── 📁 ProjectVM
+              |     └── 📁 HomeVM
+              |
+              └── 📁 Views
+                    │── 📁 Components
+                    |    │── 📁 FileSystemView
+                    |    └── 📁 ButtonView
+                    |
+                    │── 📁 ProjectView
+                    |    │── 📁 ProjectFlowView
+                    |    │── 📁 ProjectDocumentView
+                    |    │── 📁 ProjectPlanView
+                    |    │── 📁 ProjectHistoryView
+                    |    └── 📁 PresentationView
+                    |
+                    └── 📁 HomeView
+                         │── 📁 ImportPDFView
+                         │── 📁 GroupComponentView
+                         │── 📄 HomeView.swift
+                         └── 📄 ProjectCardView.swift
+              
+```
 
 
 ## 📔 **커밋 컨벤션**
