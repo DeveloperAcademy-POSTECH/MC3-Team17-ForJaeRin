@@ -23,6 +23,7 @@
 
 내용을 까먹었더라도 키워드를 떠올리며 발표를 이어나갈 수 있게 하고자 하였습니다.
 
+<img width="1739" alt="Group 205" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/074b33e9-1a92-4690-a622-d681c476973e">
 
 
 ## 🎥 **Preview**
