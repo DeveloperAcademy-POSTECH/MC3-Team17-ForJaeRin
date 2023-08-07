@@ -9,6 +9,8 @@
 
 </div>
 
+<br>
+
 ## 🎯 **프로젝트 배경 - 목표**
 
 ### 🙋🏻 어떻게 하면 발표를 잘할 수 있을까? 🙋🏻‍♀️
@@ -25,6 +27,9 @@
 
 <img width="1739" alt="Group 205" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/074b33e9-1a92-4690-a622-d681c476973e">
 
+
+<br>
+<br>
 
 ## 🎥 **Preview**
 
@@ -48,6 +53,8 @@
 |:---:|:---:|
 |<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/5eb9e572-3b9c-4b88-9554-326053b88ffe"/>|<img width="80%" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/74c5f7c7-0fd0-4b1c-bd7d-31df9ac22c66"/>|
 
+<br>
+
 ## 🔩 Tech & Skills
 
 <img width="73" src="https://img.shields.io/badge/SwiftUI-blue"> <img width="69" src="https://img.shields.io/badge/PDFKit-blue"> <img width="128" src="https://img.shields.io/badge/AVFoundation-blue"> <img width="74" src="https://img.shields.io/badge/Speech-blue"> <img width="46" src="https://img.shields.io/badge/STT-blue"> <br>
@@ -57,15 +64,17 @@
 <img width="77" src="https://img.shields.io/badge/Notion-yellow"> 
 <img width="87" src="https://img.shields.io/badge/Discord-yellow">
 
+<br>
 
 ## **🧑🏻‍💻 Member 👩🏻‍💻**  
 
 |<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/666c6d3b-9528-48e2-9591-4c5b2e4ae37a" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/ac0a402f-b750-4f4b-a4dd-8b163cd9ea1b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/d5f6c3aa-c66c-433f-80fe-8beae064c33b" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/69122165-3f9b-40c1-bf9c-ffb9c678cbb8" width="150">|<img alt="" src="https://github.com/DeveloperAcademy-POSTECH/MC3-Team17-ForJaeRin/assets/99160103/a25e3115-ddcf-4946-a4e0-a7810891a5c9" width="150">|<img alt="" src="https://github.com/KLJH1025/MC3-Team17-ForJaeRin/assets/99160103/01b9714d-4f3d-4596-b0b6-7df901d81654" width="150">
 |:---:|:---:|:---:|:---:|:---:|:---:|
 |**Anne**|**Coffee**|**Loki**|**Rin**|**Yong82**|**Yena**|
-|Tech, Design|Tech|Tech|Tech, Design|Tech|Design|
+|Design, Tech|Tech|Tech|Design, Tech|Tech|Design|
 |[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/AANNNEE)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/yuncoffee)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/KLJH1025)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/dimazsr)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/leeyongjun604)|[<img src="https://img.shields.io/badge/Github-black?style=for-the-badge&logo=github&logoColor=white" alt="Github Blog Badge"/>](https://github.com/leeyongjun604)|
 
+<br>
 
 ## 📁 **폴더링**
 
@@ -110,6 +119,7 @@ HighPitch-macOS
               
 ```
 
+<br>
 
 ## 📔 **커밋 컨벤션**
   
